@@ -2,11 +2,11 @@
 
     Public Sub design()
         Try
-            Dim w As Integer = Form1.PictureBox1.Width
-            Dim h As Integer = Form1.PictureBox1.Height
+            Dim w As Integer = Main.PictureBox1.Width
+            Dim h As Integer = Main.PictureBox1.Height
             Dim myPen = New Pen(Brushes.Black, 1)
             Dim myPenRED = New Pen(Brushes.Red, 1)
-            Dim myOutil As Drawing.Graphics = Form1.PictureBox1.CreateGraphics
+            Dim myOutil As Drawing.Graphics = Main.PictureBox1.CreateGraphics
             Dim s As New System.Drawing.Color
 
             s = System.Drawing.Color.Gainsboro
@@ -16,12 +16,12 @@
 
             Dim half_h As Integer = h / 2
 
-            Dim d1 As Double = Replace(Form1.d1.Text, ".", ",")
-            Dim d2 As Double = Replace(Form1.d2.Text, ".", ",")
-            Dim d3 As Double = Replace(Form1.d3.Text, ".", ",")
-            Dim l1 As Double = Replace(Form1.L1.Text, ".", ",")
-            Dim l2 As Double = Replace(Form1.L2.Text, ".", ",")
-            Dim l3 As Double = Replace(Form1.L3.Text, ".", ",")
+            Dim d1 As Double = Replace(Main.d1.Text, ".", ",")
+            Dim d2 As Double = Replace(Main.d2.Text, ".", ",")
+            Dim d3 As Double = Replace(Main.d3.Text, ".", ",")
+            Dim l1 As Double = Replace(Main.L1.Text, ".", ",")
+            Dim l2 As Double = Replace(Main.L2.Text, ".", ",")
+            Dim l3 As Double = Replace(Main.L3.Text, ".", ",")
 
             Dim scale As Double = (w - 1) / l1
             Dim drawFont As New Font("Arial", 8)

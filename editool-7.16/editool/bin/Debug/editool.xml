@@ -1,0 +1,91 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+editool
+</name>
+</assembly>
+<members>
+<member name="T:editool.My.Resources.Resources">
+<summary>
+  Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
+</summary>
+</member>
+<member name="P:editool.My.Resources.Resources.ResourceManager">
+<summary>
+  Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
+</summary>
+</member>
+<member name="P:editool.My.Resources.Resources.Culture">
+<summary>
+  Remplace la propriété CurrentUICulture du thread actuel pour toutes
+  les recherches de ressources à l'aide de cette classe de ressource fortement typée.
+</summary>
+</member>
+<member name="P:editool.My.Resources.Resources.menu_en">
+<summary>
+  Recherche une chaîne localisée semblable à tool name
+chanfrein
+angle
+n. tooth
+diamètre de coupe
+diamètre détalonné
+diamètre corps
+longueur de coupe
+longueur détalonné
+longueur total
+référence
+diamètre de coupe
+créer outil0.
+</summary>
+</member>
+<member name="P:editool.My.Resources.Resources.menu_fr">
+<summary>
+  Recherche une chaîne localisée semblable à nom outil
+chanfrein
+angle
+n. de dents
+diamètre de coupe
+diamètre détalonné
+diamètre corps
+longueur de coupe
+longueur détalonné
+longueur total
+référence
+diamètre de coupe
+créer outil.
+</summary>
+</member>
+<member name="P:editool.My.Resources.Resources.outils">
+<summary>
+  Recherche une chaîne localisée semblable à 15232120;1.5;6;0;38;3;0;11.5;3
+15232140;2;6;0;38;3;0;11;3
+15232160;2.5;6;0;38;3;0;10;3
+15232180;3;6;0;38;4;0;8;3
+15232200;3.5;6;0;38;4;0;7;3
+15232220;4;6;0;38;5;0;5.5;3
+15232240;4.5;6;0;38;5;0;4.5;3
+15232260;5;6;0;38;6;0;3;3
+15232300;6;6;0;38;7;0;0;3
+15232391;8;8;0;41;9;0;0;3
+15232450;10;10;0;48;11;0;0;3
+15520140;2;6;1.9;57;7;10;7;2
+15520180;3;6;2.8;57;8;14;4.5;2
+15520220;4;6;3.7;57;11;16;3;2
+15520260;5;6;4.6;57;13;18;1.5;2
+15520300;6;6;5.5;57;13;20;0;2
+15520391;8;8;7.4;63;19;26;0;2
+1552045 [le reste de la chaîne a été tronqué]&quot;;.
+</summary>
+</member>
+<member name="P:editool.My.Resources.Resources.reg">
+<summary>
+  Recherche une chaîne localisée semblable à FR Ø8 3z Lc9
+FR Ø10 2z Lc22 Lu31
+FR Ø5 2z Lc13 Lu18
+FR Ø4 2z Lc11 Lu16
+.
+</summary>
+</member>
+</members>
+</doc>

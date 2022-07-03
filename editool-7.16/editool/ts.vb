@@ -75,15 +75,15 @@ Module ts
 
         Set_parametre_outil(newTool)
         TopSolidHost.Application.EndModification(True, True)
-        MsgBox("Outil " + Form1.Name_textbox.Text + " crée")
+        MsgBox("Outil " + Main.Name_textbox.Text + " crée")
 
     End Sub
     Private Sub Set_parametre_outil(newTool As DocumentId)
 
         Dim list_par(0, 2) As String
 
-        list_par = {{"D", 0, Form1.d1.Text}, {"DD", 0, Form1.d3.Text}, {"SD", 0, Form1.d2.Text}, {"L", 0, Form1.L2.Text}, {"LD", 0, Form1.L3.Text}, {"OL", 0, Form1.L1.Text}, {"FB", 0, Form1.chf.Text}, {"NoTT", 0, Form1.NoTT.Text}, {"Name", 0, Form1.Name_textbox.Text}}
-        ''list_par = {{"D", 0, Form1.d1.Text}, {"SD", 0, Form1.d2.Text}, {"L", 0, Form1.L2.Text}, {"OL", 0, Form1.L1.Text}, {"Nom", 0, Form1.Name_textbox.Text}}
+        list_par = {{"D", 0, Main.d1.Text}, {"DD", 0, Main.d3.Text}, {"SD", 0, Main.d2.Text}, {"L", 0, Main.L2.Text}, {"LD", 0, Main.L3.Text}, {"OL", 0, Main.L1.Text}, {"FB", 0, Main.chf.Text}, {"NoTT", 0, Main.NoTT.Text}, {"Name", 0, Main.Name_textbox.Text}}
+        ''list_par = {{"D", 0, Main.d1.Text}, {"SD", 0, Main.d2.Text}, {"L", 0, Main.L2.Text}, {"OL", 0, Main.L1.Text}, {"Nom", 0, Main.Name_textbox.Text}}
 
         For i As Integer = 0 To 6 ' numero de parametres Double
             Dim p_elementId As ElementId = TopSolidHost.Elements.SearchByName(newTool, list_par(i, 0)) ' get parameter by names from array
@@ -104,7 +104,7 @@ Module ts
                 '     fb_tmp = 0.1 / 1000
                 'End If
                 'If fb_tmp = 0 And list_par(i, 0) = "DD" Then
-                '   fb_tmp = Replace(Form1.d1.Text, ".", ",") / 1000
+                '   fb_tmp = Replace(Main.d1.Text, ".", ",") / 1000
             End If
             '***********************************************
             list_par(i, 1) = fb_tmp
@@ -115,7 +115,7 @@ Module ts
         Next
 
         Dim NoTT As ElementId = TopSolidHost.Elements.SearchByName(newTool, "NoTT")
-        TopSolidHost.Parameters.SetIntegerValue(NoTT, Form1.NoTT.Text)
+        TopSolidHost.Parameters.SetIntegerValue(NoTT, Main.NoTT.Text)
 
 
 
@@ -129,10 +129,10 @@ Module ts
             End If
 
             'If TopSolidHost.Elements.GetName(sys_par(i)) = "$TopSolid.Kernel.TX.Properties.PartNumber" Then
-            'TopSolidHost.Parameters.SetTextValue(sys_par(i), Form1.DataGridView1.SelectedCells(0).Value)
+            'TopSolidHost.Parameters.SetTextValue(sys_par(i), Main.DataGridView1.SelectedCells(0).Value)
             'End If
             If TopSolidHost.Elements.GetName(sys_par(i)) = "$TopSolid.Kernel.TX.Properties.ManufacturerPartNumber" Then
-                TopSolidHost.Parameters.SetTextValue(sys_par(i), Form1.DataGridView1.SelectedCells(0).Value)
+                TopSolidHost.Parameters.SetTextValue(sys_par(i), Main.DataGridView1.SelectedCells(0).Value)
             End If
 
             'If TopSolidHost.Elements.GetName(sys_par(i)) = "$TopSolid.Cam.NC.Tool.TX.MachiningComponents.NotAllowedForMachining" Then
@@ -185,7 +185,7 @@ Module ts
             If model_fr_id.Count > 0 Then
 
                 model_fr = TopSolidHost.Documents.GetDocument(model_fr_id(0))
-                temp_model = TopSolidHost.Documents.SaveAs(model_fr, lib_models(0), Form1.Name_textbox.Text)
+                temp_model = TopSolidHost.Documents.SaveAs(model_fr, lib_models(0), Main.Name_textbox.Text)
 
 
             End If
