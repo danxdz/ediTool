@@ -4,9 +4,7 @@ Imports TopSolid.Cad.Design.Automating
 
 Module ts
 
-
     Public Sub Create_outil()
-
 
         'TopSolidHost.Connect(1, 0, "server")
         TopSolidHost.Connect()
@@ -15,20 +13,12 @@ Module ts
         Dim model_fr As New DocumentId
         Dim model_id As String
 
-        'model_id = "Thenmodel_fr" --> FR 2T
+        'model_id = "model_fr" --> FR 2T
         'model_id = "model_ft" --> Ft Rayon/Chanfrein
         'model_id = "model_fo" --> Foret
         'etc
 
-
-        ''model_id = "123" '---->   19_5bceb813-ab67-4cf3-9345-adf8c15c9140&3_3150
-
-        'model_id = "model2"
-
-        model_id = "FR Ø8 3z Lc15 Lu25"
-
-        'model_id = "Fraise 2 tailles D20 L35 SD20"
-        ' model_id = "Side Mill"
+        model_id = "FR 2T D20 L35 SD20"
 
         Try
             model_fr = Open_file(model_id)
@@ -38,23 +28,23 @@ Module ts
                 If TopSolidHost.Application.StartModification("model_fr", True) Then
                     'Modify document.
                     Try
-                        '// Make document modifiable.
-                        'TopSolidHost.Application.StartModification("makeTool", False)
                         TopSolidHost.Documents.EnsureIsDirty(model_fr)
                         '// Perform document modification.
                         MakeTool(model_fr)
+
+
                     Catch
                         '// End modification (failure).
-                        MsgBox("failure not dirty&")
+                        MsgBox("failure not dirty - EndModification")
                         TopSolidHost.Application.EndModification(False, False)
                     End Try
                 Else
-                    MsgBox("failure not dirty 2")
+                    MsgBox("StartModification failure")
                     TopSolidHost.Application.EndModification(False, False)
                 End If
             End If
         Catch
-            MsgBox("failure start mod")
+            MsgBox("Cant open file, close everything in TopSolid")
             TopSolidHost.Application.EndModification(False, False)
         End Try
 
@@ -78,44 +68,58 @@ Module ts
         MsgBox("Outil " + Main.Name_textbox.Text + " crée")
 
     End Sub
+    Function strip_doubles(tmp As String)
+        Dim tmp_string As String = tmp
+        tmp_string = Replace(tmp_string, ".", ",") ' replace , -> .
+        Dim res As Double = tmp_string / 1000 '  get de Double from String and scale mm to m (SI units)
+        Return res
+    End Function
+
+    Private Sub setReal(newtool As DocumentId, dbl As String, value As Double)
+
+        Dim tmpReal As ElementId = TopSolidHost.Elements.SearchByName(newtool, dbl)
+        TopSolidHost.Parameters.SetRealValue(tmpReal, value)
+
+    End Sub
+
     Private Sub Set_parametre_outil(newTool As DocumentId)
 
-        Dim list_par(0, 2) As String
-
-        list_par = {{"D", 0, Main.d1.Text}, {"DD", 0, Main.d3.Text}, {"SD", 0, Main.d2.Text}, {"L", 0, Main.L2.Text}, {"LD", 0, Main.L3.Text}, {"OL", 0, Main.L1.Text}, {"FB", 0, Main.chf.Text}, {"NoTT", 0, Main.NoTT.Text}, {"Name", 0, Main.Name_textbox.Text}}
-        ''list_par = {{"D", 0, Main.d1.Text}, {"SD", 0, Main.d2.Text}, {"L", 0, Main.L2.Text}, {"OL", 0, Main.L1.Text}, {"Nom", 0, Main.Name_textbox.Text}}
-
-        For i As Integer = 0 To 6 ' numero de parametres Double
-            Dim p_elementId As ElementId = TopSolidHost.Elements.SearchByName(newTool, list_par(i, 0)) ' get parameter by names from array
-            Dim tmp_string As String = list_par(i, 2)
-            tmp_string = Replace(tmp_string, ".", ",") ' eliminate ,
-            Dim fb_tmp As Double = tmp_string / 1000 '  get de Double from String and scale mm to m (SI units)
+        'list_par = {{"D", 0, Main.d1.Text}, {"CTS_AD", 0, Main.d3.Text}, {"SD", 0, Main.d2.Text}, {"L", 0, Main.L2.Text}, {"CTS_AL", 0, Main.L3.Text}, {"OL", 0, Main.L1.Text}, {"FB", 0, Main.chf.Text}, {"NoTT", 0, Main.NoTT.Text}, {"Name", 0, Main.Name_textbox.Text}}
 
 
+        'Dim D As ElementId = TopSolidHost.Elements.SearchByName(newTool, "D")
+        'TopSolidHost.Parameters.SetRealValue(D, strip_doubles(Main.d1.Text))
+        setReal(newTool, "D", strip_doubles(Main.D_textbox.Text))
+        setReal(newTool, "SD", strip_doubles(Main.SD_textbox.Text))
+        setReal(newTool, "CTS_AD", strip_doubles(Main.CTS_AD_textbox.Text))
+        setReal(newTool, "OL", strip_doubles(Main.OL_textbox.Text))
+        setReal(newTool, "L", strip_doubles(Main.L_textbox.Text))
+        setReal(newTool, "CTS_AL", strip_doubles(Main.CTS_AL_textbox.Text))
+        setReal(newTool, "CTS_ED", strip_doubles(Main.SD_textbox.Text))
 
-            '***********************************************
-            If list_par(i, 0) = "LD" Then
+        Dim CTS_AD_tmp As Double = strip_doubles(Main.CTS_AD_textbox.Text)
+        If CTS_AD_tmp > 0 Then
+            setReal(newTool, "CTS_EBD", CTS_AD_tmp) 'TODO
+        Else
+            CTS_AD_tmp = strip_doubles(Main.D_textbox.Text)
+            setReal(newTool, "CTS_EBD", CTS_AD_tmp)
+        End If
 
-                If fb_tmp = 0 Then
-                    fb_tmp = list_par(3, 1)
-
-                End If
-
-                '     fb_tmp = 0.1 / 1000
-                'End If
-                'If fb_tmp = 0 And list_par(i, 0) = "DD" Then
-                '   fb_tmp = Replace(Main.d1.Text, ".", ",") / 1000
-            End If
-            '***********************************************
-            list_par(i, 1) = fb_tmp
+        'Dim CTS_EL As ElementId = TopSolidHost.Elements.SearchByName(newTool, "CTS_EL")
+        'TopSolidHost.Parameters.SetRealValue(CTS_EL, Main.L3.Text / 1000)
+        Dim CTS_EL As Double = strip_doubles(Main.CTS_AL_textbox.Text)
+        If (Main.alpha.Text = 0) Then
+            setReal(newTool, "CTS_EL", CTS_EL) 'TODO
+        Else
+            CTS_EL = (strip_doubles(Main.SD_textbox.Text) - strip_doubles(Main.D_textbox.Text)) / 2
+            CTS_EL /= Math.Tan((Main.alpha.Text * Math.PI) / 180)
+            setReal(newTool, "CTS_EL", CTS_EL) 'TODO
+        End If
 
 
-            TopSolidHost.Parameters.SetRealValue(p_elementId, fb_tmp)
+        Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool, "$TopSolid.Kernel.TX.Properties.Name")
 
-        Next
-
-        Dim NoTT As ElementId = TopSolidHost.Elements.SearchByName(newTool, "NoTT")
-        TopSolidHost.Parameters.SetIntegerValue(NoTT, Main.NoTT.Text)
+        TopSolidHost.Parameters.SetTextParameterizedValue(Name, "FR 2T Ø[D] Lc[L] SD[SD]")
 
 
 
@@ -128,6 +132,8 @@ Module ts
                 TopSolidHost.Parameters.SetBooleanValue(sys_par(i), False)
             End If
 
+
+
             'If TopSolidHost.Elements.GetName(sys_par(i)) = "$TopSolid.Kernel.TX.Properties.PartNumber" Then
             'TopSolidHost.Parameters.SetTextValue(sys_par(i), Main.DataGridView1.SelectedCells(0).Value)
             'End If
@@ -135,9 +141,9 @@ Module ts
                 TopSolidHost.Parameters.SetTextValue(sys_par(i), Main.DataGridView1.SelectedCells(0).Value)
             End If
 
-            'If TopSolidHost.Elements.GetName(sys_par(i)) = "$TopSolid.Cam.NC.Tool.TX.MachiningComponents.NotAllowedForMachining" Then
-            'TopSolidHost.Parameters.SetBooleanValue(sys_par(i), False)
-            'End If
+            If TopSolidHost.Elements.GetName(sys_par(i)) = "$TopSolid.Cam.NC.Tool.TX.MachiningComponents.NotAllowedForMachining" Then
+                TopSolidHost.Parameters.SetBooleanValue(sys_par(i), True)
+            End If
 
             If TopSolidHost.Elements.GetName(sys_par(i)) = "$TopSolid.Kernel.TX.Properties.Manufacturer" Then
                 TopSolidHost.Parameters.SetTextValue(sys_par(i), "FRAISA")
@@ -150,27 +156,10 @@ Module ts
     Function Open_file(model As String)
         Dim lib_models As List(Of PdmObjectId)
 
-        ''        11_ec439f6b-111d-4721-bf4d-81251317f992&65537_2524
-
-
-
         lib_models = TopSolidHost.Pdm.SearchProjectByName("EdiTool")
 
-        ''lib_models = TopSolidHost.Pdm.SearchProjectByName("TopSolid Machining User Tools")
-
-
-        ''11_9a853b31-91a3-4f21-8b69-d41096477dfc&65537_12056
         Dim model_fr As DocumentId
-        ' Dim ass_model As DocumentId
-
-        'Dim model_ass As String = "model_fr+porte_outil"
-
         Dim temp_model As DocumentId
-        'Dim temp_ass_model As DocumentId
-
-
-
-
 
         If lib_models.Count > 0 Then
             TopSolidHost.Pdm.OpenProject(lib_models(0))

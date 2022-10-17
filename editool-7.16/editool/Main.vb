@@ -24,7 +24,7 @@ Public Class Main
                 Get_prefs(data)
             Catch
                 MsgBox("new config file")
-                set_pref_lang("fr")
+                Set_pref_lang("fr")
             End Try
 
 
@@ -71,7 +71,7 @@ Public Class Main
     End Sub
 
     Private Sub DataGridView1_CurrentCellChanged(sender As Object, e As EventArgs) Handles DataGridView1.CurrentCellChanged
-        Dim ds() As TextBox = {d1, d2, d3, L1, L2, L3, alpha, NoTT}
+        Dim ds() As TextBox = {D_textbox, SD_textbox, CTS_AD_textbox, OL_textbox, L_textbox, CTS_AL_textbox, alpha, NoTT}
         Try
             For i As Short = 1 To 8
                 ds(i - 1).Text = DataGridView1.SelectedCells(i).Value
@@ -88,37 +88,37 @@ Public Class Main
         Set_Name_auto()
     End Sub
 
-    Private Sub D1_TextChanged(sender As Object, e As EventArgs) Handles d1.TextChanged, d2.TextChanged, d3.TextChanged, L1.TextChanged, L2.TextChanged, L3.TextChanged
-        Refresh_outil()
+    Private Sub D1_TextChanged(sender As Object, e As EventArgs) Handles D_textbox.TextChanged, SD_textbox.TextChanged, CTS_AD_textbox.TextChanged, OL_textbox.TextChanged, L_textbox.TextChanged, CTS_AL_textbox.TextChanged
+
     End Sub
 
-    Private Sub TextBox_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles d1.KeyPress, d2.KeyPress, d3.KeyPress, L1.KeyPress, L2.KeyPress, L3.KeyPress
+    Private Sub TextBox_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles D_textbox.KeyPress, SD_textbox.KeyPress, CTS_AD_textbox.KeyPress, OL_textbox.KeyPress, L_textbox.KeyPress, CTS_AL_textbox.KeyPress
         If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) AndAlso Not e.KeyChar = "." Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub TextBox_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles d1.KeyPress, d2.KeyPress, d3.KeyPress, L1.KeyPress, L2.KeyPress, L3.KeyPress
+    Private Sub TextBox_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles D_textbox.KeyPress, SD_textbox.KeyPress, CTS_AD_textbox.KeyPress, OL_textbox.KeyPress, L_textbox.KeyPress, CTS_AL_textbox.KeyPress
         Dim digitsOnly As Regex = New Regex("[^\d]")
         Me.Text = digitsOnly.Replace(Me.Text, "")
     End Sub
 
     Private Sub NoTT_TextChanged(sender As Object, e As EventArgs) Handles NoTT.TextChanged
-        Refresh_outil()
+
     End Sub
 
-    Private Sub lang_fr_Click(sender As Object, e As EventArgs) Handles lang_fr.Click
+    Private Sub Lang_fr_Click(sender As Object, e As EventArgs) Handles lang_fr.Click
 
-        set_pref_lang("fr")
+        Set_pref_lang("fr")
 
         Get_files(My.Resources.menu_fr)
     End Sub
 
-    Private Sub lang_en_Click(sender As Object, e As EventArgs) Handles lang_en.Click
-        set_pref_lang("en")
+    Private Sub Lang_en_Click(sender As Object, e As EventArgs) Handles lang_en.Click
+        Set_pref_lang("en")
         Get_files(My.Resources.menu_en)
     End Sub
-    Function set_pref_lang(lang As String)
+    Private Sub Set_pref_lang(lang As String)
         Dim path As String = IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase)
 
         path = New Uri(path).LocalPath
@@ -131,9 +131,9 @@ Public Class Main
         outFile.Close()
 
         'Console.WriteLine(My.Computer.FileSystem.ReadAllText(csvFile))
-    End Function
+    End Sub
 
-    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
+    Private Sub CTS_AD_label_Click(sender As Object, e As EventArgs) Handles CTS_AD_label.Click
 
     End Sub
 End Class

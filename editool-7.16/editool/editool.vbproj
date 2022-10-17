@@ -97,16 +97,16 @@
     <Reference Include="TopSolid.Cad.Design.Automating, Version=7.14.300.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\TOPSOLID\TopSolid 7.16\bin\TopSolid.Cad.Design.Automating.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="TopSolid.Cam.NC.Kernel.Automating">
       <HintPath>C:\Program Files\TOPSOLID\TopSolid 7.16\bin\TopSolid.Cam.NC.Kernel.Automating.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="TopSolid.Kernel.Automating, Version=7.14.300.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\TOPSOLID\TopSolid 7.16\bin\TopSolid.Kernel.Automating.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>

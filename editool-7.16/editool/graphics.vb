@@ -16,14 +16,15 @@
 
             Dim half_h As Integer = h / 2
 
-            Dim d1 As Double = Replace(Main.d1.Text, ".", ",")
-            Dim d2 As Double = Replace(Main.d2.Text, ".", ",")
-            Dim d3 As Double = Replace(Main.d3.Text, ".", ",")
-            Dim l1 As Double = Replace(Main.L1.Text, ".", ",")
-            Dim l2 As Double = Replace(Main.L2.Text, ".", ",")
-            Dim l3 As Double = Replace(Main.L3.Text, ".", ",")
+            Dim D As Double = Replace(Main.D_textbox.Text, ".", ",")
+            Dim SD As Double = Replace(Main.SD_textbox.Text, ".", ",")
+            Dim CTS_AD As Double = Replace(Main.CTS_AD_textbox.Text, ".", ",")
+            Dim OL As Double = Replace(Main.OL_textbox.Text, ".", ",")
+            Dim L As Double = Replace(Main.L_textbox.Text, ".", ",")
+            Dim CTS_AL As Double = Replace(Main.CTS_AL_textbox.Text, ".", ",")
+            Dim Alpha As Double = Replace(Main.alpha.Text, ".", ",")
 
-            Dim scale As Double = (w - 1) / l1
+            Dim scale As Double = (w - 1) / OL
             Dim drawFont As New Font("Arial", 8)
             Dim drawBrush As New SolidBrush(Drawing.Color.Black)
             Dim drawFormat As New StringFormat With {
@@ -32,54 +33,71 @@
 
             '-------   grid
 
-            'For i = 1 To d2 / 2 Step 1
+            'For i = 1 To SD / 2 Step 1
             'Dim x As Single = i * scale
             'myOutil.DrawLine(myPenRED, 0, h - x, w, h - x)
             'Next
-            'For i = 1 To l1 Step 1
+            'For i = 1 To OL Step 1
             'Dim x As Single = i * scale
             'myOutil.DrawString(i, drawFont, drawBrush, x + dif_w, 10)
             'myOutil.DrawLine(myPenRED, dif_w + x, 0, dif_w + x, h)
             'Next
 
-            Dim d1_tmp As Single = h - ((d1 / 2) * scale)
-            Dim d2_tmp As Single = h - ((d2 / 2) * scale)
-            Dim d3_tmp As Single
-            If d3 <> 0 Then
-                d3_tmp = h - ((d3 / 2) * scale)
+
+            Dim D_tmp As Single = h - ((D / 2) * scale)
+            Dim SD_tmp As Single = h - ((SD / 2) * scale)
+            Dim CTS_AD_tmp As Single = h - ((CTS_AD / 2) * scale)
+            Dim OL_tmp As Single = OL * scale
+            Dim L_tmp As Single = L * scale
+            Dim CTS_AL_tmp As Single = CTS_AL * scale
+
+            Dim CTS_ED_tmp As Single
+            If CTS_AD > 0 Then
+                CTS_ED_tmp = CTS_AD_tmp
             Else
-                d3_tmp = 0
+                CTS_ED_tmp = SD_tmp
             End If
 
-            Dim l1_tmp As Single = l1 * scale
-            Dim l2_tmp As Single = l2 * scale
+            Dim CTS_EL_tmp As Single
+            If (Alpha = 0) Then
+                CTS_EL_tmp = CTS_AL_tmp
+            Else
+                CTS_EL_tmp = (SD - D) / 2
+                CTS_EL_tmp /= Math.Tan((Alpha * Math.PI) / 180)
+                'Main.CTS_AL_textbox.Text = Math.Round(CTS_AL_tmp)
+                CTS_EL_tmp *= scale
+                CTS_ED_tmp = SD_tmp
 
-            Dim l3_tmp As Single = l3 * scale
-
-
-            myOutil.FillRectangle(Brushes.Orange, 0, d1_tmp, l2_tmp, h - d1_tmp)
-
-            myOutil.DrawLine(myPen, 0, h, 0, d1_tmp)
-            myOutil.DrawLine(myPen, 0, d1_tmp, l2_tmp, d1_tmp)
-
-            If d3_tmp <> 0 And l3_tmp <> 0 Then
-                myOutil.FillRectangle(Brushes.LightGray, l2_tmp, d3_tmp, (l3_tmp - l2_tmp), h - d3_tmp)
             End If
 
-            If d3_tmp = 0 Then
-                d3_tmp = d1_tmp
-            End If
-            If l3_tmp = 0 Then
-                l3_tmp = l2_tmp
-            End If
 
-            myOutil.FillRectangle(Brushes.DarkGray, l3_tmp, d2_tmp, (l1_tmp - l3_tmp), h - d2_tmp)
+            myOutil.FillRectangle(Brushes.Orange, 0, D_tmp, L_tmp, h - D_tmp)
 
-            myOutil.DrawLine(myPen, l2_tmp, d1_tmp, l2_tmp, d3_tmp)
-            myOutil.DrawLine(myPen, l2_tmp, d3_tmp, l3_tmp, d3_tmp)
-            myOutil.DrawLine(myPen, l3_tmp, d3_tmp, l3_tmp, d2_tmp)
-            myOutil.DrawLine(myPen, l3_tmp, d2_tmp, l1_tmp, d2_tmp)
-            myOutil.DrawLine(myPen, l1_tmp, d2_tmp, l1_tmp, h)
+            myOutil.DrawLine(myPen, 0, h, 0, D_tmp)
+            myOutil.DrawLine(myPen, 0, D_tmp, L_tmp, D_tmp)
+
+
+
+
+            If CTS_AD_tmp <> 0 And CTS_AL_tmp <> 0 Then
+                myOutil.FillRectangle(Brushes.LightGray, L_tmp, CTS_AD_tmp, (CTS_AL_tmp - L_tmp), h - CTS_AD_tmp)
+                myOutil.DrawLine(myPen, L_tmp, D_tmp, L_tmp, CTS_AD_tmp)
+                myOutil.DrawLine(myPen, L_tmp, CTS_AD_tmp, CTS_AL_tmp, CTS_AD_tmp)
+                If CTS_EL_tmp > CTS_AL_tmp Then
+                    myOutil.DrawLine(myPen, CTS_AL_tmp, CTS_AD_tmp, CTS_EL_tmp, SD_tmp)
+                    myOutil.FillRectangle(Brushes.DarkGray, CTS_EL_tmp, SD_tmp, OL_tmp - CTS_EL_tmp, h - SD_tmp)
+
+                Else
+                    myOutil.DrawLine(myPen, CTS_AL_tmp, CTS_AD_tmp, CTS_AL_tmp, SD_tmp)
+                    myOutil.FillRectangle(Brushes.DarkGray, CTS_AL_tmp, SD_tmp, OL_tmp - CTS_AL_tmp, h - SD_tmp)
+
+
+                End If
+            Else
+                myOutil.DrawLine(myPen, L_tmp, D_tmp, CTS_EL_tmp, CTS_ED_tmp)
+            End If
+            myOutil.DrawLine(myPen, CTS_EL_tmp, SD_tmp, OL_tmp, SD_tmp)
+            myOutil.DrawLine(myPen, OL_tmp, SD_tmp, OL_tmp, h)
 
 
             Dim axe_big As Integer = w / 20

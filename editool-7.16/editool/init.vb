@@ -16,12 +16,12 @@
     Public Sub Set_Name_auto()
         Try
             'If L2.Text = "" Or L2.Text = "0" Then
-            Main.Name_textbox.Text = "FR Ø" + Main.d1.Text + " " + Main.NoTT.Text + "z" ' nome =  FR Ø + diamètre de coupe + numero d dents
-            If Main.L2.Text <> "" And Main.L2.Text <> "0" Then
-                Main.Name_textbox.Text += " Lc" + Main.L2.Text ' nome += Longueur de coupe
+            Main.Name_textbox.Text = "FR Ø" + Main.D_textbox.Text + " " + Main.NoTT.Text + "z" ' nome =  FR Ø + diamètre de coupe + numero d dents
+            If Main.L_textbox.Text <> "" And Main.L_textbox.Text <> "0" Then
+                Main.Name_textbox.Text += " Lc" + Main.L_textbox.Text ' nome += Longueur de coupe
             End If
-            If Main.L3.Text <> "" And Main.L3.Text <> "0" Then
-                Main.Name_textbox.Text += " Lu" + Main.L3.Text ' nome += Longueur util
+            If Main.CTS_AL_textbox.Text <> "" And Main.CTS_AL_textbox.Text <> "0" Then
+                Main.Name_textbox.Text += " Lu" + Main.CTS_AL_textbox.Text ' nome += Longueur util
             End If
             design()
         Catch ex As Exception
@@ -52,10 +52,7 @@
         Dim splitLine() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
         Dim pref_lang As String = Right(splitLine(0), 2)
 
-
         Main.sel_lang.Text = pref_lang
-
-
 
     End Sub
     Public Sub Get_files(data As String)
@@ -64,13 +61,13 @@
         Dim labels() As Label = {
             Main.menu_1, Main.menu_2, Main.menu_3, Main.menu_4,
             Main.menu_5, Main.menu_6, Main.menu_7, Main.menu_8,
-            Main.menu_9, Main.menu_10, Main.menu_11, Main.menu_12}
+            Main.menu_9, Main.menu_10, Main.menu_11, Main.menu_12, Main.menu_13}
 
-        For i As Integer = 0 To 11
+        For i As Integer = 0 To labels.Length - 1
             labels(i).Text = splitLine(i)
         Next
 
-        Main.create.Text = splitLine(12)
+        Main.create.Text = splitLine(labels.Length)
 
     End Sub
 
@@ -98,14 +95,7 @@
         Next
         Main.DataGridView1.DataSource = dt
 
-
     End Sub
-
-
-
-
-
-
     Public Sub Fill_db(file_reader As System.IO.StreamReader, filter As String)
         Dim index As Integer = 1
         Dim textline As String = ""
@@ -124,7 +114,6 @@
             'For x = 0 To list.Count - 1
             'splitLine(x) = list.Item(x)
             'Next
-
 
             If filter = "" Then
                 dt.Rows.Add(splitLine)
