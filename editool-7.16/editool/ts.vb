@@ -18,10 +18,16 @@ Module ts
         'model_id = "model_fo" --> Foret
         'etc
 
-        model_id = "FR 2T D20 L35 SD20"
+        ''model_id = "FR 2T D20 L35 SD20"
+        model_id = "Side Mill D20 L35 SD20"
+
+        Dim lib_models As List(Of PdmObjectId)
+        lib_models = TopSolidHost.Pdm.SearchProjectByName("EdiTool")
+        ''lib_models = TopSolidHost.Pdm.SearchProjectByName("TopSolid Machining User Tools")
+        ''newTool_lib = TopSolidHost.Pdm.SearchProjectByName("EdiTool")
 
         Try
-            model_fr = Open_file(model_id)
+            model_fr = Open_file(model_id, lib_models)
             If model_fr.IsEmpty Then
                 MsgBox("can't find file ( " + model_id + " )")
             Else
@@ -31,6 +37,7 @@ Module ts
                         TopSolidHost.Documents.EnsureIsDirty(model_fr)
                         '// Perform document modification.
                         MakeTool(model_fr)
+                        TopSolidHost.Pdm.CheckIn(lib_models(0), True)
 
 
                     Catch
@@ -64,7 +71,11 @@ Module ts
 
 
         Set_parametre_outil(newTool)
-        TopSolidHost.Application.EndModification(True, True)
+        TopSolidHost.Application.EndModification(True, False)
+
+        '' TopSolidHost.Documents.Open(newTool)
+        TopSolidHost.Documents.Save(newTool)
+        ''TopSolidHost.Documents.Close(newTool, False, False)
         MsgBox("Outil " + Main.Name_textbox.Text + " crée")
 
     End Sub
@@ -153,10 +164,7 @@ Module ts
 
     End Sub
 
-    Function Open_file(model As String)
-        Dim lib_models As List(Of PdmObjectId)
-
-        lib_models = TopSolidHost.Pdm.SearchProjectByName("EdiTool")
+    Function Open_file(model As String, lib_models As List(Of PdmObjectId))
 
         Dim model_fr As DocumentId
         Dim temp_model As DocumentId
