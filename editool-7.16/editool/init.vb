@@ -4,30 +4,99 @@
         Dim dv As DataView = New DataView(dt)
         Dim str_tmp As String
 
-        If Main.TextBox10.Text = "" Then
-            str_tmp = "Reference LIKE '%" + Main.TextBox9.Text + "%'"
-        ElseIf Main.TextBox9.Text = "" Then
-            str_tmp = "d1 LIKE '%" + Main.TextBox10.Text + "%'"
+        If Main.Diam_filter_TextBox.Text = "" Then
+            str_tmp = "Reference LIKE '%" + Main.Ref_filter_TextBox.Text + "%'"
+        ElseIf Main.Ref_filter_TextBox.Text = "" Then
+
+            str_tmp = "D LIKE '%" + Main.Diam_filter_TextBox.Text + "%'"
         Else
-            str_tmp = "Reference LIKE '%" + Main.TextBox9.Text + "%' AND d1 like '%" + Main.TextBox10.Text + "%'"
+            str_tmp = "Reference LIKE '%" + Main.Ref_filter_TextBox.Text + "%' AND D like '%" + Main.Diam_filter_TextBox.Text + "%'"
         End If
         dt.DefaultView.RowFilter = str_tmp
     End Sub
-    Public Sub Set_Name_auto()
-        Try
-            'If L2.Text = "" Or L2.Text = "0" Then
-            Main.Name_textbox.Text = "FR Ø" + Main.D_textbox.Text + " " + Main.NoTT.Text + "z" ' nome =  FR Ø + diamètre de coupe + numero d dents
-            If Main.L_textbox.Text <> "" And Main.L_textbox.Text <> "0" Then
-                Main.Name_textbox.Text += " Lc" + Main.L_textbox.Text ' nome += Longueur de coupe
-            End If
-            If Main.CTS_AL_textbox.Text <> "" And Main.CTS_AL_textbox.Text <> "0" Then
-                Main.Name_textbox.Text += " Lu" + Main.CTS_AL_textbox.Text ' nome += Longueur util
-            End If
-            design()
-        Catch ex As Exception
-            '  MsgBox("SET NAME AUTO - " + ex.ToString)
+    Function Check_zero(param As String, value As String)
+        ''Dim tmp_string As String = value
+        ''tmp_string = Replace(tmp_string, ".", ",") ' replace , -> .
+        ''Dim result As Double = tmp_string
 
-        End Try
+        If param = "CTS_AL" And value = 0 Then
+            Return Main.L_textbox.Text
+        Else
+            Return value
+        End If
+        If param = "CTS_AD" And value = 0 Then
+            Return Main.D_textbox.Text
+        Else
+            Return value
+        End If
+    End Function
+    Function Pick_param(param As String)
+        Select Case param
+            Case "D" : Return Main.D_textbox.Text
+            Case "L" : Return Main.L_textbox.Text
+            Case "OL" : Return Main.OL_textbox.Text
+            Case "SD" : Return Main.SD_textbox.Text
+            Case "CTS_AL" : Return Check_zero(param, Main.CTS_AL_textbox.Text)
+            Case "CTS_AD" : Return Check_zero(param, Main.CTS_AD_textbox.Text)
+            Case "NoTT" : Return Main.NoTT.Text
+        End Select
+    End Function
+    Public Sub Set_Name_auto()
+        If Main.ForceName_checkBox.Checked = False Then
+            Try
+                Dim Namemask As String = ToolName_config.Namemask_textbox.Text
+
+                Dim temp As String = Namemask
+                Dim formated As String = ""
+                Dim tempL, res, code_temp As String
+
+                For i As Integer = 0 To Namemask.Length
+                    tempL = Left(temp, 1)
+                    If tempL = "[" Then
+                        If formated = "" Then
+                            formated = Left(Namemask, i)
+                        End If
+                        code_temp = temp
+                        For j As Integer = 0 To temp.Length
+
+                            If Left(code_temp, 1) = "]" Then
+                                Dim parameter_temp As String = Left(temp, j)
+                                res = Right(parameter_temp, parameter_temp.Length - 1)
+                                formated += Pick_param(res)
+                                j = temp.Length
+                            End If
+                            code_temp = Right(code_temp, code_temp.Length - 1)
+
+                        Next
+                        temp = Right(code_temp, code_temp.Length)
+                    Else
+                        formated += tempL
+                        If temp.Length > 0 Then
+                            temp = Right(temp, temp.Length - 1)
+                        Else
+                            i = Namemask.Length
+
+                        End If
+                    End If
+
+                Next
+
+                'If L2.Text = "" Or L2.Text = "0" Then
+                ''Main.Name_textbox.Text = "FR Ø" + Main.D_textbox.Text + " " + Main.NoTT.Text + "z" ' nome =  FR Ø + diamètre de coupe + numero d dents
+                Main.Name_textbox.Text = formated
+                ''If Main.L_textbox.Text <> "" And Main.L_textbox.Text <> "0" Then
+                ''Main.Name_textbox.Text += " Lc" + Main.L_textbox.Text ' nome += Longueur de coupe
+                ''End If
+                ''If Main.CTS_AL_textbox.Text <> "" And Main.CTS_AL_textbox.Text <> "0" Then
+                ''Main.Name_textbox.Text += " Lu" + Main.CTS_AL_textbox.Text ' nome += Longueur util
+                ''
+                design()
+            Catch ex As Exception
+                MsgBox("Name Mask Error - " + ex.ToString)
+
+            End Try
+        End If
+
     End Sub
 
     Public Sub Set_grid()
@@ -35,12 +104,12 @@
 
         'dt.Columns.Add("index", GetType(String))            ' --------> option to add index to DataGridView1
         dt.Columns.Add("Reference", GetType(String))
-        dt.Columns.Add("d1", GetType(String))
-        dt.Columns.Add("d2", GetType(String))
-        dt.Columns.Add("d3", GetType(String))
-        dt.Columns.Add("l1", GetType(String))
-        dt.Columns.Add("l2", GetType(String))
-        dt.Columns.Add("l3", GetType(String))
+        dt.Columns.Add("D", GetType(String))
+        dt.Columns.Add("SD", GetType(String))
+        dt.Columns.Add("CTS_AD", GetType(String))
+        dt.Columns.Add("OL", GetType(String))
+        dt.Columns.Add("L", GetType(String))
+        dt.Columns.Add("CTS_AL", GetType(String))
         dt.Columns.Add("a", GetType(String))
         dt.Columns.Add("z", GetType(String))
         dt.Columns.Add("chf", GetType(String))
@@ -52,8 +121,6 @@
         Dim splitLine() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
         Dim pref_lang As String = Right(splitLine(0), 2)
 
-        Main.sel_lang.Text = pref_lang
-
     End Sub
     Public Sub Get_files(data As String)
         Dim splitLine() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
@@ -61,13 +128,16 @@
         Dim labels() As Label = {
             Main.menu_1, Main.menu_2, Main.menu_3, Main.menu_4,
             Main.menu_5, Main.menu_6, Main.menu_7, Main.menu_8,
-            Main.menu_9, Main.menu_10, Main.menu_11, Main.menu_12, Main.menu_13}
+            Main.menu_9, Main.menu_10, Main.menu_11, Main.menu_12}
 
         For i As Integer = 0 To labels.Length - 1
             labels(i).Text = splitLine(i)
         Next
 
-        Main.create.Text = splitLine(labels.Length)
+        Main.ForceName_checkBox.Text = splitLine(labels.Length)
+        Main.AutoOpen_checkBox.Text = splitLine(labels.Length + 1)
+        Main.ValidateBt.Text = splitLine(labels.Length + 2)
+        Main.DefineName_Bt.Text = splitLine(labels.Length + 3)
 
     End Sub
 

@@ -1,0 +1,5 @@
+﻿################################################################################
+# Ce fichier .gitignore a été automatiquement créé par Microsoft(R) Visual Studio.
+################################################################################
+
+/editool-7.16/editool/bin/Debug/hasp_net_windows.dll

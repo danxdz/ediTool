@@ -6,6 +6,7 @@ Module ts
 
     Public Sub Create_outil()
 
+
         'TopSolidHost.Connect(1, 0, "server")
         TopSolidHost.Connect()
         TopSolidDesignHost.Connect()
@@ -37,8 +38,9 @@ Module ts
                         TopSolidHost.Documents.EnsureIsDirty(model_fr)
                         '// Perform document modification.
                         MakeTool(model_fr)
-                        TopSolidHost.Pdm.CheckIn(lib_models(0), True)
+                        TopSolidHost.Pdm.CheckIn(TopSolidHost.Pdm.SearchDocumentByName(lib_models(0), TopSolidHost.Documents.GetName(model_fr))(0), True)
 
+                        MsgBox("Outil " + Main.Name_textbox.Text + " crée")
 
                     Catch
                         '// End modification (failure).
@@ -73,20 +75,22 @@ Module ts
         Set_parametre_outil(newTool)
         TopSolidHost.Application.EndModification(True, False)
 
-        '' TopSolidHost.Documents.Open(newTool)
+        If Main.AutoOpen_checkBox.Checked = True Then
+            TopSolidHost.Documents.Open(newTool)
+        End If
+
         TopSolidHost.Documents.Save(newTool)
         ''TopSolidHost.Documents.Close(newTool, False, False)
-        MsgBox("Outil " + Main.Name_textbox.Text + " crée")
 
     End Sub
-    Function strip_doubles(tmp As String)
+    Function Strip_doubles(tmp As String)
         Dim tmp_string As String = tmp
         tmp_string = Replace(tmp_string, ".", ",") ' replace , -> .
         Dim res As Double = tmp_string / 1000 '  get de Double from String and scale mm to m (SI units)
         Return res
     End Function
 
-    Private Sub setReal(newtool As DocumentId, dbl As String, value As Double)
+    Private Sub SetReal(newtool As DocumentId, dbl As String, value As Double)
 
         Dim tmpReal As ElementId = TopSolidHost.Elements.SearchByName(newtool, dbl)
         TopSolidHost.Parameters.SetRealValue(tmpReal, value)
@@ -100,35 +104,39 @@ Module ts
 
         'Dim D As ElementId = TopSolidHost.Elements.SearchByName(newTool, "D")
         'TopSolidHost.Parameters.SetRealValue(D, strip_doubles(Main.d1.Text))
-        setReal(newTool, "D", strip_doubles(Main.D_textbox.Text))
-        setReal(newTool, "SD", strip_doubles(Main.SD_textbox.Text))
-        setReal(newTool, "CTS_AD", strip_doubles(Main.CTS_AD_textbox.Text))
-        setReal(newTool, "OL", strip_doubles(Main.OL_textbox.Text))
-        setReal(newTool, "L", strip_doubles(Main.L_textbox.Text))
-        setReal(newTool, "CTS_AL", strip_doubles(Main.CTS_AL_textbox.Text))
-        setReal(newTool, "CTS_ED", strip_doubles(Main.SD_textbox.Text))
+        SetReal(newTool, "D", Strip_doubles(Main.D_textbox.Text))
+        SetReal(newTool, "SD", Strip_doubles(Main.SD_textbox.Text))
+        SetReal(newTool, "CTS_AD", Strip_doubles(Main.CTS_AD_textbox.Text))
+        SetReal(newTool, "OL", Strip_doubles(Main.OL_textbox.Text))
+        SetReal(newTool, "L", Strip_doubles(Main.L_textbox.Text))
+        SetReal(newTool, "CTS_AL", Strip_doubles(Main.CTS_AL_textbox.Text))
+        SetReal(newTool, "CTS_ED", Strip_doubles(Main.SD_textbox.Text))
 
-        Dim CTS_AD_tmp As Double = strip_doubles(Main.CTS_AD_textbox.Text)
+        Dim CTS_AD_tmp As Double = Strip_doubles(Main.CTS_AD_textbox.Text)
         If CTS_AD_tmp > 0 Then
-            setReal(newTool, "CTS_EBD", CTS_AD_tmp) 'TODO
+            SetReal(newTool, "CTS_EBD", CTS_AD_tmp) 'TODO
         Else
-            CTS_AD_tmp = strip_doubles(Main.D_textbox.Text)
-            setReal(newTool, "CTS_EBD", CTS_AD_tmp)
+            CTS_AD_tmp = Strip_doubles(Main.D_textbox.Text)
+            SetReal(newTool, "CTS_EBD", CTS_AD_tmp)
         End If
 
         'Dim CTS_EL As ElementId = TopSolidHost.Elements.SearchByName(newTool, "CTS_EL")
         'TopSolidHost.Parameters.SetRealValue(CTS_EL, Main.L3.Text / 1000)
-        Dim CTS_EL As Double = strip_doubles(Main.CTS_AL_textbox.Text)
+        Dim CTS_EL As Double = Strip_doubles(Main.CTS_AL_textbox.Text)
         If (Main.alpha.Text = 0) Then
-            setReal(newTool, "CTS_EL", CTS_EL) 'TODO
+            SetReal(newTool, "CTS_EL", CTS_EL) 'TODO
         Else
-            CTS_EL = (strip_doubles(Main.SD_textbox.Text) - strip_doubles(Main.D_textbox.Text)) / 2
+            CTS_EL = (Strip_doubles(Main.SD_textbox.Text) - Strip_doubles(Main.D_textbox.Text)) / 2
             CTS_EL /= Math.Tan((Main.alpha.Text * Math.PI) / 180)
-            setReal(newTool, "CTS_EL", CTS_EL) 'TODO
+            SetReal(newTool, "CTS_EL", CTS_EL) 'TODO
         End If
 
 
+
         Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool, "$TopSolid.Kernel.TX.Properties.Name")
+
+
+
 
         TopSolidHost.Parameters.SetTextParameterizedValue(Name, "FR 2T Ø[D] Lc[L] SD[SD]")
 
