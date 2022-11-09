@@ -138,7 +138,8 @@ Module ts
 
 
 
-        TopSolidHost.Parameters.SetTextParameterizedValue(Name, "FR 2T Ø[D] Lc[L] SD[SD]")
+        TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.NameMask) '"FR 2T Ø[D] Lc[L] SD[SD]")
+
 
 
 

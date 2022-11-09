@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="editool.exe" size="267264">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="editool.exe" size="282624">
       <assemblyIdentity name="editool" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>12ovxZP+PzcCaqmgqg2+pZi6pjVznt5i616z/jIvekY=</dsig:DigestValue>
+        <dsig:DigestValue>ZQm/sglEZKXhHhrhmA3aG78yfkTo3I/jU/5NlEOPQHM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -245,13 +245,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="editool.exe.config" size="185">
+  <file name="editool.exe.config" size="1097">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>i4aTnescc/3zAk5LEuOq4n40QdhkgDViykK1SLNhG2E=</dsig:DigestValue>
+      <dsig:DigestValue>cwwp68skPBUQNcf9JJCUQAlILVGTmIY2I526biDGt7w=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

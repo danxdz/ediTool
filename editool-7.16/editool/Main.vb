@@ -111,4 +111,79 @@ Public Class Main
     Private Sub NoTT_LostFocus(sender As Object, e As EventArgs) Handles NoTT.LostFocus
         Set_Name_auto()
     End Sub
+
+
+    Private Sub FR2T_Click(sender As Object, e As EventArgs) Handles FR2T.Click
+        Dim color = Drawing.Color.Gray
+        Dim color_green = Drawing.Color.SpringGreen
+        FR2T.BackColor = color_green
+
+        FRBO.BackColor = color
+        FRTO.BackColor = color
+        FAP.BackColor = color
+        AL.BackColor = color
+        FO.BackColor = color
+
+    End Sub
+
+    Private Sub FAP_Click(sender As Object, e As EventArgs) Handles FAP.Click
+
+        Dim color = Drawing.Color.Gray
+        Dim color_green = Drawing.Color.SpringGreen
+        FAP.BackColor = color_green
+
+        FR2T.BackColor = color
+        FRTO.BackColor = color
+        FRBO.BackColor = color
+        AL.BackColor = color
+        FO.BackColor = color
+
+    End Sub
+
+    Private Sub FRBO_Click(sender As Object, e As EventArgs) Handles FRBO.Click
+        Dim color = Drawing.Color.Gray
+        Dim color_green = Drawing.Color.SpringGreen
+        FRBO.BackColor = color_green
+        FR2T.BackColor = color
+        FRTO.BackColor = color
+        FAP.BackColor = color
+        AL.BackColor = color
+        FO.BackColor = color
+
+    End Sub
+
+    Private Sub FRTO_Click(sender As Object, e As EventArgs) Handles FRTO.Click
+        Dim color = Drawing.Color.Gray
+        Dim color_green = Drawing.Color.SpringGreen
+        FRTO.BackColor = color_green
+        FR2T.BackColor = color
+        FRBO.BackColor = color
+        FAP.BackColor = color
+        AL.BackColor = color
+        FO.BackColor = color
+
+    End Sub
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles FO.Click
+        Dim color = Drawing.Color.Gray
+        Dim color_green = Drawing.Color.SpringGreen
+        FO.BackColor = color_green
+        FR2T.BackColor = color
+        FRTO.BackColor = color
+        FRBO.BackColor = color
+        FAP.BackColor = color
+        AL.BackColor = color
+
+    End Sub
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles AL.Click
+        Dim color = Drawing.Color.Gray
+        Dim color_green = Drawing.Color.SpringGreen
+        AL.BackColor = color_green
+        FR2T.BackColor = color
+        FRBO.BackColor = color
+        FRTO.BackColor = color
+        FAP.BackColor = color
+        FO.BackColor = color
+    End Sub
 End Class
