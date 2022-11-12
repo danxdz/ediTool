@@ -229,5 +229,9 @@
   <ItemGroup>
     <None Include="data\reg.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="data\menu_en_tooltypes.txt" />
+    <Content Include="data\tooltypes.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

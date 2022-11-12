@@ -62,22 +62,49 @@ Namespace My.Resources
         
         '''<summary>
         '''  Recherche une chaîne localisée semblable à tool name
-        '''chanfrein
+        '''chamfer
         '''angle
-        '''n. tooth
-        '''diamètre de coupe
-        '''diamètre détalonné
-        '''diamètre corps
-        '''longueur de coupe
-        '''longueur détalonné
-        '''longueur total
-        '''référence
-        '''diamètre de coupe
-        '''créer outil0.
+        '''teeth num
+        '''cutting diameter
+        '''clearance diameter
+        '''body diameter
+        '''cutting length
+        '''clearance length
+        '''overall length
+        '''reference
+        '''cutting diameter
+        '''force name
+        '''open tool
+        '''create tool
+        '''config.
         '''</summary>
         Friend ReadOnly Property menu_en() As String
             Get
                 Return ResourceManager.GetString("menu_en", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à tool name
+        '''chamfer
+        '''angle
+        '''teeth num
+        '''cutting diameter
+        '''clearance diameter
+        '''body diameter
+        '''cutting length
+        '''clearance length
+        '''overall length
+        '''reference
+        '''cutting diameter
+        '''force name
+        '''open tool
+        '''create tool
+        '''config.
+        '''</summary>
+        Friend ReadOnly Property menu_en_tooltypes() As String
+            Get
+                Return ResourceManager.GetString("menu_en_tooltypes", resourceCulture)
             End Get
         End Property
         
@@ -94,7 +121,10 @@ Namespace My.Resources
         '''longueur total
         '''référence
         '''diamètre de coupe
-        '''créer outil.
+        '''force nom
+        '''ouvrir outil
+        '''créer outil
+        '''config.
         '''</summary>
         Friend ReadOnly Property menu_fr() As String
             Get
@@ -138,6 +168,20 @@ Namespace My.Resources
         Friend ReadOnly Property reg() As String
             Get
                 Return ResourceManager.GetString("reg", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à FR Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
+        '''FT Ø[D] r[r] [NoTT]z Lc[L] Lu[CTS_AL]
+        '''FB Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
+        '''FAP Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
+        '''FO Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
+        '''AL Ø[D] [NoTT]z Lc[L] Lu[CTS_AL].
+        '''</summary>
+        Friend ReadOnly Property tooltypes() As String
+            Get
+                Return ResourceManager.GetString("tooltypes", resourceCulture)
             End Get
         End Property
     End Module

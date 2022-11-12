@@ -39,13 +39,20 @@
             Case "CTS_AL" : Return Check_zero(param, Main.CTS_AL_textbox.Text)
             Case "CTS_AD" : Return Check_zero(param, Main.CTS_AD_textbox.Text)
             Case "NoTT" : Return Main.NoTT.Text
+            Case "A" : Return Main.A_TextBox.Text
+            Case "r" : Return Main.chf.Text
+            Case Else
+                MsgBox("no param found, check outil name mask config")
         End Select
     End Function
     Public Sub Set_Name_auto()
+
         If Main.ForceName_checkBox.Checked = False Then
             Try
                 Dim Namemask As String = ToolName_config.Namemask_textbox.Text
+                Dim ToolType = My.Settings.ToolType
 
+                ''Dim temp As String = ToolType + " " + Namemask
                 Dim temp As String = Namemask
                 Dim formated As String = ""
                 Dim tempL, res, code_temp As String

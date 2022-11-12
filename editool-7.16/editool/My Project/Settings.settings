@@ -11,5 +11,26 @@
     <Setting Name="NameMask" Type="System.String" Scope="User">
       <Value Profile="(Default)">FR Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]</Value>
     </Setting>
+    <Setting Name="ToolType" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MaskTT_FR" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FR Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]</Value>
+    </Setting>
+    <Setting Name="MaskTT_FT" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FT Ø[D] r[r] [NoTT]z Lc[L] Lu[CTS_AL]</Value>
+    </Setting>
+    <Setting Name="MaskTT_FB" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FB Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]</Value>
+    </Setting>
+    <Setting Name="MaskTT_FP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FP Ø[D] [NoTT]z Lc[L]</Value>
+    </Setting>
+    <Setting Name="MaskTT_FO" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FO Ø[D] [NoTT]z Lc[L]</Value>
+    </Setting>
+    <Setting Name="MaskTT_AL" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="editool.exe" size="282624">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="editool.exe" size="303616">
       <assemblyIdentity name="editool" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ZQm/sglEZKXhHhrhmA3aG78yfkTo3I/jU/5NlEOPQHM=</dsig:DigestValue>
+        <dsig:DigestValue>ar5DoL6QSsqpiWBc6JsPglLtJs/NYILq43thKoyihVQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -150,50 +150,50 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TopSolid.Cad.Design.Automating.dll" size="40960">
-      <assemblyIdentity name="TopSolid.Cad.Design.Automating" version="7.16.400.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TopSolid.Cad.Design.Automating.dll" size="45568">
+      <assemblyIdentity name="TopSolid.Cad.Design.Automating" version="7.16.400.149" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>dDpTPKZb+HlmsHIszzNOCZ40TzdgyzHMnYggS8sCxHw=</dsig:DigestValue>
+        <dsig:DigestValue>HeXa70i5hJSNKy/B+KT6efyUNZVH+hBys4O1/WqAMGs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TopSolid.Cam.NC.Kernel.Automating.dll" size="26624">
-      <assemblyIdentity name="TopSolid.Cam.NC.Kernel.Automating" version="7.16.400.0" language="neutral" processorArchitecture="amd64" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TopSolid.Cam.NC.Kernel.Automating.dll" size="27136">
+      <assemblyIdentity name="TopSolid.Cam.NC.Kernel.Automating" version="7.16.400.149" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>5HLJXV1e3UYMK5X//PIO1XpZMkjz4qLwwNcakTEzSVY=</dsig:DigestValue>
+        <dsig:DigestValue>uMyhEd66fdC7cQCTfVdOjdEaS/6iwuUicSkjKRYGX/w=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TopSolid.Kernel.Automating.dll" size="130048">
-      <assemblyIdentity name="TopSolid.Kernel.Automating" version="7.16.400.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TopSolid.Kernel.Automating.dll" size="138240">
+      <assemblyIdentity name="TopSolid.Kernel.Automating" version="7.16.400.149" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>XXNSOKWVzxHwV9lvl2kACbk7QSEA4zDcdPzvBsGogn8=</dsig:DigestValue>
+        <dsig:DigestValue>m3eFCi+E0XDeB7neXsrDRqeXO72Xk6E8x1taWWjE5wI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TopSolid.Kernel.SX.dll" size="1493504">
-      <assemblyIdentity name="TopSolid.Kernel.SX" version="7.16.400.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TopSolid.Kernel.SX.dll" size="1513472">
+      <assemblyIdentity name="TopSolid.Kernel.SX" version="7.16.400.149" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>T45ZLoAmIZASJtbW7VDkNUHzNJ9dbxpN4/oXlrhFJGA=</dsig:DigestValue>
+        <dsig:DigestValue>4+Horr+iZ7elCchACnQK8TZ3vXFPzlaijUpmjuLXe5k=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -245,13 +245,22 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="editool.exe.config" size="1097">
+  <file name="data\tooltypes.txt" size="171">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>cwwp68skPBUQNcf9JJCUQAlILVGTmIY2I526biDGt7w=</dsig:DigestValue>
+      <dsig:DigestValue>8Kys5froH4vedZ/XSgT0dOItJHQA8rDNlltIzimNDLI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="editool.exe.config" size="1918">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>Mlc+e0AGNFxDj7OJ2yrUJxMEdJIfppNLwIoTSkQ1/+c=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

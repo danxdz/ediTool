@@ -22,6 +22,7 @@ C:\Users\user\source\repos\ediTool\editool-7.16\editool\bin\Debug\LZ4mm.dll
 C:\Users\user\source\repos\ediTool\editool-7.16\editool\bin\Debug\LZ4pn.dll
 C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.vbproj.AssemblyReference.cache
 C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.vbproj.SuggestedBindingRedirects.cache
+C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.ToolName_config.resources
 C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.Main.resources
 C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.Resources.resources
 C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.vbproj.GenerateResource.cache
@@ -32,4 +33,3 @@ C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.vbproj
 C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.exe
 C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.xml
 C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.pdb
-C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.ToolName_config.resources

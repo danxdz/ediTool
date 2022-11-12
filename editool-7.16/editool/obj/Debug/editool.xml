@@ -25,18 +25,41 @@ editool
 <member name="P:editool.My.Resources.Resources.menu_en">
 <summary>
   Recherche une chaîne localisée semblable à tool name
-chanfrein
+chamfer
 angle
-n. tooth
-diamètre de coupe
-diamètre détalonné
-diamètre corps
-longueur de coupe
-longueur détalonné
-longueur total
-référence
-diamètre de coupe
-créer outil0.
+teeth num
+cutting diameter
+clearance diameter
+body diameter
+cutting length
+clearance length
+overall length
+reference
+cutting diameter
+force name
+open tool
+create tool
+config.
+</summary>
+</member>
+<member name="P:editool.My.Resources.Resources.menu_en_tooltypes">
+<summary>
+  Recherche une chaîne localisée semblable à tool name
+chamfer
+angle
+teeth num
+cutting diameter
+clearance diameter
+body diameter
+cutting length
+clearance length
+overall length
+reference
+cutting diameter
+force name
+open tool
+create tool
+config.
 </summary>
 </member>
 <member name="P:editool.My.Resources.Resources.menu_fr">
@@ -53,7 +76,10 @@ longueur détalonné
 longueur total
 référence
 diamètre de coupe
-créer outil.
+force nom
+ouvrir outil
+créer outil
+config.
 </summary>
 </member>
 <member name="P:editool.My.Resources.Resources.outils">
@@ -85,6 +111,16 @@ FR Ø10 2z Lc22 Lu31
 FR Ø5 2z Lc13 Lu18
 FR Ø4 2z Lc11 Lu16
 .
+</summary>
+</member>
+<member name="P:editool.My.Resources.Resources.tooltypes">
+<summary>
+  Recherche une chaîne localisée semblable à FR Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
+FT Ø[D] r[r] [NoTT]z Lc[L] Lu[CTS_AL]
+FB Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
+FAP Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
+FO Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
+AL Ø[D] [NoTT]z Lc[L] Lu[CTS_AL].
 </summary>
 </member>
 </members>

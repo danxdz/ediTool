@@ -59,7 +59,7 @@ Partial Class Main
         Me.menu_3 = New System.Windows.Forms.Label()
         Me.menu_4 = New System.Windows.Forms.Label()
         Me.menu_1 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.manref_TextBox = New System.Windows.Forms.ComboBox()
         Me.Man = New System.Windows.Forms.ComboBox()
         Me.ForceName_checkBox = New System.Windows.Forms.CheckBox()
         Me.DefineName_Bt = New System.Windows.Forms.Button()
@@ -75,6 +75,8 @@ Partial Class Main
         Me.FAP = New System.Windows.Forms.ToolStripButton()
         Me.FO = New System.Windows.Forms.ToolStripButton()
         Me.AL = New System.Windows.Forms.ToolStripButton()
+        Me.A_TextBox = New System.Windows.Forms.TextBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolsBar.SuspendLayout()
@@ -378,7 +380,7 @@ Partial Class Main
         Me.chf.BackColor = System.Drawing.Color.LightGray
         Me.chf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.chf.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chf.Location = New System.Drawing.Point(317, 143)
+        Me.chf.Location = New System.Drawing.Point(317, 151)
         Me.chf.Margin = New System.Windows.Forms.Padding(10)
         Me.chf.Name = "chf"
         Me.chf.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -390,7 +392,7 @@ Partial Class Main
         'menu_2
         '
         Me.menu_2.AutoSize = True
-        Me.menu_2.Location = New System.Drawing.Point(319, 133)
+        Me.menu_2.Location = New System.Drawing.Point(314, 128)
         Me.menu_2.Name = "menu_2"
         Me.menu_2.Size = New System.Drawing.Size(35, 13)
         Me.menu_2.TabIndex = 29
@@ -429,7 +431,7 @@ Partial Class Main
         'menu_3
         '
         Me.menu_3.AutoSize = True
-        Me.menu_3.Location = New System.Drawing.Point(319, 87)
+        Me.menu_3.Location = New System.Drawing.Point(314, 77)
         Me.menu_3.Name = "menu_3"
         Me.menu_3.Size = New System.Drawing.Size(35, 13)
         Me.menu_3.TabIndex = 33
@@ -438,7 +440,7 @@ Partial Class Main
         'menu_4
         '
         Me.menu_4.AutoSize = True
-        Me.menu_4.Location = New System.Drawing.Point(319, 31)
+        Me.menu_4.Location = New System.Drawing.Point(314, 18)
         Me.menu_4.Name = "menu_4"
         Me.menu_4.Size = New System.Drawing.Size(35, 13)
         Me.menu_4.TabIndex = 34
@@ -453,13 +455,13 @@ Partial Class Main
         Me.menu_1.TabIndex = 35
         Me.menu_1.Text = "empty"
         '
-        'ComboBox1
+        'manref_TextBox
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(176, 148)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox1.TabIndex = 36
+        Me.manref_TextBox.FormattingEnabled = True
+        Me.manref_TextBox.Location = New System.Drawing.Point(176, 97)
+        Me.manref_TextBox.Name = "manref_TextBox"
+        Me.manref_TextBox.Size = New System.Drawing.Size(120, 21)
+        Me.manref_TextBox.TabIndex = 36
         '
         'Man
         '
@@ -467,7 +469,7 @@ Partial Class Main
         Me.Man.Items.AddRange(New Object() {"FRAISA", "SECO", "HOFFMAN"})
         Me.Man.Location = New System.Drawing.Point(49, 97)
         Me.Man.Name = "Man"
-        Me.Man.Size = New System.Drawing.Size(247, 21)
+        Me.Man.Size = New System.Drawing.Size(121, 21)
         Me.Man.TabIndex = 41
         Me.Man.Text = "FRAISA"
         '
@@ -566,13 +568,13 @@ Partial Class Main
         Me.ToolsBar.Margin = New System.Windows.Forms.Padding(5)
         Me.ToolsBar.Name = "ToolsBar"
         Me.ToolsBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.ToolsBar.Size = New System.Drawing.Size(32, 382)
+        Me.ToolsBar.Size = New System.Drawing.Size(25, 382)
         Me.ToolsBar.TabIndex = 54
         Me.ToolsBar.Text = "ToolsBar"
         '
         'FR2T
         '
-        Me.FR2T.BackColor = System.Drawing.Color.Gainsboro
+        Me.FR2T.BackColor = System.Drawing.Color.Lime
         Me.FR2T.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.FR2T.Image = CType(resources.GetObject("FR2T.Image"), System.Drawing.Image)
         Me.FR2T.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
@@ -593,7 +595,7 @@ Partial Class Main
         '
         'FRBO
         '
-        Me.FRBO.BackColor = System.Drawing.Color.DimGray
+        Me.FRBO.BackColor = System.Drawing.Color.Silver
         Me.FRBO.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.FRBO.Image = CType(resources.GetObject("FRBO.Image"), System.Drawing.Image)
         Me.FRBO.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
@@ -605,7 +607,7 @@ Partial Class Main
         '
         'FAP
         '
-        Me.FAP.BackColor = System.Drawing.Color.SpringGreen
+        Me.FAP.BackColor = System.Drawing.Color.Silver
         Me.FAP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.FAP.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.FAP.Image = CType(resources.GetObject("FAP.Image"), System.Drawing.Image)
@@ -635,6 +637,29 @@ Partial Class Main
         Me.AL.Size = New System.Drawing.Size(24, 44)
         Me.AL.Text = "AL"
         '
+        'A_TextBox
+        '
+        Me.A_TextBox.BackColor = System.Drawing.Color.LightGray
+        Me.A_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.A_TextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.A_TextBox.Location = New System.Drawing.Point(359, 151)
+        Me.A_TextBox.Margin = New System.Windows.Forms.Padding(10)
+        Me.A_TextBox.Name = "A_TextBox"
+        Me.A_TextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.A_TextBox.Size = New System.Drawing.Size(32, 26)
+        Me.A_TextBox.TabIndex = 55
+        Me.A_TextBox.Text = "90"
+        Me.A_TextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(242, 124)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(54, 17)
+        Me.CheckBox1.TabIndex = 56
+        Me.CheckBox1.Text = "empty"
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -642,6 +667,8 @@ Partial Class Main
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(810, 392)
+        Me.Controls.Add(Me.CheckBox1)
+        Me.Controls.Add(Me.A_TextBox)
         Me.Controls.Add(Me.ToolsBar)
         Me.Controls.Add(Me.ValidateBt)
         Me.Controls.Add(Me.AutoOpen_checkBox)
@@ -651,7 +678,7 @@ Partial Class Main
         Me.Controls.Add(Me.DefineName_Bt)
         Me.Controls.Add(Me.ForceName_checkBox)
         Me.Controls.Add(Me.Man)
-        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.manref_TextBox)
         Me.Controls.Add(Me.menu_1)
         Me.Controls.Add(Me.menu_4)
         Me.Controls.Add(Me.menu_3)
@@ -733,7 +760,7 @@ Partial Class Main
     Friend WithEvents menu_3 As Label
     Friend WithEvents menu_4 As Label
     Friend WithEvents menu_1 As Label
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents manref_TextBox As ComboBox
     Friend WithEvents Man As ComboBox
     Friend WithEvents ForceName_checkBox As CheckBox
     Friend WithEvents DefineName_Bt As Button
@@ -749,4 +776,6 @@ Partial Class Main
     Private WithEvents ToolsBar As ToolStrip
     Friend WithEvents FO As ToolStripButton
     Friend WithEvents AL As ToolStripButton
+    Friend WithEvents A_TextBox As TextBox
+    Friend WithEvents CheckBox1 As CheckBox
 End Class

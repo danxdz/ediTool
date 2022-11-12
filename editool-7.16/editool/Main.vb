@@ -5,7 +5,6 @@ Public Class Main
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Dim file_reader As IO.StreamReader
         ToolName_config.Namemask_textbox.Text = My.Settings.NameMask
-
         Set_grid()
 
         If My.Settings.PrefLang = "en" Then
@@ -40,7 +39,7 @@ Public Class Main
         End If
     End Sub
     Private Sub TextBox_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles D_textbox.KeyPress, SD_textbox.KeyPress, CTS_AD_textbox.KeyPress, OL_textbox.KeyPress, L_textbox.KeyPress, CTS_AL_textbox.KeyPress
-        Dim digitsOnly As Regex = New Regex("[^\d]")
+        Dim digitsOnly As New Regex("[^\d]")
         Me.Text = digitsOnly.Replace(Me.Text, "")
     End Sub
     Private Sub Set_pref_lang(lang As String)
@@ -75,6 +74,7 @@ Public Class Main
     Private Sub DataGridView1_CurrentCellChanged(sender As Object, e As EventArgs) Handles DataGridView1.CurrentCellChanged
         Dim ds() As TextBox = {D_textbox, SD_textbox, CTS_AD_textbox, OL_textbox, L_textbox, CTS_AL_textbox, alpha, NoTT}
         Try
+            manref_TextBox.Text = DataGridView1.SelectedCells(0).Value
             For i As Short = 1 To 8
                 ds(i - 1).Text = DataGridView1.SelectedCells(i).Value
             Next
@@ -124,6 +124,13 @@ Public Class Main
         AL.BackColor = color
         FO.BackColor = color
 
+        My.Settings.ToolType = "FR"
+        'My.Settings.NameMask = ToolName_config.MaskTT_FR.Text
+        ToolName_config.Namemask_textbox.Text = ToolName_config.MaskTT_FR.Text
+
+        My.Settings.Save()
+        Set_Name_auto()
+
     End Sub
 
     Private Sub FAP_Click(sender As Object, e As EventArgs) Handles FAP.Click
@@ -138,6 +145,12 @@ Public Class Main
         AL.BackColor = color
         FO.BackColor = color
 
+        My.Settings.ToolType = "FP"
+        My.Settings.Save()
+        ToolName_config.Namemask_textbox.Text = ToolName_config.MaskTT_FP.Text
+
+        Set_Name_auto()
+
     End Sub
 
     Private Sub FRBO_Click(sender As Object, e As EventArgs) Handles FRBO.Click
@@ -149,6 +162,12 @@ Public Class Main
         FAP.BackColor = color
         AL.BackColor = color
         FO.BackColor = color
+
+        My.Settings.ToolType = "FB"
+        My.Settings.Save()
+        ToolName_config.Namemask_textbox.Text = ToolName_config.MaskTT_FB.Text
+
+        Set_Name_auto()
 
     End Sub
 
@@ -162,6 +181,13 @@ Public Class Main
         AL.BackColor = color
         FO.BackColor = color
 
+
+        My.Settings.ToolType = "FT"
+        My.Settings.Save()
+        ToolName_config.Namemask_textbox.Text = ToolName_config.MaskTT_FT.Text
+
+        Set_Name_auto()
+
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles FO.Click
@@ -174,6 +200,12 @@ Public Class Main
         FAP.BackColor = color
         AL.BackColor = color
 
+        My.Settings.ToolType = "FO"
+        My.Settings.Save()
+        ToolName_config.Namemask_textbox.Text = ToolName_config.MaskTT_FO.Text
+
+        Set_Name_auto()
+
     End Sub
 
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles AL.Click
@@ -185,5 +217,17 @@ Public Class Main
         FRTO.BackColor = color
         FAP.BackColor = color
         FO.BackColor = color
+
+
+        My.Settings.ToolType = "AL"
+        My.Settings.Save()
+        ToolName_config.Namemask_textbox.Text = ToolName_config.MaskTT_Al.Text
+
+        Set_Name_auto()
+
+    End Sub
+
+    Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
+
     End Sub
 End Class

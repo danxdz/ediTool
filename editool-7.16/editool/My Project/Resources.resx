@@ -121,6 +121,9 @@
   <data name="menu_en" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\menu_en.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
+  <data name="menu_en_tooltypes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\menu_en_tooltypes.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
   <data name="menu_fr" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\menu_fr.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
@@ -129,5 +132,8 @@
   </data>
   <data name="reg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\reg.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="tooltypes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\tooltypes.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>
