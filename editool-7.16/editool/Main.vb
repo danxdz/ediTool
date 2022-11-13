@@ -4,8 +4,8 @@ Imports System.Text.RegularExpressions
 Public Class Main
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Dim file_reader As IO.StreamReader
-        ToolName_config.Namemask_textbox.Text = My.Settings.NameMask
-        Set_grid()
+        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
+        SetDataTable()
 
         If My.Settings.PrefLang = "en" Then
             Get_files(My.Resources.menu_en)
@@ -126,7 +126,7 @@ Public Class Main
 
         My.Settings.ToolType = "FR"
         'My.Settings.NameMask = ToolName_config.MaskTT_FR.Text
-        ToolName_config.Namemask_textbox.Text = ToolName_config.MaskTT_FR.Text
+        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
 
         My.Settings.Save()
         Set_Name_auto()
@@ -147,7 +147,7 @@ Public Class Main
 
         My.Settings.ToolType = "FP"
         My.Settings.Save()
-        ToolName_config.Namemask_textbox.Text = ToolName_config.MaskTT_FP.Text
+        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FP
 
         Set_Name_auto()
 
@@ -165,7 +165,7 @@ Public Class Main
 
         My.Settings.ToolType = "FB"
         My.Settings.Save()
-        ToolName_config.Namemask_textbox.Text = ToolName_config.MaskTT_FB.Text
+        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FB
 
         Set_Name_auto()
 
@@ -184,13 +184,13 @@ Public Class Main
 
         My.Settings.ToolType = "FT"
         My.Settings.Save()
-        ToolName_config.Namemask_textbox.Text = ToolName_config.MaskTT_FT.Text
+        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FT
 
         Set_Name_auto()
 
     End Sub
 
-    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles FO.Click
+    Private Sub FO_Click(sender As Object, e As EventArgs) Handles FO.Click
         Dim color = Drawing.Color.Gray
         Dim color_green = Drawing.Color.SpringGreen
         FO.BackColor = color_green
@@ -202,13 +202,13 @@ Public Class Main
 
         My.Settings.ToolType = "FO"
         My.Settings.Save()
-        ToolName_config.Namemask_textbox.Text = ToolName_config.MaskTT_FO.Text
+        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FO
 
         Set_Name_auto()
 
     End Sub
 
-    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles AL.Click
+    Private Sub AL_Click(sender As Object, e As EventArgs) Handles AL.Click
         Dim color = Drawing.Color.Gray
         Dim color_green = Drawing.Color.SpringGreen
         AL.BackColor = color_green
@@ -221,13 +221,17 @@ Public Class Main
 
         My.Settings.ToolType = "AL"
         My.Settings.Save()
-        ToolName_config.Namemask_textbox.Text = ToolName_config.MaskTT_Al.Text
+        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_AL
 
         Set_Name_auto()
 
     End Sub
 
     Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
+
+    End Sub
+
+    Private Sub FO_DisplayStyleChanged(sender As Object, e As EventArgs) Handles FO.DisplayStyleChanged
 
     End Sub
 End Class

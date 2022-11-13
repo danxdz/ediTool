@@ -1,7 +1,7 @@
 ﻿Module outils_base
     Dim dt As DataTable
     Public Sub set_filter()
-        Dim dv As DataView = New DataView(dt)
+        Dim dv As New DataView(dt)
         Dim str_tmp As String
 
         If Main.Diam_filter_TextBox.Text = "" Then
@@ -106,10 +106,10 @@
 
     End Sub
 
-    Public Sub Set_grid()
+    Public Sub SetDataTable()
         dt = New DataTable
 
-        'dt.Columns.Add("index", GetType(String))            ' --------> option to add index to DataGridView1
+        dt.Columns.Add("index", GetType(String))            ' --------> option to add index to DataGridView1
         dt.Columns.Add("Reference", GetType(String))
         dt.Columns.Add("D", GetType(String))
         dt.Columns.Add("SD", GetType(String))

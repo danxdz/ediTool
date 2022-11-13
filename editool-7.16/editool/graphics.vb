@@ -23,6 +23,9 @@
             Dim L As Double = Replace(Main.L_textbox.Text, ".", ",")
             Dim CTS_AL As Double = Replace(Main.CTS_AL_textbox.Text, ".", ",")
             Dim Alpha As Double = Replace(Main.alpha.Text, ".", ",")
+            Dim r As Double = Replace(Main.chf.Text, ".", ",")
+            Dim A_point = Replace(Main.A_TextBox.Text, ".", ",")
+            A_point /= 2
 
             Dim scale As Double = (w - 1) / OL
             Dim drawFont As New Font("Arial", 8)
@@ -51,6 +54,11 @@
             Dim L_tmp As Single = L * scale
             Dim CTS_AL_tmp As Single = CTS_AL * scale
 
+            Dim R_tmp As Single = h - (r * scale)
+
+
+            Dim A_tmp As Single = ((D / 2) / (Math.Tan((A_point * Math.PI) / 180)) * scale)
+
             Dim CTS_ED_tmp As Single
             If CTS_AD > 0 Then
                 CTS_ED_tmp = CTS_AD_tmp
@@ -70,15 +78,41 @@
 
             End If
 
+            'half revolved preview tool 
+            'CUT
+            'FR 2T et Alesoir *************************
+            If My.Settings.ToolType = "FR" Or My.Settings.ToolType = "AL" Then
+                myOutil.FillRectangle(Brushes.Orange, 0, D_tmp, L_tmp, h - D_tmp)
+                'contour
+                myOutil.DrawLine(myPen, 0, h, 0, D_tmp)
+                myOutil.DrawLine(myPen, 0, D_tmp, L_tmp, D_tmp)
+            ElseIf My.Settings.ToolType = "FB" Then
+                'FR Spherique ***********************
+                myOutil.FillEllipse(Brushes.Black, 0, D_tmp, (h - D_tmp) * 2, (h - D_tmp) * 2)
+                myOutil.FillEllipse(Brushes.Orange, 1, D_tmp + 1, ((h - D_tmp) * 2), (h - D_tmp) * 2)
+                myOutil.FillRectangle(Brushes.Orange, (h - D_tmp), D_tmp, L_tmp - (h - D_tmp), h - D_tmp)
+                myOutil.DrawLine(myPen, (h - D_tmp), D_tmp, L_tmp, D_tmp)
+            ElseIf My.Settings.ToolType = "FT" Then
+                'FR Torique ***********************
+                myOutil.FillEllipse(Brushes.Black, 0, D_tmp, (h - R_tmp) * 2, (h - R_tmp) * 2)
+                myOutil.FillEllipse(Brushes.Orange, 1, D_tmp + 1, ((h - R_tmp) * 2), (h - R_tmp) * 2)
+                myOutil.FillRectangle(Brushes.Orange, 0, D_tmp + ((h - R_tmp)), L_tmp, h - D_tmp)
+                myOutil.FillRectangle(Brushes.Orange, h - R_tmp, D_tmp, L_tmp - (h - R_tmp), h - D_tmp)
+                myOutil.DrawLine(myPen, 0, h, 0, D_tmp + ((h - R_tmp)))
+                myOutil.DrawLine(myPen, (h - R_tmp), D_tmp, L_tmp, D_tmp)
+            ElseIf My.Settings.ToolType = "FO" Or My.Settings.ToolType = "FP" Then
+                'Forets et Forets a pointer ***********************
 
-            myOutil.FillRectangle(Brushes.Orange, 0, D_tmp, L_tmp, h - D_tmp)
+                myOutil.DrawLine(myPen, 0, h, A_tmp, D_tmp)
+                myOutil.DrawLine(myPen, A_tmp, D_tmp, L_tmp, D_tmp)
 
-            myOutil.DrawLine(myPen, 0, h, 0, D_tmp)
-            myOutil.DrawLine(myPen, 0, D_tmp, L_tmp, D_tmp)
-
-
+                'myOutil.FillClosedCurve(Brushes.Aqua, 0, h, 10, 10)
 
 
+
+            End If
+            'NOCUT
+            'partie util ( degage ) outil
             If CTS_AD_tmp <> 0 And CTS_AL_tmp <> 0 Then
                 myOutil.FillRectangle(Brushes.LightGray, L_tmp, CTS_AD_tmp, (CTS_AL_tmp - L_tmp), h - CTS_AD_tmp)
                 myOutil.DrawLine(myPen, L_tmp, D_tmp, L_tmp, CTS_AD_tmp)
@@ -86,16 +120,15 @@
                 If CTS_EL_tmp > CTS_AL_tmp Then
                     myOutil.DrawLine(myPen, CTS_AL_tmp, CTS_AD_tmp, CTS_EL_tmp, SD_tmp)
                     myOutil.FillRectangle(Brushes.DarkGray, CTS_EL_tmp, SD_tmp, OL_tmp - CTS_EL_tmp, h - SD_tmp)
-
                 Else
                     myOutil.DrawLine(myPen, CTS_AL_tmp, CTS_AD_tmp, CTS_AL_tmp, SD_tmp)
                     myOutil.FillRectangle(Brushes.DarkGray, CTS_AL_tmp, SD_tmp, OL_tmp - CTS_AL_tmp, h - SD_tmp)
-
-
                 End If
             Else
-                myOutil.DrawLine(myPen, L_tmp, D_tmp, CTS_EL_tmp, CTS_ED_tmp)
+                myOutil.DrawLine(myPen, L_tmp, D_tmp, CTS_EL_tmp, CTS_ED_tmp) ''TODO 
             End If
+
+            'contour corps outil
             myOutil.DrawLine(myPen, CTS_EL_tmp, SD_tmp, OL_tmp, SD_tmp)
             myOutil.DrawLine(myPen, OL_tmp, SD_tmp, OL_tmp, h)
 

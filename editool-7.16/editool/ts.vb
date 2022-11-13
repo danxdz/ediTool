@@ -80,7 +80,6 @@ Module ts
     End Sub
     Private Sub MakeTool(newTool As DocumentId)
 
-
         Dim list_par As List(Of ElementId) = TopSolidHost.Parameters.GetParameters(newTool)
         Dim names As String
         Dim types As ParameterType
@@ -89,7 +88,6 @@ Module ts
             names = TopSolidHost.Elements.GetName(list_par(i))
             'ComboBox1.Items.Add(names)
         Next
-
 
         Set_parametre_outil(newTool)
         TopSolidHost.Application.EndModification(True, False)
@@ -119,8 +117,6 @@ Module ts
     Private Sub Set_parametre_outil(newTool As DocumentId)
 
         'list_par = {{"D", 0, Main.d1.Text}, {"CTS_AD", 0, Main.d3.Text}, {"SD", 0, Main.d2.Text}, {"L", 0, Main.L2.Text}, {"CTS_AL", 0, Main.L3.Text}, {"OL", 0, Main.L1.Text}, {"FB", 0, Main.chf.Text}, {"NoTT", 0, Main.NoTT.Text}, {"Name", 0, Main.Name_textbox.Text}}
-
-
         'Dim D As ElementId = TopSolidHost.Elements.SearchByName(newTool, "D")
         'TopSolidHost.Parameters.SetRealValue(D, strip_doubles(Main.d1.Text))
         SetReal(newTool, "D", Strip_doubles(Main.D_textbox.Text))
