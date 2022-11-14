@@ -103,11 +103,20 @@
             ElseIf My.Settings.ToolType = "FO" Or My.Settings.ToolType = "FP" Then
                 'Forets et Forets a pointer ***********************
 
+
+                Dim pnts() As Point = {
+                    New Point(0, h),
+                    New Point(A_tmp, D_tmp),
+                    New Point(L_tmp, D_tmp),
+                    New Point(L_tmp, h),
+                    New Point(0, h)
+                    }
+                myOutil.FillPolygon(Brushes.Orange, pnts)
+
                 myOutil.DrawLine(myPen, 0, h, A_tmp, D_tmp)
                 myOutil.DrawLine(myPen, A_tmp, D_tmp, L_tmp, D_tmp)
 
-                'myOutil.FillClosedCurve(Brushes.Aqua, 0, h, 10, 10)
-
+                ' myOutil.FillRectangle(Brushes.Orange, A_tmp, D_tmp + 1, L_tmp - A_tmp, h - D_tmp + 1)
 
 
             End If
@@ -125,7 +134,9 @@
                     myOutil.FillRectangle(Brushes.DarkGray, CTS_AL_tmp, SD_tmp, OL_tmp - CTS_AL_tmp, h - SD_tmp)
                 End If
             Else
-                myOutil.DrawLine(myPen, L_tmp, D_tmp, CTS_EL_tmp, CTS_ED_tmp) ''TODO 
+                If My.Settings.ToolType = "FR" Then
+                    myOutil.DrawLine(myPen, L_tmp, D_tmp, CTS_EL_tmp, CTS_ED_tmp) ''TODO 
+                End If
             End If
 
             'contour corps outil
