@@ -30,7 +30,7 @@ Public Class Main
     End Sub
 
     Private Sub Refresh_outil()
-        design()
+        ToolPreview()
         Set_Name_auto()
     End Sub
     Private Sub TextBox_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles D_textbox.KeyPress, SD_textbox.KeyPress, CTS_AD_textbox.KeyPress, OL_textbox.KeyPress, L_textbox.KeyPress, CTS_AL_textbox.KeyPress

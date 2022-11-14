@@ -77,6 +77,8 @@ Partial Class Main
         Me.AL = New System.Windows.Forms.ToolStripButton()
         Me.A_TextBox = New System.Windows.Forms.TextBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolsBar.SuspendLayout()
@@ -558,17 +560,17 @@ Partial Class Main
         '
         'ToolsBar
         '
-        Me.ToolsBar.BackColor = System.Drawing.Color.Silver
+        Me.ToolsBar.BackColor = System.Drawing.Color.Transparent
         Me.ToolsBar.Dock = System.Windows.Forms.DockStyle.Left
         Me.ToolsBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolsBar.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ToolsBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FR2T, Me.FRTO, Me.FRBO, Me.FAP, Me.FO, Me.AL})
+        Me.ToolsBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FR2T, Me.FRTO, Me.FRBO, Me.FAP, Me.FO, Me.AL, Me.ToolStripSeparator1, Me.ToolStripButton1})
         Me.ToolsBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Table
         Me.ToolsBar.Location = New System.Drawing.Point(5, 5)
         Me.ToolsBar.Margin = New System.Windows.Forms.Padding(5)
         Me.ToolsBar.Name = "ToolsBar"
         Me.ToolsBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.ToolsBar.Size = New System.Drawing.Size(25, 382)
+        Me.ToolsBar.Size = New System.Drawing.Size(32, 382)
         Me.ToolsBar.TabIndex = 54
         Me.ToolsBar.Text = "ToolsBar"
         '
@@ -595,7 +597,7 @@ Partial Class Main
         '
         'FRBO
         '
-        Me.FRBO.BackColor = System.Drawing.Color.Silver
+        Me.FRBO.BackColor = System.Drawing.Color.Transparent
         Me.FRBO.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.FRBO.Image = CType(resources.GetObject("FRBO.Image"), System.Drawing.Image)
         Me.FRBO.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
@@ -607,7 +609,7 @@ Partial Class Main
         '
         'FAP
         '
-        Me.FAP.BackColor = System.Drawing.Color.Silver
+        Me.FAP.BackColor = System.Drawing.Color.Transparent
         Me.FAP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.FAP.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.FAP.Image = CType(resources.GetObject("FAP.Image"), System.Drawing.Image)
@@ -660,6 +662,20 @@ Partial Class Main
         Me.CheckBox1.TabIndex = 56
         Me.CheckBox1.Text = "empty"
         Me.CheckBox1.Visible = False
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 23)
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(24, 24)
+        Me.ToolStripButton1.Text = "ToolStripButton1"
         '
         'Main
         '
@@ -779,4 +795,6 @@ Partial Class Main
     Friend WithEvents AL As ToolStripButton
     Friend WithEvents A_TextBox As TextBox
     Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ToolStripButton1 As ToolStripButton
 End Class

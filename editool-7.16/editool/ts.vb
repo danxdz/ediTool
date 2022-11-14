@@ -214,14 +214,12 @@ Module ts
 
         If lib_models.Count > 0 Then
             TopSolidHost.Pdm.OpenProject(lib_models(0))
-            ''11_b54f2f06-10da-4a62-aa3f-57f906aa506c&2_40027
             Dim model_fr_id As List(Of PdmObjectId)
             For i As Integer = 0 To (lib_models.Count - 1)
                 model_fr_id = TopSolidHost.Pdm.SearchDocumentByName(lib_models(i), model)
 
             Next
 
-            '--->   19_9a853b31-91a3-4f21-8b69-d41096477dfc&65537_35683
             If model_fr_id.Count > 0 Then
 
                 model_fr = TopSolidHost.Documents.GetDocument(model_fr_id(0))
@@ -230,7 +228,7 @@ Module ts
 
             End If
         Else
-            MsgBox("cant find lib")
+            MsgBox("cant find lib 'EdiTool'")
             'Close()
 
         End If

@@ -50,7 +50,7 @@
         If Main.ForceName_checkBox.Checked = False Then
             Try
                 Dim Namemask As String = ToolName_config.Namemask_textbox.Text
-                Dim ToolType = My.Settings.ToolType
+                Dim ToolType = "FR"
 
                 ''Dim temp As String = ToolType + " " + Namemask
                 Dim temp As String = Namemask
@@ -97,7 +97,11 @@
                 ''If Main.CTS_AL_textbox.Text <> "" And Main.CTS_AL_textbox.Text <> "0" Then
                 ''Main.Name_textbox.Text += " Lu" + Main.CTS_AL_textbox.Text ' nome += Longueur util
                 ''
-                design()
+
+
+
+
+                ToolPreview()
             Catch ex As Exception
                 MsgBox("Name Mask Error - " + ex.ToString)
 
@@ -109,7 +113,7 @@
     Public Sub SetDataTable()
         dt = New DataTable
 
-        dt.Columns.Add("index", GetType(String))            ' --------> option to add index to DataGridView1
+        'dt.Columns.Add("index", GetType(String))            ' --------> option to add index to DataGridView1
         dt.Columns.Add("Reference", GetType(String))
         dt.Columns.Add("D", GetType(String))
         dt.Columns.Add("SD", GetType(String))
