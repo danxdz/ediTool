@@ -1,8 +1,16 @@
 ﻿
+Option Explicit On
+
+Imports System.IO
 Imports System.Text.RegularExpressions
+
+
+
+
 
 Public Class Main
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         'Dim file_reader As IO.StreamReader
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
         SetDataTable()
@@ -22,11 +30,12 @@ Public Class Main
             End
         End Try
     End Sub
+
     Private Sub TextBox9_TextChanged(sender As Object, e As EventArgs) Handles Ref_filter_TextBox.TextChanged
-        set_filter()
+        Set_filter()
     End Sub
     Private Sub TextBox10_TextChanged(sender As Object, e As EventArgs) Handles Diam_filter_TextBox.TextChanged
-        set_filter()
+        Set_filter()
     End Sub
 
     Private Sub Refresh_outil()
@@ -227,11 +236,7 @@ Public Class Main
 
     End Sub
 
-    Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
-
-    End Sub
-
-    Private Sub FO_DisplayStyleChanged(sender As Object, e As EventArgs) Handles FO.DisplayStyleChanged
-
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        NewBD.Show()
     End Sub
 End Class

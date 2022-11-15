@@ -1,7 +1,9 @@
-﻿Module outils_base
-    Dim dt As DataTable
-    Public Sub set_filter()
-        Dim dv As New DataView(dt)
+﻿
+
+Module outils_base
+    Dim DataTable_buffer As DataTable
+    Public Sub Set_filter()
+        Dim dv As New DataView(DataTable_buffer)
         Dim str_tmp As String
 
         If Main.Diam_filter_TextBox.Text = "" Then
@@ -12,7 +14,7 @@
         Else
             str_tmp = "Reference LIKE '%" + Main.Ref_filter_TextBox.Text + "%' AND D like '%" + Main.Diam_filter_TextBox.Text + "%'"
         End If
-        dt.DefaultView.RowFilter = str_tmp
+        DataTable_buffer.DefaultView.RowFilter = str_tmp
     End Sub
     Function Check_zero(param As String, value As String)
         ''Dim tmp_string As String = value
@@ -98,9 +100,6 @@
                 ''Main.Name_textbox.Text += " Lu" + Main.CTS_AL_textbox.Text ' nome += Longueur util
                 ''
 
-
-
-
                 ToolPreview()
             Catch ex As Exception
                 MsgBox("Name Mask Error - " + ex.ToString)
@@ -111,19 +110,19 @@
     End Sub
 
     Public Sub SetDataTable()
-        dt = New DataTable
+        DataTable_buffer = New DataTable
 
         'dt.Columns.Add("index", GetType(String))            ' --------> option to add index to DataGridView1
-        dt.Columns.Add("Reference", GetType(String))
-        dt.Columns.Add("D", GetType(String))
-        dt.Columns.Add("SD", GetType(String))
-        dt.Columns.Add("CTS_AD", GetType(String))
-        dt.Columns.Add("OL", GetType(String))
-        dt.Columns.Add("L", GetType(String))
-        dt.Columns.Add("CTS_AL", GetType(String))
-        dt.Columns.Add("a", GetType(String))
-        dt.Columns.Add("z", GetType(String))
-        dt.Columns.Add("chf", GetType(String))
+        DataTable_buffer.Columns.Add("Reference", GetType(String))
+        DataTable_buffer.Columns.Add("D", GetType(String))
+        DataTable_buffer.Columns.Add("SD", GetType(String))
+        DataTable_buffer.Columns.Add("CTS_AD", GetType(String))
+        DataTable_buffer.Columns.Add("OL", GetType(String))
+        DataTable_buffer.Columns.Add("L", GetType(String))
+        DataTable_buffer.Columns.Add("CTS_AL", GetType(String))
+        DataTable_buffer.Columns.Add("a", GetType(String))
+        DataTable_buffer.Columns.Add("z", GetType(String))
+        DataTable_buffer.Columns.Add("chf", GetType(String))
 
     End Sub
 
@@ -164,17 +163,17 @@
             line = Split(single_line, ";")
 
             If filter = "" Then
-                dt.Rows.Add(line)
+                DataTable_buffer.Rows.Add(line)
             Else
                 Dim tmp As String = Strings.Left(line(0), filter.Length)
                 If filter = tmp Then
-                    dt.Rows.Add(line)
+                    DataTable_buffer.Rows.Add(line)
                 End If
             End If
 
 
         Next
-        Main.DataGridView1.DataSource = dt
+        Main.DataGridView1.DataSource = DataTable_buffer
 
     End Sub
     Public Sub Fill_db(file_reader As System.IO.StreamReader, filter As String)
@@ -197,17 +196,19 @@
             'Next
 
             If filter = "" Then
-                dt.Rows.Add(splitLine)
+                DataTable_buffer.Rows.Add(splitLine)
             Else
                 Dim tmp As String = Strings.Left(splitLine(0), filter.Length)
                 If filter = tmp Then
-                    dt.Rows.Add(splitLine)
+                    DataTable_buffer.Rows.Add(splitLine)
                 End If
             End If
             index += 1
         Loop
-        Main.DataGridView1.DataSource = dt
+        Main.DataGridView1.DataSource = DataTable_buffer
         file_reader.Close()
+
     End Sub
+
 
 End Module
