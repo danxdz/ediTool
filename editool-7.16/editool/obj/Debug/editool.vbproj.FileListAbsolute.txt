@@ -71,3 +71,6 @@ C:\Users\daniel.mendesdeamori\Source\Repos\ediTool\editool-7.16\editool\obj\Debu
 C:\Users\daniel.mendesdeamori\source\repos\ediTool\editool-7.16\editool\obj\Debug\Interop.Office.dll
 C:\Users\daniel.mendesdeamori\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.vbproj.ResolveComReference.cache
 C:\Users\daniel.mendesdeamori\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.NewBD.resources
+C:\Users\user\Source\Repos\ediTool\editool-7.16\editool\obj\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\user\Source\Repos\ediTool\editool-7.16\editool\obj\Debug\editool.vbproj.ResolveComReference.cache
+C:\Users\user\Source\Repos\ediTool\editool-7.16\editool\obj\Debug\editool.NewBD.resources

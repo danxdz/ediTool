@@ -69,6 +69,8 @@ Partial Class NewBD
         Me.comm_cb = New System.Windows.Forms.ComboBox()
         Me.cancel_bt = New System.Windows.Forms.Button()
         Me.open_file_bt = New System.Windows.Forms.Button()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'valider_bt
@@ -469,14 +471,23 @@ Partial Class NewBD
         Me.open_file_bt.Name = "open_file_bt"
         Me.open_file_bt.Size = New System.Drawing.Size(75, 23)
         Me.open_file_bt.TabIndex = 48
-        Me.open_file_bt.Text = "ouvrir bd"
+        Me.open_file_bt.Text = "fichier"
         Me.open_file_bt.UseVisualStyleBackColor = True
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(426, 25)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(680, 378)
+        Me.DataGridView1.TabIndex = 49
         '
         'NewBD
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 411)
+        Me.ClientSize = New System.Drawing.Size(1137, 567)
+        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.open_file_bt)
         Me.Controls.Add(Me.cancel_bt)
         Me.Controls.Add(Me.ref_int_cb)
@@ -526,6 +537,7 @@ Partial Class NewBD
         Me.Controls.Add(Me.valider_bt)
         Me.Name = "NewBD"
         Me.Text = "Form1"
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -578,4 +590,5 @@ Partial Class NewBD
     Friend WithEvents comm_cb As ComboBox
     Friend WithEvents cancel_bt As Button
     Friend WithEvents open_file_bt As Button
+    Friend WithEvents DataGridView1 As DataGridView
 End Class
