@@ -14,6 +14,7 @@ Public Class ELEM
     Public Property RayonBout As String
     Public Property Chanfrein As String
     Public Property AngleDeg As String
+    Public Property NoTT As String
 
 End Class
 

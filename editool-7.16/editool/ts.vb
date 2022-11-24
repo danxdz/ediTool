@@ -89,6 +89,28 @@ Module ts
         Dim tool As New ELEM
         'NewBD.DataGridView1.SelectedCells.Count '-> get selected rows number
         Dim Temp_row As String = NewBD.DataGridView1.CurrentCell.Value
+        Dim line() As String
+        Temp_row = Replace(Temp_row, ",", ".")
+        Temp_row = Replace(Temp_row, "  ", "")
+        line = Split(Temp_row, ";")
+
+        tool.Type = line(1)
+        tool.Name = line(2)
+
+
+        tool.D1 = Replace(line(8), "Tool.Diam=", "")
+        tool.L1 = Replace(line(9), "Tool.UtilLength=", "")
+        tool.D2 = Replace(line(12), "Tool.DiamPoky=", "")
+        tool.L2 = Replace(line(10), "Tool.ZProg=", "")
+        tool.D3 = Replace(line(18), "Tool.LinkType=QC", "")
+        tool.L3 = Replace(line(19), "Tool.TotalLength=", "")
+
+        tool.NoTT = Replace(line(17), "Tool.NbCogs=", "")
+
+
+
+
+
 
 
 
@@ -245,7 +267,7 @@ Module ts
             End If
         Else
             MsgBox("cant find lib 'EdiTool'")
-            'Close()
+        'Close()
 
         End If
         Return temp_model
