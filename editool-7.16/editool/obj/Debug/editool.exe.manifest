@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="editool.exe" size="336384">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="editool.exe" size="336896">
       <assemblyIdentity name="editool" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>YDGP9+fnNlmF8PHbMHlz+xdsPy75oUFtEP/hjdjOCZ4=</dsig:DigestValue>
+        <dsig:DigestValue>d+G8v3xduvaz2+oN1Nj2vM/KCx6mBMM5HmiaJSZFWW8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
