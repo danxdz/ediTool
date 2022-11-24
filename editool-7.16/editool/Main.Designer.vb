@@ -51,7 +51,7 @@ Partial Class Main
         Me.menu_11 = New System.Windows.Forms.Label()
         Me.menu_12 = New System.Windows.Forms.Label()
         Me.Name_textbox = New System.Windows.Forms.TextBox()
-        Me.chf = New System.Windows.Forms.TextBox()
+        Me.Chf_textbox = New System.Windows.Forms.TextBox()
         Me.menu_2 = New System.Windows.Forms.Label()
         Me.menu_8 = New System.Windows.Forms.Label()
         Me.menu_9 = New System.Windows.Forms.Label()
@@ -79,6 +79,8 @@ Partial Class Main
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.A_TextBox = New System.Windows.Forms.TextBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.v6import_bt = New System.Windows.Forms.Button()
+        Me.readToolProgress_Label = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolsBar.SuspendLayout()
@@ -377,19 +379,19 @@ Partial Class Main
         Me.Name_textbox.TabIndex = 27
         Me.Name_textbox.Text = "123"
         '
-        'chf
+        'Chf_textbox
         '
-        Me.chf.BackColor = System.Drawing.Color.LightGray
-        Me.chf.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.chf.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chf.Location = New System.Drawing.Point(315, 151)
-        Me.chf.Margin = New System.Windows.Forms.Padding(10)
-        Me.chf.Name = "chf"
-        Me.chf.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.chf.Size = New System.Drawing.Size(32, 26)
-        Me.chf.TabIndex = 28
-        Me.chf.Text = "0"
-        Me.chf.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.Chf_textbox.BackColor = System.Drawing.Color.LightGray
+        Me.Chf_textbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Chf_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Chf_textbox.Location = New System.Drawing.Point(315, 151)
+        Me.Chf_textbox.Margin = New System.Windows.Forms.Padding(10)
+        Me.Chf_textbox.Name = "Chf_textbox"
+        Me.Chf_textbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Chf_textbox.Size = New System.Drawing.Size(32, 26)
+        Me.Chf_textbox.TabIndex = 28
+        Me.Chf_textbox.Text = "0"
+        Me.Chf_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'menu_2
         '
@@ -562,15 +564,13 @@ Partial Class Main
         '
         Me.ToolsBar.BackColor = System.Drawing.Color.Transparent
         Me.ToolsBar.Dock = System.Windows.Forms.DockStyle.Left
-        Me.ToolsBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolsBar.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ToolsBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FR2T, Me.FRTO, Me.FRBO, Me.FAP, Me.FO, Me.AL, Me.ToolStripSeparator1, Me.ToolStripButton1})
         Me.ToolsBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Table
         Me.ToolsBar.Location = New System.Drawing.Point(5, 5)
-        Me.ToolsBar.Margin = New System.Windows.Forms.Padding(5)
+        Me.ToolsBar.Margin = New System.Windows.Forms.Padding(15, 5, 5, 5)
         Me.ToolsBar.Name = "ToolsBar"
-        Me.ToolsBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.ToolsBar.Size = New System.Drawing.Size(32, 382)
+        Me.ToolsBar.Size = New System.Drawing.Size(37, 382)
         Me.ToolsBar.TabIndex = 54
         Me.ToolsBar.Text = "ToolsBar"
         '
@@ -641,7 +641,13 @@ Partial Class Main
         '
         'ToolStripSeparator1
         '
+        Me.ToolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripSeparator1.AutoSize = False
+        Me.ToolStripSeparator1.BackColor = System.Drawing.Color.IndianRed
+        Me.ToolStripSeparator1.ForeColor = System.Drawing.Color.IndianRed
+        Me.ToolStripSeparator1.Margin = New System.Windows.Forms.Padding(15, 15, 15, 5)
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 23)
         '
         'ToolStripButton1
@@ -677,6 +683,29 @@ Partial Class Main
         Me.CheckBox1.Text = "empty"
         Me.CheckBox1.Visible = False
         '
+        'v6import_bt
+        '
+        Me.v6import_bt.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.v6import_bt.Font = New System.Drawing.Font("Microsoft YaHei", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.v6import_bt.Location = New System.Drawing.Point(166, 356)
+        Me.v6import_bt.Name = "v6import_bt"
+        Me.v6import_bt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.v6import_bt.Size = New System.Drawing.Size(130, 26)
+        Me.v6import_bt.TabIndex = 57
+        Me.v6import_bt.Text = "importer outils V6"
+        Me.v6import_bt.UseVisualStyleBackColor = True
+        '
+        'readToolProgress_Label
+        '
+        Me.readToolProgress_Label.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.readToolProgress_Label.AutoSize = True
+        Me.readToolProgress_Label.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.readToolProgress_Label.Location = New System.Drawing.Point(310, 356)
+        Me.readToolProgress_Label.Name = "readToolProgress_Label"
+        Me.readToolProgress_Label.Size = New System.Drawing.Size(24, 25)
+        Me.readToolProgress_Label.TabIndex = 58
+        Me.readToolProgress_Label.Text = "0"
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -684,6 +713,8 @@ Partial Class Main
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(810, 392)
+        Me.Controls.Add(Me.readToolProgress_Label)
+        Me.Controls.Add(Me.v6import_bt)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.A_TextBox)
         Me.Controls.Add(Me.ToolsBar)
@@ -703,7 +734,7 @@ Partial Class Main
         Me.Controls.Add(Me.menu_9)
         Me.Controls.Add(Me.menu_8)
         Me.Controls.Add(Me.menu_2)
-        Me.Controls.Add(Me.chf)
+        Me.Controls.Add(Me.Chf_textbox)
         Me.Controls.Add(Me.Name_textbox)
         Me.Controls.Add(Me.menu_12)
         Me.Controls.Add(Me.menu_11)
@@ -769,7 +800,7 @@ Partial Class Main
     Friend WithEvents menu_11 As Label
     Friend WithEvents menu_12 As Label
     Friend WithEvents Name_textbox As TextBox
-    Friend WithEvents chf As TextBox
+    Friend WithEvents Chf_textbox As TextBox
     Friend WithEvents menu_2 As Label
     Friend WithEvents menu_8 As Label
     Friend WithEvents menu_9 As Label
@@ -795,6 +826,8 @@ Partial Class Main
     Friend WithEvents AL As ToolStripButton
     Friend WithEvents A_TextBox As TextBox
     Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ToolStripButton1 As ToolStripButton
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents v6import_bt As Button
+    Friend WithEvents readToolProgress_Label As Label
 End Class

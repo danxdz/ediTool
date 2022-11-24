@@ -42,7 +42,7 @@ Module outils_base
             Case "CTS_AD" : Return Check_zero(param, Main.CTS_AD_textbox.Text)
             Case "NoTT" : Return Main.NoTT.Text
             Case "A" : Return Main.A_TextBox.Text
-            Case "r" : Return Main.chf.Text
+            Case "r" : Return Main.Chf_textbox.Text
             Case Else
                 MsgBox("no param found, check outil name mask config")
         End Select

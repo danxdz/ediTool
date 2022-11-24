@@ -1,6 +1,9 @@
 ﻿Option Explicit On
+Imports System.Data.Common
 Imports System.IO
-Imports Excel = Microsoft.Office.Interop.Excel          ' EXCEL APPLICATION.
+Imports Microsoft.Office.Interop
+Imports Microsoft.Office.Interop.Excel
+Imports Color = System.Drawing.Color
 
 Module FileImports
     ' CREATE EXCEL OBJECTS.
@@ -22,6 +25,9 @@ Module FileImports
                 '' myStream = openFileDialog1.OpenFile()
                 Dim fpath As String = openFileDialog1.FileName
 
+                NewBD.path_TextBox.Text = fpath
+
+
 
                 ReadExcel(fpath)
                 NewBD.Show()
@@ -30,7 +36,7 @@ Module FileImports
                     ' Insert code to read the stream here.
                 End If
             Catch Ex As Exception
-                MessageBox.Show("Cannot read file from disk. Original error: " & Ex.Message)
+                MessageBox.Show("error: " & Ex.Message)
             Finally
                 ' Check this again, since we need to make sure we didn't throw an exception on open.
                 If (myStream IsNot Nothing) Then
@@ -40,58 +46,73 @@ Module FileImports
         End If
     End Sub
 
-    Public Sub ReadExcel(ByVal sFile As String)
-        Dim TempData As New DataTable
-        'TempData = SetNewDataTable(TempData)
+
+
+    Public Sub ReadExcel(fpath As String)
 
         xlApp = New Excel.Application
-        xlWorkBook = xlApp.Workbooks.Open(sFile)            ' WORKBOOK TO OPEN THE EXCEL FILE.
+        xlWorkBook = xlApp.Workbooks.Open(fpath)            ' WORKBOOK TO OPEN THE EXCEL FILE.
+        xlWorkSheet = CType(xlApp.Sheets(1),
+                    Worksheet)
 
-        Try
-            xlWorkSheet = xlWorkBook.Worksheets("Sheet1")       ' NAME OF THE WORK SHEET.
-        Catch ex As Exception
-            Try
-                xlWorkSheet = xlWorkBook.Worksheets("Feuille 1")       ' NAME OF THE WORK SHEET.
-            Catch exs As Exception
-            End Try
-        End Try
+        NewBD.DataGridView1.Columns.Clear()
+        NewBD.DataGridView1.Rows.Clear()
 
-        Dim iRow As Integer
         Dim iCol As Integer
-        Dim combos As New DataGridViewComboBoxColumn With {
-            .DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox,
-            .DisplayStyleForCurrentCellOnly = True
-        }
+        Dim iColCount As Integer = 0
 
-        combos.Items.AddRange(Drawing.Color.Red, Drawing.Color.Yellow, Drawing.Color.Green, Drawing.Color.Blue)
-        combos.ValueType = GetType(Drawing.Color)
-        'TempData.Columns.Add(xlWorkSheet.Cells(1, 1).value)
-        NewBD.DataGridView1.Columns.Add(combos)
+
+
         For iCol = 1 To xlWorkSheet.Columns.Count
-            If Trim(xlWorkSheet.Cells(1, iCol).value) = "" Then
-                Exit For        ' BAIL OUT IF REACHED THE LAST ROW.
-            Else
-                ' POPULATE COMBO BOX.
-                TempData.Columns.Add(xlWorkSheet.Cells(1, iCol).value)
+            Try
+                If Trim(xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, iCol).value) = "" Then
+                    Exit For        ' BAIL OUT IF REACHED THE LAST COL.
+                Else
+                    Dim col = New DataGridViewTextBoxColumn With {
+                        .HeaderText = xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, iCol).value,
+                        .SortMode = DataGridViewColumnSortMode.NotSortable
+                    }
+                    Dim colIndex As Integer = NewBD.DataGridView1.Columns.Add(col)        ' ADD A NEW COLUMN.
+                    NewBD.nom_cb.Items.Add(xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, iCol).value)
 
-            End If
+                    iColCount += 1
+
+                End If
+            Catch ex As Exception
+                NewBD.Row_NumericUpDown.Value += 1
+            End Try
+
         Next
 
-
-
-        For iRow = 2 To xlWorkSheet.Rows.Count
+        Dim list As New List(Of String)()
+        ' ADD ROWS TO THE GRID.
+        Dim iRow As Integer
+        For iRow = 1 To xlWorkSheet.Rows.Count
             If Trim(xlWorkSheet.Cells(iRow, 1).value) = "" Then
                 Exit For        ' BAIL OUT IF REACHED THE LAST ROW.
             Else
-                ' POPULATE COMBO BOX.
+                NewBD.DataGridView1.Rows.Add()
+                Main.readToolProgress_Label.Text += 1
+                ' CREATE A STRING ARRAY USING THE VALUES IN EACH ROW OF THE SHEET.
+                For i As Integer = 1 To xlWorkSheet.Columns.Count ' iColCount
+                    If i > iColCount Then
+                        If Trim(xlWorkSheet.Cells(iRow + 1, i).value) = "" Then
+                            Exit For        ' BAIL OUT IF REACHED THE LAST ROW.
+                        End If
+                    Else
 
-                NewBD.nom_cb.Items.Add(xlWorkSheet.Cells(iRow, 1).value)
+                        Dim tmp_string As String = Replace(xlWorkSheet.Cells(iRow + 1, i).value, ".", ",")
+                        NewBD.DataGridView1.Rows(iRow - 1).Cells(i - 1).Value = tmp_string
+                    End If
 
-                TempData.Rows.Add(xlWorkSheet.Cells(iRow, 1).value)
-                'cmbEmp.Items.Add(xlWorkSheet.Cells(iRow, 1).value)
+                    'list.Add(xlWorkSheet.Cells(iRow, i).value)
+                Next
+                ' NewBD.DataGridView1.Rows.Add(list)
+                'NewBD.DataGridView1.Rows.Add(xlWorkSheet.Cells(iRow, iCol).value)
             End If
+
         Next
-        NewBD.DataGridView1.DataSource = TempData
+
 
 
         xlWorkBook.Close() : xlApp.Quit()
@@ -100,6 +121,11 @@ Module FileImports
         System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp) : xlApp = Nothing
         System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkBook) : xlWorkBook = Nothing
         System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkSheet) : xlWorkSheet = Nothing
+
+
     End Sub
+
+
+
 
 End Module

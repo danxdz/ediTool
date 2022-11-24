@@ -22,6 +22,7 @@ Partial Class NewBD
     'Ne la modifiez pas à l'aide de l'éditeur de code.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.valider_bt = New System.Windows.Forms.Button()
         Me.nom_cb = New System.Windows.Forms.ComboBox()
         Me.mat_cb = New System.Windows.Forms.ComboBox()
@@ -70,7 +71,15 @@ Partial Class NewBD
         Me.cancel_bt = New System.Windows.Forms.Button()
         Me.open_file_bt = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Row_NumericUpDown = New System.Windows.Forms.NumericUpDown()
+        Me.path_TextBox = New System.Windows.Forms.TextBox()
+        Me.RC_Menu_NewDB = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.new_tool = New System.Windows.Forms.ToolStripMenuItem()
+        Me.copy_tool = New System.Windows.Forms.ToolStripMenuItem()
+        Me.del_tool = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Row_NumericUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.RC_Menu_NewDB.SuspendLayout()
         Me.SuspendLayout()
         '
         'valider_bt
@@ -476,17 +485,71 @@ Partial Class NewBD
         '
         'DataGridView1
         '
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
+        Me.DataGridView1.AllowUserToOrderColumns = True
+        Me.DataGridView1.AllowUserToResizeColumns = False
+        Me.DataGridView1.AllowUserToResizeRows = False
+        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(426, 25)
+        Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.DataGridView1.Location = New System.Drawing.Point(428, 49)
         Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ReadOnly = True
+        Me.DataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.DataGridView1.RowHeadersVisible = False
+        Me.DataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView1.Size = New System.Drawing.Size(680, 378)
         Me.DataGridView1.TabIndex = 49
+        '
+        'Row_NumericUpDown
+        '
+        Me.Row_NumericUpDown.Location = New System.Drawing.Point(428, 25)
+        Me.Row_NumericUpDown.Name = "Row_NumericUpDown"
+        Me.Row_NumericUpDown.Size = New System.Drawing.Size(61, 20)
+        Me.Row_NumericUpDown.TabIndex = 50
+        Me.Row_NumericUpDown.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'path_TextBox
+        '
+        Me.path_TextBox.Location = New System.Drawing.Point(846, 23)
+        Me.path_TextBox.Name = "path_TextBox"
+        Me.path_TextBox.Size = New System.Drawing.Size(262, 20)
+        Me.path_TextBox.TabIndex = 51
+        '
+        'RC_Menu_NewDB
+        '
+        Me.RC_Menu_NewDB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.new_tool, Me.copy_tool, Me.del_tool})
+        Me.RC_Menu_NewDB.Name = "ContextMenuStrip1"
+        Me.RC_Menu_NewDB.Size = New System.Drawing.Size(181, 92)
+        '
+        'new_tool
+        '
+        Me.new_tool.Name = "new_tool"
+        Me.new_tool.Size = New System.Drawing.Size(180, 22)
+        Me.new_tool.Text = "new"
+        '
+        'copy_tool
+        '
+        Me.copy_tool.Name = "copy_tool"
+        Me.copy_tool.Size = New System.Drawing.Size(180, 22)
+        Me.copy_tool.Text = "copy"
+        '
+        'del_tool
+        '
+        Me.del_tool.Name = "del_tool"
+        Me.del_tool.Size = New System.Drawing.Size(180, 22)
+        Me.del_tool.Text = "delete"
         '
         'NewBD
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1137, 567)
+        Me.ClientSize = New System.Drawing.Size(1119, 439)
+        Me.Controls.Add(Me.path_TextBox)
+        Me.Controls.Add(Me.Row_NumericUpDown)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.open_file_bt)
         Me.Controls.Add(Me.cancel_bt)
@@ -538,6 +601,8 @@ Partial Class NewBD
         Me.Name = "NewBD"
         Me.Text = "Form1"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Row_NumericUpDown, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.RC_Menu_NewDB.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -591,4 +656,10 @@ Partial Class NewBD
     Friend WithEvents cancel_bt As Button
     Friend WithEvents open_file_bt As Button
     Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents Row_NumericUpDown As NumericUpDown
+    Friend WithEvents path_TextBox As TextBox
+    Friend WithEvents RC_Menu_NewDB As ContextMenuStrip
+    Friend WithEvents new_tool As ToolStripMenuItem
+    Friend WithEvents copy_tool As ToolStripMenuItem
+    Friend WithEvents del_tool As ToolStripMenuItem
 End Class

@@ -132,6 +132,7 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="check_outil.vb" />
     <Compile Include="FileImports.vb" />
+    <Compile Include="Import_TopV6.vb" />
     <Compile Include="NewBD.Designer.vb">
       <DependentUpon>NewBD.vb</DependentUpon>
     </Compile>

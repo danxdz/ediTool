@@ -30,7 +30,7 @@ Module graphics
             Dim L As Double = Replace(Main.L_textbox.Text, ".", ",")
             Dim CTS_AL As Double = Replace(Main.CTS_AL_textbox.Text, ".", ",")
             Dim Alpha As Double = Replace(Main.alpha.Text, ".", ",")
-            Dim r As Double = Replace(Main.chf.Text, ".", ",")
+            Dim r As Double = Replace(Main.Chf_textbox.Text, ".", ",")
             Dim A_point = Replace(Main.A_TextBox.Text, ".", ",")
             A_point /= 2
 

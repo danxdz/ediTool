@@ -5,9 +5,12 @@ Imports System.ComponentModel
 
 Module ts
 
-    Public Sub Create_outil()
+    Public Sub Create_outil(com As Boolean)
 
 
+        If com = True Then
+            GetV6Tool()
+        End If
         'TopSolidHost.Connect(1, 0, "server")
         TopSolidHost.Connect()
         TopSolidDesignHost.Connect()
@@ -19,6 +22,7 @@ Module ts
         'model_id = "model_ft" --> Ft Rayon/Chanfrein
         'model_id = "model_fo" --> Foret
         'etc
+
 
         ''model_id = "FR 2T D20 L35 SD20"
         Select Case My.Settings.ToolType
@@ -53,6 +57,7 @@ Module ts
                     Try
                         TopSolidHost.Documents.EnsureIsDirty(model_fr)
                         '// Perform document modification.
+
                         MakeTool(model_fr)
                         TopSolidHost.Pdm.CheckIn(TopSolidHost.Pdm.SearchDocumentByName(lib_models(0), TopSolidHost.Documents.GetName(model_fr))(0), True)
 
@@ -78,6 +83,17 @@ Module ts
 
 
     End Sub
+
+
+    Private Sub GetV6Tool()
+        Dim tool As New ELEM
+        'NewBD.DataGridView1.SelectedCells.Count '-> get selected rows number
+        Dim Temp_row As String = NewBD.DataGridView1.CurrentCell.Value
+
+
+
+    End Sub
+
     Private Sub MakeTool(newTool As DocumentId)
 
         Dim list_par As List(Of ElementId) = TopSolidHost.Parameters.GetParameters(newTool)
@@ -166,7 +182,7 @@ Module ts
             End If
 
             If My.Settings.ToolType = "FT" Then
-                Dim r As Double = Strip_doubles(Main.chf.Text)
+                Dim r As Double = Strip_doubles(Main.Chf_textbox.Text)
                 SetReal(newTool, "r", r) 'TODO
                 TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FT)
             ElseIf My.Settings.ToolType = "FB" Then

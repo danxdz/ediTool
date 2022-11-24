@@ -64,7 +64,7 @@ Public Class Main
         End If
     End Sub
     Private Sub ValidateBt_Click_1(sender As Object, e As EventArgs) Handles ValidateBt.Click
-        Create_outil()
+        Create_outil(0)
         'REG CREATED TOOLS
         'Dim file_reader As IO.StreamReader
         'file_reader = Open_data_file("reg.txt")
@@ -216,7 +216,6 @@ Public Class Main
         Set_Name_auto()
 
     End Sub
-
     Private Sub AL_Click(sender As Object, e As EventArgs) Handles AL.Click
         Dim color = Drawing.Color.Gray
         Dim color_green = Drawing.Color.SpringGreen
@@ -227,7 +226,6 @@ Public Class Main
         FAP.BackColor = color
         FO.BackColor = color
 
-
         My.Settings.ToolType = "AL"
         My.Settings.Save()
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_AL
@@ -235,11 +233,16 @@ Public Class Main
         Set_Name_auto()
 
     End Sub
-
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         OpenFile()
+    End Sub
 
+    Private Sub Chf_textbox_TextChanged(sender As Object, e As EventArgs) Handles Chf_textbox.TextChanged
 
+    End Sub
+
+    Private Sub V6import_bt_Click(sender As Object, e As EventArgs) Handles v6import_bt.Click
+        OpenV6File()
 
     End Sub
 End Class
