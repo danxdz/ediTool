@@ -7,14 +7,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="editool.exe.manifest" size="15658">
+    <dependentAssembly dependencyType="install" codebase="editool.exe.manifest" size="16049">
       <assemblyIdentity name="editool.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="amd64" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>hNpiJUxozSiQ2UWwLlXPvg2bodyqAgGIwyp/EYWCHE0=</dsig:DigestValue>
+        <dsig:DigestValue>58m83T9mosd8J7GbEFD1kmo48DtcWArwFNK4D8OaJDo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

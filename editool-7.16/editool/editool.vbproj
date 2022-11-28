@@ -241,6 +241,7 @@
     <None Include="data\reg.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="XSLTFile1.xslt" />
     <None Include="data\menu_en_tooltypes.txt" />
     <Content Include="data\tooltypes.txt" />
   </ItemGroup>
