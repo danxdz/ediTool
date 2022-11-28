@@ -9,9 +9,9 @@ Module ts
     Public Sub Create_outil(com As Boolean)
 
 
-        'If com = True Then
-        'GetV6Tool()
-        'End If
+        If com = True Then
+            GetV6Tool()
+        End If
         'TopSolidHost.Connect(1, 0, "server")
         TopSolidHost.Connect()
         TopSolidDesignHost.Connect()
@@ -92,7 +92,7 @@ Module ts
             Return False
         End If
     End Function
-    Public Sub GetV6Tool()
+    Private Sub GetV6Tool()
         Dim tool As New ELEM
         'NewBD.DataGridView1.SelectedCells.Count '-> get selected rows number
         Dim Temp_row As String = NewBD.DataGridView1.CurrentCell.Value
@@ -101,80 +101,67 @@ Module ts
         Temp_row = Replace(Temp_row, "  ", "")
         line = Split(Temp_row, ";")
 
-        Dim type, name, d1, d2, d3, l1, l2, l3, NoTT, RayonBout, ChanfreinBout As String
+        Dim type, name, d1, d2, d3, l1, l2, l3, NoTT As String
 
         type = line(1)
 
 
 
         Select Case type
-            Case "FR_2TAI "
-                type = "FR"
-            Case "FR_TORI "
-                type = "FT"
-                RayonBout = Replace(line(9), "Tool.Radius=", "")
-                l1 = Replace(line(10), "Tool.UtilLength=", "")
+            Case "FR"
+                type = "Side Mill D20 L35 SD20"
+            Case "FT"
+                type = "Radiused Mill D16 L40 r3 SD16"
             Case "FR_HEMI "
                 type = "FB"
             Case "FP"
                 type = "Spotting Drill D10 SD10"
-            Case "FO_HELI "
-                type = "FO"
-            Case "AL_FIXE "
-                type = "AL"
-            Case Else
-                MsgBox("tool type not supported")
-                type = ""
+            Case "FO"
+                type = "Twisted Drill D10 L35 SD10"
+            Case "AL"
+                type = "Constant Reamer D10 L20 SD9"
         End Select
-        If type <> "" Then
-            My.Settings.ToolType = type
 
-            My.Settings.Save()
-            tool.Type = type
+        My.Settings.ToolType = type
 
-            name = line(2)
+        My.Settings.Save()
+        tool.Type = type
 
-            tool.Name = name
-            Main.Name_textbox.Text = name
+        name = line(2)
 
-
-            d1 = Replace(line(8), "Tool.Diam=", "")
-            If Not l1 Then
-                l1 = Replace(line(9), "Tool.UtilLength=", "")
-            End If
-            d2 = Replace(line(12), "Tool.DiamPoky=", "")
-            l2 = Replace(line(10), "Tool.ZProg=", "")
-            d3 = Replace(line(18), "Tool.LinkType=QC", "")
-            l3 = Replace(line(19), "Tool.TotalLength=", "")
-            NoTT = Replace(line(17), "Tool.NbCogs=", "")
+        tool.Name = name
+        Main.Name_textbox.Text = name
 
 
+        d1 = Replace(line(8), "Tool.Diam=", "")
 
-            If IsInt(d1) Then
-                tool.D1 = Int(d1)
-                Main.D_textbox.Text = Int(d1)
-            End If
-            If IsInt(l1) Then
-                tool.L1 = Int(l1)
-                Main.L_textbox.Text = Int(l1)
-            End If
-
-            '**************************************
-            'tool.D2 = Replace(line(12), "Tool.DiamPoky=", "")
-            'tool.L2 = Replace(line(10), "Tool.ZProg=", "")
-            'tool.D3 = Replace(line(18), "Tool.LinkType=QC", "")
-            'tool.L3 = Replace(line(19), "Tool.TotalLength=", "")
-            'tool.NoTT = Replace(line(17), "Tool.NbCogs=", "")
+        l1 = Replace(line(9), "Tool.UtilLength=", "")
+        d2 = Replace(line(12), "Tool.DiamPoky=", "")
+        l2 = Replace(line(10), "Tool.ZProg=", "")
+        d3 = Replace(line(18), "Tool.LinkType=QC", "")
+        l3 = Replace(line(19), "Tool.TotalLength=", "")
+        NoTT = Replace(line(17), "Tool.NbCogs=", "")
 
 
-            Main.CTS_AD_textbox.Text = 0
-            Main.CTS_AL_textbox.Text = 0
-            Main.manuf_Combobox.Text = ""
-            Main.manref_TextBox.Text = ""
 
-            NewBD.Hide()
 
+        If IsInt(d1) Then
+            tool.D1 = Int(d1)
+            Main.D_textbox.Text = Int(d1)
         End If
+
+
+        tool.L1 = Replace(line(9), "Tool.UtilLength=", "")
+        tool.D2 = Replace(line(12), "Tool.DiamPoky=", "")
+        tool.L2 = Replace(line(10), "Tool.ZProg=", "")
+        tool.D3 = Replace(line(18), "Tool.LinkType=QC", "")
+        tool.L3 = Replace(line(19), "Tool.TotalLength=", "")
+        tool.NoTT = Replace(line(17), "Tool.NbCogs=", "")
+
+
+
+
+
 
 
 
@@ -298,7 +285,7 @@ Module ts
 
         TopSolidHost.Parameters.SetTextValue(
                 TopSolidHost.Elements.SearchByName(newTool, "$TopSolid.Kernel.TX.Properties.Manufacturer"),
-                Main.manuf_Combobox.Text)
+                Main.Man.Text)
 
         TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool, "$TopSolid.Kernel.TX.Properties.VirtualDocument"), False)
         Try
@@ -330,7 +317,7 @@ Module ts
 
             End If
         Else
-            MsgBox("cant find Lib 'EdiTool'")
+            MsgBox("cant find lib 'EdiTool'")
         'Close()
 
         End If

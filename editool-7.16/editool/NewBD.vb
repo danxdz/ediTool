@@ -71,12 +71,7 @@ Public Class NewBD
     End Sub
 
     Private Sub NewTool_Click(sender As Object, e As EventArgs) Handles new_tool.Click
-        'Create_outil(1)
-        GetV6Tool()
-    End Sub
-
-    Private Sub DataGridView1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellDoubleClick
-        GetV6Tool()
+        Create_outil(1)
 
     End Sub
 End Class
