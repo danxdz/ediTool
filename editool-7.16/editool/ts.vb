@@ -285,7 +285,7 @@ Module ts
 
         TopSolidHost.Parameters.SetTextValue(
                 TopSolidHost.Elements.SearchByName(newTool, "$TopSolid.Kernel.TX.Properties.Manufacturer"),
-                Main.Man.Text)
+                Main.manuf_TextBox.Text)
 
         TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool, "$TopSolid.Kernel.TX.Properties.VirtualDocument"), False)
         Try
@@ -318,7 +318,7 @@ Module ts
             End If
         Else
             MsgBox("cant find lib 'EdiTool'")
-        'Close()
+            'Close()
 
         End If
         Return temp_model

@@ -60,7 +60,7 @@ Partial Class Main
         Me.menu_4 = New System.Windows.Forms.Label()
         Me.menu_1 = New System.Windows.Forms.Label()
         Me.manref_TextBox = New System.Windows.Forms.ComboBox()
-        Me.Man = New System.Windows.Forms.ComboBox()
+        Me.manuf_TextBox = New System.Windows.Forms.ComboBox()
         Me.ForceName_checkBox = New System.Windows.Forms.CheckBox()
         Me.DefineName_Bt = New System.Windows.Forms.Button()
         Me.Lang_en = New System.Windows.Forms.Button()
@@ -467,15 +467,15 @@ Partial Class Main
         Me.manref_TextBox.Size = New System.Drawing.Size(120, 21)
         Me.manref_TextBox.TabIndex = 36
         '
-        'Man
+        'manuf_TextBox
         '
-        Me.Man.FormattingEnabled = True
-        Me.Man.Items.AddRange(New Object() {"FRAISA", "SECO", "HOFFMAN"})
-        Me.Man.Location = New System.Drawing.Point(49, 97)
-        Me.Man.Name = "Man"
-        Me.Man.Size = New System.Drawing.Size(121, 21)
-        Me.Man.TabIndex = 41
-        Me.Man.Text = "FRAISA"
+        Me.manuf_TextBox.FormattingEnabled = True
+        Me.manuf_TextBox.Items.AddRange(New Object() {"FRAISA", "SECO", "HOFFMAN"})
+        Me.manuf_TextBox.Location = New System.Drawing.Point(49, 97)
+        Me.manuf_TextBox.Name = "manuf_TextBox"
+        Me.manuf_TextBox.Size = New System.Drawing.Size(121, 21)
+        Me.manuf_TextBox.TabIndex = 41
+        Me.manuf_TextBox.Text = "FRAISA"
         '
         'ForceName_checkBox
         '
@@ -725,7 +725,7 @@ Partial Class Main
         Me.Controls.Add(Me.Lang_fr)
         Me.Controls.Add(Me.DefineName_Bt)
         Me.Controls.Add(Me.ForceName_checkBox)
-        Me.Controls.Add(Me.Man)
+        Me.Controls.Add(Me.manuf_TextBox)
         Me.Controls.Add(Me.manref_TextBox)
         Me.Controls.Add(Me.menu_1)
         Me.Controls.Add(Me.menu_4)
@@ -809,7 +809,7 @@ Partial Class Main
     Friend WithEvents menu_4 As Label
     Friend WithEvents menu_1 As Label
     Friend WithEvents manref_TextBox As ComboBox
-    Friend WithEvents Man As ComboBox
+    Friend WithEvents manuf_TextBox As ComboBox
     Friend WithEvents ForceName_checkBox As CheckBox
     Friend WithEvents DefineName_Bt As Button
     Friend WithEvents Lang_en As Button

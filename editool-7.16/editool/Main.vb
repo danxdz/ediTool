@@ -245,4 +245,12 @@ Public Class Main
         OpenV6File()
 
     End Sub
+
+    Private Sub L_textbox_TextChanged(sender As Object, e As EventArgs) Handles L_textbox.TextChanged
+
+    End Sub
+
+    Private Sub D_textbox_TextChanged(sender As Object, e As EventArgs) Handles D_textbox.TextChanged
+
+    End Sub
 End Class
