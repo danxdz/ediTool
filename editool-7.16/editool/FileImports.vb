@@ -144,8 +144,16 @@ Module FileImports
     End Sub
     Public Sub OpenFile()
         Dim myStream As Stream = Nothing
+        Dim startPath As String = ""
+
+        ' If My.Settings.lastPath <> "" Then
+        'startPath = My.Settings.lastPath
+        'My.Settings.Save()
+        'End If
+
+
         Dim openFileDialog1 As New OpenFileDialog With {
-            .InitialDirectory = "c:\",
+            .InitialDirectory = startPath,
             .Filter = "Txt files (*.txt)|*.txt|All files (*.*)|*.*|CSV files (*.csv)|*.csv|Excel Files|*.xls;*.xlsx",
             .FilterIndex = 2,
             .RestoreDirectory = True
@@ -162,7 +170,8 @@ Module FileImports
                 Dim fpath As String = openFileDialog1.FileName
 
                 NewBD.path_TextBox.Text = fpath
-
+                My.Settings.lastPath = fpath
+                My.Settings.Save()
 
 
                 If openFileDialog1.FileName.Substring(openFileDialog1.FileName.Length - 3) = "xml" Then
@@ -227,22 +236,21 @@ Module FileImports
         ' ADD ROWS TO THE GRID.
         Dim iRow As Integer
         For iRow = 1 To xlWorkSheet.Rows.Count
-            If Trim(xlWorkSheet.Cells(iRow, 1).value) = "" Then
+            If Trim(xlWorkSheet.Cells(iRow, 1).value) = "" And Trim(xlWorkSheet.Cells(iRow, 2).value) = "" Then
                 Exit For        ' BAIL OUT IF REACHED THE LAST ROW.
             Else
                 NewBD.DataGridView1.Rows.Add()
                 Main.readToolProgress_Label.Text += 1
                 ' CREATE A STRING ARRAY USING THE VALUES IN EACH ROW OF THE SHEET.
-                For i As Integer = 1 To xlWorkSheet.Columns.Count ' iColCount
-                    If i > iColCount Then
-                        If Trim(xlWorkSheet.Cells(iRow + 1, i).value) = "" Then
-                            Exit For        ' BAIL OUT IF REACHED THE LAST ROW.
-                        End If
-                    Else
+                For i As Integer = 1 To iColCount
+                    'If Trim(xlWorkSheet.Cells(iRow, i).value) = "" Then
+                    'Exit For        ' BAIL OUT IF REACHED THE LAST ROW.
+                    'End If
+                    'Else
 
-                        Dim tmp_string As String = Replace(xlWorkSheet.Cells(iRow + 1, i).value, ".", ",")
+                    Dim tmp_string As String = Replace(xlWorkSheet.Cells(iRow, i).value, ".", ",")
                         NewBD.DataGridView1.Rows(iRow - 1).Cells(i - 1).Value = tmp_string
-                    End If
+                    'End If
 
                     'list.Add(xlWorkSheet.Cells(iRow, i).value)
                 Next

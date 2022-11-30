@@ -164,10 +164,6 @@ Module graphics
             End If
 
 
-
-
-
-
             Dim axe_big As Integer = w / 20
                 Dim axe_petite As Integer = axe_big / 8
             Dim space As Integer = 0

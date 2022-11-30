@@ -47,6 +47,7 @@ Module outils_base
                 MsgBox("no param found, check outil name mask config")
         End Select
     End Function
+
     Public Sub Set_Name_auto()
 
         If Main.ForceName_checkBox.Checked = False Then

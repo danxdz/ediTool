@@ -32,5 +32,11 @@
     <Setting Name="MaskTT_AL" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="lastPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="V6_default_path" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:/missler/config/database/tools/</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

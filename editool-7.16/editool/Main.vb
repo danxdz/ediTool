@@ -11,8 +11,9 @@ Imports System.Text.RegularExpressions
 Public Class Main
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        'Dim file_reader As IO.StreamReader
+
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
+
         SetDataTable()
 
         If My.Settings.PrefLang = "en" Then
@@ -23,7 +24,7 @@ Public Class Main
 
         Try
             get_outils(My.Resources.outils, "")
-            Set_Name_auto()
+            'Set_Name_auto()
         Catch ex As Exception
             MsgBox("no db file    -->" & ex.ToString)
             Close()
@@ -97,30 +98,6 @@ Public Class Main
         ToolName_config.Show()
 
     End Sub
-
-
-    Private Sub D_textbox_LostFocus(sender As Object, e As EventArgs) Handles D_textbox.LostFocus
-        Set_Name_auto()
-    End Sub
-    Private Sub L_textbox_LostFocus(sender As Object, e As EventArgs) Handles L_textbox.LostFocus
-        Set_Name_auto()
-    End Sub
-    Private Sub CTS_AL_textbox_LostFocus(sender As Object, e As EventArgs) Handles CTS_AL_textbox.LostFocus
-        Set_Name_auto()
-    End Sub
-    Private Sub CTS_AD_textbox_LostFocus(sender As Object, e As EventArgs) Handles CTS_AD_textbox.LostFocus
-        Set_Name_auto()
-    End Sub
-    Private Sub SD_textbox_LostFocus(sender As Object, e As EventArgs) Handles SD_textbox.LostFocus
-        Set_Name_auto()
-    End Sub
-    Private Sub OL_textbox_LostFocus(sender As Object, e As EventArgs) Handles OL_textbox.LostFocus
-        Set_Name_auto()
-    End Sub
-    Private Sub NoTT_LostFocus(sender As Object, e As EventArgs) Handles NoTT.LostFocus
-        Set_Name_auto()
-    End Sub
-
 
     Private Sub FR2T_Click(sender As Object, e As EventArgs) Handles FR2T.Click
         Dim color = Drawing.Color.Gray
@@ -237,20 +214,38 @@ Public Class Main
         OpenFile()
     End Sub
 
-    Private Sub Chf_textbox_TextChanged(sender As Object, e As EventArgs) Handles Chf_textbox.TextChanged
-
-    End Sub
 
     Private Sub V6import_bt_Click(sender As Object, e As EventArgs) Handles v6import_bt.Click
         OpenV6File()
-
     End Sub
 
-    Private Sub L_textbox_TextChanged(sender As Object, e As EventArgs) Handles L_textbox.TextChanged
-
+    Private Sub A_TextBox_LostFocus(sender As Object, e As EventArgs) Handles A_TextBox.LostFocus
+        Set_Name_auto()
     End Sub
 
-    Private Sub D_textbox_TextChanged(sender As Object, e As EventArgs) Handles D_textbox.TextChanged
+    Private Sub D_textbox_LostFocus(sender As Object, e As EventArgs) Handles D_textbox.LostFocus
+        Set_Name_auto()
+    End Sub
+    Private Sub L_textbox_LostFocus(sender As Object, e As EventArgs) Handles L_textbox.LostFocus
+        Set_Name_auto()
+    End Sub
+    Private Sub CTS_AL_textbox_LostFocus(sender As Object, e As EventArgs) Handles CTS_AL_textbox.LostFocus
+        Set_Name_auto()
+    End Sub
+    Private Sub CTS_AD_textbox_LostFocus(sender As Object, e As EventArgs) Handles CTS_AD_textbox.LostFocus
+        Set_Name_auto()
+    End Sub
+    Private Sub SD_textbox_LostFocus(sender As Object, e As EventArgs) Handles SD_textbox.LostFocus
+        Set_Name_auto()
+    End Sub
+    Private Sub OL_textbox_LostFocus(sender As Object, e As EventArgs) Handles OL_textbox.LostFocus
+        Set_Name_auto()
+    End Sub
+    Private Sub NoTT_LostFocus(sender As Object, e As EventArgs) Handles NoTT.LostFocus
+        Set_Name_auto()
+    End Sub
 
+    Private Sub Chf_textbox_LostFocus(sender As Object, e As EventArgs) Handles Chf_textbox.LostFocus
+        Set_Name_auto()
     End Sub
 End Class

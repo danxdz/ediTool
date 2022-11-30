@@ -7,5 +7,6 @@ Namespace My
     ' L'événement SettingsLoaded est déclenché après le chargement des valeurs de paramètre.
     ' L'événement SettingsSaving est déclenché avant l'enregistrement des valeurs de paramètre.
     Partial Friend NotInheritable Class MySettings
+        Public Property lastPat As String
     End Class
 End Namespace

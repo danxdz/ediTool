@@ -173,6 +173,30 @@ Namespace My
                 Me("MaskTT_AL") = value
             End Set
         End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("")>
+        Public Property lastPath() As String
+            Get
+                Return CType(Me("lastPath"),String)
+            End Get
+            Set
+                Me("lastPath") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("c:/missler/config/database/tools/")>  _
+        Public Property V6_default_path() As String
+            Get
+                Return CType(Me("V6_default_path"),String)
+            End Get
+            Set
+                Me("V6_default_path") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
