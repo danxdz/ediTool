@@ -4,9 +4,6 @@ C:\Users\daniel.mendesdeamori\Source\Repos\ediTool\editool-7.16\editool\bin\Debu
 C:\Users\daniel.mendesdeamori\Source\Repos\ediTool\editool-7.16\editool\bin\Debug\editool.exe
 C:\Users\daniel.mendesdeamori\Source\Repos\ediTool\editool-7.16\editool\bin\Debug\editool.pdb
 C:\Users\daniel.mendesdeamori\Source\Repos\ediTool\editool-7.16\editool\bin\Debug\editool.xml
-C:\Users\daniel.mendesdeamori\Source\Repos\ediTool\editool-7.16\editool\bin\Debug\TopSolid.Cad.Design.Automating.dll
-C:\Users\daniel.mendesdeamori\Source\Repos\ediTool\editool-7.16\editool\bin\Debug\TopSolid.Cam.NC.Kernel.Automating.dll
-C:\Users\daniel.mendesdeamori\Source\Repos\ediTool\editool-7.16\editool\bin\Debug\TopSolid.Kernel.Automating.dll
 C:\Users\daniel.mendesdeamori\Source\Repos\ediTool\editool-7.16\editool\bin\Debug\TopSolid.Kernel.SX.dll
 C:\Users\daniel.mendesdeamori\Source\Repos\ediTool\editool-7.16\editool\bin\Debug\TopSolid.Kernel.SX.XmlSerializers.dll
 C:\Users\daniel.mendesdeamori\Source\Repos\ediTool\editool-7.16\editool\bin\Debug\hasp_net_windows.dll
@@ -74,3 +71,6 @@ C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.vbproj
 C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.exe
 C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.xml
 C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.pdb
+C:\Users\daniel.mendesdeamori\source\repos\ediTool\editool-7.16\editool\bin\Debug\TopSolid.Cad.Design.Automating.dll
+C:\Users\daniel.mendesdeamori\source\repos\ediTool\editool-7.16\editool\bin\Debug\TopSolid.Kernel.Automating.dll
+C:\Users\daniel.mendesdeamori\source\repos\ediTool\editool-7.16\editool\bin\Debug\TopSolid.Cam.NC.Kernel.Automating.dll

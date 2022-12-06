@@ -177,8 +177,9 @@ Module FileImports
                 If openFileDialog1.FileName.Substring(openFileDialog1.FileName.Length - 3) = "xml" Then
                     LoadXML(fpath)
                 Else
-                    ReadExcel(fpath)
                     NewBD.Show()
+
+                    ReadExcel(fpath)
 
                 End If
 
@@ -222,7 +223,6 @@ Module FileImports
                     }
                     Dim colIndex As Integer = NewBD.DataGridView1.Columns.Add(col)        ' ADD A NEW COLUMN.
                     NewBD.nom_cb.Items.Add(xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, iCol).value)
-
                     iColCount += 1
 
                 End If
@@ -235,27 +235,47 @@ Module FileImports
         Dim list As New List(Of String)()
         ' ADD ROWS TO THE GRID.
         Dim iRow As Integer
-        For iRow = 1 To xlWorkSheet.Rows.Count
+        For iRow = 1 + NewBD.Row_NumericUpDown.Value To xlWorkSheet.Rows.Count
             If Trim(xlWorkSheet.Cells(iRow, 1).value) = "" And Trim(xlWorkSheet.Cells(iRow, 2).value) = "" Then
                 Exit For        ' BAIL OUT IF REACHED THE LAST ROW.
             Else
-                NewBD.DataGridView1.Rows.Add()
                 Main.readToolProgress_Label.Text += 1
-                ' CREATE A STRING ARRAY USING THE VALUES IN EACH ROW OF THE SHEET.
-                For i As Integer = 1 To iColCount
-                    'If Trim(xlWorkSheet.Cells(iRow, i).value) = "" Then
-                    'Exit For        ' BAIL OUT IF REACHED THE LAST ROW.
-                    'End If
-                    'Else
+                ' NewBD.DataGridView1.Rows.Add()
+                Dim index As Integer = NewBD.DataGridView1.Rows.Count
+                If index = 0 Then
+                    '  NewBD.DataGridView1.Rows.Add()
+                End If
 
-                    Dim tmp_string As String = Replace(xlWorkSheet.Cells(iRow, i).value, ".", ",")
-                        NewBD.DataGridView1.Rows(iRow - 1).Cells(i - 1).Value = tmp_string
-                    'End If
+                If (xlWorkSheet.Cells(iRow, 2).value = NewBD.TypeFilterComboBox.Text) Or (NewBD.TypeFilterComboBox.Text = "") Then
+                    NewBD.DataGridView1.Rows.Add()
 
-                    'list.Add(xlWorkSheet.Cells(iRow, i).value)
-                Next
-                ' NewBD.DataGridView1.Rows.Add(list)
-                'NewBD.DataGridView1.Rows.Add(xlWorkSheet.Cells(iRow, iCol).value)
+                    For i As Integer = 1 To iColCount
+                        Dim tmp_string As String = Replace(xlWorkSheet.Cells(iRow, i).value, ".", ",")
+
+                        If NewBD.TypeFilterComboBox.Text <> "" Then
+                            NewBD.DataGridView1.Rows.Add()
+
+                            NewBD.DataGridView1.Rows(NewBD.DataGridView1.RowCount).Cells(i).Value = tmp_string
+                        Else
+                            NewBD.DataGridView1.Rows.Add()
+                            NewBD.DataGridView1.Rows(iRow - 1).Cells(i - 1).Value = tmp_string
+                        End If
+                        If i = 2 Then
+                            If NewBD.TypeFilterComboBox.Items.Contains(tmp_string) = False Then
+                                If tmp_string <> "Codification" Then
+
+                                    NewBD.TypeFilterComboBox.Items.Add(tmp_string)
+                                End If
+                            End If
+                        End If
+
+                        'End If
+
+                        'list.Add(xlWorkSheet.Cells(iRow, i).value)
+                    Next
+                    ' NewBD.DataGridView1.Rows.Add(list)
+                    'NewBD.DataGridView1.Rows.Add(xlWorkSheet.Cells(iRow, iCol).value)
+                End If
             End If
 
         Next

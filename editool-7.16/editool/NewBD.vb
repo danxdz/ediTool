@@ -74,4 +74,8 @@ Public Class NewBD
         Create_outil(1)
 
     End Sub
+
+    Private Sub TypeFilterComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TypeFilterComboBox.SelectedIndexChanged
+
+    End Sub
 End Class
