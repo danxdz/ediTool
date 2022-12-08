@@ -81,9 +81,12 @@ Partial Class Main
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.v6import_bt = New System.Windows.Forms.Button()
         Me.readToolProgress_Label = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.OrderToolsDataGridView = New System.Windows.Forms.DataGridView()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolsBar.SuspendLayout()
+        CType(Me.OrderToolsDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'OpenFileDialog1
@@ -532,7 +535,7 @@ Partial Class Main
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView1.Size = New System.Drawing.Size(752, 168)
+        Me.DataGridView1.Size = New System.Drawing.Size(319, 168)
         Me.DataGridView1.TabIndex = 49
         '
         'ValidateBt
@@ -706,6 +709,40 @@ Partial Class Main
         Me.readToolProgress_Label.TabIndex = 58
         Me.readToolProgress_Label.Text = "0"
         '
+        'Button1
+        '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button1.Font = New System.Drawing.Font("Microsoft YaHei", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(420, 355)
+        Me.Button1.Name = "Button1"
+        Me.Button1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.Button1.Size = New System.Drawing.Size(155, 26)
+        Me.Button1.TabIndex = 59
+        Me.Button1.Text = "importer Order-Tools"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'OrderToolsDataGridView
+        '
+        Me.OrderToolsDataGridView.AllowDrop = True
+        Me.OrderToolsDataGridView.AllowUserToAddRows = False
+        Me.OrderToolsDataGridView.AllowUserToDeleteRows = False
+        Me.OrderToolsDataGridView.AllowUserToResizeRows = False
+        Me.OrderToolsDataGridView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.OrderToolsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.OrderToolsDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.OrderToolsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.OrderToolsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
+        Me.OrderToolsDataGridView.Location = New System.Drawing.Point(440, 182)
+        Me.OrderToolsDataGridView.MultiSelect = False
+        Me.OrderToolsDataGridView.Name = "OrderToolsDataGridView"
+        Me.OrderToolsDataGridView.ReadOnly = True
+        Me.OrderToolsDataGridView.RowHeadersVisible = False
+        Me.OrderToolsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.OrderToolsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.OrderToolsDataGridView.Size = New System.Drawing.Size(319, 168)
+        Me.OrderToolsDataGridView.TabIndex = 60
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -713,6 +750,8 @@ Partial Class Main
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(810, 392)
+        Me.Controls.Add(Me.OrderToolsDataGridView)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.readToolProgress_Label)
         Me.Controls.Add(Me.v6import_bt)
         Me.Controls.Add(Me.CheckBox1)
@@ -769,6 +808,7 @@ Partial Class Main
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolsBar.ResumeLayout(False)
         Me.ToolsBar.PerformLayout()
+        CType(Me.OrderToolsDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -830,4 +870,6 @@ Partial Class Main
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents v6import_bt As Button
     Friend WithEvents readToolProgress_Label As Label
+    Friend WithEvents Button1 As Button
+    Friend WithEvents OrderToolsDataGridView As DataGridView
 End Class

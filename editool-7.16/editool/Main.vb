@@ -4,12 +4,16 @@ Option Explicit On
 Imports System.IO
 Imports System.Text.RegularExpressions
 
+Imports System.Net
+Imports System.Text
 
 
 
 
 Public Class Main
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
 
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
@@ -247,5 +251,84 @@ Public Class Main
 
     Private Sub Chf_textbox_LostFocus(sender As Object, e As EventArgs) Handles Chf_textbox.LostFocus
         Set_Name_auto()
+    End Sub
+
+
+    Private Sub webtocsv(ByVal sender As Object, ByVal e As WebBrowserDocumentCompletedEventArgs)
+
+        Dim webcsv As WebBrowser = CType(sender, WebBrowser)
+
+        Dim tblrows As HtmlElementCollection
+        Dim tblcols As HtmlElementCollection
+        Dim column As String = ""
+        Dim csv As String = ""
+
+        ''tblrows = webcsv.Document.GetElementsByTagName("tbody").Item(0).GetElementsByTagName("tr")
+        tblrows = webcsv.Document.GetElementById("tableTool").GetElementsByTagName("tr")
+
+        For r As Integer = 0 To tblrows.Count - 1
+            tblcols = tblrows.Item(r).GetElementsByTagName("td")
+            If tblcols.Count > 0 Then
+
+                Dim col = New DataGridViewTextBoxColumn With {
+                                .HeaderText = "<" + r.ToString() + ">",
+                                .SortMode = DataGridViewColumnSortMode.NotSortable
+                            }
+                Dim colIndex As Integer = OrderToolsDataGridView.Columns.Add(col)
+
+
+                OrderToolsDataGridView.Rows.Add()
+
+                For x As Integer = 1 To tblcols.Count - 1
+                    column = tblcols.Item(x).InnerHtml
+                    csv = csv + column
+                    'Replace(column, "VbTab", "")
+
+                    OrderToolsDataGridView.Rows(r).Cells(x).Value = column
+                    If (x < tblrows.Count - 1) Then csv = csv + ";"
+                Next
+                'csv = csv + vbCrLf
+                csv = ""
+            End If
+
+        Next
+        'ToolList.Text = csv     'show csv in textbox
+
+    End Sub
+
+    Private Sub test()
+
+        ' Create a request for the URL. 		
+        Dim request As WebRequest = WebRequest.Create("http://tools.semmip.local/")
+        ' If required by the server, set the credentials.
+        request.Credentials = CredentialCache.DefaultCredentials
+        ' Get the response.
+        Dim response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
+        ' Display the status.
+        Console.WriteLine(response.StatusDescription)
+        ' Get the stream containing content returned by the server.
+        Dim dataStream As Stream = response.GetResponseStream()
+        ' Open the stream using a StreamReader for easy access.
+        Dim reader As New StreamReader(dataStream)
+        ' Read the content.
+        Dim responseFromServer As String = reader.ReadToEnd()
+
+
+
+
+
+        ' Display the content.
+        Console.WriteLine(responseFromServer)
+        ' Cleanup the streams and the response.
+        reader.Close()
+        dataStream.Close()
+        response.Close()
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim web As New WebBrowser
+        AddHandler web.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf webtocsv)
+        web.Navigate(New System.Uri("http://tools.semmip.local/"))
     End Sub
 End Class
