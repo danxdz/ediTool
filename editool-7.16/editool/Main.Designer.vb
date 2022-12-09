@@ -528,14 +528,14 @@ Partial Class Main
         Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DataGridView1.Location = New System.Drawing.Point(50, 182)
+        Me.DataGridView1.Location = New System.Drawing.Point(40, 400)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView1.Size = New System.Drawing.Size(319, 168)
+        Me.DataGridView1.Size = New System.Drawing.Size(763, 203)
         Me.DataGridView1.TabIndex = 49
         '
         'ValidateBt
@@ -573,7 +573,7 @@ Partial Class Main
         Me.ToolsBar.Location = New System.Drawing.Point(5, 5)
         Me.ToolsBar.Margin = New System.Windows.Forms.Padding(15, 5, 5, 5)
         Me.ToolsBar.Name = "ToolsBar"
-        Me.ToolsBar.Size = New System.Drawing.Size(37, 382)
+        Me.ToolsBar.Size = New System.Drawing.Size(37, 601)
         Me.ToolsBar.TabIndex = 54
         Me.ToolsBar.Text = "ToolsBar"
         '
@@ -723,24 +723,23 @@ Partial Class Main
         '
         'OrderToolsDataGridView
         '
-        Me.OrderToolsDataGridView.AllowDrop = True
         Me.OrderToolsDataGridView.AllowUserToAddRows = False
         Me.OrderToolsDataGridView.AllowUserToDeleteRows = False
+        Me.OrderToolsDataGridView.AllowUserToOrderColumns = True
+        Me.OrderToolsDataGridView.AllowUserToResizeColumns = False
         Me.OrderToolsDataGridView.AllowUserToResizeRows = False
-        Me.OrderToolsDataGridView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.OrderToolsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.OrderToolsDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.OrderToolsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.OrderToolsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.OrderToolsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.OrderToolsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.OrderToolsDataGridView.Location = New System.Drawing.Point(440, 182)
-        Me.OrderToolsDataGridView.MultiSelect = False
+        Me.OrderToolsDataGridView.Location = New System.Drawing.Point(49, 190)
         Me.OrderToolsDataGridView.Name = "OrderToolsDataGridView"
         Me.OrderToolsDataGridView.ReadOnly = True
+        Me.OrderToolsDataGridView.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.OrderToolsDataGridView.RowHeadersVisible = False
-        Me.OrderToolsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.OrderToolsDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.OrderToolsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.OrderToolsDataGridView.Size = New System.Drawing.Size(319, 168)
+        Me.OrderToolsDataGridView.Size = New System.Drawing.Size(754, 160)
         Me.OrderToolsDataGridView.TabIndex = 60
         '
         'Main
@@ -749,7 +748,7 @@ Partial Class Main
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.ClientSize = New System.Drawing.Size(810, 392)
+        Me.ClientSize = New System.Drawing.Size(810, 611)
         Me.Controls.Add(Me.OrderToolsDataGridView)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.readToolProgress_Label)

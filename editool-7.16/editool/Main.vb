@@ -256,6 +256,8 @@ Public Class Main
 
     Private Sub webtocsv(ByVal sender As Object, ByVal e As WebBrowserDocumentCompletedEventArgs)
 
+
+
         Dim webcsv As WebBrowser = CType(sender, WebBrowser)
 
         Dim tblrows As HtmlElementCollection
@@ -263,34 +265,54 @@ Public Class Main
         Dim column As String = ""
         Dim csv As String = ""
 
+
+
+
         ''tblrows = webcsv.Document.GetElementsByTagName("tbody").Item(0).GetElementsByTagName("tr")
         tblrows = webcsv.Document.GetElementById("tableTool").GetElementsByTagName("tr")
 
-        For r As Integer = 0 To tblrows.Count - 1
-            tblcols = tblrows.Item(r).GetElementsByTagName("td")
-            If tblcols.Count > 0 Then
+        OrderToolsDataGridView.Columns.Clear()
+        OrderToolsDataGridView.Rows.Clear()
+        readToolProgress_Label.Text = 0
+
+
+        'For r As Integer = 0 To tblrows.Count - 1
+        tblcols = tblrows.Item(0).GetElementsByTagName("th")
+        If tblcols.Count > 0 Then
+            For x As Integer = 0 To tblcols.Count - 1
+                column = tblcols.Item(x).InnerHtml
+                Replace(column, "VbTab", "")
+                Replace(column, "<br>", "")
 
                 Dim col = New DataGridViewTextBoxColumn With {
-                                .HeaderText = "<" + r.ToString() + ">",
-                                .SortMode = DataGridViewColumnSortMode.NotSortable
-                            }
+                               .HeaderText = Replace(column, "<br>", " "),
+                               .SortMode = DataGridViewColumnSortMode.NotSortable
+                           }
                 Dim colIndex As Integer = OrderToolsDataGridView.Columns.Add(col)
+            Next
+        End If
 
+        For r As Integer = 1 To tblrows.Count - 2
+            tblcols = tblrows.Item(r).GetElementsByTagName("td")
 
-                OrderToolsDataGridView.Rows.Add()
+            readToolProgress_Label.Text += 1
 
-                For x As Integer = 1 To tblcols.Count - 1
+            Dim stock As HtmlElementCollection
+
+            OrderToolsDataGridView.Rows.Add()
+
+            For x As Integer = 0 To tblcols.Count - 1
+
+                stock = tblcols.Item(x).GetElementsByTagName("strong")
+                If stock.Count > 0 Then
+                    OrderToolsDataGridView.Rows(OrderToolsDataGridView.RowCount - 2).Cells(0).Value = stock.Item(0).InnerHtml
+                Else
                     column = tblcols.Item(x).InnerHtml
-                    csv = csv + column
                     'Replace(column, "VbTab", "")
-
-                    OrderToolsDataGridView.Rows(r).Cells(x).Value = column
-                    If (x < tblrows.Count - 1) Then csv = csv + ";"
-                Next
-                'csv = csv + vbCrLf
-                csv = ""
-            End If
-
+                    Replace(column, "<br>", " ")
+                    OrderToolsDataGridView.Rows(OrderToolsDataGridView.RowCount - 2).Cells(x).Value = column
+                End If
+            Next
         Next
         'ToolList.Text = csv     'show csv in textbox
 
@@ -299,7 +321,9 @@ Public Class Main
     Private Sub test()
 
         ' Create a request for the URL. 		
-        Dim request As WebRequest = WebRequest.Create("http://tools.semmip.local/")
+        'Dim request As WebRequest = WebRequest.Create("http://tools.semmip.local/")
+        Dim request As WebRequest = WebRequest.Create("C:/Downloaded%20Web%20Sites/tools.semmip.local/index.php.html")
+
         ' If required by the server, set the credentials.
         request.Credentials = CredentialCache.DefaultCredentials
         ' Get the response.
@@ -330,5 +354,11 @@ Public Class Main
         Dim web As New WebBrowser
         AddHandler web.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf webtocsv)
         web.Navigate(New System.Uri("http://tools.semmip.local/"))
+        'web.Navigate(New System.Uri("C:/Downloaded%20Web%20Sites/tools.semmip.local/index.php.html"))
+
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
     End Sub
 End Class
