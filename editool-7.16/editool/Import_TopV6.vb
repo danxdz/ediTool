@@ -2,21 +2,7 @@
 Imports System.IO
 Imports System.Text
 
-Public Class ELEM
-    Public Property Name As String
-    Public Property Type As String
-    Public Property D1 As String
-    Public Property D2 As String
-    Public Property D3 As String
-    Public Property L1 As String
-    Public Property L2 As String
-    Public Property L3 As String
-    Public Property RayonBout As String
-    Public Property Chanfrein As String
-    Public Property AngleDeg As String
-    Public Property NoTT As String
 
-End Class
 
 Module ImportV6
 

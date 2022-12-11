@@ -65,7 +65,31 @@ Public Class Main
         End If
     End Sub
     Private Sub ValidateBt_Click_1(sender As Object, e As EventArgs) Handles ValidateBt.Click
-        Create_outil(0)
+
+        Dim newTool As New NewTool With {
+            .D1 = Me.D_textbox.Text,
+            .D2 = Me.CTS_AD_textbox.Text,
+            .D3 = Me.SD_textbox.Text,
+            .L1 = Me.L_textbox.Text,
+            .L2 = Me.CTS_AL_textbox.Text,
+            .L3 = Me.OL_textbox.Text,
+            .AngleDeg = Me.alpha.Text,
+            .Chanfrein = Me.Chf_textbox.Text,
+            .RayonBout = Me.Chf_textbox.Text,
+            .NoTT = Me.NoTT.Text,
+            .Name = Me.Name_textbox.Text,
+            .Type = My.Settings.ToolType,
+            .Code = Me.manuf_TextBox.Text,
+            .CodeBar = Me.Chf_textbox.Text,
+            .Manuf = Me.manuf_TextBox.Text,
+            .ManufRef = Me.manref_TextBox.Text,
+            .ManufRefSec = Me.manRefSec_TextBox.Text
+        }
+
+
+
+
+        Create_outil(newTool)
         'REG CREATED TOOLS
         'Dim file_reader As IO.StreamReader
         'file_reader = Open_data_file("reg.txt")
@@ -81,17 +105,8 @@ Public Class Main
         Get_files(My.Resources.menu_fr)
     End Sub
 
-    Private Sub DataGridView1_CurrentCellChanged(sender As Object, e As EventArgs) Handles DataGridView1.CurrentCellChanged
-        Dim ds() As TextBox = {D_textbox, SD_textbox, CTS_AD_textbox, OL_textbox, L_textbox, CTS_AL_textbox, alpha, NoTT}
-        Try
-            manref_TextBox.Text = DataGridView1.SelectedCells(0).Value
-            For i As Short = 1 To 8
-                ds(i - 1).Text = DataGridView1.SelectedCells(i).Value
-            Next
-            Refresh_outil()
-        Catch ex As Exception
-            ' MsgBox("CELL CHANGED - " + ex.ToString)
-        End Try
+    Private Sub DataGridView1_CurrentCellChanged(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub DefineName_Bt_Click(sender As Object, e As EventArgs) Handles DefineName_Bt.Click
@@ -186,7 +201,7 @@ Public Class Main
         FAP.BackColor = color
         AL.BackColor = color
 
-        My.Settings.ToolType = "FO"
+        My.Settings.ToolType = "FOCA"
         My.Settings.Save()
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FO
 
@@ -215,8 +230,8 @@ Public Class Main
     End Sub
 
 
-    Private Sub V6import_bt_Click(sender As Object, e As EventArgs) Handles v6import_bt.Click
-        OpenV6File()
+    Private Sub V6import_bt_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub A_TextBox_LostFocus(sender As Object, e As EventArgs) Handles A_TextBox.LostFocus
@@ -248,4 +263,25 @@ Public Class Main
     Private Sub Chf_textbox_LostFocus(sender As Object, e As EventArgs) Handles Chf_textbox.LostFocus
         Set_Name_auto()
     End Sub
+
+
+    Private Sub NewToolDataGridView_CurrentCellChanged(sender As Object, e As EventArgs) Handles NewToolDataGridView.CurrentCellChanged
+        Dim ds() As TextBox = {D_textbox, CTS_AD_textbox, SD_textbox, L_textbox, CTS_AL_textbox, OL_textbox, NoTT, alpha}
+        Try
+            manref_TextBox.Text = NewToolDataGridView.SelectedCells(0).Value
+            For i As Short = 1 To 8
+                ds(i - 1).Text = NewToolDataGridView.SelectedCells(i).Value
+            Next
+            Refresh_outil()
+        Catch ex As Exception
+            ' MsgBox("CELL CHANGED - " + ex.ToString)
+        End Try
+    End Sub
+
+
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+        OpenV6File()
+    End Sub
+
+
 End Class

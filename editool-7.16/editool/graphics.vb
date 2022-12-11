@@ -113,7 +113,7 @@ Module graphics
 
 
 
-            If My.Settings.ToolType = "FO" Or My.Settings.ToolType = "FP" Then
+            If My.Settings.ToolType = "FOCA" Or My.Settings.ToolType = "FP" Then
                 'Forets et Forets a pointer ***********************
                 'CUT
                 Dim pnts() As Point = {

@@ -6,28 +6,32 @@ Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Module ts
 
-    Public Sub Create_outil(com As Boolean)
+    Public Sub Create_outil(newTool As NewTool)
 
 
-        If com = True Then
-            GetV6Tool()
-        End If
+
         'TopSolidHost.Connect(1, 0, "server")
         TopSolidHost.Connect()
         TopSolidDesignHost.Connect()
 
         Dim model_fr As New DocumentId
         Dim model_id As String = "Side Mill D20 L35 SD20"
+        Dim toolType = newTool.Type
 
         'model_id = "model_fr" --> FR 2T
         'model_id = "model_ft" --> Ft Rayon/Chanfrein
         'model_id = "model_fo" --> Foret
         'etc
-
+        If toolType <> "" Then
+            My.Settings.ToolType = toolType
+            My.Settings.Save()
+        Else
+            toolType = My.Settings.ToolType
+        End If
 
         ''model_id = "FR 2T D20 L35 SD20"
-        Select Case My.Settings.ToolType
-            Case "FR"
+        Select Case toolType
+            Case "FR2T"
                 model_id = "Side Mill D20 L35 SD20"
             Case "FT"
                 model_id = "Radiused Mill D16 L40 r3 SD16"
@@ -35,17 +39,14 @@ Module ts
                 model_id = "Ball Nose Mill D8 L30 SD8"
             Case "FP"
                 model_id = "Spotting Drill D10 SD10"
-            Case "FO"
+            Case "FOCA"
                 model_id = "Twisted Drill D10 L35 SD10"
             Case "AL"
                 model_id = "Constant Reamer D10 L20 SD9"
         End Select
 
-
-
         Dim lib_models As List(Of PdmObjectId)
         lib_models = TopSolidHost.Pdm.SearchProjectByName("EdiTool")
-        ''lib_models = TopSolidHost.Pdm.SearchProjectByName("TopSolid Machining User Tools")
         ''newTool_lib = TopSolidHost.Pdm.SearchProjectByName("EdiTool")
 
         Try
@@ -59,7 +60,7 @@ Module ts
                         TopSolidHost.Documents.EnsureIsDirty(model_fr)
                         '// Perform document modification.
 
-                        MakeTool(model_fr)
+                        MakeTool(model_fr, newTool)
                         TopSolidHost.Pdm.CheckIn(TopSolidHost.Pdm.SearchDocumentByName(lib_models(0), TopSolidHost.Documents.GetName(model_fr))(0), True)
 
                         MsgBox("Outil " + Main.Name_textbox.Text + " crée")
@@ -75,7 +76,7 @@ Module ts
                 End If
             End If
         Catch
-            MsgBox("Cant open file, close everything in TopSolid")
+            MsgBox("Cant open file, close everything in Topsolid" + Environment.NewLine + Environment.NewLine + "Impossible ouvrir le fichier, fermer tout sur Topsolid")
             Try
                 TopSolidHost.Application.EndModification(False, False)
             Catch
@@ -93,7 +94,7 @@ Module ts
         End If
     End Function
     Private Sub GetV6Tool()
-        Dim tool As New ELEM
+        Dim newTool As New NewTool
         'NewBD.DataGridView1.SelectedCells.Count '-> get selected rows number
         Dim Temp_row As String = NewBD.DataGridView1.CurrentCell.Value
         Dim line() As String
@@ -103,7 +104,7 @@ Module ts
 
         Dim type, name, d1, d2, d3, l1, l2, l3, NoTT As String
 
-        type = line(1)
+        type = line(0)
 
 
 
@@ -125,11 +126,11 @@ Module ts
         My.Settings.ToolType = type
 
         My.Settings.Save()
-        tool.Type = type
+        newTool.Type = type
 
         name = line(2)
 
-        tool.Name = name
+        newTool.Name = name
         Main.Name_textbox.Text = name
 
 
@@ -146,30 +147,22 @@ Module ts
 
 
         If IsInt(d1) Then
-            tool.D1 = Int(d1)
+            newTool.D1 = Int(d1)
             Main.D_textbox.Text = Int(d1)
         End If
 
-
-        tool.L1 = Replace(line(9), "Tool.UtilLength=", "")
-        tool.D2 = Replace(line(12), "Tool.DiamPoky=", "")
-        tool.L2 = Replace(line(10), "Tool.ZProg=", "")
-        tool.D3 = Replace(line(18), "Tool.LinkType=QC", "")
-        tool.L3 = Replace(line(19), "Tool.TotalLength=", "")
-        tool.NoTT = Replace(line(17), "Tool.NbCogs=", "")
-
-
-
-
-
-
-
+        newTool.L1 = Replace(line(9), "Tool.UtilLength=", "")
+        newTool.D2 = Replace(line(12), "Tool.DiamPoky=", "")
+        newTool.L2 = Replace(line(10), "Tool.ZProg=", "")
+        newTool.D3 = Replace(line(18), "Tool.LinkType=QC", "")
+        newTool.L3 = Replace(line(19), "Tool.TotalLength=", "")
+        newTool.NoTT = Replace(line(17), "Tool.NbCogs=", "")
 
     End Sub
 
-    Private Sub MakeTool(newTool As DocumentId)
+    Private Sub MakeTool(docId As DocumentId, newTool As NewTool)
 
-        Dim list_par As List(Of ElementId) = TopSolidHost.Parameters.GetParameters(newTool)
+        Dim list_par As List(Of ElementId) = TopSolidHost.Parameters.GetParameters(docId)
         Dim names As String
         Dim types As ParameterType
         For i As Integer = 0 To list_par.Count - 1
@@ -178,14 +171,14 @@ Module ts
             'ComboBox1.Items.Add(names)
         Next
 
-        Set_parametre_outil(newTool)
+        Set_parametre_outil(docId)
         TopSolidHost.Application.EndModification(True, False)
 
         If Main.AutoOpen_checkBox.Checked = True Then
-            TopSolidHost.Documents.Open(newTool)
+            TopSolidHost.Documents.Open(docId)
         End If
 
-        TopSolidHost.Documents.Save(newTool)
+        TopSolidHost.Documents.Save(docId)
         ''TopSolidHost.Documents.Close(newTool, False, False)
 
     End Sub
@@ -215,7 +208,7 @@ Module ts
 
         Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool, "$TopSolid.Kernel.TX.Properties.Name")
 
-        If My.Settings.ToolType = "FP" Or My.Settings.ToolType = "FO" Then
+        If My.Settings.ToolType = "FP" Or My.Settings.ToolType = "FOCA" Then
             Dim tmpAngleRad = Main.A_TextBox.Text * Math.PI / 180
             SetReal(newTool, "A", tmpAngleRad)
 
@@ -312,7 +305,8 @@ Module ts
             If model_fr_id.Count > 0 Then
 
                 model_fr = TopSolidHost.Documents.GetDocument(model_fr_id(0))
-                temp_model = TopSolidHost.Documents.SaveAs(model_fr, lib_models(0), Main.Name_textbox.Text)
+
+                temp_model = TopSolidHost.Documents.SaveAs(model_fr, lib_models(0), "temp") 'Main.Name_textbox.Text)
 
 
             End If

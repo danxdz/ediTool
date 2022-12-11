@@ -69,7 +69,6 @@ Partial Class ToolName_config
         Me.Namemask_textbox.Size = New System.Drawing.Size(204, 20)
         Me.Namemask_textbox.TabIndex = 1
         Me.Namemask_textbox.Text = " FR Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]"
-        Me.Namemask_textbox.Visible = False
         '
         'CancelBt
         '

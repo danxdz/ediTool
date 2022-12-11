@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="editool.exe" size="340992">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="editool.exe" size="344576">
       <assemblyIdentity name="editool" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>bF2Sbs9BBxp8aUhjNajxGNumucy/8RQcMRefCIBy1Xc=</dsig:DigestValue>
+        <dsig:DigestValue>izO+bSvdIjp2o5J5eLDPZQmw9QIh3tRyKNxNaE3uYRM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -150,50 +150,50 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TopSolid.Cad.Design.Automating.dll" size="45568">
-      <assemblyIdentity name="TopSolid.Cad.Design.Automating" version="7.16.400.149" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TopSolid.Cad.Design.Automating.dll" size="46080">
+      <assemblyIdentity name="TopSolid.Cad.Design.Automating" version="7.16.400.166" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>HeXa70i5hJSNKy/B+KT6efyUNZVH+hBys4O1/WqAMGs=</dsig:DigestValue>
+        <dsig:DigestValue>tFw1wUSzWw1zQt0sLAA3z7giCvBFIV+aIploHc4eaio=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TopSolid.Cam.NC.Kernel.Automating.dll" size="27136">
-      <assemblyIdentity name="TopSolid.Cam.NC.Kernel.Automating" version="7.16.400.149" language="neutral" processorArchitecture="amd64" />
+      <assemblyIdentity name="TopSolid.Cam.NC.Kernel.Automating" version="7.16.400.166" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>uMyhEd66fdC7cQCTfVdOjdEaS/6iwuUicSkjKRYGX/w=</dsig:DigestValue>
+        <dsig:DigestValue>OTEt1spALUyJw6NIy+9HNl4JeIQEYUbXWgN0CGkFB2Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TopSolid.Kernel.Automating.dll" size="138240">
-      <assemblyIdentity name="TopSolid.Kernel.Automating" version="7.16.400.149" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="TopSolid.Kernel.Automating" version="7.16.400.166" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>m3eFCi+E0XDeB7neXsrDRqeXO72Xk6E8x1taWWjE5wI=</dsig:DigestValue>
+        <dsig:DigestValue>0kwSpRN55OCEXaIvebHytryJjetoogcO8OJRz/ONj3w=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TopSolid.Kernel.SX.dll" size="1513472">
-      <assemblyIdentity name="TopSolid.Kernel.SX" version="7.16.400.149" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TopSolid.Kernel.SX.dll" size="1517056">
+      <assemblyIdentity name="TopSolid.Kernel.SX" version="7.16.400.166" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>4+Horr+iZ7elCchACnQK8TZ3vXFPzlaijUpmjuLXe5k=</dsig:DigestValue>
+        <dsig:DigestValue>rF3fOL/YPc0RRWorv5xXN0YigDXhj0AGuptT7nZ8Ruo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

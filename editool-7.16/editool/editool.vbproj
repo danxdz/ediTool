@@ -139,6 +139,7 @@
     <Compile Include="NewBD.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="OUTIL.vb" />
     <Compile Include="ToolName_config.Designer.vb">
       <DependentUpon>ToolName_config.vb</DependentUpon>
     </Compile>
