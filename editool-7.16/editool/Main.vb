@@ -9,6 +9,8 @@ Imports System.Text.RegularExpressions
 
 
 Public Class Main
+    Dim toolsList As New List(Of NewTool)
+
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
@@ -283,5 +285,149 @@ Public Class Main
         OpenV6File()
     End Sub
 
+    Private Sub Webtocsv(ByVal sender As Object, ByVal e As WebBrowserDocumentCompletedEventArgs)
 
+        Dim newTool As New NewTool
+
+        Dim webcsv As WebBrowser = CType(sender, WebBrowser)
+
+        Dim tblrows As HtmlElementCollection
+        Dim tblcols As HtmlElementCollection
+        Dim column As String
+        Dim csv As String
+
+
+        Dim row() As String
+
+
+        ''tblrows = webcsv.Document.GetElementsByTagName("tbody").Item(0).GetElementsByTagName("tr")
+        tblrows = webcsv.Document.GetElementById("tableTool").GetElementsByTagName("tr")
+
+        NewToolDataGridView.Columns.Clear()
+        NewToolDataGridView.Rows.Clear()
+        readToolProgress_Label.Text = 0
+
+
+        'For r As Integer = 0 To tblrows.Count - 1
+        tblcols = tblrows.Item(0).GetElementsByTagName("th")
+        If tblcols.Count > 0 Then
+            For x As Integer = 0 To tblcols.Count - 1
+                column = tblcols.Item(x).InnerHtml
+                Replace(column, "VbTab", "")
+                Replace(column, "<br>", "")
+
+                Dim col = New DataGridViewTextBoxColumn With {
+                               .HeaderText = Replace(column, "<br>", " "),
+                               .SortMode = DataGridViewColumnSortMode.NotSortable
+                           }
+                Dim colIndex As Integer = NewToolDataGridView.Columns.Add(col)
+            Next
+        End If
+
+        For r As Integer = 1 To tblrows.Count - 2
+            tblcols = tblrows.Item(r).GetElementsByTagName("td")
+
+            readToolProgress_Label.Text += 1
+
+            Dim stock As HtmlElementCollection
+
+            NewToolDataGridView.Rows.Add()
+
+            For x As Integer = 0 To tblcols.Count - 1
+
+                stock = tblcols.Item(x).GetElementsByTagName("strong")
+                If stock.Count > 0 Then
+                    NewToolDataGridView.Rows(NewToolDataGridView.RowCount - 2).Cells(0).Value = stock.Item(0).InnerHtml
+                Else
+                    column = tblcols.Item(x).InnerHtml
+                    'Replace(column, "VbTab", "")
+                    Replace(column, "<br>", " ")
+                    Try
+                        column = Convert.ToDouble(column)
+                    Catch ex As Exception
+
+                    End Try
+                    Select Case x
+                        Case 1 : newTool.Type = column
+                        Case 2 : newTool.GroupeMat = column
+                        Case 3 : newTool.D1 = column
+                        Case 4 : newTool.L1 = column
+                        Case 5 : newTool.L2 = column
+                        Case 6 : newTool.L3 = column
+                        Case 7 : newTool.D3 = column
+                        Case 8 : newTool.NoTT = column
+                        Case 9 : newTool.RayonBout = column
+                        Case 10 : newTool.Chanfrein = column
+                        Case 11 : newTool.CoupeCentre = column
+                        Case 12 : newTool.ArrCentre = column
+                        Case 13 : newTool.TypeTar = column
+                        Case 14 : newTool.PasTar = column
+                        Case 15 : newTool.Manuf = column
+                        Case 16 : newTool.ManufRef = column
+                        Case 17 : newTool.ManufRefSec = column
+                        Case 18 : newTool.ManufRefSec = column
+                        Case 21 : newTool.Code = column
+                        Case 22 : newTool.CodeBar = column
+
+                    End Select
+
+
+                    'NewToolDataGridView.Rows(NewToolDataGridView.RowCount - 2).Cells(x).Value = column
+
+                    row.Append(column)
+
+                End If
+            Next
+
+            NewToolDataGridView.Rows.Insert(1, row)
+
+            toolsList.Add(newTool)
+
+        Next
+        'ToolList.Text = csv     'show csv in textbox
+
+        'Refresh_outil()
+    End Sub
+
+
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles OrderTools_Bt.Click
+        Dim web As New WebBrowser
+        AddHandler web.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf Webtocsv)
+        web.Navigate(New System.Uri("http://tools.semmip.local/"))
+        'web.Navigate(New System.Uri("C:/Downloaded%20Web%20Sites/tools.semmip.local/index.php.html"))
+    End Sub
+
+
+    Private Sub NewToolDataGridView_MouseDown(sender As Object, e As MouseEventArgs) Handles NewToolDataGridView.MouseDown
+        If e.Button = MouseButtons.Right Then
+            Try
+                '  DataGridView1.CurrentCell = DataGridView1(e.ColumnIndex, e.RowIndex)
+
+            Catch ex As Exception
+                ' MsgBox("invalid cell")
+            End Try
+            newToolMenu.Show(Cursor.Position)
+        End If
+    End Sub
+
+    Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+
+        Dim num As Integer = NewToolDataGridView.SelectedRows().Count
+        Dim index As Integer = NewToolDataGridView.CurrentRow().Index
+
+        Dim total = toolsList.Count
+
+        Dim i As Integer = total - index
+
+
+        D_textbox.Text = toolsList(i).D1
+        L_textbox.Text = toolsList(index).L1
+
+        CTS_AD_textbox.Text = toolsList(index).D2
+        CTS_AL_textbox.Text = toolsList(index).L2
+
+        SD_textbox.Text = toolsList(index).D3
+        OL_textbox.Text = toolsList(index).L3
+
+    End Sub
 End Class
