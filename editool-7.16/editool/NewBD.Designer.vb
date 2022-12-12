@@ -77,6 +77,7 @@ Partial Class NewBD
         Me.new_tool = New System.Windows.Forms.ToolStripMenuItem()
         Me.copy_tool = New System.Windows.Forms.ToolStripMenuItem()
         Me.del_tool = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TypeFilterComboBox = New System.Windows.Forms.ComboBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Row_NumericUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RC_Menu_NewDB.SuspendLayout()
@@ -523,31 +524,41 @@ Partial Class NewBD
         '
         Me.RC_Menu_NewDB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.new_tool, Me.copy_tool, Me.del_tool})
         Me.RC_Menu_NewDB.Name = "ContextMenuStrip1"
-        Me.RC_Menu_NewDB.Size = New System.Drawing.Size(181, 92)
+        Me.RC_Menu_NewDB.Size = New System.Drawing.Size(107, 70)
         '
         'new_tool
         '
         Me.new_tool.Name = "new_tool"
-        Me.new_tool.Size = New System.Drawing.Size(180, 22)
+        Me.new_tool.Size = New System.Drawing.Size(106, 22)
         Me.new_tool.Text = "new"
         '
         'copy_tool
         '
         Me.copy_tool.Name = "copy_tool"
-        Me.copy_tool.Size = New System.Drawing.Size(180, 22)
+        Me.copy_tool.Size = New System.Drawing.Size(106, 22)
         Me.copy_tool.Text = "copy"
         '
         'del_tool
         '
         Me.del_tool.Name = "del_tool"
-        Me.del_tool.Size = New System.Drawing.Size(180, 22)
+        Me.del_tool.Size = New System.Drawing.Size(106, 22)
         Me.del_tool.Text = "delete"
+        '
+        'TypeFilterComboBox
+        '
+        Me.TypeFilterComboBox.FormattingEnabled = True
+        Me.TypeFilterComboBox.Location = New System.Drawing.Point(495, 23)
+        Me.TypeFilterComboBox.Name = "TypeFilterComboBox"
+        Me.TypeFilterComboBox.Size = New System.Drawing.Size(121, 21)
+        Me.TypeFilterComboBox.TabIndex = 52
+        Me.TypeFilterComboBox.Text = "FOCA"
         '
         'NewBD
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1119, 439)
+        Me.ClientSize = New System.Drawing.Size(1119, 489)
+        Me.Controls.Add(Me.TypeFilterComboBox)
         Me.Controls.Add(Me.path_TextBox)
         Me.Controls.Add(Me.Row_NumericUpDown)
         Me.Controls.Add(Me.DataGridView1)
@@ -662,4 +673,5 @@ Partial Class NewBD
     Friend WithEvents new_tool As ToolStripMenuItem
     Friend WithEvents copy_tool As ToolStripMenuItem
     Friend WithEvents del_tool As ToolStripMenuItem
+    Friend WithEvents TypeFilterComboBox As ComboBox
 End Class
