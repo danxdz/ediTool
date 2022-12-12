@@ -27,6 +27,7 @@ Module FileImports
                 Main.OL_textbox.Text = val
             Case "cuttingEdges"
                 Main.NoTT.Text = val
+
             Case "cuttingLength"
                 Main.L_textbox.Text = val
             Case "toolShaftDiameter"
@@ -42,115 +43,133 @@ Module FileImports
         End Select
     End Sub
 
-    Private Sub Fill_Fraisa_XML(name As String, val As String)
-        Select Case name
-            Case "orderingCode"
-                Main.manuf_TextBox.Text = val
-            Case "manufacturer"
-                Main.manref_TextBox.Text = val
-            Case "toolTotalLength"
-                Main.OL_textbox.Text = val
-            Case "cuttingEdges"
-                Main.NoTT.Text = val
-            Case "cuttingLength"
-                Main.L_textbox.Text = val
-            Case "toolShaftDiameter"
-                Main.SD_textbox.Text = val
-            Case "toolDiameter"
-                Main.D_textbox.Text = val
-            Case "taperHeight"
-                Main.CTS_AL_textbox.Text = val
-            Case "tipDiameter"
-                Main.CTS_AD_textbox.Text = val
-            Case "toolTotalLength"
-                Main.OL_textbox.Text = val
-        End Select
-    End Sub
-
-
-
+    Private Function FindTool(reader As XmlTextReader)
+        While reader.Read()
+            If reader.Name = "tools" Then
+                Return reader
+            End If
+        End While
+        Return reader
+    End Function
     Private Sub LoadXML(path As String)
 
-        Dim Xml_type As Integer = 0 '1= Hypermill | 2= Fraisa
-        Dim last_name As String = ""
-        Dim val As String = ""
+        Dim newTool As New NewTool
+
+        'Main.DataGridView1.Rows.Clear()
+        'Main.NewToolDataGridView.Columns.Clear()
 
         Dim reader As New XmlTextReader(path)
+        FindTool(reader)
+
         While reader.Read()
-            Dim count As Integer = reader.AttributeCount()
-            Dim hash As Integer = reader.GetHashCode()
+            If reader.Name = "param" Then
+                Dim val1 = reader.Value
+                Dim type As String = reader.GetAttribute("type")
+                Dim name As String = reader.GetAttribute("name")
+                Dim val As String = reader.GetAttribute("value")
 
-            If XmlNodeType.Element And reader.Name <> "" Then
-                If reader.Name <> "xml" Then
+                Select Case name
+                    Case "orderingCode"
+                        Main.manref_TextBox.Text = val
+                        newTool.ManufRef = val
+                    Case "manufacturer"
+                        Main.manuf_TextBox.Text = val
+                        newTool.Manuf = val
+                    Case "toolTotalLength"
+                        Main.OL_textbox.Text = val
+                        newTool.L3 = val
+                    Case "cuttingEdges"
+                        Main.NoTT.Text = val
+                        newTool.NoTT = val
+                    Case "cuttingLength"
+                        Main.L_textbox.Text = val
+                        newTool.L1 = val
 
-                    If reader.Name = "tecsets" And Xml_type = 1 Then
-                        reader.Close() '' end of HP xml file
-                    End If
+                    Case "toolShaftDiameter"
+                        Main.SD_textbox.Text = val
+                        newTool.D3 = val
 
-                    If Xml_type = 0 Then
-                        If reader.Name = "omtdx" Then
-                            Xml_type = "1"
-                        ElseIf reader.Name = "Tool-Data" Then
-                            Xml_type = "2"
-                        End If
-                    End If
+                    Case "toolDiameter"
+                        Main.D_textbox.Text = val
+                        newTool.D1 = val
 
-                    Dim name As String = reader.Name
-                    val = reader.Value
+                    Case "taperHeight"
+                        Main.CTS_AL_textbox.Text = val
+                        newTool.L2 = val '???? not sure
 
-                    If Xml_type = 1 Then
+                    Case "tipDiameter"
+                        Main.CTS_AD_textbox.Text = val
 
-                        Dim col = New DataGridViewTextBoxColumn With {
-                                .HeaderText = "<" + reader.Name & ">",
-                                .SortMode = DataGridViewColumnSortMode.NotSortable
-                            }
-                        Dim colIndex As Integer = NewBD.DataGridView1.Columns.Add(col)
+                        'plungeAngle
+                        'tipDiameter
+                        'cornerRadius
 
-                        Dim type As String = reader.GetAttribute("type")
-                        Dim name_hp As String = reader.GetAttribute("name")
-                        Dim val_hp As String = reader.GetAttribute("value")
-
-                        If name_hp <> "" And val_hp <> "" Then
-
-                            Fill_HM_XML(name_hp, val_hp, type)
-                        End If
-                    Else
-                        If name <> "" And val <> "" Then
-                            Fill_Fraisa_XML(name, val)
-                        Else
-                            If last_name <> name Or last_name <> "PropertyName" Then
-                                last_name = name
-                            Else
-                                last_name = ""
-                            End If
-                        End If
-                    End If
-                End If
-
-            Else
-                If XmlNodeType.Text And last_name <> "" Then
-                        If last_name = "PropertyName" Then
-                            last_name = reader.Value
-                        Else
-                            val = reader.Value
-                            Fill_Fraisa_XML(last_name, val)
-                        End If
-                    End If
-                End If
-
+                End Select
+            ElseIf (reader.Name = "tecsets") Then
+                reader.Close()
+                FillDataGrid(newTool, Main.NewToolDataGridView)
+            End If
         End While
+
+
+        ' End While
         Set_Name_auto()
 
     End Sub
+
+    Private Sub FillDataGrid(NewTool As NewTool, DGV As DataGridView)
+
+        Dim objList As New List(Of String)({"ref", "D", "CTS_AD", "SD", "L", "CTS_AL", "OL", "NoTT", "chf", "manuf"})
+
+        Dim rowIndex As Integer
+
+        'DGV.Columns.Clear()
+
+        If DGV.Rows.Count = 0 Then
+            For i As Integer = 0 To objList.Count - 1
+
+                Dim col = New DataGridViewTextBoxColumn With {
+                            .HeaderText = objList(i),
+                            .SortMode = DataGridViewColumnSortMode.NotSortable
+                        }
+                Dim colIndex As Integer = DGV.Columns.Add(col)
+            Next
+            rowIndex = DGV.Rows.Count - 1
+        Else
+            rowIndex = DGV.Rows.Count - 1
+            DGV.Rows.Add()
+        End If
+
+        ' DGV.Rows.Clear()
+
+
+
+        DGV.Rows(rowIndex).Cells(0).Value = NewTool.ManufRef
+        DGV.Rows(rowIndex).Cells(1).Value = NewTool.D1
+        If NewTool.D2 > 0 Then
+            DGV.Rows(rowIndex).Cells(2).Value = NewTool.D2
+        Else
+            DGV.Rows(rowIndex).Cells(2).Value = NewTool.D1 - 0.2
+        End If
+        DGV.Rows(rowIndex).Cells(3).Value = NewTool.D3
+        DGV.Rows(rowIndex).Cells(4).Value = NewTool.L1
+        DGV.Rows(rowIndex).Cells(5).Value = NewTool.L2
+        DGV.Rows(rowIndex).Cells(6).Value = NewTool.L3
+        DGV.Rows(rowIndex).Cells(7).Value = NewTool.NoTT
+        DGV.Rows(rowIndex).Cells(8).Value = NewTool.Chanfrein
+        DGV.Rows(rowIndex).Cells(9).Value = NewTool.Manuf
+
+
+    End Sub
+
     Public Sub OpenFile()
-        Dim myStream As Stream = Nothing
         Dim startPath As String = ""
+        Dim myStream As Stream
 
         ' If My.Settings.lastPath <> "" Then
         'startPath = My.Settings.lastPath
         'My.Settings.Save()
         'End If
-
 
         Dim openFileDialog1 As New OpenFileDialog With {
             .InitialDirectory = startPath,
@@ -162,42 +181,29 @@ Module FileImports
         If openFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             Try
 
-
                 NewBD.DataGridView1.Columns.Clear()
                 NewBD.DataGridView1.Rows.Clear()
 
-                '' myStream = openFileDialog1.OpenFile()
+                myStream = openFileDialog1.OpenFile()
                 Dim fpath As String = openFileDialog1.FileName
 
                 NewBD.path_TextBox.Text = fpath
                 My.Settings.lastPath = fpath
                 My.Settings.Save()
 
-
                 If openFileDialog1.FileName.Substring(openFileDialog1.FileName.Length - 3) = "xml" Then
                     LoadXML(fpath)
                 Else
+                    ReadExcel(fpath)
                     NewBD.Show()
 
-                    ReadExcel(fpath)
-
                 End If
 
-                If (myStream IsNot Nothing) Then
-                    ' Insert code to read the stream here.
-                End If
             Catch Ex As Exception
                 MessageBox.Show("error: " & Ex.Message)
-            Finally
-                ' Check this again, since we need to make sure we didn't throw an exception on open.
-                If (myStream IsNot Nothing) Then
-                    myStream.Close()
-                End If
             End Try
         End If
     End Sub
-
-
 
     Public Sub ReadExcel(fpath As String)
 
@@ -205,12 +211,8 @@ Module FileImports
         xlWorkBook = xlApp.Workbooks.Open(fpath)            ' WORKBOOK TO OPEN THE EXCEL FILE.
         xlWorkSheet = CType(xlApp.Sheets(1),
                     Worksheet)
-
-
         Dim iCol As Integer
         Dim iColCount As Integer = 0
-
-
 
         For iCol = 1 To xlWorkSheet.Columns.Count
             Try
@@ -223,6 +225,7 @@ Module FileImports
                     }
                     Dim colIndex As Integer = NewBD.DataGridView1.Columns.Add(col)        ' ADD A NEW COLUMN.
                     NewBD.nom_cb.Items.Add(xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, iCol).value)
+
                     iColCount += 1
 
                 End If
@@ -235,47 +238,23 @@ Module FileImports
         Dim list As New List(Of String)()
         ' ADD ROWS TO THE GRID.
         Dim iRow As Integer
-        For iRow = 1 + NewBD.Row_NumericUpDown.Value To xlWorkSheet.Rows.Count
+        For iRow = 1 To xlWorkSheet.Rows.Count
             If Trim(xlWorkSheet.Cells(iRow, 1).value) = "" And Trim(xlWorkSheet.Cells(iRow, 2).value) = "" Then
                 Exit For        ' BAIL OUT IF REACHED THE LAST ROW.
             Else
+                NewBD.DataGridView1.Rows.Add()
                 Main.readToolProgress_Label.Text += 1
-                ' NewBD.DataGridView1.Rows.Add()
-                Dim index As Integer = NewBD.DataGridView1.Rows.Count
-                If index = 0 Then
-                    '  NewBD.DataGridView1.Rows.Add()
-                End If
+                ' CREATE A STRING ARRAY USING THE VALUES IN EACH ROW OF THE SHEET.
+                For i As Integer = 1 To iColCount
 
-                If (xlWorkSheet.Cells(iRow, 2).value = NewBD.TypeFilterComboBox.Text) Or (NewBD.TypeFilterComboBox.Text = "") Then
-                    NewBD.DataGridView1.Rows.Add()
+                    Dim tmp_string As String = Replace(xlWorkSheet.Cells(iRow, i).value, ".", ",")
+                    NewBD.DataGridView1.Rows(iRow - 1).Cells(i - 1).Value = tmp_string
+                    'End If
 
-                    For i As Integer = 1 To iColCount
-                        Dim tmp_string As String = Replace(xlWorkSheet.Cells(iRow, i).value, ".", ",")
-
-                        If NewBD.TypeFilterComboBox.Text <> "" Then
-                            NewBD.DataGridView1.Rows.Add()
-
-                            NewBD.DataGridView1.Rows(NewBD.DataGridView1.RowCount).Cells(i).Value = tmp_string
-                        Else
-                            NewBD.DataGridView1.Rows.Add()
-                            NewBD.DataGridView1.Rows(iRow - 1).Cells(i - 1).Value = tmp_string
-                        End If
-                        If i = 2 Then
-                            If NewBD.TypeFilterComboBox.Items.Contains(tmp_string) = False Then
-                                If tmp_string <> "Codification" Then
-
-                                    NewBD.TypeFilterComboBox.Items.Add(tmp_string)
-                                End If
-                            End If
-                        End If
-
-                        'End If
-
-                        'list.Add(xlWorkSheet.Cells(iRow, i).value)
-                    Next
-                    ' NewBD.DataGridView1.Rows.Add(list)
-                    'NewBD.DataGridView1.Rows.Add(xlWorkSheet.Cells(iRow, iCol).value)
-                End If
+                    'list.Add(xlWorkSheet.Cells(iRow, i).value)
+                Next
+                ' NewBD.DataGridView1.Rows.Add(list)
+                'NewBD.DataGridView1.Rows.Add(xlWorkSheet.Cells(iRow, iCol).value)
             End If
 
         Next

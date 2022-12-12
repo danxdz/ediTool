@@ -53,7 +53,7 @@ Module outils_base
         If Main.ForceName_checkBox.Checked = False Then
             Try
                 Dim Namemask As String = ToolName_config.Namemask_textbox.Text
-                Dim ToolType = "FR"
+                Dim ToolType = My.Settings.NameMask
 
                 ''Dim temp As String = ToolType + " " + Namemask
                 Dim temp As String = Namemask
@@ -101,7 +101,7 @@ Module outils_base
                 ''Main.Name_textbox.Text += " Lu" + Main.CTS_AL_textbox.Text ' nome += Longueur util
                 ''
 
-                ToolPreview()
+                'ToolPreview()
             Catch ex As Exception
                 MsgBox("Name Mask Error - " + ex.ToString)
 
@@ -174,7 +174,7 @@ Module outils_base
 
 
         Next
-        Main.DataGridView1.DataSource = DataTable_buffer
+        'Main.NewToolDataGridView.DataSource = DataTable_buffer
 
     End Sub
     Public Sub Fill_db(file_reader As System.IO.StreamReader, filter As String)
@@ -206,7 +206,7 @@ Module outils_base
             End If
             index += 1
         Loop
-        Main.DataGridView1.DataSource = DataTable_buffer
+        Main.NewToolDataGridView.DataSource = DataTable_buffer
         file_reader.Close()
 
     End Sub

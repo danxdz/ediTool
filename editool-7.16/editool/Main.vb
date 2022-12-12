@@ -4,16 +4,12 @@ Option Explicit On
 Imports System.IO
 Imports System.Text.RegularExpressions
 
-Imports System.Net
-Imports System.Text
 
 
 
 
 Public Class Main
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-
 
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
@@ -69,7 +65,31 @@ Public Class Main
         End If
     End Sub
     Private Sub ValidateBt_Click_1(sender As Object, e As EventArgs) Handles ValidateBt.Click
-        Create_outil(0)
+
+        Dim newTool As New NewTool With {
+            .D1 = Me.D_textbox.Text,
+            .D2 = Me.CTS_AD_textbox.Text,
+            .D3 = Me.SD_textbox.Text,
+            .L1 = Me.L_textbox.Text,
+            .L2 = Me.CTS_AL_textbox.Text,
+            .L3 = Me.OL_textbox.Text,
+            .AngleDeg = Me.alpha.Text,
+            .Chanfrein = Me.Chf_textbox.Text,
+            .RayonBout = Me.Chf_textbox.Text,
+            .NoTT = Me.NoTT.Text,
+            .Name = Me.Name_textbox.Text,
+            .Type = My.Settings.ToolType,
+            .Code = Me.manuf_TextBox.Text,
+            .CodeBar = Me.Chf_textbox.Text,
+            .Manuf = Me.manuf_TextBox.Text,
+            .ManufRef = Me.manref_TextBox.Text,
+            .ManufRefSec = Me.manRefSec_TextBox.Text
+        }
+
+
+
+
+        Create_outil(newTool)
         'REG CREATED TOOLS
         'Dim file_reader As IO.StreamReader
         'file_reader = Open_data_file("reg.txt")
@@ -85,17 +105,8 @@ Public Class Main
         Get_files(My.Resources.menu_fr)
     End Sub
 
-    Private Sub DataGridView1_CurrentCellChanged(sender As Object, e As EventArgs) Handles DataGridView1.CurrentCellChanged
-        Dim ds() As TextBox = {D_textbox, SD_textbox, CTS_AD_textbox, OL_textbox, L_textbox, CTS_AL_textbox, alpha, NoTT}
-        Try
-            manref_TextBox.Text = DataGridView1.SelectedCells(0).Value
-            For i As Short = 1 To 8
-                ds(i - 1).Text = DataGridView1.SelectedCells(i).Value
-            Next
-            Refresh_outil()
-        Catch ex As Exception
-            ' MsgBox("CELL CHANGED - " + ex.ToString)
-        End Try
+    Private Sub DataGridView1_CurrentCellChanged(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub DefineName_Bt_Click(sender As Object, e As EventArgs) Handles DefineName_Bt.Click
@@ -190,7 +201,7 @@ Public Class Main
         FAP.BackColor = color
         AL.BackColor = color
 
-        My.Settings.ToolType = "FO"
+        My.Settings.ToolType = "FOCA"
         My.Settings.Save()
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FO
 
@@ -219,8 +230,8 @@ Public Class Main
     End Sub
 
 
-    Private Sub V6import_bt_Click(sender As Object, e As EventArgs) Handles v6import_bt.Click
-        OpenV6File()
+    Private Sub V6import_bt_Click(sender As Object, e As EventArgs)
+
     End Sub
 
     Private Sub A_TextBox_LostFocus(sender As Object, e As EventArgs) Handles A_TextBox.LostFocus
@@ -254,111 +265,23 @@ Public Class Main
     End Sub
 
 
-    Private Sub webtocsv(ByVal sender As Object, ByVal e As WebBrowserDocumentCompletedEventArgs)
-
-
-
-        Dim webcsv As WebBrowser = CType(sender, WebBrowser)
-
-        Dim tblrows As HtmlElementCollection
-        Dim tblcols As HtmlElementCollection
-        Dim column As String = ""
-        Dim csv As String = ""
-
-
-
-
-        ''tblrows = webcsv.Document.GetElementsByTagName("tbody").Item(0).GetElementsByTagName("tr")
-        tblrows = webcsv.Document.GetElementById("tableTool").GetElementsByTagName("tr")
-
-        OrderToolsDataGridView.Columns.Clear()
-        OrderToolsDataGridView.Rows.Clear()
-        readToolProgress_Label.Text = 0
-
-
-        'For r As Integer = 0 To tblrows.Count - 1
-        tblcols = tblrows.Item(0).GetElementsByTagName("th")
-        If tblcols.Count > 0 Then
-            For x As Integer = 0 To tblcols.Count - 1
-                column = tblcols.Item(x).InnerHtml
-                Replace(column, "VbTab", "")
-                Replace(column, "<br>", "")
-
-                Dim col = New DataGridViewTextBoxColumn With {
-                               .HeaderText = Replace(column, "<br>", " "),
-                               .SortMode = DataGridViewColumnSortMode.NotSortable
-                           }
-                Dim colIndex As Integer = OrderToolsDataGridView.Columns.Add(col)
+    Private Sub NewToolDataGridView_CurrentCellChanged(sender As Object, e As EventArgs) Handles NewToolDataGridView.CurrentCellChanged
+        Dim ds() As TextBox = {D_textbox, CTS_AD_textbox, SD_textbox, L_textbox, CTS_AL_textbox, OL_textbox, NoTT, alpha}
+        Try
+            manref_TextBox.Text = NewToolDataGridView.SelectedCells(0).Value
+            For i As Short = 1 To 8
+                ds(i - 1).Text = NewToolDataGridView.SelectedCells(i).Value
             Next
-        End If
-
-        For r As Integer = 1 To tblrows.Count - 2
-            tblcols = tblrows.Item(r).GetElementsByTagName("td")
-
-            readToolProgress_Label.Text += 1
-
-            Dim stock As HtmlElementCollection
-
-            OrderToolsDataGridView.Rows.Add()
-
-            For x As Integer = 0 To tblcols.Count - 1
-
-                stock = tblcols.Item(x).GetElementsByTagName("strong")
-                If stock.Count > 0 Then
-                    OrderToolsDataGridView.Rows(OrderToolsDataGridView.RowCount - 2).Cells(0).Value = stock.Item(0).InnerHtml
-                Else
-                    column = tblcols.Item(x).InnerHtml
-                    'Replace(column, "VbTab", "")
-                    Replace(column, "<br>", " ")
-                    OrderToolsDataGridView.Rows(OrderToolsDataGridView.RowCount - 2).Cells(x).Value = column
-                End If
-            Next
-        Next
-        'ToolList.Text = csv     'show csv in textbox
-
+            Refresh_outil()
+        Catch ex As Exception
+            ' MsgBox("CELL CHANGED - " + ex.ToString)
+        End Try
     End Sub
 
-    Private Sub test()
 
-        ' Create a request for the URL. 		
-        'Dim request As WebRequest = WebRequest.Create("http://tools.semmip.local/")
-        Dim request As WebRequest = WebRequest.Create("C:/Downloaded%20Web%20Sites/tools.semmip.local/index.php.html")
-
-        ' If required by the server, set the credentials.
-        request.Credentials = CredentialCache.DefaultCredentials
-        ' Get the response.
-        Dim response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
-        ' Display the status.
-        Console.WriteLine(response.StatusDescription)
-        ' Get the stream containing content returned by the server.
-        Dim dataStream As Stream = response.GetResponseStream()
-        ' Open the stream using a StreamReader for easy access.
-        Dim reader As New StreamReader(dataStream)
-        ' Read the content.
-        Dim responseFromServer As String = reader.ReadToEnd()
-
-
-
-
-
-        ' Display the content.
-        Console.WriteLine(responseFromServer)
-        ' Cleanup the streams and the response.
-        reader.Close()
-        dataStream.Close()
-        response.Close()
-
+    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
+        OpenV6File()
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim web As New WebBrowser
-        AddHandler web.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf webtocsv)
-        web.Navigate(New System.Uri("http://tools.semmip.local/"))
-        'web.Navigate(New System.Uri("C:/Downloaded%20Web%20Sites/tools.semmip.local/index.php.html"))
 
-    End Sub
-
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
-    End Sub
 End Class
