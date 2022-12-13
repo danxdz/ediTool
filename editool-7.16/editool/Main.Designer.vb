@@ -731,24 +731,24 @@ Partial Class Main
         '
         Me.newToolMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.ToolStripMenuItem3})
         Me.newToolMenu.Name = "ContextMenuStrip1"
-        Me.newToolMenu.Size = New System.Drawing.Size(181, 92)
+        Me.newToolMenu.Size = New System.Drawing.Size(111, 70)
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(110, 22)
         Me.ToolStripMenuItem1.Text = "créer"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(180, 22)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(110, 22)
         Me.ToolStripMenuItem2.Text = "info"
         '
         'ToolStripMenuItem3
         '
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(180, 22)
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(110, 22)
         Me.ToolStripMenuItem3.Text = "effacer"
         '
         'Main

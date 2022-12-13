@@ -9,7 +9,8 @@ Imports System.Text.RegularExpressions
 
 
 Public Class Main
-    Dim toolsList As New List(Of NewTool)
+    Private ReadOnly toolsList = New ToolList
+
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -267,38 +268,22 @@ Public Class Main
     End Sub
 
 
-    Private Sub NewToolDataGridView_CurrentCellChanged(sender As Object, e As EventArgs) Handles NewToolDataGridView.CurrentCellChanged
-        Dim ds() As TextBox = {D_textbox, CTS_AD_textbox, SD_textbox, L_textbox, CTS_AL_textbox, OL_textbox, NoTT, alpha}
-        Try
-            manref_TextBox.Text = NewToolDataGridView.SelectedCells(0).Value
-            For i As Short = 1 To 8
-                ds(i - 1).Text = NewToolDataGridView.SelectedCells(i).Value
-            Next
-            Refresh_outil()
-        Catch ex As Exception
-            ' MsgBox("CELL CHANGED - " + ex.ToString)
-        End Try
-    End Sub
-
-
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
         OpenV6File()
     End Sub
 
     Private Sub Webtocsv(ByVal sender As Object, ByVal e As WebBrowserDocumentCompletedEventArgs)
 
-        Dim newTool As New NewTool
 
         Dim webcsv As WebBrowser = CType(sender, WebBrowser)
 
         Dim tblrows As HtmlElementCollection
         Dim tblcols As HtmlElementCollection
         Dim column As String
-        Dim csv As String
 
+        Dim row As New List(Of String)()
 
-        Dim row As List(Of String)
-
+        Dim row() As String
 
         ''tblrows = webcsv.Document.GetElementsByTagName("tbody").Item(0).GetElementsByTagName("tr")
         tblrows = webcsv.Document.GetElementById("tableTool").GetElementsByTagName("tr")
@@ -314,10 +299,10 @@ Public Class Main
             For x As Integer = 0 To tblcols.Count - 1
                 column = tblcols.Item(x).InnerHtml
                 Replace(column, "VbTab", "")
-                Replace(column, "<br>", "")
+                Replace(column, "<br>", " ")
 
                 Dim col = New DataGridViewTextBoxColumn With {
-                               .HeaderText = Replace(column, "<br>", " "),
+                               .HeaderText = column,
                                .SortMode = DataGridViewColumnSortMode.NotSortable
                            }
                 Dim colIndex As Integer = NewToolDataGridView.Columns.Add(col)
@@ -331,23 +316,36 @@ Public Class Main
 
             Dim stock As HtmlElementCollection
 
-            NewToolDataGridView.Rows.Add()
+            'NewToolDataGridView.Rows.Add()
+            Dim newTool = New NewTool
 
             For x As Integer = 0 To tblcols.Count - 1
 
                 stock = tblcols.Item(x).GetElementsByTagName("strong")
                 If stock.Count > 0 Then
-                    NewToolDataGridView.Rows(NewToolDataGridView.RowCount - 2).Cells(0).Value = stock.Item(0).InnerHtml
+                    'NewToolDataGridView.Rows(NewToolDataGridView.RowCount - 2).Cells(0).Value = stock.Item(0).InnerHtml
+                    column = stock.Item(0).InnerHtml
                 Else
                     column = tblcols.Item(x).InnerHtml
-                    'Replace(column, "VbTab", "")
+                    Replace(column, "		", "")
                     Replace(column, "<br>", " ")
+
+                    If x = 0 And column = "" Then
+                        column = "-"
+                    End If
+
+                    If column = "" Then
+                        column = "0"
+                    End If
+
                     Try
                         column = Convert.ToDouble(column)
                     Catch ex As Exception
-
+                        'MsgBox("data import error")
                     End Try
+
                     Select Case x
+                        Case 0 : column = x
                         Case 1 : newTool.Type = column
                         Case 2 : newTool.GroupeMat = column
                         Case 3 : newTool.D1 = column
@@ -370,18 +368,22 @@ Public Class Main
                         Case 22 : newTool.CodeBar = column
 
                     End Select
-
-
                     'NewToolDataGridView.Rows(NewToolDataGridView.RowCount - 2).Cells(x).Value = column
 
-                    row.Add(column)
+                    row.Append(column)
 
-                End If
+                    Dim tmp As String = Strings.Left(column, 2)
+
+                    If tmp <> "		" Then
+                        row.Add(column)
+                    End If
+
             Next
 
-            NewToolDataGridView.Rows.Insert(1, row)
+            NewToolDataGridView.Rows.Insert(0, row.ToArray())
+            row.Clear()
 
-            toolsList.Add(newTool)
+            toolsList.items.Add(newTool)
 
         Next
         'ToolList.Text = csv     'show csv in textbox
@@ -409,26 +411,74 @@ Public Class Main
             End Try
             newToolMenu.Show(Cursor.Position)
         End If
+
+
+
+
     End Sub
+
+
+
+    '**********************************
+
+
+
+
+
+
+
 
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
 
         Dim num As Integer = NewToolDataGridView.SelectedRows().Count
-        Dim index As Integer = NewToolDataGridView.CurrentRow().Index
 
-        Dim total = toolsList.Count
-
-        Dim i As Integer = total - index
+        Dim i As Integer = NewToolDataGridView.CurrentRow().Index + 1
 
 
         D_textbox.Text = toolsList(i).D1
-        L_textbox.Text = toolsList(index).L1
+        L_textbox.Text = toolsList(i).L1
 
-        CTS_AD_textbox.Text = toolsList(index).D2
-        CTS_AL_textbox.Text = toolsList(index).L2
+        CTS_AD_textbox.Text = toolsList(i).D2
+        CTS_AL_textbox.Text = toolsList(i).L2
 
-        SD_textbox.Text = toolsList(index).D3
-        OL_textbox.Text = toolsList(index).L3
+        SD_textbox.Text = toolsList(i).D3
+        OL_textbox.Text = toolsList(i).L3
 
+    End Sub
+
+    Private Sub NewToolDataGridView_MouseUp(sender As Object, e As MouseEventArgs) Handles NewToolDataGridView.MouseUp
+
+
+        If e.Button = MouseButtons.Left Then
+
+            Dim num As Integer = NewToolDataGridView.SelectedRows().Count
+            If num > 0 Then
+                Dim i As Integer = NewToolDataGridView.CurrentRow().Index
+                'Dim tmp = toolsList.items.Count
+                'i = tmp - i
+
+                readToolProgress_Label.Text = i
+
+
+                D_textbox.Text = toolsList.items(i).D1
+                L_textbox.Text = toolsList.items(i).L1
+
+                CTS_AD_textbox.Text = toolsList.items(i).D2
+                CTS_AL_textbox.Text = toolsList.items(i).L2
+
+                SD_textbox.Text = toolsList.items(i).D3
+                OL_textbox.Text = toolsList.items(i).L3
+                'Dim ds() As TextBox = {D_textbox, CTS_AD_textbox, SD_textbox, L_textbox, CTS_AL_textbox, OL_textbox, NoTT, alpha}
+                ' Try
+                'manref_TextBox.Text = NewToolDataGridView.SelectedCells(0).Value
+                ' For i As Short = 1 To 8
+                ' ds(i - 1).Text = NewToolDataGridView.SelectedCells(i).Value
+                ' Next
+                ' Refresh_outil()
+                ' Catch ex As Exception
+                '  ' MsgBox("CELL CHANGED - " + ex.ToString)
+                '  End Try
+            End If
+        End If
     End Sub
 End Class

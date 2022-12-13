@@ -27,4 +27,14 @@
         Public Property CodeBar As String
 
     End Class
+
+
+    Public Class ToolList
+        Public Property Name As String
+        Public Property BasicDescription As String
+        Public Property RoomDescription As String
+        Public ReadOnly Property ValidExists As New List(Of String)
+        Public ReadOnly Property Objects As New List(Of String)
+        Public ReadOnly Property Items As New List(Of NewTool)
+    End Class
 End Module
