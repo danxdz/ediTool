@@ -74,3 +74,10 @@ C:\Users\user\source\repos\ediTool\editool-7.16\editool\obj\Debug\editool.pdb
 C:\Users\daniel.mendesdeamori\source\repos\ediTool\editool-7.16\editool\bin\Debug\TopSolid.Cad.Design.Automating.dll
 C:\Users\daniel.mendesdeamori\source\repos\ediTool\editool-7.16\editool\bin\Debug\TopSolid.Kernel.Automating.dll
 C:\Users\daniel.mendesdeamori\source\repos\ediTool\editool-7.16\editool\bin\Debug\TopSolid.Cam.NC.Kernel.Automating.dll
+C:\Users\user\source\repos\ediTool\editool-7.16\editool\bin\Debug\runtimes\win-x64\native\WebView2Loader.dll
+C:\Users\user\source\repos\ediTool\editool-7.16\editool\bin\Debug\Microsoft.Web.WebView2.Core.dll
+C:\Users\user\source\repos\ediTool\editool-7.16\editool\bin\Debug\Microsoft.Web.WebView2.WinForms.dll
+C:\Users\user\source\repos\ediTool\editool-7.16\editool\bin\Debug\Microsoft.Web.WebView2.Wpf.dll
+C:\Users\user\source\repos\ediTool\editool-7.16\editool\bin\Debug\Microsoft.Web.WebView2.Core.xml
+C:\Users\user\source\repos\ediTool\editool-7.16\editool\bin\Debug\Microsoft.Web.WebView2.WinForms.xml
+C:\Users\user\source\repos\ediTool\editool-7.16\editool\bin\Debug\Microsoft.Web.WebView2.Wpf.xml
