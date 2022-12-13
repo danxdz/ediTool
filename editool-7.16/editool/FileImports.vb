@@ -137,28 +137,40 @@ Module FileImports
             rowIndex = DGV.Rows.Count - 1
         Else
             rowIndex = DGV.Rows.Count - 1
-            DGV.Rows.Add()
+            ' DGV.Rows.Add()
         End If
 
         ' DGV.Rows.Clear()
 
 
+        Dim row As New List(Of String) From {
+            NewTool.ManufRef,
+            NewTool.D1,
+            NewTool.D2,
+            NewTool.D3,
+            NewTool.L1,
+            NewTool.L2,
+            NewTool.L3,
+            NewTool.NoTT,
+            NewTool.Chanfrein,
+            NewTool.Manuf
+        }
 
-        DGV.Rows(rowIndex).Cells(0).Value = NewTool.ManufRef
-        DGV.Rows(rowIndex).Cells(1).Value = NewTool.D1
-        If NewTool.D2 > 0 Then
-            DGV.Rows(rowIndex).Cells(2).Value = NewTool.D2
-        Else
-            DGV.Rows(rowIndex).Cells(2).Value = NewTool.D1 - 0.2
-        End If
-        DGV.Rows(rowIndex).Cells(3).Value = NewTool.D3
-        DGV.Rows(rowIndex).Cells(4).Value = NewTool.L1
-        DGV.Rows(rowIndex).Cells(5).Value = NewTool.L2
-        DGV.Rows(rowIndex).Cells(6).Value = NewTool.L3
-        DGV.Rows(rowIndex).Cells(7).Value = NewTool.NoTT
-        DGV.Rows(rowIndex).Cells(8).Value = NewTool.Chanfrein
-        DGV.Rows(rowIndex).Cells(9).Value = NewTool.Manuf
-
+        'DGV.Rows(rowIndex).Cells(0).Value = NewTool.ManufRef
+        'DGV.Rows(rowIndex).Cells(1).Value = NewTool.D1
+        'If NewTool.D2 > 0 Then
+        '    DGV.Rows(rowIndex).Cells(2).Value = NewTool.D2
+        'Else
+        '    DGV.Rows(rowIndex).Cells(2).Value = NewTool.D1 - 0.2
+        'End If
+        'DGV.Rows(rowIndex).Cells(3).Value = NewTool.D3
+        'DGV.Rows(rowIndex).Cells(4).Value = NewTool.L1
+        'DGV.Rows(rowIndex).Cells(5).Value = NewTool.L2
+        'DGV.Rows(rowIndex).Cells(6).Value = NewTool.L3
+        'DGV.Rows(rowIndex).Cells(7).Value = NewTool.NoTT
+        'DGV.Rows(rowIndex).Cells(8).Value = NewTool.Chanfrein
+        'DGV.Rows(rowIndex).Cells(9).Value = NewTool.Manuf
+        DGV.Rows.Insert(0, row.ToArray())
 
     End Sub
 

@@ -297,7 +297,7 @@ Public Class Main
         Dim csv As String
 
 
-        Dim row() As String
+        Dim row As List(Of String)
 
 
         ''tblrows = webcsv.Document.GetElementsByTagName("tbody").Item(0).GetElementsByTagName("tr")
@@ -374,7 +374,7 @@ Public Class Main
 
                     'NewToolDataGridView.Rows(NewToolDataGridView.RowCount - 2).Cells(x).Value = column
 
-                    row.Append(column)
+                    row.Add(column)
 
                 End If
             Next
@@ -395,6 +395,7 @@ Public Class Main
         AddHandler web.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf Webtocsv)
         web.Navigate(New System.Uri("http://tools.semmip.local/"))
         'web.Navigate(New System.Uri("C:/Downloaded%20Web%20Sites/tools.semmip.local/index.php.html"))
+
     End Sub
 
 
