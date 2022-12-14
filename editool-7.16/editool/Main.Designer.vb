@@ -75,9 +75,9 @@ Partial Class Main
         Me.FO = New System.Windows.Forms.ToolStripButton()
         Me.AL = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.OrderTools_Bt = New System.Windows.Forms.ToolStripButton()
+        Me.XML_ToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.Top6_ToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.OrderTools_ToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.A_TextBox = New System.Windows.Forms.TextBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.readToolProgress_Label = New System.Windows.Forms.Label()
@@ -87,6 +87,7 @@ Partial Class Main
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolsBar.SuspendLayout()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -551,7 +552,7 @@ Partial Class Main
         Me.ToolsBar.BackColor = System.Drawing.Color.Transparent
         Me.ToolsBar.Dock = System.Windows.Forms.DockStyle.None
         Me.ToolsBar.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ToolsBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FR2T, Me.FRTO, Me.FRBO, Me.FAP, Me.FO, Me.AL, Me.ToolStripSeparator1, Me.ToolStripButton1, Me.ToolStripButton2, Me.OrderTools_Bt})
+        Me.ToolsBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FR2T, Me.FRTO, Me.FRBO, Me.FAP, Me.FO, Me.AL, Me.ToolStripSeparator1, Me.XML_ToolStripButton, Me.Top6_ToolStripButton, Me.OrderTools_ToolStripButton})
         Me.ToolsBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
         Me.ToolsBar.Location = New System.Drawing.Point(10, 2)
         Me.ToolsBar.Margin = New System.Windows.Forms.Padding(15, 5, 5, 5)
@@ -641,38 +642,38 @@ Partial Class Main
         Me.ToolStripSeparator1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(40, 60)
         '
-        'ToolStripButton1
+        'XML_ToolStripButton
         '
-        Me.ToolStripButton1.AutoSize = False
-        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButton1.Font = New System.Drawing.Font("3ds", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(60, 60)
-        Me.ToolStripButton1.Text = "XML"
+        Me.XML_ToolStripButton.AutoSize = False
+        Me.XML_ToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.XML_ToolStripButton.Font = New System.Drawing.Font("3ds", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XML_ToolStripButton.Image = CType(resources.GetObject("XML_ToolStripButton.Image"), System.Drawing.Image)
+        Me.XML_ToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.XML_ToolStripButton.Name = "XML_ToolStripButton"
+        Me.XML_ToolStripButton.Size = New System.Drawing.Size(60, 60)
+        Me.XML_ToolStripButton.Text = "XML"
         '
-        'ToolStripButton2
+        'Top6_ToolStripButton
         '
-        Me.ToolStripButton2.AutoSize = False
-        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButton2.Font = New System.Drawing.Font("3ds", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripButton2.Image = CType(resources.GetObject("ToolStripButton2.Image"), System.Drawing.Image)
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(60, 60)
-        Me.ToolStripButton2.Text = "Top6"
+        Me.Top6_ToolStripButton.AutoSize = False
+        Me.Top6_ToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.Top6_ToolStripButton.Font = New System.Drawing.Font("3ds", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Top6_ToolStripButton.Image = CType(resources.GetObject("Top6_ToolStripButton.Image"), System.Drawing.Image)
+        Me.Top6_ToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.Top6_ToolStripButton.Name = "Top6_ToolStripButton"
+        Me.Top6_ToolStripButton.Size = New System.Drawing.Size(60, 60)
+        Me.Top6_ToolStripButton.Text = "Top6"
         '
-        'OrderTools_Bt
+        'OrderTools_ToolStripButton
         '
-        Me.OrderTools_Bt.AutoSize = False
-        Me.OrderTools_Bt.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.OrderTools_Bt.Font = New System.Drawing.Font("3ds", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OrderTools_Bt.Image = CType(resources.GetObject("OrderTools_Bt.Image"), System.Drawing.Image)
-        Me.OrderTools_Bt.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.OrderTools_Bt.Name = "OrderTools_Bt"
-        Me.OrderTools_Bt.Size = New System.Drawing.Size(100, 60)
-        Me.OrderTools_Bt.Text = "OrderTools"
+        Me.OrderTools_ToolStripButton.AutoSize = False
+        Me.OrderTools_ToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.OrderTools_ToolStripButton.Font = New System.Drawing.Font("3ds", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OrderTools_ToolStripButton.Image = CType(resources.GetObject("OrderTools_ToolStripButton.Image"), System.Drawing.Image)
+        Me.OrderTools_ToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.OrderTools_ToolStripButton.Name = "OrderTools_ToolStripButton"
+        Me.OrderTools_ToolStripButton.Size = New System.Drawing.Size(100, 60)
+        Me.OrderTools_ToolStripButton.Text = "OrderTools"
         '
         'A_TextBox
         '
@@ -712,7 +713,7 @@ Partial Class Main
         'manRefSec_TextBox
         '
         Me.manRefSec_TextBox.FormattingEnabled = True
-        Me.manRefSec_TextBox.Location = New System.Drawing.Point(31, 253)
+        Me.manRefSec_TextBox.Location = New System.Drawing.Point(27, 253)
         Me.manRefSec_TextBox.Name = "manRefSec_TextBox"
         Me.manRefSec_TextBox.Size = New System.Drawing.Size(120, 21)
         Me.manRefSec_TextBox.TabIndex = 59
@@ -720,11 +721,11 @@ Partial Class Main
         'NewToolDataGridView
         '
         Me.NewToolDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.NewToolDataGridView.Location = New System.Drawing.Point(27, 295)
+        Me.NewToolDataGridView.Location = New System.Drawing.Point(614, 282)
         Me.NewToolDataGridView.MultiSelect = False
         Me.NewToolDataGridView.Name = "NewToolDataGridView"
         Me.NewToolDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.NewToolDataGridView.Size = New System.Drawing.Size(973, 149)
+        Me.NewToolDataGridView.Size = New System.Drawing.Size(386, 160)
         Me.NewToolDataGridView.TabIndex = 61
         '
         'newToolMenu
@@ -751,6 +752,14 @@ Partial Class Main
         Me.ToolStripMenuItem3.Size = New System.Drawing.Size(110, 22)
         Me.ToolStripMenuItem3.Text = "effacer"
         '
+        'ListBox1
+        '
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.Location = New System.Drawing.Point(27, 282)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.Size = New System.Drawing.Size(581, 160)
+        Me.ListBox1.TabIndex = 62
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -758,6 +767,7 @@ Partial Class Main
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1008, 486)
+        Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.ToolsBar)
         Me.Controls.Add(Me.Lang_en)
         Me.Controls.Add(Me.Lang_fr)
@@ -871,15 +881,16 @@ Partial Class Main
     Friend WithEvents AL As ToolStripButton
     Friend WithEvents A_TextBox As TextBox
     Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents ToolStripButton1 As ToolStripButton
+    Friend WithEvents XML_ToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents readToolProgress_Label As Label
     Friend WithEvents manRefSec_TextBox As ComboBox
     Friend WithEvents NewToolDataGridView As DataGridView
-    Friend WithEvents ToolStripButton2 As ToolStripButton
-    Friend WithEvents OrderTools_Bt As ToolStripButton
+    Friend WithEvents Top6_ToolStripButton As ToolStripButton
+    Friend WithEvents OrderTools_ToolStripButton As ToolStripButton
     Friend WithEvents newToolMenu As ContextMenuStrip
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
+    Friend WithEvents ListBox1 As ListBox
 End Class

@@ -58,7 +58,6 @@ Module FileImports
 
         Main.NewToolDataGridView.Columns.Clear()
 
-        Main.NewToolDataGridView.DataSource = vbNull
 
 
         Dim reader As New XmlTextReader(path)
@@ -118,7 +117,7 @@ Module FileImports
 
 
         ' End While
-        Set_Name_auto()
+        Refresh_outil()
 
     End Sub
 

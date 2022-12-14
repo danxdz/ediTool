@@ -10,7 +10,7 @@ Imports System.Text.RegularExpressions
 
 Public Class Main
     Public ReadOnly toolsList = New ToolList
-
+    Public started As Boolean = False
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -42,10 +42,7 @@ Public Class Main
         Set_filter()
     End Sub
 
-    Private Sub Refresh_outil()
-        ToolPreview()
-        Set_Name_auto()
-    End Sub
+
     Private Sub TextBox_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles D_textbox.KeyPress, SD_textbox.KeyPress, CTS_AD_textbox.KeyPress, OL_textbox.KeyPress, L_textbox.KeyPress, CTS_AL_textbox.KeyPress
         If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) AndAlso Not e.KeyChar = "." Then
             e.Handled = True
@@ -89,9 +86,6 @@ Public Class Main
             .ManufRefSec = Me.manRefSec_TextBox.Text
         }
 
-
-
-
         Create_outil(newTool)
         'REG CREATED TOOLS
         'Dim file_reader As IO.StreamReader
@@ -106,10 +100,6 @@ Public Class Main
     Private Sub Lang_fr_Click_1(sender As Object, e As EventArgs) Handles Lang_fr.Click
         Set_pref_lang("fr")
         Get_files(My.Resources.menu_fr)
-    End Sub
-
-    Private Sub DataGridView1_CurrentCellChanged(sender As Object, e As EventArgs)
-
     End Sub
 
     Private Sub DefineName_Bt_Click(sender As Object, e As EventArgs) Handles DefineName_Bt.Click
@@ -133,7 +123,7 @@ Public Class Main
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
 
         My.Settings.Save()
-        Set_Name_auto()
+        Refresh_outil()
 
     End Sub
 
@@ -153,7 +143,7 @@ Public Class Main
         My.Settings.Save()
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FP
 
-        Set_Name_auto()
+        Refresh_outil()
 
     End Sub
 
@@ -171,7 +161,7 @@ Public Class Main
         My.Settings.Save()
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FB
 
-        Set_Name_auto()
+        Refresh_outil()
 
     End Sub
 
@@ -190,7 +180,7 @@ Public Class Main
         My.Settings.Save()
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FT
 
-        Set_Name_auto()
+        Refresh_outil()
 
     End Sub
 
@@ -208,7 +198,8 @@ Public Class Main
         My.Settings.Save()
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FO
 
-        Set_Name_auto()
+        Refresh_outil()
+
 
     End Sub
     Private Sub AL_Click(sender As Object, e As EventArgs) Handles AL.Click
@@ -225,55 +216,53 @@ Public Class Main
         My.Settings.Save()
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_AL
 
-        Set_Name_auto()
+        Refresh_outil()
+
 
     End Sub
-    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles XML_ToolStripButton.Click
         OpenFile()
     End Sub
 
-
     Private Sub V6import_bt_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub A_TextBox_LostFocus(sender As Object, e As EventArgs) Handles A_TextBox.LostFocus
-        Set_Name_auto()
-    End Sub
-
-    Private Sub D_textbox_LostFocus(sender As Object, e As EventArgs) Handles D_textbox.LostFocus
-        Set_Name_auto()
-    End Sub
-    Private Sub L_textbox_LostFocus(sender As Object, e As EventArgs) Handles L_textbox.LostFocus
-        Set_Name_auto()
-    End Sub
-    Private Sub CTS_AL_textbox_LostFocus(sender As Object, e As EventArgs) Handles CTS_AL_textbox.LostFocus
-        Set_Name_auto()
-    End Sub
-    Private Sub CTS_AD_textbox_LostFocus(sender As Object, e As EventArgs) Handles CTS_AD_textbox.LostFocus
-        Set_Name_auto()
-    End Sub
-    Private Sub SD_textbox_LostFocus(sender As Object, e As EventArgs) Handles SD_textbox.LostFocus
-        Set_Name_auto()
-    End Sub
-    Private Sub OL_textbox_LostFocus(sender As Object, e As EventArgs) Handles OL_textbox.LostFocus
-        Set_Name_auto()
-    End Sub
-    Private Sub NoTT_LostFocus(sender As Object, e As EventArgs) Handles NoTT.LostFocus
-        Set_Name_auto()
-    End Sub
-
-    Private Sub Chf_textbox_LostFocus(sender As Object, e As EventArgs) Handles Chf_textbox.LostFocus
-        Set_Name_auto()
-    End Sub
-
-
-    Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
         OpenV6File()
     End Sub
 
+    Private Sub A_TextBox_LostFocus(sender As Object, e As EventArgs) Handles A_TextBox.LostFocus
+        Refresh_outil()
+    End Sub
+
+    Private Sub D_textbox_LostFocus(sender As Object, e As EventArgs) Handles D_textbox.LostFocus
+        Refresh_outil()
+    End Sub
+    Private Sub L_textbox_LostFocus(sender As Object, e As EventArgs) Handles L_textbox.LostFocus
+        Refresh_outil()
+    End Sub
+    Private Sub CTS_AL_textbox_LostFocus(sender As Object, e As EventArgs) Handles CTS_AL_textbox.LostFocus
+        Refresh_outil()
+    End Sub
+    Private Sub CTS_AD_textbox_LostFocus(sender As Object, e As EventArgs) Handles CTS_AD_textbox.LostFocus
+        Refresh_outil()
+    End Sub
+    Private Sub SD_textbox_LostFocus(sender As Object, e As EventArgs) Handles SD_textbox.LostFocus
+        Refresh_outil()
+    End Sub
+    Private Sub OL_textbox_LostFocus(sender As Object, e As EventArgs) Handles OL_textbox.LostFocus
+        Refresh_outil()
+    End Sub
+    Private Sub NoTT_LostFocus(sender As Object, e As EventArgs) Handles NoTT.LostFocus
+        Refresh_outil()
+    End Sub
+
+    Private Sub Chf_textbox_LostFocus(sender As Object, e As EventArgs) Handles Chf_textbox.LostFocus
+        Refresh_outil()
+    End Sub
+
+
     Private Sub Webtocsv(ByVal sender As Object, ByVal e As WebBrowserDocumentCompletedEventArgs)
 
+        NewToolDataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing
+        NewToolDataGridView.RowHeadersVisible = False
 
         Dim webcsv As WebBrowser = CType(sender, WebBrowser)
 
@@ -301,7 +290,7 @@ Public Class Main
                 Replace(column, "<br>", " ")
 
                 Dim col = New DataGridViewTextBoxColumn With {
-                               .HeaderText = column,
+                               .HeaderText = Replace(column, "<br>", " "),
                                .SortMode = DataGridViewColumnSortMode.NotSortable
                            }
                 Dim colIndex As Integer = NewToolDataGridView.Columns.Add(col)
@@ -324,73 +313,98 @@ Public Class Main
                 If stock.Count > 0 Then
                     'NewToolDataGridView.Rows(NewToolDataGridView.RowCount - 2).Cells(0).Value = stock.Item(0).InnerHtml
                     column = stock.Item(0).InnerHtml
+                    row.Add(Replace(column, "<br>", " "))
+
                 Else
-                    column = tblcols.Item(x).InnerHtml
-                    Replace(column, "		", "")
-                    Replace(column, "<br>", "")
+                    If x = 0 Then
+                        row.Add("0")
+                    Else
+                        column = tblcols.Item(x).InnerHtml
+                        Replace(column, "		", "")
+                        Replace(column, "<br>", " ")
 
-                    If x = 0 And column = "" Then
-                        column = "-"
+                        If x = 0 And column = "" Then
+                            column = "-"
+                        End If
+
+                        If column = "" Then
+                            column = "0"
+                        End If
+
+                        Try
+                            column = Convert.ToDouble(column)
+                        Catch ex As Exception
+                            'MsgBox("data import error")
+                        End Try
+
+                        Select Case x
+                            Case 0 : column = x
+                            Case 1 : newTool.Type = column
+                            Case 2 : newTool.GroupeMat = column
+                            Case 3 : newTool.D1 = column
+                            Case 4 : newTool.L1 = column
+                            Case 5 : If column = 0 Then
+                                    newTool.L2 = newTool.L1
+                                Else
+                                    newTool.L2 = column
+                                End If
+                            Case 6 : newTool.L3 = column
+                            Case 7 : newTool.D3 = column
+                            Case 8 : newTool.NoTT = column
+                            Case 9 : newTool.RayonBout = column
+                            Case 10 : newTool.Chanfrein = column
+                            Case 11 : newTool.CoupeCentre = column
+                            Case 12 : newTool.ArrCentre = column
+                            Case 13 : newTool.TypeTar = column
+                            Case 14 : newTool.PasTar = column
+                            Case 15 : newTool.Manuf = column
+                            Case 16 : newTool.ManufRef = column
+                            Case 17 : newTool.ManufRefSec = column
+                            Case 18 : newTool.ManufRefSec = column
+                            Case 21 : newTool.Code = column
+                            Case 22 : newTool.CodeBar = column
+
+                        End Select
+                        'NewToolDataGridView.Rows(NewToolDataGridView.RowCount - 2).Cells(x).Value = column
+
+                        'row.Append(column)
+
+                        Dim tmp As String = Strings.Left(column, 2)
+
+                        If tmp <> "		" Then
+                            row.Add(Replace(column, "<br>", " "))
+                        End If
                     End If
 
-                    If column = "" Then
-                        column = "0"
-                    End If
-
-                    Try
-                        column = Convert.ToDouble(column)
-                    Catch ex As Exception
-                        'MsgBox("data import error")
-                    End Try
-
-                    Select Case x
-                        Case 0 : column = x
-                        Case 1 : newTool.Type = column
-                        Case 2 : newTool.GroupeMat = column
-                        Case 3 : newTool.D1 = column
-                        Case 4 : newTool.L1 = column
-                        Case 5 : newTool.L2 = column
-                        Case 6 : newTool.L3 = column
-                        Case 7 : newTool.D3 = column
-                        Case 8 : newTool.NoTT = column
-                        Case 9 : newTool.RayonBout = column
-                        Case 10 : newTool.Chanfrein = column
-                        Case 11 : newTool.CoupeCentre = column
-                        Case 12 : newTool.ArrCentre = column
-                        Case 13 : newTool.TypeTar = column
-                        Case 14 : newTool.PasTar = column
-                        Case 15 : newTool.Manuf = column
-                        Case 16 : newTool.ManufRef = column
-                        Case 17 : newTool.ManufRefSec = column
-                        Case 18 : newTool.ManufRefSec = column
-                        Case 21 : newTool.Code = column
-                        Case 22 : newTool.CodeBar = column
-
-                    End Select
-                    'NewToolDataGridView.Rows(NewToolDataGridView.RowCount - 2).Cells(x).Value = column
-
-                    Dim tmp As String = Strings.Left(column, 2)
-
-                    If tmp <> "		" Then
-                        row.Add(column)
-                    End If
                 End If
             Next
+            If row.Count > 0 Then
+                'NewToolDataGridView.Rows.Insert(0, row.ToArray())
+                ListBox1.Items.Add(newTool)
 
-            NewToolDataGridView.Rows.Insert(0, row.ToArray())
-            row.Clear()
+                row.Clear()
+                Try
+                    newTool.D2 = Convert.ToDouble(newTool.D1) - 0.2
+                    CTS_AD_textbox.Text = newTool.D2
 
-            toolsList.items.Add(newTool)
+                Catch ex As Exception
+
+                End Try
+
+                toolsList.items.Add(newTool)
+            End If
+
+
+
 
         Next
         'ToolList.Text = csv     'show csv in textbox
 
         'Refresh_outil()
-
     End Sub
 
 
-    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles OrderTools_Bt.Click
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles OrderTools_ToolStripButton.Click
         Dim web As New WebBrowser
         AddHandler web.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf Webtocsv)
         web.Navigate(New System.Uri("http://tools.semmip.local/"))
@@ -450,7 +464,7 @@ Public Class Main
     Private Sub NewToolDataGridView_MouseUp(sender As Object, e As MouseEventArgs) Handles NewToolDataGridView.MouseUp
 
         If e.Button = MouseButtons.Left Then
-
+            started = True
             Dim num As Integer = NewToolDataGridView.SelectedRows().Count
             If num > 0 Then
                 Dim i As Integer = NewToolDataGridView.CurrentRow().Index
@@ -478,5 +492,7 @@ Public Class Main
     End Sub
 
 
-
+    Private Sub Top6_ToolStripButton_Click(sender As Object, e As EventArgs) Handles Top6_ToolStripButton.Click
+        OpenV6File()
+    End Sub
 End Class

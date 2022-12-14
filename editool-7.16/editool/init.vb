@@ -211,15 +211,19 @@ Module outils_base
 
             If filter = "" Then
                 DataTable_buffer.Rows.Add(splitLine)
+                Main.NewToolDataGridView.Rows.Insert(0, splitLine.ToArray())
+
             Else
                 Dim tmp As String = Strings.Left(splitLine(0), filter.Length)
                 If filter = tmp Then
                     DataTable_buffer.Rows.Add(splitLine)
+                    Main.NewToolDataGridView.Rows.Insert(0, splitLine.ToArray())
+
                 End If
             End If
             index += 1
         Loop
-        Main.NewToolDataGridView.DataSource = DataTable_buffer
+        'Main.NewToolDataGridView.DataSource = DataTable_buffer
         file_reader.Close()
 
     End Sub
