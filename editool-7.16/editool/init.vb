@@ -158,6 +158,16 @@ Module outils_base
         Dim single_line As String
         Dim line() As String
 
+        Dim objList As New List(Of String)({"ref", "D", "SD", "CTS_AD", "OL", "L", "CTS_AL", "a", "z", "chf"})
+
+        For i As Integer = 0 To objList.Count - 1
+
+            Dim col = New DataGridViewTextBoxColumn With {
+                            .HeaderText = objList(i),
+                            .SortMode = DataGridViewColumnSortMode.NotSortable
+                        }
+            Dim colIndex As Integer = Main.NewToolDataGridView.Columns.Add(col)
+        Next
 
         For i As Integer = 0 To full_file.Length - 1
             single_line = full_file(i)
@@ -165,15 +175,18 @@ Module outils_base
 
             If filter = "" Then
                 DataTable_buffer.Rows.Add(line)
+                Main.NewToolDataGridView.Rows.Insert(0, line.ToArray())
             Else
                 Dim tmp As String = Strings.Left(line(0), filter.Length)
                 If filter = tmp Then
                     DataTable_buffer.Rows.Add(line)
+                    Main.NewToolDataGridView.Rows.Insert(0, line.ToArray())
                 End If
             End If
 
 
         Next
+
         'Main.NewToolDataGridView.DataSource = DataTable_buffer
 
     End Sub

@@ -9,7 +9,7 @@ Imports System.Text.RegularExpressions
 
 
 Public Class Main
-    Private ReadOnly toolsList = New ToolList
+    Public ReadOnly toolsList = New ToolList
 
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -283,7 +283,6 @@ Public Class Main
 
         Dim row As New List(Of String)()
 
-        Dim row() As String
 
         ''tblrows = webcsv.Document.GetElementsByTagName("tbody").Item(0).GetElementsByTagName("tr")
         tblrows = webcsv.Document.GetElementById("tableTool").GetElementsByTagName("tr")
@@ -328,7 +327,7 @@ Public Class Main
                 Else
                     column = tblcols.Item(x).InnerHtml
                     Replace(column, "		", "")
-                    Replace(column, "<br>", " ")
+                    Replace(column, "<br>", "")
 
                     If x = 0 And column = "" Then
                         column = "-"
@@ -370,14 +369,12 @@ Public Class Main
                     End Select
                     'NewToolDataGridView.Rows(NewToolDataGridView.RowCount - 2).Cells(x).Value = column
 
-                    row.Append(column)
-
                     Dim tmp As String = Strings.Left(column, 2)
 
                     If tmp <> "		" Then
                         row.Add(column)
                     End If
-
+                End If
             Next
 
             NewToolDataGridView.Rows.Insert(0, row.ToArray())
@@ -389,6 +386,7 @@ Public Class Main
         'ToolList.Text = csv     'show csv in textbox
 
         'Refresh_outil()
+
     End Sub
 
 
@@ -411,21 +409,11 @@ Public Class Main
             End Try
             newToolMenu.Show(Cursor.Position)
         End If
-
-
-
-
     End Sub
 
 
 
     '**********************************
-
-
-
-
-
-
 
 
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
@@ -434,20 +422,32 @@ Public Class Main
 
         Dim i As Integer = NewToolDataGridView.CurrentRow().Index + 1
 
+        D_textbox.Text = toolsList.items(i).D1
+        L_textbox.Text = toolsList.items(i).L1
 
-        D_textbox.Text = toolsList(i).D1
-        L_textbox.Text = toolsList(i).L1
+        CTS_AD_textbox.Text = toolsList.items(i).D2
+        CTS_AL_textbox.Text = toolsList.items(i).L2
 
-        CTS_AD_textbox.Text = toolsList(i).D2
-        CTS_AL_textbox.Text = toolsList(i).L2
-
-        SD_textbox.Text = toolsList(i).D3
-        OL_textbox.Text = toolsList(i).L3
+        SD_textbox.Text = toolsList.items(i).D3
+        OL_textbox.Text = toolsList.items(i).L3
 
     End Sub
 
-    Private Sub NewToolDataGridView_MouseUp(sender As Object, e As MouseEventArgs) Handles NewToolDataGridView.MouseUp
 
+    Private Sub NewToolDataGridView_CurrentCellChanged(sender As Object, e As EventArgs) Handles NewToolDataGridView.CurrentCellChanged
+        Dim ds() As TextBox = {D_textbox, SD_textbox, CTS_AD_textbox, OL_textbox, L_textbox, CTS_AL_textbox, alpha, NoTT}
+        Try
+            manref_TextBox.Text = NewToolDataGridView.SelectedCells(0).Value
+            For i As Short = 1 To 8
+                ds(i - 1).Text = NewToolDataGridView.SelectedCells(i).Value
+            Next
+            Refresh_outil()
+        Catch ex As Exception
+            ' MsgBox("CELL CHANGED - " + ex.ToString)
+        End Try
+    End Sub
+
+    Private Sub NewToolDataGridView_MouseUp(sender As Object, e As MouseEventArgs) Handles NewToolDataGridView.MouseUp
 
         If e.Button = MouseButtons.Left Then
 
@@ -458,27 +458,25 @@ Public Class Main
                 'i = tmp - i
 
                 readToolProgress_Label.Text = i
+                Try
 
+                    D_textbox.Text = toolsList.items(i).D1
+                    L_textbox.Text = toolsList.items(i).L1
 
-                D_textbox.Text = toolsList.items(i).D1
-                L_textbox.Text = toolsList.items(i).L1
+                    CTS_AD_textbox.Text = toolsList.items(i).D2
+                    CTS_AL_textbox.Text = toolsList.items(i).L2
 
-                CTS_AD_textbox.Text = toolsList.items(i).D2
-                CTS_AL_textbox.Text = toolsList.items(i).L2
+                    SD_textbox.Text = toolsList.items(i).D3
+                    OL_textbox.Text = toolsList.items(i).L3
+                    Refresh_outil()
+                Catch ex As Exception
 
-                SD_textbox.Text = toolsList.items(i).D3
-                OL_textbox.Text = toolsList.items(i).L3
-                'Dim ds() As TextBox = {D_textbox, CTS_AD_textbox, SD_textbox, L_textbox, CTS_AL_textbox, OL_textbox, NoTT, alpha}
-                ' Try
-                'manref_TextBox.Text = NewToolDataGridView.SelectedCells(0).Value
-                ' For i As Short = 1 To 8
-                ' ds(i - 1).Text = NewToolDataGridView.SelectedCells(i).Value
-                ' Next
-                ' Refresh_outil()
-                ' Catch ex As Exception
-                '  ' MsgBox("CELL CHANGED - " + ex.ToString)
-                '  End Try
+                End Try
+
             End If
         End If
     End Sub
+
+
+
 End Class

@@ -103,7 +103,7 @@ Partial Class Main
         Me.D_textbox.AccessibleName = "tthth"
         Me.D_textbox.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolTip
         Me.D_textbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.D_textbox.BackColor = System.Drawing.Color.White
+        Me.D_textbox.BackColor = System.Drawing.Color.LightGray
         Me.D_textbox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.D_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.D_textbox.Location = New System.Drawing.Point(485, 97)
@@ -117,7 +117,7 @@ Partial Class Main
         'SD_textbox
         '
         Me.SD_textbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SD_textbox.BackColor = System.Drawing.Color.White
+        Me.SD_textbox.BackColor = System.Drawing.Color.LightGray
         Me.SD_textbox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.SD_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SD_textbox.Location = New System.Drawing.Point(915, 97)
@@ -131,7 +131,7 @@ Partial Class Main
         'CTS_AD_textbox
         '
         Me.CTS_AD_textbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CTS_AD_textbox.BackColor = System.Drawing.Color.White
+        Me.CTS_AD_textbox.BackColor = System.Drawing.Color.LightGray
         Me.CTS_AD_textbox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.CTS_AD_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CTS_AD_textbox.Location = New System.Drawing.Point(685, 97)
@@ -145,7 +145,7 @@ Partial Class Main
         'OL_textbox
         '
         Me.OL_textbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.OL_textbox.BackColor = System.Drawing.Color.White
+        Me.OL_textbox.BackColor = System.Drawing.Color.LightGray
         Me.OL_textbox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.OL_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.OL_textbox.Location = New System.Drawing.Point(915, 238)
@@ -159,7 +159,7 @@ Partial Class Main
         'L_textbox
         '
         Me.L_textbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.L_textbox.BackColor = System.Drawing.Color.White
+        Me.L_textbox.BackColor = System.Drawing.Color.LightGray
         Me.L_textbox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.L_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.L_textbox.Location = New System.Drawing.Point(485, 238)
@@ -173,7 +173,7 @@ Partial Class Main
         'CTS_AL_textbox
         '
         Me.CTS_AL_textbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CTS_AL_textbox.BackColor = System.Drawing.Color.White
+        Me.CTS_AL_textbox.BackColor = System.Drawing.Color.LightGray
         Me.CTS_AL_textbox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.CTS_AL_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CTS_AL_textbox.Location = New System.Drawing.Point(685, 238)
@@ -237,7 +237,7 @@ Partial Class Main
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(896, 102)
+        Me.Label2.Location = New System.Drawing.Point(892, 102)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(22, 13)
         Me.Label2.TabIndex = 12
@@ -257,7 +257,7 @@ Partial Class Main
         '
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(896, 243)
+        Me.Label4.Location = New System.Drawing.Point(892, 243)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(21, 13)
         Me.Label4.TabIndex = 14

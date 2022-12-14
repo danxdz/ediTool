@@ -6,6 +6,7 @@ Imports System.Runtime.Remoting
 Imports System.Text
 Imports System.Xml
 Imports System.Xml.Schema
+Imports editool.Tools
 Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Excel
 Imports Color = System.Drawing.Color
@@ -55,8 +56,10 @@ Module FileImports
 
         Dim newTool As New NewTool
 
-        'Main.DataGridView1.Rows.Clear()
-        'Main.NewToolDataGridView.Columns.Clear()
+        Main.NewToolDataGridView.Columns.Clear()
+
+        Main.NewToolDataGridView.DataSource = vbNull
+
 
         Dim reader As New XmlTextReader(path)
         FindTool(reader)
@@ -108,6 +111,8 @@ Module FileImports
             ElseIf (reader.Name = "tecsets") Then
                 reader.Close()
                 FillDataGrid(newTool, Main.NewToolDataGridView)
+                Main.toolsList.items.Add(newTool)
+
             End If
         End While
 
@@ -123,8 +128,6 @@ Module FileImports
 
         Dim rowIndex As Integer
 
-        'DGV.Columns.Clear()
-
         If DGV.Rows.Count = 0 Then
             For i As Integer = 0 To objList.Count - 1
 
@@ -137,11 +140,7 @@ Module FileImports
             rowIndex = DGV.Rows.Count - 1
         Else
             rowIndex = DGV.Rows.Count - 1
-            ' DGV.Rows.Add()
         End If
-
-        ' DGV.Rows.Clear()
-
 
         Dim row As New List(Of String) From {
             NewTool.ManufRef,
@@ -156,20 +155,6 @@ Module FileImports
             NewTool.Manuf
         }
 
-        'DGV.Rows(rowIndex).Cells(0).Value = NewTool.ManufRef
-        'DGV.Rows(rowIndex).Cells(1).Value = NewTool.D1
-        'If NewTool.D2 > 0 Then
-        '    DGV.Rows(rowIndex).Cells(2).Value = NewTool.D2
-        'Else
-        '    DGV.Rows(rowIndex).Cells(2).Value = NewTool.D1 - 0.2
-        'End If
-        'DGV.Rows(rowIndex).Cells(3).Value = NewTool.D3
-        'DGV.Rows(rowIndex).Cells(4).Value = NewTool.L1
-        'DGV.Rows(rowIndex).Cells(5).Value = NewTool.L2
-        'DGV.Rows(rowIndex).Cells(6).Value = NewTool.L3
-        'DGV.Rows(rowIndex).Cells(7).Value = NewTool.NoTT
-        'DGV.Rows(rowIndex).Cells(8).Value = NewTool.Chanfrein
-        'DGV.Rows(rowIndex).Cells(9).Value = NewTool.Manuf
         DGV.Rows.Insert(0, row.ToArray())
 
     End Sub
