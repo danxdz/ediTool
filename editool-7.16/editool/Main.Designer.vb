@@ -88,6 +88,8 @@ Partial Class Main
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.timer_label = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolsBar.SuspendLayout()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -760,6 +762,17 @@ Partial Class Main
         Me.ListBox1.Size = New System.Drawing.Size(581, 160)
         Me.ListBox1.TabIndex = 62
         '
+        'timer_label
+        '
+        Me.timer_label.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.timer_label.AutoSize = True
+        Me.timer_label.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.timer_label.Location = New System.Drawing.Point(594, 6)
+        Me.timer_label.Name = "timer_label"
+        Me.timer_label.Size = New System.Drawing.Size(24, 25)
+        Me.timer_label.TabIndex = 63
+        Me.timer_label.Text = "0"
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -767,6 +780,7 @@ Partial Class Main
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1008, 486)
+        Me.Controls.Add(Me.timer_label)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.ToolsBar)
         Me.Controls.Add(Me.Lang_en)
@@ -893,4 +907,6 @@ Partial Class Main
     Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
     Friend WithEvents ListBox1 As ListBox
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents timer_label As Label
 End Class

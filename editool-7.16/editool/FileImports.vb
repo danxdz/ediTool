@@ -1,16 +1,8 @@
 ﻿Option Explicit On
-Imports System.Data.Common
-Imports System.Diagnostics.Eventing
 Imports System.IO
-Imports System.Runtime.Remoting
-Imports System.Text
 Imports System.Xml
-Imports System.Xml.Schema
-Imports editool.Tools
 Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Excel
-Imports Color = System.Drawing.Color
-Imports XmlSchema = System.Xml.Schema.XmlSchema
 
 Module FileImports
     ' CREATE EXCEL OBJECTS.
@@ -34,7 +26,7 @@ Module FileImports
             Case "toolShaftDiameter"
                 Main.SD_textbox.Text = val
             Case "toolDiameter"
-                Main.D_textbox.Text = val
+                Main.D_textBox.Text = val
             Case "taperHeight"
                 Main.CTS_AL_textbox.Text = val
             Case "tipDiameter"
@@ -92,19 +84,28 @@ Module FileImports
                         newTool.D3 = val
 
                     Case "toolDiameter"
-                        Main.D_textbox.Text = val
+                        Main.D_textBox.Text = val
+                        Main.CTS_AD_TextBox.Text = val - 0.2
+
                         newTool.D1 = val
+                        newTool.D2 = val - 0.2
+
 
                     Case "taperHeight"
                         Main.CTS_AL_textbox.Text = val
-                        newTool.L2 = val '???? not sure
+                        If val <> 0 Then
+                            newTool.L2 = val '???? not sure
+                        Else
+                            newTool.L2 = newTool.L2
+                        End If
 
                     Case "tipDiameter"
-                        Main.CTS_AD_textbox.Text = val
+                        'Main.CTS_AD_textbox.Text = val
 
                         'plungeAngle
-                        'tipDiameter
-                        'cornerRadius
+                    Case "cornerRadius"
+                        Main.Chf_textbox.Text = val
+
 
                 End Select
             ElseIf (reader.Name = "tecsets") Then

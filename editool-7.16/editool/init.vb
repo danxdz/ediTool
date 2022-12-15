@@ -27,14 +27,14 @@ Module outils_base
             Return value
         End If
         If param = "CTS_AD" And value = 0 Then
-            Return Main.D_textbox.Text
+            Return Main.D_textBox.Text
         Else
             Return value
         End If
     End Function
     Function Pick_param(param As String)
         Select Case param
-            Case "D" : Return Main.D_textbox.Text
+            Case "D" : Return Main.D_textBox.Text
             Case "L" : Return Main.L_textbox.Text
             Case "OL" : Return Main.OL_textbox.Text
             Case "SD" : Return Main.SD_textbox.Text

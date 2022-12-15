@@ -1,8 +1,4 @@
-﻿Imports System.Drawing.Drawing2D
-Imports System.IO
-Imports System.Windows.Forms.AxHost
-
-Module graphics
+﻿Module graphics
 
 
 
@@ -27,7 +23,7 @@ Module graphics
 
                 Dim half_h As Integer = StartY / 2
 
-                Dim D As Double = Replace(Main.D_textbox.Text, ".", ",")
+                Dim D As Double = Replace(Main.D_textBox.Text, ".", ",")
                 Dim SD As Double = Replace(Main.SD_textbox.Text, ".", ",")
                 Dim CTS_AD As Double = Replace(Main.CTS_AD_textbox.Text, ".", ",")
                 Dim OL As Double = Replace(Main.OL_textbox.Text, ".", ",")
