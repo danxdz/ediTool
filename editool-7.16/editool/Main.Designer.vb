@@ -81,7 +81,7 @@ Partial Class Main
         Me.A_TextBox = New System.Windows.Forms.TextBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.readToolProgress_Label = New System.Windows.Forms.Label()
-        Me.manRefSec_TextBox = New System.Windows.Forms.ComboBox()
+        Me.manFilter_comboBox = New System.Windows.Forms.ComboBox()
         Me.NewToolDataGridView = New System.Windows.Forms.DataGridView()
         Me.newToolMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -712,22 +712,22 @@ Partial Class Main
         Me.readToolProgress_Label.TabIndex = 58
         Me.readToolProgress_Label.Text = "0"
         '
-        'manRefSec_TextBox
+        'manFilter_comboBox
         '
-        Me.manRefSec_TextBox.FormattingEnabled = True
-        Me.manRefSec_TextBox.Location = New System.Drawing.Point(27, 253)
-        Me.manRefSec_TextBox.Name = "manRefSec_TextBox"
-        Me.manRefSec_TextBox.Size = New System.Drawing.Size(120, 21)
-        Me.manRefSec_TextBox.TabIndex = 59
+        Me.manFilter_comboBox.FormattingEnabled = True
+        Me.manFilter_comboBox.Location = New System.Drawing.Point(27, 253)
+        Me.manFilter_comboBox.Name = "manFilter_comboBox"
+        Me.manFilter_comboBox.Size = New System.Drawing.Size(120, 21)
+        Me.manFilter_comboBox.TabIndex = 59
         '
         'NewToolDataGridView
         '
         Me.NewToolDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.NewToolDataGridView.Location = New System.Drawing.Point(614, 282)
+        Me.NewToolDataGridView.Location = New System.Drawing.Point(136, 282)
         Me.NewToolDataGridView.MultiSelect = False
         Me.NewToolDataGridView.Name = "NewToolDataGridView"
         Me.NewToolDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.NewToolDataGridView.Size = New System.Drawing.Size(386, 160)
+        Me.NewToolDataGridView.Size = New System.Drawing.Size(864, 160)
         Me.NewToolDataGridView.TabIndex = 61
         '
         'newToolMenu
@@ -759,7 +759,7 @@ Partial Class Main
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.Location = New System.Drawing.Point(27, 282)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(581, 160)
+        Me.ListBox1.Size = New System.Drawing.Size(103, 160)
         Me.ListBox1.TabIndex = 62
         '
         'timer_label
@@ -805,7 +805,7 @@ Partial Class Main
         Me.Controls.Add(Me.D_textbox)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.NewToolDataGridView)
-        Me.Controls.Add(Me.manRefSec_TextBox)
+        Me.Controls.Add(Me.manFilter_comboBox)
         Me.Controls.Add(Me.readToolProgress_Label)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.A_TextBox)
@@ -898,7 +898,7 @@ Partial Class Main
     Friend WithEvents XML_ToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents readToolProgress_Label As Label
-    Friend WithEvents manRefSec_TextBox As ComboBox
+    Friend WithEvents manFilter_comboBox As ComboBox
     Friend WithEvents NewToolDataGridView As DataGridView
     Friend WithEvents Top6_ToolStripButton As ToolStripButton
     Friend WithEvents OrderTools_ToolStripButton As ToolStripButton

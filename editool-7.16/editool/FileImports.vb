@@ -122,9 +122,11 @@ Module FileImports
 
     End Sub
 
-    Private Sub FillDataGrid(NewTool As NewTool, DGV As DataGridView)
+    Public Sub FillDataGrid(NewTool As NewTool, DGV As DataGridView)
 
-        Dim objList As New List(Of String)({"ref", "D", "CTS_AD", "SD", "L", "CTS_AL", "OL", "NoTT", "chf", "manuf"})
+
+
+        Dim objList As New List(Of String)({"ref", "D", "SD", "CTS_AD", "OL", "L", "CTS_AL", "AngDeg", "NoTT", "chf", "manuf"})
 
         Dim rowIndex As Integer
 
@@ -141,21 +143,23 @@ Module FileImports
         Else
             rowIndex = DGV.Rows.Count - 1
         End If
-
-        Dim row As New List(Of String) From {
-            NewTool.ManufRef,
-            NewTool.D1,
-            NewTool.D2,
-            NewTool.D3,
-            NewTool.L1,
-            NewTool.L2,
-            NewTool.L3,
-            NewTool.NoTT,
-            NewTool.Chanfrein,
-            NewTool.Manuf
+        With NewTool
+            Dim row As New List(Of String) From {
+            .ManufRef,
+            .D1,
+            .D3,
+            .D2,
+            .L3,
+            .L1,
+            .L2,
+            .AngleDeg,
+            .NoTT,
+            .Chanfrein,
+            .Manuf
         }
 
-        DGV.Rows.Insert(0, row.ToArray())
+            DGV.Rows.Insert(0, row.ToArray())
+        End With
 
     End Sub
 
