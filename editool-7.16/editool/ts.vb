@@ -144,7 +144,7 @@ Module ts
 
         If IsInt(d1) Then
             newTool.D1 = Int(d1)
-            Main.D_textBox.Text = Int(d1)
+            Main.D_textbox.Text = Int(d1)
         End If
 
         newTool.L1 = Replace(line(9), "Tool.UtilLength=", "")
@@ -197,7 +197,7 @@ Module ts
         'list_par = {{"D", 0, Main.d1.Text}, {"CTS_AD", 0, Main.d3.Text}, {"SD", 0, Main.d2.Text}, {"L", 0, Main.L2.Text}, {"CTS_AL", 0, Main.L3.Text}, {"OL", 0, Main.L1.Text}, {"FB", 0, Main.chf.Text}, {"NoTT", 0, Main.NoTT.Text}, {"Name", 0, Main.Name_textbox.Text}}
         'Dim D As ElementId = TopSolidHost.Elements.SearchByName(newTool, "D")
         'TopSolidHost.Parameters.SetRealValue(D, strip_doubles(Main.d1.Text))
-        SetReal(newTool, "D", Strip_doubles(Main.D_textBox.Text))
+        SetReal(newTool, "D", Strip_doubles(Main.D_textbox.Text))
         SetReal(newTool, "SD", Strip_doubles(Main.SD_textbox.Text))
         SetReal(newTool, "OL", Strip_doubles(Main.OL_textbox.Text))
         SetReal(newTool, "L", Strip_doubles(Main.L_textbox.Text))
@@ -228,7 +228,7 @@ Module ts
             If CTS_AD_tmp > 0 Then
                 SetReal(newTool, "CTS_EBD", CTS_AD_tmp) 'TODO
             Else
-                CTS_AD_tmp = Strip_doubles(Main.D_textBox.Text)
+                CTS_AD_tmp = Strip_doubles(Main.D_textbox.Text)
                 SetReal(newTool, "CTS_EBD", CTS_AD_tmp)
             End If
 
@@ -238,7 +238,7 @@ Module ts
             If (Main.alpha.Text = 0) Then
                 SetReal(newTool, "CTS_EL", CTS_EL) 'TODO
             Else
-                CTS_EL = (Strip_doubles(Main.SD_textbox.Text) - Strip_doubles(Main.D_textBox.Text)) / 2
+                CTS_EL = (Strip_doubles(Main.SD_textbox.Text) - Strip_doubles(Main.D_textbox.Text)) / 2
                 CTS_EL /= Math.Tan((Main.alpha.Text * Math.PI) / 180)
                 SetReal(newTool, "CTS_EL", CTS_EL) 'TODO
             End If

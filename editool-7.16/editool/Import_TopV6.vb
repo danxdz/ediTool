@@ -1,8 +1,5 @@
 ﻿Option Explicit On
 Imports System.IO
-Imports System.Text
-
-
 
 Module ImportV6
 
