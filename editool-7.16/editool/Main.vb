@@ -442,18 +442,18 @@ Public Class Main
     End Sub
 
 
-    Private Sub NewToolDataGridView_CurrentCellChanged(sender As Object, e As EventArgs) Handles NewToolDataGridView.CurrentCellChanged
-        Dim ds() As Windows.Forms.TextBox = {D_textbox, SD_textbox, CTS_AD_textbox, OL_textbox, L_textbox, CTS_AL_textbox, alpha, NoTT}
-        Try
-            manref_TextBox.Text = NewToolDataGridView.SelectedCells(0).Value
-            For i As Short = 1 To 8
-                ds(i - 1).Text = NewToolDataGridView.SelectedCells(i).Value
-            Next
-            Refresh_outil()
-        Catch ex As Exception
-            ' MsgBox("CELL CHANGED - " + ex.ToString)
-        End Try
-    End Sub
+    'Private Sub NewToolDataGridView_CurrentCellChanged(sender As Object, e As EventArgs) Handles NewToolDataGridView.CurrentCellChanged
+    '    Dim ds() As Windows.Forms.TextBox = {D_textbox, SD_textbox, CTS_AD_textbox, OL_textbox, L_textbox, CTS_AL_textbox, alpha, NoTT}
+    '    Try
+    '        manref_TextBox.Text = NewToolDataGridView.SelectedCells(0).Value
+    '        For i As Short = 1 To 8
+    '            ds(i - 1).Text = NewToolDataGridView.SelectedCells(i).Value
+    '        Next
+    '        Refresh_outil()
+    '    Catch ex As Exception
+    '        ' MsgBox("CELL CHANGED - " + ex.ToString)
+    '    End Try
+    'End Sub
 
     Private Sub NewToolDataGridView_MouseUp(sender As Object, e As MouseEventArgs) Handles NewToolDataGridView.MouseUp
 
