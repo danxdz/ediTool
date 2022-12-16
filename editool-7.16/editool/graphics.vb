@@ -90,7 +90,7 @@
                 'half revolved preview tool 
                 'CUT
                 'FR 2T et Alesoir *************************
-                If My.Settings.ToolType = "FR" Or My.Settings.ToolType = "AL" Then
+                If My.Settings.ToolType = "FR2T" Or My.Settings.ToolType = "AL" Then
                     myOutil.FillRectangle(Brushes.Orange, 0, D_tmp, L_tmp, StartY - D_tmp)
                     'contour
                     myOutil.DrawLine(myPen, 0, StartY, 0, D_tmp)

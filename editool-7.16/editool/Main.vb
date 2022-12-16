@@ -461,7 +461,7 @@ Public Class Main
             started = True
             Dim num As Integer = NewToolDataGridView.SelectedRows().Count
             If num > 0 Then
-                Dim i As Integer = NewToolDataGridView.CurrentRow().Index - 1
+                Dim i As Integer = NewToolDataGridView.CurrentRow().Index + 1
                 Dim tmp = toolsList.items.Count
                 i = tmp - i
 
@@ -490,14 +490,10 @@ Public Class Main
         OpenV6File()
     End Sub
 
-    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
-
-    End Sub
 
     Private Sub ListBox1_MouseUp(sender As Object, e As MouseEventArgs) Handles ListBox1.MouseUp
         If e.Button = MouseButtons.Right Then
             Dim index As Integer = ListBox1.SelectedIndex
-
         End If
     End Sub
 
