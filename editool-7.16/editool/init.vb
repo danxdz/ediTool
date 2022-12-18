@@ -3,18 +3,18 @@
 Module outils_base
     Dim DataTable_buffer As DataTable
     Public Sub Set_filter()
-        Dim dv As New DataView(DataTable_buffer)
-        Dim str_tmp As String
+        'Dim dv As New DataView(DataTable_buffer)
+        'Dim str_tmp As String
 
-        If Main.Diam_filter_TextBox.Text = "" Then
-            str_tmp = "Reference LIKE '%" + Main.Ref_filter_TextBox.Text + "%'"
-        ElseIf Main.Ref_filter_TextBox.Text = "" Then
+        'If Main.Diam_filter_TextBox.Text = "" Then
+        '    str_tmp = "Reference LIKE '%" + Main.Ref_filter_TextBox.Text + "%'"
+        'ElseIf Main.Ref_filter_TextBox.Text = "" Then
 
-            str_tmp = "D LIKE '%" + Main.Diam_filter_TextBox.Text + "%'"
-        Else
-            str_tmp = "Reference LIKE '%" + Main.Ref_filter_TextBox.Text + "%' AND D like '%" + Main.Diam_filter_TextBox.Text + "%'"
-        End If
-        DataTable_buffer.DefaultView.RowFilter = str_tmp
+        '    str_tmp = "D LIKE '%" + Main.Diam_filter_TextBox.Text + "%'"
+        'Else
+        '    str_tmp = "Reference LIKE '%" + Main.Ref_filter_TextBox.Text + "%' AND D like '%" + Main.Diam_filter_TextBox.Text + "%'"
+        'End If
+        'DataTable_buffer.DefaultView.RowFilter = str_tmp
     End Sub
     Function Check_zero(param As String, value As String)
         ''Dim tmp_string As String = value
@@ -110,22 +110,14 @@ Module outils_base
 
     End Sub
 
-    Public Sub SetDataTable()
-        DataTable_buffer = New DataTable
+    Public Function SetDataGridColumnsTitle(columns() As String, dt As DataTable)
 
+        For Each col As String In columns
+            dt.Columns.Add(col, GetType(String))
+        Next
         'dt.Columns.Add("index", GetType(String))            ' --------> option to add index to DataGridView1
-        DataTable_buffer.Columns.Add("Reference", GetType(String))
-        DataTable_buffer.Columns.Add("D", GetType(String))
-        DataTable_buffer.Columns.Add("SD", GetType(String))
-        DataTable_buffer.Columns.Add("CTS_AD", GetType(String))
-        DataTable_buffer.Columns.Add("OL", GetType(String))
-        DataTable_buffer.Columns.Add("L", GetType(String))
-        DataTable_buffer.Columns.Add("CTS_AL", GetType(String))
-        DataTable_buffer.Columns.Add("a", GetType(String))
-        DataTable_buffer.Columns.Add("z", GetType(String))
-        DataTable_buffer.Columns.Add("chf", GetType(String))
-
-    End Sub
+        Return dt
+    End Function
 
 
     Public Sub Get_prefs(data As String)
@@ -139,7 +131,7 @@ Module outils_base
         Dim labels() As Label = {
             Main.menu_1, Main.menu_2, Main.menu_3, Main.menu_4,
             Main.menu_5, Main.menu_6, Main.menu_7, Main.menu_8,
-            Main.menu_9, Main.menu_10, Main.menu_11, Main.menu_12}
+            Main.menu_9, Main.menu_10}
 
         For i As Integer = 0 To labels.Length - 1
             labels(i).Text = splitLine(i)
@@ -157,39 +149,73 @@ Module outils_base
 
         Dim single_line As String
         Dim line() As String
+        '                           0      1    2       3       4     5     6       7     8     9
+        Dim objList() As String = {"ref", "D", "SD", "CTS_AD", "OL", "L", "CTS_AL", "a", "z", "chf"}
 
-        Dim objList As New List(Of String)({"ref", "D", "SD", "CTS_AD", "OL", "L", "CTS_AL", "a", "z", "chf"})
+        DataTable_buffer = New DataTable
+        DataTable_buffer = SetDataGridColumnsTitle(objList, DataTable_buffer)
 
-        For i As Integer = 0 To objList.Count - 1
 
-            Dim col = New DataGridViewTextBoxColumn With {
-                            .HeaderText = objList(i),
-                            .SortMode = DataGridViewColumnSortMode.NotSortable
-                        }
-            Dim colIndex As Integer = Main.NewToolDataGridView.Columns.Add(col)
-        Next
+        Dim filterD1 As New List(Of Single)
 
-        For i As Integer = 0 To full_file.Length - 1
+
+        For i As Integer = 0 To 4000 'full_file.Length - 1
             single_line = full_file(i)
             line = Split(single_line, ";")
 
+            Dim newtool As New NewTool
+
             If filter = "" Then
                 DataTable_buffer.Rows.Add(line)
-                Main.NewToolDataGridView.Rows.Insert(0, line.ToArray())
+                Dim tmp_line() As String = line.ToArray
+
+                newtool = FileImports.Fill_newTool(line(1), line(3), line(2), line(5), line(6), line(4), line(8), "FR2T", "0", "0", "0", "0", "0", "0", "0", "FRAISA", line(0), "0", "0", "0")
+                Main.toolsList.items.add(newtool)
+
+
+                Dim tmp As Single
+                If Single.TryParse(line(1), tmp) = True Then
+                    If filterD1.Contains(tmp) = False Then
+                        filterD1.Add(tmp)
+                    End If
+                End If
+                'Main.NewToolDataGridView.Rows.Insert(0, line.ToArray())
             Else
                 Dim tmp As String = Strings.Left(line(0), filter.Length)
                 If filter = tmp Then
+                    Main.toolsList.items.add(newtool)
                     DataTable_buffer.Rows.Add(line)
-                    Main.NewToolDataGridView.Rows.Insert(0, line.ToArray())
+                    'Main.NewToolDataGridView.Rows.Insert(0, line.ToArray())
                 End If
             End If
-
-
         Next
 
-        'Main.NewToolDataGridView.DataSource = DataTable_buffer
+
+        filterD1 = filterD1.OrderBy(Function(x) x).ToList()
+
+        With Main.filterD1Combobox
+            .DataSource = filterD1
+        End With
+
+
+        DataTable_buffer.DefaultView.Sort = "d ASC"
+        Main.NewToolDataGridView.DataSource = DataTable_buffer.DefaultView.ToTable
+
+
 
     End Sub
+
+
+
+    Private Sub FillDiamFilterDropbox(diam As String)
+        Dim tmp As Double
+        If Double.TryParse(diam, tmp) = True Then
+            If Main.filterD1Combobox.Items.Contains(tmp) = False Then
+                Main.filterD1Combobox.Items.Add(tmp)
+            End If
+        End If
+    End Sub
+
     Public Sub Fill_db(file_reader As System.IO.StreamReader, filter As String)
         Dim index As Integer = 1
         Dim textline As String = ""

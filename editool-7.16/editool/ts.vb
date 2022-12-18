@@ -274,7 +274,7 @@ Module ts
 
         TopSolidHost.Parameters.SetTextValue(
                 TopSolidHost.Elements.SearchByName(newTool, "$TopSolid.Kernel.TX.Properties.Manufacturer"),
-                Main.manuf_TextBox.Text)
+                Main.manuf_comboBox.Text)
 
         TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool, "$TopSolid.Kernel.TX.Properties.VirtualDocument"), False)
         Try

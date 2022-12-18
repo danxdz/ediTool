@@ -10,12 +10,50 @@ Module FileImports
     Dim xlWorkBook As Excel.Workbook
     Dim xlWorkSheet As Excel.Worksheet
 
+    Public Function Fill_newTool(d1 As String, d2 As String, d3 As String, l1 As String, l2 As String, l3 As String, nott As String, type As String, groupeMat As String,
+                            Rbout As String, chanfrein As String, coupeCentre As String, arrCentre As String, typeTar As String, pasTar As String, manuf As String,
+                            manufRef As String, manufRefSec As String, code As String, codeBar As String)
+
+        Dim newtool As New NewTool
+
+        With newtool
+            .D1 = d1
+            .D2 = d1 - 0.2
+            .D3 = d3
+            .L1 = l1
+            If l2 > 0 Then
+                .L2 = l2
+            Else
+                .L2 = l1
+            End If
+            .L3 = l3
+            .NoTT = nott
+            .Type = type
+            .GroupeMat = groupeMat
+            .RayonBout = Rbout
+            .Chanfrein = chanfrein
+            .CoupeCentre = coupeCentre
+            .ArrCentre = arrCentre
+            .TypeTar = typeTar
+            .PasTar = pasTar
+            .Manuf = manuf
+            .ManufRef = manufRef
+            .ManufRefSec = Replace(manufRefSec, "    ", "")
+            '.Link = tblcols.Item(18).InnerHtml
+            .Code = code
+            .CodeBar = codeBar
+        End With
+        Return newtool
+
+    End Function
+
+
     Private Sub Fill_HM_XML(name As String, val As String, type As String)
         Select Case name
             Case "orderingCode"
                 Main.manref_TextBox.Text = val
             Case "manufacturer"
-                Main.manuf_TextBox.Text = val
+                Main.manuf_comboBox.Text = val
             Case "toolTotalLength"
                 Main.OL_textbox.Text = val
             Case "cuttingEdges"
@@ -67,7 +105,7 @@ Module FileImports
                         Main.manref_TextBox.Text = val
                         newTool.ManufRef = val
                     Case "manufacturer"
-                        Main.manuf_TextBox.Text = val
+                        Main.manuf_comboBox.Text = val
                         newTool.Manuf = val
                     Case "toolTotalLength"
                         Main.OL_textbox.Text = val

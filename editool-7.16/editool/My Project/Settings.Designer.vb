@@ -197,6 +197,8 @@ Namespace My
                 Me("V6_default_path") = value
             End Set
         End Property
+
+        Public Property DefManuf As Object
     End Class
 End Namespace
 

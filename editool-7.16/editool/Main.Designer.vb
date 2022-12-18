@@ -46,10 +46,6 @@ Partial Class Main
         Me.menu_5 = New System.Windows.Forms.Label()
         Me.menu_6 = New System.Windows.Forms.Label()
         Me.menu_7 = New System.Windows.Forms.Label()
-        Me.Ref_filter_TextBox = New System.Windows.Forms.TextBox()
-        Me.Diam_filter_TextBox = New System.Windows.Forms.TextBox()
-        Me.menu_11 = New System.Windows.Forms.Label()
-        Me.menu_12 = New System.Windows.Forms.Label()
         Me.Name_textbox = New System.Windows.Forms.TextBox()
         Me.Chf_textbox = New System.Windows.Forms.TextBox()
         Me.menu_2 = New System.Windows.Forms.Label()
@@ -60,7 +56,7 @@ Partial Class Main
         Me.menu_4 = New System.Windows.Forms.Label()
         Me.menu_1 = New System.Windows.Forms.Label()
         Me.manref_TextBox = New System.Windows.Forms.ComboBox()
-        Me.manuf_TextBox = New System.Windows.Forms.ComboBox()
+        Me.manuf_comboBox = New System.Windows.Forms.ComboBox()
         Me.ForceName_checkBox = New System.Windows.Forms.CheckBox()
         Me.DefineName_Bt = New System.Windows.Forms.Button()
         Me.Lang_en = New System.Windows.Forms.Button()
@@ -81,15 +77,16 @@ Partial Class Main
         Me.A_TextBox = New System.Windows.Forms.TextBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.readToolProgress_Label = New System.Windows.Forms.Label()
-        Me.manFilter_comboBox = New System.Windows.Forms.ComboBox()
+        Me.filterD1Combobox = New System.Windows.Forms.ComboBox()
         Me.NewToolDataGridView = New System.Windows.Forms.DataGridView()
         Me.newToolMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.timer_label = New System.Windows.Forms.Label()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.l1_comboBox = New System.Windows.Forms.ComboBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolsBar.SuspendLayout()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -334,48 +331,6 @@ Partial Class Main
         Me.menu_7.TabIndex = 21
         Me.menu_7.Text = "empty"
         '
-        'Ref_filter_TextBox
-        '
-        Me.Ref_filter_TextBox.AccessibleDescription = "diamètre de coupe"
-        Me.Ref_filter_TextBox.AccessibleName = "tthth"
-        Me.Ref_filter_TextBox.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolTip
-        Me.Ref_filter_TextBox.Location = New System.Drawing.Point(83, 462)
-        Me.Ref_filter_TextBox.Name = "Ref_filter_TextBox"
-        Me.Ref_filter_TextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Ref_filter_TextBox.Size = New System.Drawing.Size(77, 20)
-        Me.Ref_filter_TextBox.TabIndex = 22
-        '
-        'Diam_filter_TextBox
-        '
-        Me.Diam_filter_TextBox.AccessibleDescription = "diamètre de coupe"
-        Me.Diam_filter_TextBox.AccessibleName = "tthth"
-        Me.Diam_filter_TextBox.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolTip
-        Me.Diam_filter_TextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
-        Me.Diam_filter_TextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.Diam_filter_TextBox.Location = New System.Drawing.Point(166, 462)
-        Me.Diam_filter_TextBox.Name = "Diam_filter_TextBox"
-        Me.Diam_filter_TextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Diam_filter_TextBox.Size = New System.Drawing.Size(31, 20)
-        Me.Diam_filter_TextBox.TabIndex = 23
-        '
-        'menu_11
-        '
-        Me.menu_11.AutoSize = True
-        Me.menu_11.Location = New System.Drawing.Point(83, 449)
-        Me.menu_11.Name = "menu_11"
-        Me.menu_11.Size = New System.Drawing.Size(35, 13)
-        Me.menu_11.TabIndex = 24
-        Me.menu_11.Text = "empty"
-        '
-        'menu_12
-        '
-        Me.menu_12.AutoSize = True
-        Me.menu_12.Location = New System.Drawing.Point(163, 446)
-        Me.menu_12.Name = "menu_12"
-        Me.menu_12.Size = New System.Drawing.Size(35, 13)
-        Me.menu_12.TabIndex = 25
-        Me.menu_12.Text = "empty"
-        '
         'Name_textbox
         '
         Me.Name_textbox.AccessibleDescription = "diamètre de coupe"
@@ -463,7 +418,7 @@ Partial Class Main
         'menu_1
         '
         Me.menu_1.AutoSize = True
-        Me.menu_1.Location = New System.Drawing.Point(29, 87)
+        Me.menu_1.Location = New System.Drawing.Point(29, 83)
         Me.menu_1.Name = "menu_1"
         Me.menu_1.Size = New System.Drawing.Size(35, 13)
         Me.menu_1.TabIndex = 35
@@ -477,15 +432,15 @@ Partial Class Main
         Me.manref_TextBox.Size = New System.Drawing.Size(181, 21)
         Me.manref_TextBox.TabIndex = 36
         '
-        'manuf_TextBox
+        'manuf_comboBox
         '
-        Me.manuf_TextBox.FormattingEnabled = True
-        Me.manuf_TextBox.Items.AddRange(New Object() {"FRAISA", "SECO", "HOFFMAN"})
-        Me.manuf_TextBox.Location = New System.Drawing.Point(27, 221)
-        Me.manuf_TextBox.Name = "manuf_TextBox"
-        Me.manuf_TextBox.Size = New System.Drawing.Size(181, 21)
-        Me.manuf_TextBox.TabIndex = 41
-        Me.manuf_TextBox.Text = "FRAISA"
+        Me.manuf_comboBox.FormattingEnabled = True
+        Me.manuf_comboBox.Items.AddRange(New Object() {"FRAISA", "SECO", "HOFFMAN"})
+        Me.manuf_comboBox.Location = New System.Drawing.Point(27, 221)
+        Me.manuf_comboBox.Name = "manuf_comboBox"
+        Me.manuf_comboBox.Size = New System.Drawing.Size(181, 21)
+        Me.manuf_comboBox.TabIndex = 41
+        Me.manuf_comboBox.Text = "FRAISA"
         '
         'ForceName_checkBox
         '
@@ -694,7 +649,7 @@ Partial Class Main
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(157, 257)
+        Me.CheckBox1.Location = New System.Drawing.Point(341, 162)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(54, 17)
         Me.CheckBox1.TabIndex = 56
@@ -706,28 +661,28 @@ Partial Class Main
         Me.readToolProgress_Label.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.readToolProgress_Label.AutoSize = True
         Me.readToolProgress_Label.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.readToolProgress_Label.Location = New System.Drawing.Point(25, 457)
+        Me.readToolProgress_Label.Location = New System.Drawing.Point(25, 451)
         Me.readToolProgress_Label.Name = "readToolProgress_Label"
         Me.readToolProgress_Label.Size = New System.Drawing.Size(24, 25)
         Me.readToolProgress_Label.TabIndex = 58
         Me.readToolProgress_Label.Text = "0"
         '
-        'manFilter_comboBox
+        'filterD1Combobox
         '
-        Me.manFilter_comboBox.FormattingEnabled = True
-        Me.manFilter_comboBox.Location = New System.Drawing.Point(27, 253)
-        Me.manFilter_comboBox.Name = "manFilter_comboBox"
-        Me.manFilter_comboBox.Size = New System.Drawing.Size(120, 21)
-        Me.manFilter_comboBox.TabIndex = 59
+        Me.filterD1Combobox.FormattingEnabled = True
+        Me.filterD1Combobox.Location = New System.Drawing.Point(27, 255)
+        Me.filterD1Combobox.Name = "filterD1Combobox"
+        Me.filterD1Combobox.Size = New System.Drawing.Size(120, 21)
+        Me.filterD1Combobox.TabIndex = 59
         '
         'NewToolDataGridView
         '
         Me.NewToolDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.NewToolDataGridView.Location = New System.Drawing.Point(136, 282)
+        Me.NewToolDataGridView.Location = New System.Drawing.Point(27, 282)
         Me.NewToolDataGridView.MultiSelect = False
         Me.NewToolDataGridView.Name = "NewToolDataGridView"
         Me.NewToolDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.NewToolDataGridView.Size = New System.Drawing.Size(864, 160)
+        Me.NewToolDataGridView.Size = New System.Drawing.Size(973, 160)
         Me.NewToolDataGridView.TabIndex = 61
         '
         'newToolMenu
@@ -754,24 +709,34 @@ Partial Class Main
         Me.ToolStripMenuItem3.Size = New System.Drawing.Size(110, 22)
         Me.ToolStripMenuItem3.Text = "effacer"
         '
-        'ListBox1
-        '
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(27, 282)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(103, 160)
-        Me.ListBox1.TabIndex = 62
-        '
         'timer_label
         '
         Me.timer_label.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.timer_label.AutoSize = True
         Me.timer_label.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.timer_label.Location = New System.Drawing.Point(594, 6)
+        Me.timer_label.Location = New System.Drawing.Point(696, 6)
         Me.timer_label.Name = "timer_label"
         Me.timer_label.Size = New System.Drawing.Size(24, 25)
         Me.timer_label.TabIndex = 63
         Me.timer_label.Text = "0"
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(396, 134)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(55, 17)
+        Me.CheckBox2.TabIndex = 64
+        Me.CheckBox2.Text = "edited"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'l1_comboBox
+        '
+        Me.l1_comboBox.FormattingEnabled = True
+        Me.l1_comboBox.Location = New System.Drawing.Point(153, 255)
+        Me.l1_comboBox.Name = "l1_comboBox"
+        Me.l1_comboBox.Size = New System.Drawing.Size(120, 21)
+        Me.l1_comboBox.TabIndex = 65
         '
         'Main
         '
@@ -780,8 +745,9 @@ Partial Class Main
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1008, 486)
+        Me.Controls.Add(Me.l1_comboBox)
+        Me.Controls.Add(Me.CheckBox2)
         Me.Controls.Add(Me.timer_label)
-        Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.ToolsBar)
         Me.Controls.Add(Me.Lang_en)
         Me.Controls.Add(Me.Lang_fr)
@@ -805,7 +771,7 @@ Partial Class Main
         Me.Controls.Add(Me.D_textbox)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.NewToolDataGridView)
-        Me.Controls.Add(Me.manFilter_comboBox)
+        Me.Controls.Add(Me.filterD1Combobox)
         Me.Controls.Add(Me.readToolProgress_Label)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.A_TextBox)
@@ -813,7 +779,7 @@ Partial Class Main
         Me.Controls.Add(Me.AutoOpen_checkBox)
         Me.Controls.Add(Me.DefineName_Bt)
         Me.Controls.Add(Me.ForceName_checkBox)
-        Me.Controls.Add(Me.manuf_TextBox)
+        Me.Controls.Add(Me.manuf_comboBox)
         Me.Controls.Add(Me.manref_TextBox)
         Me.Controls.Add(Me.menu_1)
         Me.Controls.Add(Me.menu_4)
@@ -821,10 +787,6 @@ Partial Class Main
         Me.Controls.Add(Me.menu_2)
         Me.Controls.Add(Me.Chf_textbox)
         Me.Controls.Add(Me.Name_textbox)
-        Me.Controls.Add(Me.menu_12)
-        Me.Controls.Add(Me.menu_11)
-        Me.Controls.Add(Me.Diam_filter_TextBox)
-        Me.Controls.Add(Me.Ref_filter_TextBox)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.alpha)
@@ -865,10 +827,6 @@ Partial Class Main
     Friend WithEvents menu_5 As Label
     Friend WithEvents menu_6 As Label
     Friend WithEvents menu_7 As Label
-    Friend WithEvents Ref_filter_TextBox As TextBox
-    Friend WithEvents Diam_filter_TextBox As TextBox
-    Friend WithEvents menu_11 As Label
-    Friend WithEvents menu_12 As Label
     Friend WithEvents Name_textbox As TextBox
     Friend WithEvents Chf_textbox As TextBox
     Friend WithEvents menu_2 As Label
@@ -879,7 +837,7 @@ Partial Class Main
     Friend WithEvents menu_4 As Label
     Friend WithEvents menu_1 As Label
     Friend WithEvents manref_TextBox As ComboBox
-    Friend WithEvents manuf_TextBox As ComboBox
+    Friend WithEvents manuf_comboBox As ComboBox
     Friend WithEvents ForceName_checkBox As CheckBox
     Friend WithEvents DefineName_Bt As Button
     Friend WithEvents Lang_en As Button
@@ -898,7 +856,7 @@ Partial Class Main
     Friend WithEvents XML_ToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents readToolProgress_Label As Label
-    Friend WithEvents manFilter_comboBox As ComboBox
+    Friend WithEvents filterD1Combobox As ComboBox
     Friend WithEvents NewToolDataGridView As DataGridView
     Friend WithEvents Top6_ToolStripButton As ToolStripButton
     Friend WithEvents OrderTools_ToolStripButton As ToolStripButton
@@ -906,7 +864,8 @@ Partial Class Main
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As ToolStripMenuItem
-    Friend WithEvents ListBox1 As ListBox
     Friend WithEvents Timer1 As Timer
     Friend WithEvents timer_label As Label
+    Friend WithEvents CheckBox2 As CheckBox
+    Friend WithEvents l1_comboBox As ComboBox
 End Class

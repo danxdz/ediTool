@@ -16,8 +16,13 @@ Public Class Main
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
+
+        My.Settings.DefManuf = "FRAISA"
+
         Dim type As String = My.Settings.ToolType
-        SetDataTable()
+
+        'Dim columns() As String = {"Reference", "D", "SD", "CTS_AD", "OL", "L", "CTS_AL", "a", "z", "chf"} 'set columns titles into string array
+        'SetDataGridColumnsTitle(columns) 
 
         If My.Settings.PrefLang = "en" Then
             Get_files(My.Resources.menu_en)
@@ -33,13 +38,6 @@ Public Class Main
             Close()
             End
         End Try
-    End Sub
-
-    Private Sub TextBox9_TextChanged(sender As Object, e As EventArgs) Handles Ref_filter_TextBox.TextChanged
-        Set_filter()
-    End Sub
-    Private Sub TextBox10_TextChanged(sender As Object, e As EventArgs) Handles Diam_filter_TextBox.TextChanged
-        Set_filter()
     End Sub
 
 
@@ -79,11 +77,11 @@ Public Class Main
             .NoTT = Me.NoTT.Text,
             .Name = Me.Name_textbox.Text,
             .Type = My.Settings.ToolType,
-            .Code = Me.manuf_TextBox.Text,
+            .Code = Me.manuf_comboBox.Text,
             .CodeBar = Me.Chf_textbox.Text,
-            .Manuf = Me.manuf_TextBox.Text,
+            .Manuf = Me.manuf_comboBox.Text,
             .ManufRef = Me.manref_TextBox.Text,
-            .ManufRefSec = Me.manFilter_comboBox.Text
+            .ManufRefSec = Me.filterD1Combobox.Text
         }
 
         Create_outil(newTool)
@@ -331,8 +329,8 @@ Public Class Main
                             .Code = tblcols.Item(21).InnerHtml
                             .CodeBar = tblcols.Item(22).InnerHtml
                         End With
-                        If manFilter_comboBox.Items.Contains(tblcols.Item(2).InnerHtml) = False Then
-                            manFilter_comboBox.Items.Add(tblcols.Item(2).InnerHtml)
+                        If filterD1Combobox.Items.Contains(tblcols.Item(2).InnerHtml) = False Then
+                            filterD1Combobox.Items.Add(tblcols.Item(2).InnerHtml)
                         End If
 
                         toolsList.items.Add(newTool)
@@ -456,18 +454,19 @@ Public Class Main
     'End Sub
 
     Private Sub NewToolDataGridView_MouseUp(sender As Object, e As MouseEventArgs) Handles NewToolDataGridView.MouseUp
-
         If e.Button = MouseButtons.Left Then
             started = True
             Dim num As Integer = NewToolDataGridView.SelectedRows().Count
-            If num > 0 Then
-                Dim i As Integer = NewToolDataGridView.CurrentRow().Index + 1
-                Dim tmp = toolsList.items.Count
-                i = tmp - i
+            Dim i As Integer = NewToolDataGridView.CurrentRow().Index + 1
+            Dim tmp = toolsList.items.Count
 
+            If num = 1 Then
+
+                If My.Settings.DefManuf <> "FRAISA" Then
+                    i = tmp - i
+                End If
                 readToolProgress_Label.Text = i
                 Try
-
                     D_textbox.Text = toolsList.items(i).D1
                     L_textbox.Text = toolsList.items(i).L1
 
@@ -476,26 +475,31 @@ Public Class Main
 
                     SD_textbox.Text = toolsList.items(i).D3
                     OL_textbox.Text = toolsList.items(i).L3
+
                     Refresh_outil()
                 Catch ex As Exception
-
+                    MsgBox("tool data error") 'TODO
                 End Try
 
             End If
         End If
-    End Sub
 
+    End Sub
 
     Private Sub Top6_ToolStripButton_Click(sender As Object, e As EventArgs) Handles Top6_ToolStripButton.Click
         OpenV6File()
     End Sub
 
 
-    Private Sub ListBox1_MouseUp(sender As Object, e As MouseEventArgs) Handles ListBox1.MouseUp
-        If e.Button = MouseButtons.Right Then
-            Dim index As Integer = ListBox1.SelectedIndex
-        End If
+    Private Sub Manuf_TextBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles manuf_comboBox.SelectedIndexChanged
+        Set_filter()
     End Sub
 
+    Private Sub ManRef_TextBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles manref_TextBox.SelectedIndexChanged
+        Set_filter()
+    End Sub
 
+    Private Sub NewToolDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles NewToolDataGridView.CellContentClick
+
+    End Sub
 End Class
