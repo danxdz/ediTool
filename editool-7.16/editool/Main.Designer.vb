@@ -482,7 +482,7 @@ Partial Class Main
         '
         Me.ValidateBt.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ValidateBt.Font = New System.Drawing.Font("Microsoft YaHei", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ValidateBt.Location = New System.Drawing.Point(795, 450)
+        Me.ValidateBt.Location = New System.Drawing.Point(870, 452)
         Me.ValidateBt.Name = "ValidateBt"
         Me.ValidateBt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.ValidateBt.Size = New System.Drawing.Size(130, 26)
@@ -494,7 +494,7 @@ Partial Class Main
         '
         Me.AutoOpen_checkBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.AutoOpen_checkBox.AutoSize = True
-        Me.AutoOpen_checkBox.Location = New System.Drawing.Point(946, 457)
+        Me.AutoOpen_checkBox.Location = New System.Drawing.Point(810, 459)
         Me.AutoOpen_checkBox.Name = "AutoOpen_checkBox"
         Me.AutoOpen_checkBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.AutoOpen_checkBox.Size = New System.Drawing.Size(54, 17)

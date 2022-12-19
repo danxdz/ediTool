@@ -64,25 +64,36 @@ Public Class Main
     End Sub
     Private Sub ValidateBt_Click_1(sender As Object, e As EventArgs) Handles ValidateBt.Click
 
-        Dim newTool As New NewTool With {
-            .D1 = Me.D_textbox.Text,
-            .D2 = Me.CTS_AD_textbox.Text,
-            .D3 = Me.SD_textbox.Text,
-            .L1 = Me.L_textbox.Text,
-            .L2 = Me.CTS_AL_textbox.Text,
-            .L3 = Me.OL_textbox.Text,
-            .AngleDeg = Me.alpha.Text,
-            .Chanfrein = Me.Chf_textbox.Text,
-            .RayonBout = Me.Chf_textbox.Text,
-            .NoTT = Me.NoTT.Text,
-            .Name = Me.Name_textbox.Text,
-            .Type = My.Settings.ToolType,
-            .Code = Me.manuf_comboBox.Text,
-            .CodeBar = Me.Chf_textbox.Text,
-            .Manuf = Me.manuf_comboBox.Text,
-            .ManufRef = Me.manref_TextBox.Text,
-            .ManufRefSec = Me.filterD1Combobox.Text
-        }
+        Dim newTool As New NewTool
+
+        'With {
+        '    .D1 = Me.D_textbox.Text,
+        '    .D2 = Me.CTS_AD_textbox.Text,
+        '    .D3 = Me.SD_textbox.Text,
+        '    .L1 = Me.L_textbox.Text,
+        '    .L2 = Me.CTS_AL_textbox.Text,
+        '    .L3 = Me.OL_textbox.Text,
+        '    .AngleDeg = Me.alpha.Text,
+        '    .Chanfrein = Me.Chf_textbox.Text,
+        '    .RayonBout = Me.Chf_textbox.Text,
+        '    .NoTT = Me.NoTT.Text,
+        '    .Name = Me.Name_textbox.Text,
+        '    .Type = My.Settings.ToolType,
+        '    .Code = Me.manuf_comboBox.Text,
+        '    .CodeBar = Me.Chf_textbox.Text,
+        '    .Manuf = Me.manuf_comboBox.Text,
+        '    .ManufRef = Me.manref_TextBox.Text,
+        '    .ManufRefSec = Me.filterD1Combobox.Text
+        '}
+
+        toolsList.items.count()
+
+
+
+        Dim num As Integer = NewToolDataGridView.SelectedRows().Count
+        Dim i As Integer = NewToolDataGridView.CurrentRow().Index
+
+        newTool = toolsList.Items(i)
 
         Create_outil(newTool)
         'REG CREATED TOOLS
@@ -252,8 +263,8 @@ Public Class Main
 
     Private Sub Webtocsv(ByVal sender As Object, ByVal e As WebBrowserDocumentCompletedEventArgs)
 
-        NewToolDataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.EnableResizing
-        NewToolDataGridView.RowHeadersVisible = False
+        Dim DataTableOrderTools As DataTable
+        DataTableOrderTools = New DataTable
 
         Dim toolTypeFilter As String = My.Settings.ToolType
 
@@ -261,92 +272,141 @@ Public Class Main
 
         Dim tblrows As HtmlElementCollection
         Dim tblcols As HtmlElementCollection
-        'Dim column As String
+        Dim column As String
 
         Dim row As New List(Of String)()
 
         tblrows = webcsv.Document.GetElementById("tableTool").GetElementsByTagName("tr")
-
-        NewToolDataGridView.Columns.Clear()
-        NewToolDataGridView.Rows.Clear()
+        NewToolDataGridView.DataSource = Nothing
+        'NewToolDataGridView.Columns.Clear()
+        'NewToolDataGridView.Rows.Clear()
         readToolProgress_Label.Text = 0
 
 
+
+        Dim objList As New List(Of String)
+        DataTableOrderTools = New DataTable
+
+
         tblcols = tblrows.Item(0).GetElementsByTagName("th")
-        'If tblcols.Count > 0 Then
-        '    For x As Integer = 0 To tblcols.Count - 1
-        '        column = tblcols.Item(x).InnerHtml
-        '        Replace(column, "VbTab", "")
-        '        Replace(column, "<br>", " ")
 
-        '        Dim col = New DataGridViewTextBoxColumn With {
-        '                       .HeaderText = Replace(column, "<br>", " "),
-        '                       .SortMode = DataGridViewColumnSortMode.NotSortable
-        '                   }
-        '        Dim colIndex As Integer = NewToolDataGridView.Columns.Add(col)
-        '    Next
-        'End If
+        If tblcols.Count > 0 Then
+            For x As Integer = 0 To tblcols.Count - 1
+                column = tblcols.Item(x).InnerHtml
+                column = Replace(column, "<br>", " ")
 
-        For r As Integer = 1 To tblrows.Count - 2
+                Dim col = New DataGridViewTextBoxColumn With {
+                               .HeaderText = column,
+                               .SortMode = DataGridViewColumnSortMode.NotSortable
+                           }
+                'Dim colIndex As Integer = NewToolDataGridView.Columns.Add(col)
+                objList.Add(column)
+            Next
+        End If
+
+        DataTableOrderTools = SetDataGridColumnsTitle(objList.ToArray, DataTableOrderTools)
+
+
+
+
+        For r As Integer = 2 To tblrows.Count - 2
             tblcols = tblrows.Item(r).GetElementsByTagName("td")
 
             Dim stock As HtmlElementCollection
 
             'NewToolDataGridView.Rows.Add()
             Dim newTool = New NewTool
+            Try
+                stock = tblcols.Item(0).GetElementsByTagName("strong")
+                Dim stockVal As Integer
+                If stock.Count > 0 Then
+                    stockVal = stock(0).InnerHtml
+                Else
+                    stockVal = 0
+                End If
 
-            For x As Integer = 0 To 0 'tblcols.Count - 1
-                Try
-                    stock = tblcols.Item(x).GetElementsByTagName("strong")
-
-                    If tblcols.Item(1).InnerHtml = toolTypeFilter Then
-                        'ListBox1.Items.Add(tblcols.Item(2).InnerHtml & " - " & tblcols.Item(3).InnerHtml & " - " & tblcols.Item(4).InnerHtml & " - " & tblcols.Item(8).InnerHtml)
-                        readToolProgress_Label.Text += 1
-                        With newTool
-                            .d1 = tblcols.Item(3).InnerHtml
-                            .d2 = tblcols.Item(3).InnerHtml - 0.2
-                            .d3 = tblcols.Item(7).InnerHtml
-                            .l1 = tblcols.Item(4).InnerHtml
-                            If tblcols.Item(5).InnerHtml > 0 Then
-                                .L2 = tblcols.Item(5).InnerHtml
-                            Else
-                                .L2 = newTool.L1
-                            End If
-                            .l3 = tblcols.Item(6).InnerHtml
-                            .nott = tblcols.Item(8).InnerHtml
-                            .Type = tblcols.Item(1).InnerHtml
-                            .GroupeMat = tblcols.Item(2).InnerHtml
-                            .RayonBout = tblcols.Item(9).InnerHtml
-                            .Chanfrein = tblcols.Item(10).InnerHtml
-                            .CoupeCentre = tblcols.Item(11).InnerHtml
-                            .ArrCentre = tblcols.Item(12).InnerHtml
-                            .TypeTar = tblcols.Item(13).InnerHtml
-                            .PasTar = tblcols.Item(14).InnerHtml
-                            .Manuf = tblcols.Item(15).InnerHtml
-                            .ManufRef = tblcols.Item(16).InnerHtml
-                            .ManufRefSec = Replace(tblcols.Item(17).InnerHtml, "    ", "")
-                            '.Link = tblcols.Item(18).InnerHtml
-                            .Code = tblcols.Item(21).InnerHtml
-                            .CodeBar = tblcols.Item(22).InnerHtml
-                        End With
-                        If filterD1Combobox.Items.Contains(tblcols.Item(2).InnerHtml) = False Then
-                            filterD1Combobox.Items.Add(tblcols.Item(2).InnerHtml)
+                If tblcols.Item(1).InnerHtml = toolTypeFilter Then
+                    'ListBox1.Items.Add(tblcols.Item(2).InnerHtml & " - " & tblcols.Item(3).InnerHtml & " - " & tblcols.Item(4).InnerHtml & " - " & tblcols.Item(8).InnerHtml)
+                    readToolProgress_Label.Text += 1
+                    With newTool
+                        .d1 = tblcols.Item(3).InnerHtml
+                        .d2 = tblcols.Item(3).InnerHtml - 0.2
+                        .d3 = tblcols.Item(7).InnerHtml
+                        .l1 = tblcols.Item(4).InnerHtml
+                        If tblcols.Item(5).InnerHtml > 0 Then
+                            .L2 = tblcols.Item(5).InnerHtml
+                        Else
+                            .L2 = newTool.L1
                         End If
+                        .l3 = tblcols.Item(6).InnerHtml
+                        .nott = tblcols.Item(8).InnerHtml
+                        .Type = tblcols.Item(1).InnerHtml
+                        .GroupeMat = tblcols.Item(2).InnerHtml
+                        .RayonBout = tblcols.Item(9).InnerHtml
+                        .Chanfrein = tblcols.Item(10).InnerHtml
+                        .CoupeCentre = tblcols.Item(11).InnerHtml
+                        .ArrCentre = tblcols.Item(12).InnerHtml
+                        .TypeTar = tblcols.Item(13).InnerHtml
+                        .PasTar = tblcols.Item(14).InnerHtml
+                        .Manuf = tblcols.Item(15).InnerHtml
+                        .ManufRef = tblcols.Item(16).InnerHtml
+                        .ManufRefSec = Replace(tblcols.Item(17).InnerHtml, "    ", "")
+                        '.Link = tblcols.Item(18).InnerHtml
+                        .Code = tblcols.Item(21).InnerHtml
+                        .CodeBar = tblcols.Item(22).InnerHtml
+                    End With
 
-                        toolsList.items.Add(newTool)
-                        FileImports.FillDataGrid(newTool, NewToolDataGridView)
-                    End If
 
-                Catch ex As Exception
+                    With newTool
+                        Dim rowTmp() As String = {
+                            stockVal,
+                            .Type,
+                            .GroupeMat,
+                            .D1,
+                            .L1,
+                            .L2,
+                            .L3,
+                            .D3,
+                            .NoTT,
+                            .RayonBout,
+                            .Chanfrein,
+                            .CoupeCentre,
+                            .ArrCentre,
+                            .TypeTar,
+                            .PasTar,
+                            .Manuf,
+                            .ManufRef,
+                            .ManufRefSec,
+                            .Code,
+                            .CodeBar
+                        }
 
-                End Try
 
-            Next
+                        DataTableOrderTools.Rows.Add(rowTmp)
+
+                    End With
+
+
+                    toolsList.items.Add(newTool)
+                    'FileImports.FillDataGrid(newTool, NewToolDataGridView)
+                End If
+
+            Catch ex As Exception
+                'MsgBox("cant read tool")
+            End Try
+
 
         Next
         'ToolList.Text = csv     'show csv in textbox
 
         'Refresh_outil()
+
+        'DataTableOrderTools.DefaultView.Sort = "Id outil ASC"
+        'NewToolDataGridView.DataSource = DataTableOrderTools.DefaultView.ToTable
+        NewToolDataGridView.DataSource = DataTableOrderTools
+
+
+
 
         avance_f = Now().ToUniversalTime
 
@@ -383,6 +443,7 @@ Public Class Main
 
         'End Select
 
+        'FileImports.FillDataGrid(newTool, NewToolDataGridView)
 
 
 
@@ -392,6 +453,14 @@ Public Class Main
 
 
     Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles OrderTools_ToolStripButton.Click
+
+        My.Settings.DefManuf = ""
+        My.Settings.Save()
+
+        filterD1Combobox.DataSource = Nothing
+        filterD1Combobox.Items.Clear()
+
+        toolsList.items.clear()
 
         avance = Now().ToUniversalTime
 
@@ -457,14 +526,14 @@ Public Class Main
         If e.Button = MouseButtons.Left Then
             started = True
             Dim num As Integer = NewToolDataGridView.SelectedRows().Count
-            Dim i As Integer = NewToolDataGridView.CurrentRow().Index + 1
+            Dim i As Integer = NewToolDataGridView.CurrentRow().Index '+ 1
             Dim tmp = toolsList.items.Count
 
             If num = 1 Then
 
-                If My.Settings.DefManuf <> "FRAISA" Then
-                    i = tmp - i
-                End If
+                'If My.Settings.DefManuf <> "FRAISA" Then
+                '    i = tmp - i
+                'End If
                 readToolProgress_Label.Text = i
                 Try
                     D_textbox.Text = toolsList.items(i).D1
@@ -499,7 +568,4 @@ Public Class Main
         Set_filter()
     End Sub
 
-    Private Sub NewToolDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles NewToolDataGridView.CellContentClick
-
-    End Sub
 End Class

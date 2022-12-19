@@ -6,7 +6,7 @@ Module ts
 
 
 
-        'TopSolidHost.Connect(1, 0, "server")
+        'TopSolidHost.Connect(1, 0, "server") 'option to network server
         TopSolidHost.Connect()
         TopSolidDesignHost.Connect()
 
@@ -194,9 +194,6 @@ Module ts
 
     Private Sub Set_parametre_outil(newTool As DocumentId)
 
-        'list_par = {{"D", 0, Main.d1.Text}, {"CTS_AD", 0, Main.d3.Text}, {"SD", 0, Main.d2.Text}, {"L", 0, Main.L2.Text}, {"CTS_AL", 0, Main.L3.Text}, {"OL", 0, Main.L1.Text}, {"FB", 0, Main.chf.Text}, {"NoTT", 0, Main.NoTT.Text}, {"Name", 0, Main.Name_textbox.Text}}
-        'Dim D As ElementId = TopSolidHost.Elements.SearchByName(newTool, "D")
-        'TopSolidHost.Parameters.SetRealValue(D, strip_doubles(Main.d1.Text))
         SetReal(newTool, "D", Strip_doubles(Main.D_textbox.Text))
         SetReal(newTool, "SD", Strip_doubles(Main.SD_textbox.Text))
         SetReal(newTool, "OL", Strip_doubles(Main.OL_textbox.Text))
