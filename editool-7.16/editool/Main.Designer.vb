@@ -77,7 +77,7 @@ Partial Class Main
         Me.A_TextBox = New System.Windows.Forms.TextBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.readToolProgress_Label = New System.Windows.Forms.Label()
-        Me.filterD1Combobox = New System.Windows.Forms.ComboBox()
+        Me.filterD1_Combobox = New System.Windows.Forms.ComboBox()
         Me.NewToolDataGridView = New System.Windows.Forms.DataGridView()
         Me.newToolMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -86,7 +86,7 @@ Partial Class Main
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.timer_label = New System.Windows.Forms.Label()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.l1_comboBox = New System.Windows.Forms.ComboBox()
+        Me.filterL1_ComboBox = New System.Windows.Forms.ComboBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolsBar.SuspendLayout()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -667,13 +667,14 @@ Partial Class Main
         Me.readToolProgress_Label.TabIndex = 58
         Me.readToolProgress_Label.Text = "0"
         '
-        'filterD1Combobox
+        'filterD1_Combobox
         '
-        Me.filterD1Combobox.FormattingEnabled = True
-        Me.filterD1Combobox.Location = New System.Drawing.Point(27, 255)
-        Me.filterD1Combobox.Name = "filterD1Combobox"
-        Me.filterD1Combobox.Size = New System.Drawing.Size(120, 21)
-        Me.filterD1Combobox.TabIndex = 59
+        Me.filterD1_Combobox.FormattingEnabled = True
+        Me.filterD1_Combobox.Location = New System.Drawing.Point(27, 255)
+        Me.filterD1_Combobox.Name = "filterD1_Combobox"
+        Me.filterD1_Combobox.Size = New System.Drawing.Size(120, 21)
+        Me.filterD1_Combobox.TabIndex = 59
+        Me.filterD1_Combobox.Text = " "
         '
         'NewToolDataGridView
         '
@@ -730,13 +731,14 @@ Partial Class Main
         Me.CheckBox2.Text = "edited"
         Me.CheckBox2.UseVisualStyleBackColor = True
         '
-        'l1_comboBox
+        'filterL1_ComboBox
         '
-        Me.l1_comboBox.FormattingEnabled = True
-        Me.l1_comboBox.Location = New System.Drawing.Point(153, 255)
-        Me.l1_comboBox.Name = "l1_comboBox"
-        Me.l1_comboBox.Size = New System.Drawing.Size(120, 21)
-        Me.l1_comboBox.TabIndex = 65
+        Me.filterL1_ComboBox.FormattingEnabled = True
+        Me.filterL1_ComboBox.Location = New System.Drawing.Point(153, 255)
+        Me.filterL1_ComboBox.Name = "filterL1_ComboBox"
+        Me.filterL1_ComboBox.Size = New System.Drawing.Size(120, 21)
+        Me.filterL1_ComboBox.TabIndex = 65
+        Me.filterL1_ComboBox.Text = " "
         '
         'Main
         '
@@ -745,7 +747,7 @@ Partial Class Main
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1008, 486)
-        Me.Controls.Add(Me.l1_comboBox)
+        Me.Controls.Add(Me.filterL1_ComboBox)
         Me.Controls.Add(Me.CheckBox2)
         Me.Controls.Add(Me.timer_label)
         Me.Controls.Add(Me.ToolsBar)
@@ -771,7 +773,7 @@ Partial Class Main
         Me.Controls.Add(Me.D_textbox)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.NewToolDataGridView)
-        Me.Controls.Add(Me.filterD1Combobox)
+        Me.Controls.Add(Me.filterD1_Combobox)
         Me.Controls.Add(Me.readToolProgress_Label)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.A_TextBox)
@@ -856,7 +858,7 @@ Partial Class Main
     Friend WithEvents XML_ToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents readToolProgress_Label As Label
-    Friend WithEvents filterD1Combobox As ComboBox
+    Friend WithEvents filterD1_Combobox As ComboBox
     Friend WithEvents NewToolDataGridView As DataGridView
     Friend WithEvents Top6_ToolStripButton As ToolStripButton
     Friend WithEvents OrderTools_ToolStripButton As ToolStripButton
@@ -867,5 +869,5 @@ Partial Class Main
     Friend WithEvents Timer1 As Timer
     Friend WithEvents timer_label As Label
     Friend WithEvents CheckBox2 As CheckBox
-    Friend WithEvents l1_comboBox As ComboBox
+    Friend WithEvents filterL1_ComboBox As ComboBox
 End Class

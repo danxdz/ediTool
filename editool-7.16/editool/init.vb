@@ -157,6 +157,7 @@ Module outils_base
 
 
         Dim filterD1 As New List(Of Single)
+        Dim filterL1 As New List(Of Single)
 
 
         For i As Integer = 0 To 4000 'full_file.Length - 1
@@ -179,6 +180,12 @@ Module outils_base
                         filterD1.Add(tmp)
                     End If
                 End If
+
+                If Single.TryParse(line(5), tmp) = True Then
+                    If filterL1.Contains(tmp) = False Then
+                        filterL1.Add(tmp)
+                    End If
+                End If
                 'Main.NewToolDataGridView.Rows.Insert(0, line.ToArray())
             Else
                 Dim tmp As String = Strings.Left(line(0), filter.Length)
@@ -192,14 +199,21 @@ Module outils_base
 
 
         filterD1 = filterD1.OrderBy(Function(x) x).ToList()
-
-        With Main.filterD1Combobox
+        With Main.filterD1_Combobox
             .DataSource = filterD1
         End With
 
 
-        DataTable_buffer.DefaultView.Sort = "d ASC"
-        Main.NewToolDataGridView.DataSource = DataTable_buffer.DefaultView.ToTable
+        filterL1 = filterL1.OrderBy(Function(x) x).ToList()
+        With Main.filterL1_comboBox
+            .DataSource = filterL1
+        End With
+
+
+
+        ' DataTable_buffer.DefaultView.Sort = "d ASC"
+        'Main.NewToolDataGridView.DataSource = DataTable_buffer.DefaultView.ToTable
+        Main.NewToolDataGridView.DataSource = DataTable_buffer
 
 
 
@@ -210,8 +224,8 @@ Module outils_base
     Private Sub FillDiamFilterDropbox(diam As String)
         Dim tmp As Double
         If Double.TryParse(diam, tmp) = True Then
-            If Main.filterD1Combobox.Items.Contains(tmp) = False Then
-                Main.filterD1Combobox.Items.Add(tmp)
+            If Main.filterD1_Combobox.Items.Contains(tmp) = False Then
+                Main.filterD1_Combobox.Items.Add(tmp)
             End If
         End If
     End Sub

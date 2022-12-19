@@ -457,8 +457,8 @@ Public Class Main
         My.Settings.DefManuf = ""
         My.Settings.Save()
 
-        filterD1Combobox.DataSource = Nothing
-        filterD1Combobox.Items.Clear()
+        filterD1_Combobox.DataSource = Nothing
+        filterD1_Combobox.Items.Clear()
 
         toolsList.items.clear()
 
@@ -568,4 +568,42 @@ Public Class Main
         Set_filter()
     End Sub
 
+    Private Sub FilterD1Combobox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles filterD1_Combobox.SelectedIndexChanged
+        If started = True Then
+
+            Dim sel As String = filterD1_Combobox.SelectedItem.ToString()
+            Dim filteredTool As New List(Of NewTool)
+
+            For Each tool As NewTool In toolsList.items
+                Dim tmp = tool.D1
+                If tmp = sel Then
+                    filteredTool.Add(tool)
+                End If
+            Next
+            NewToolDataGridView.DataSource = filteredTool
+        End If
+    End Sub
+
+
+    Private Sub filterL1_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles filterL1_ComboBox.SelectedIndexChanged
+        If started = True Then
+
+            Dim sel As String = filterL1_ComboBox.SelectedItem.ToString()
+
+            Dim otherFilters As String = filterD1_Combobox.SelectedItem.ToString()
+
+            Dim filteredTool As New List(Of NewTool)
+
+            For Each tool As NewTool In toolsList.items
+                Dim tmp = tool.L1
+                Dim tmpD1 = tool.D1
+
+                If tmp = sel And tmpD1 = otherFilters Then
+                    filteredTool.Add(tool)
+                End If
+            Next
+            NewToolDataGridView.DataSource = filteredTool
+        End If
+
+    End Sub
 End Class
