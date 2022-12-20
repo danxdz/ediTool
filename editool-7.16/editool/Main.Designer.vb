@@ -87,6 +87,7 @@ Partial Class Main
         Me.timer_label = New System.Windows.Forms.Label()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.filterL1_ComboBox = New System.Windows.Forms.ComboBox()
+        Me.filterMat_ComboBox = New System.Windows.Forms.ComboBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolsBar.SuspendLayout()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -740,6 +741,15 @@ Partial Class Main
         Me.filterL1_ComboBox.TabIndex = 65
         Me.filterL1_ComboBox.Text = " "
         '
+        'filterMat_ComboBox
+        '
+        Me.filterMat_ComboBox.FormattingEnabled = True
+        Me.filterMat_ComboBox.Location = New System.Drawing.Point(279, 255)
+        Me.filterMat_ComboBox.Name = "filterMat_ComboBox"
+        Me.filterMat_ComboBox.Size = New System.Drawing.Size(120, 21)
+        Me.filterMat_ComboBox.TabIndex = 66
+        Me.filterMat_ComboBox.Text = " "
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -747,6 +757,7 @@ Partial Class Main
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1008, 486)
+        Me.Controls.Add(Me.filterMat_ComboBox)
         Me.Controls.Add(Me.filterL1_ComboBox)
         Me.Controls.Add(Me.CheckBox2)
         Me.Controls.Add(Me.timer_label)
@@ -870,4 +881,5 @@ Partial Class Main
     Friend WithEvents timer_label As Label
     Friend WithEvents CheckBox2 As CheckBox
     Friend WithEvents filterL1_ComboBox As ComboBox
+    Friend WithEvents filterMat_ComboBox As ComboBox
 End Class

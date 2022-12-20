@@ -143,7 +143,41 @@ Module outils_base
         Main.DefineName_Bt.Text = splitLine(labels.Length + 3)
 
     End Sub
+    Function AddFiltersCombobox(str As String, filter As List(Of Single))
 
+        Dim tmp As Single
+        If Single.TryParse(str, tmp) = True Then
+            If filter.Count > 0 Then
+                If filter.Contains(tmp) = False Then
+                    filter.Add(tmp)
+                End If
+            Else
+                filter.Add(tmp)
+                Single.TryParse("", tmp)
+                filter.Add(tmp)
+
+            End If
+        End If
+        Return filter
+
+
+    End Function
+    Function SetFiltersString(str As String, filter As List(Of String))
+
+        If str <> "" Then
+            If filter.Count > 0 Then
+                If filter.Contains(str) = False Then
+                    filter.Add(str)
+                End If
+            Else
+                filter.Add("")
+                filter.Add(str)
+            End If
+        End If
+        Return filter
+
+
+    End Function
     Public Sub get_outils(data As String, filter As String)
         Dim full_file() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
 
@@ -174,21 +208,20 @@ Module outils_base
                 Main.toolsList.items.add(newtool)
 
 
-                Dim tmp As Single
-                If Single.TryParse(line(1), tmp) = True Then
-                    If filterD1.Contains(tmp) = False Then
-                        filterD1.Add(tmp)
-                    End If
-                End If
+                filterD1 = AddFiltersCombobox(line(1), filterD1)
+                filterL1 = AddFiltersCombobox(line(5), filterL1)
 
-                If Single.TryParse(line(5), tmp) = True Then
-                    If filterL1.Contains(tmp) = False Then
-                        filterL1.Add(tmp)
-                    End If
-                End If
-                'Main.NewToolDataGridView.Rows.Insert(0, line.ToArray())
+
+
+                'If Single.TryParse(line(5), tmp) = True Then
+                '    If filterL1.Contains(tmp) = False Then
+                '        filterL1.Add(tmp)
+                '    End If
+                'End If
+
+
             Else
-                Dim tmp As String = Strings.Left(line(0), filter.Length)
+                    Dim tmp As String = Strings.Left(line(0), filter.Length)
                 If filter = tmp Then
                     Main.toolsList.items.add(newtool)
                     DataTable_buffer.Rows.Add(line)
