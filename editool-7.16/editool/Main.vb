@@ -64,38 +64,14 @@ Public Class Main
     End Sub
     Private Sub ValidateBt_Click_1(sender As Object, e As EventArgs) Handles ValidateBt.Click
 
-        Dim newTool As New NewTool
-
-        'With {
-        '    .D1 = Me.D_textbox.Text,
-        '    .D2 = Me.CTS_AD_textbox.Text,
-        '    .D3 = Me.SD_textbox.Text,
-        '    .L1 = Me.L_textbox.Text,
-        '    .L2 = Me.CTS_AL_textbox.Text,
-        '    .L3 = Me.OL_textbox.Text,
-        '    .AngleDeg = Me.alpha.Text,
-        '    .Chanfrein = Me.Chf_textbox.Text,
-        '    .RayonBout = Me.Chf_textbox.Text,
-        '    .NoTT = Me.NoTT.Text,
-        '    .Name = Me.Name_textbox.Text,
-        '    .Type = My.Settings.ToolType,
-        '    .Code = Me.manuf_comboBox.Text,
-        '    .CodeBar = Me.Chf_textbox.Text,
-        '    .Manuf = Me.manuf_comboBox.Text,
-        '    .ManufRef = Me.manref_TextBox.Text,
-        '    .ManufRefSec = Me.filterD1Combobox.Text
-        '}
-
-        toolsList.items.count()
-
-
-
-        Dim num As Integer = NewToolDataGridView.SelectedRows().Count
         Dim i As Integer = NewToolDataGridView.CurrentRow().Index
+
+        Dim newTool As New NewTool
 
         newTool = toolsList.Items(i)
 
         Create_outil(newTool)
+
         'REG CREATED TOOLS
         'Dim file_reader As IO.StreamReader
         'file_reader = Open_data_file("reg.txt")
@@ -635,13 +611,14 @@ Public Class Main
     End Sub
     Dim filteredTool As New List(Of NewTool)
 
-    Public Sub filters_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles filterMat_ComboBox.SelectedIndexChanged, filterL1_ComboBox.SelectedIndexChanged, filterD1_Combobox.SelectedIndexChanged
+    Public Sub Filters_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles filterMat_ComboBox.SelectedIndexChanged, filterL1_ComboBox.SelectedIndexChanged, filterD1_Combobox.SelectedIndexChanged
 
-        If filterMat_ComboBox.SelectedItem <> "" Then
-            filteredTool = SetFilters(sender)
-            NewToolDataGridView.DataSource = filteredTool
+        'If filterMat_ComboBox.SelectedItem <> "" Then
+        filteredTool.Clear()
+        filteredTool = SetFilters(sender)
+        NewToolDataGridView.DataSource = filteredTool
 
-        End If
+        'End If
     End Sub
 
     Function SetFilters(sender As Object)
@@ -651,7 +628,7 @@ Public Class Main
         Dim seltmp As String = filterCB.SelectedItem
 
 
-        If filterCB.SelectedItem <> "" Then
+        If filterCB.SelectedItem <> 0 Then
             For Each tool As NewTool In toolsList.Items
                 Dim tmpFilter As String
 
@@ -663,10 +640,18 @@ Public Class Main
                                 filteredTool.Add(tool)
 
                             End If
-                        Case "filterD1_ComboBox"
+                        Case "filterD1_Combobox"
                             tmpFilter = tool.D1
+                            If tmpFilter = seltmp Then
+                                filteredTool.Add(tool)
+
+                            End If
                         Case "filterL1_ComboBox"
                             tmpFilter = tool.L1
+                            If tmpFilter = seltmp Then
+                                filteredTool.Add(tool)
+
+                            End If
                     End Select
 
                 End If

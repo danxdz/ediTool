@@ -14,10 +14,6 @@ Module ts
         Dim model_id As String = "Side Mill D20 L35 SD20"
         Dim toolType = newTool.Type
 
-        'model_id = "model_fr" --> FR 2T
-        'model_id = "model_ft" --> Ft Rayon/Chanfrein
-        'model_id = "model_fo" --> Foret
-        'etc
         If toolType <> "" Then
             My.Settings.ToolType = toolType
             My.Settings.Save()
@@ -25,7 +21,6 @@ Module ts
             toolType = My.Settings.ToolType
         End If
 
-        ''model_id = "FR 2T D20 L35 SD20"
         Select Case toolType
             Case "FR2T"
                 model_id = "Side Mill D20 L35 SD20"
@@ -56,7 +51,7 @@ Module ts
                         TopSolidHost.Documents.EnsureIsDirty(model_fr)
                         '// Perform document modification.
 
-                        MakeTool(model_fr, newTool)
+                        MakeTool(model_fr)
                         TopSolidHost.Pdm.CheckIn(TopSolidHost.Pdm.SearchDocumentByName(lib_models(0), TopSolidHost.Documents.GetName(model_fr))(0), True)
 
                         MsgBox("Outil " + Main.Name_textbox.Text + " crée")
@@ -156,7 +151,7 @@ Module ts
 
     End Sub
 
-    Private Sub MakeTool(docId As DocumentId, newTool As NewTool)
+    Private Sub MakeTool(docId As DocumentId)
 
         Dim list_par As List(Of ElementId) = TopSolidHost.Parameters.GetParameters(docId)
         Dim names As String
@@ -192,20 +187,18 @@ Module ts
 
     End Sub
 
-    Private Sub Set_parametre_outil(newTool As DocumentId)
+    Private Sub Set_parametre_outil(newTool_docId As DocumentId)
 
-        SetReal(newTool, "D", Strip_doubles(Main.D_textbox.Text))
-        SetReal(newTool, "SD", Strip_doubles(Main.SD_textbox.Text))
-        SetReal(newTool, "OL", Strip_doubles(Main.OL_textbox.Text))
-        SetReal(newTool, "L", Strip_doubles(Main.L_textbox.Text))
+        SetReal(newTool_docId, "D", Strip_doubles(Main.D_textbox.Text))
+        SetReal(newTool_docId, "SD", Strip_doubles(Main.SD_textbox.Text))
+        SetReal(newTool_docId, "OL", Strip_doubles(Main.OL_textbox.Text))
+        SetReal(newTool_docId, "L", Strip_doubles(Main.L_textbox.Text))
 
-        Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool, "$TopSolid.Kernel.TX.Properties.Name")
+        Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")
 
         If My.Settings.ToolType = "FP" Or My.Settings.ToolType = "FOCA" Then
             Dim tmpAngleRad = Main.A_TextBox.Text * Math.PI / 180
-            SetReal(newTool, "A", tmpAngleRad)
-
-
+            SetReal(newTool_docId, "A", tmpAngleRad)
 
             Select Case My.Settings.ToolType
                 Case "FP"
@@ -217,32 +210,32 @@ Module ts
         ElseIf My.Settings.ToolType = "AL" Then
             TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_AL)
         Else
-            SetReal(newTool, "CTS_AD", Strip_doubles(Main.CTS_AD_textbox.Text))
-            SetReal(newTool, "CTS_AL", Strip_doubles(Main.CTS_AL_textbox.Text))
-            SetReal(newTool, "CTS_ED", Strip_doubles(Main.SD_textbox.Text))
+            SetReal(newTool_docId, "CTS_AD", Strip_doubles(Main.CTS_AD_textbox.Text))
+            SetReal(newTool_docId, "CTS_AL", Strip_doubles(Main.CTS_AL_textbox.Text))
+            SetReal(newTool_docId, "CTS_ED", Strip_doubles(Main.SD_textbox.Text))
 
             Dim CTS_AD_tmp As Double = Strip_doubles(Main.CTS_AD_textbox.Text)
             If CTS_AD_tmp > 0 Then
-                SetReal(newTool, "CTS_EBD", CTS_AD_tmp) 'TODO
+                SetReal(newTool_docId, "CTS_EBD", CTS_AD_tmp) 'TODO
             Else
                 CTS_AD_tmp = Strip_doubles(Main.D_textbox.Text)
-                SetReal(newTool, "CTS_EBD", CTS_AD_tmp)
+                SetReal(newTool_docId, "CTS_EBD", CTS_AD_tmp)
             End If
 
             'Dim CTS_EL As ElementId = TopSolidHost.Elements.SearchByName(newTool, "CTS_EL")
             'TopSolidHost.Parameters.SetRealValue(CTS_EL, Main.L3.Text / 1000)
             Dim CTS_EL As Double = Strip_doubles(Main.CTS_AL_textbox.Text)
             If (Main.alpha.Text = 0) Then
-                SetReal(newTool, "CTS_EL", CTS_EL) 'TODO
+                SetReal(newTool_docId, "CTS_EL", CTS_EL) 'TODO
             Else
                 CTS_EL = (Strip_doubles(Main.SD_textbox.Text) - Strip_doubles(Main.D_textbox.Text)) / 2
                 CTS_EL /= Math.Tan((Main.alpha.Text * Math.PI) / 180)
-                SetReal(newTool, "CTS_EL", CTS_EL) 'TODO
+                SetReal(newTool_docId, "CTS_EL", CTS_EL) 'TODO
             End If
 
             If My.Settings.ToolType = "FT" Then
                 Dim r As Double = Strip_doubles(Main.Chf_textbox.Text)
-                SetReal(newTool, "r", r) 'TODO
+                SetReal(newTool_docId, "r", r) 'TODO
                 TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FT)
             ElseIf My.Settings.ToolType = "FB" Then
                 TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FB)
@@ -265,17 +258,15 @@ Module ts
         '***************
 
 
-        TopSolidHost.Parameters.PublishText(newTool, "Designation_outil", New SmartText(TopSolidHost.Parameters.GetDescriptionParameter(newTool)))
+        TopSolidHost.Parameters.PublishText(newTool_docId, "Designation_outil", New SmartText(TopSolidHost.Parameters.GetDescriptionParameter(newTool_docId)))
 
-        TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool, "$TopSolid.Kernel.TX.Properties.ManufacturerPartNumber"), Main.manref_TextBox.Text)
+        TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.ManufacturerPartNumber"), Main.manref_TextBox.Text)
 
-        TopSolidHost.Parameters.SetTextValue(
-                TopSolidHost.Elements.SearchByName(newTool, "$TopSolid.Kernel.TX.Properties.Manufacturer"),
-                Main.manuf_comboBox.Text)
+        TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Manufacturer"), Main.manuf_comboBox.Text)
 
-        TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool, "$TopSolid.Kernel.TX.Properties.VirtualDocument"), False)
+        TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.VirtualDocument"), False)
         Try
-            TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool, "$TopSolid.Cam.NC.Tool.TX.MachiningComponents.NotAllowedForMachining"), True)
+            TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Cam.NC.Tool.TX.MachiningComponents.NotAllowedForMachining"), True)
         Catch ex As Exception
         End Try
 
@@ -292,21 +283,15 @@ Module ts
             Dim model_fr_id As List(Of PdmObjectId)
             For i As Integer = 0 To (lib_models.Count - 1)
                 model_fr_id = TopSolidHost.Pdm.SearchDocumentByName(lib_models(i), model)
-
             Next
 
             If model_fr_id.Count > 0 Then
-
                 model_fr = TopSolidHost.Documents.GetDocument(model_fr_id(0))
-
                 temp_model = TopSolidHost.Documents.SaveAs(model_fr, lib_models(0), "temp") 'Main.Name_textbox.Text)
-
-
             End If
         Else
             MsgBox("cant find lib 'EdiTool'")
             'Close()
-
         End If
         Return temp_model
     End Function
