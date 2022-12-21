@@ -428,7 +428,7 @@ Partial Class Main
         'manref_TextBox
         '
         Me.manref_TextBox.FormattingEnabled = True
-        Me.manref_TextBox.Location = New System.Drawing.Point(214, 221)
+        Me.manref_TextBox.Location = New System.Drawing.Point(218, 223)
         Me.manref_TextBox.Name = "manref_TextBox"
         Me.manref_TextBox.Size = New System.Drawing.Size(181, 21)
         Me.manref_TextBox.TabIndex = 36
@@ -437,7 +437,7 @@ Partial Class Main
         '
         Me.manuf_comboBox.FormattingEnabled = True
         Me.manuf_comboBox.Items.AddRange(New Object() {"FRAISA", "SECO", "HOFFMAN"})
-        Me.manuf_comboBox.Location = New System.Drawing.Point(27, 221)
+        Me.manuf_comboBox.Location = New System.Drawing.Point(27, 223)
         Me.manuf_comboBox.Name = "manuf_comboBox"
         Me.manuf_comboBox.Size = New System.Drawing.Size(181, 21)
         Me.manuf_comboBox.TabIndex = 41
@@ -671,7 +671,7 @@ Partial Class Main
         'filterD1_Combobox
         '
         Me.filterD1_Combobox.FormattingEnabled = True
-        Me.filterD1_Combobox.Location = New System.Drawing.Point(27, 255)
+        Me.filterD1_Combobox.Location = New System.Drawing.Point(153, 255)
         Me.filterD1_Combobox.Name = "filterD1_Combobox"
         Me.filterD1_Combobox.Size = New System.Drawing.Size(120, 21)
         Me.filterD1_Combobox.TabIndex = 59
@@ -735,7 +735,7 @@ Partial Class Main
         'filterL1_ComboBox
         '
         Me.filterL1_ComboBox.FormattingEnabled = True
-        Me.filterL1_ComboBox.Location = New System.Drawing.Point(153, 255)
+        Me.filterL1_ComboBox.Location = New System.Drawing.Point(279, 255)
         Me.filterL1_ComboBox.Name = "filterL1_ComboBox"
         Me.filterL1_ComboBox.Size = New System.Drawing.Size(120, 21)
         Me.filterL1_ComboBox.TabIndex = 65
@@ -744,7 +744,7 @@ Partial Class Main
         'filterMat_ComboBox
         '
         Me.filterMat_ComboBox.FormattingEnabled = True
-        Me.filterMat_ComboBox.Location = New System.Drawing.Point(279, 255)
+        Me.filterMat_ComboBox.Location = New System.Drawing.Point(27, 255)
         Me.filterMat_ComboBox.Name = "filterMat_ComboBox"
         Me.filterMat_ComboBox.Size = New System.Drawing.Size(120, 21)
         Me.filterMat_ComboBox.TabIndex = 66

@@ -143,26 +143,20 @@ Module outils_base
         Main.DefineName_Bt.Text = splitLine(labels.Length + 3)
 
     End Sub
-    Function AddFiltersCombobox(str As String, filter As List(Of Single))
+    Function AddFiltersCombobox(tmp As Single, filter As List(Of Single))
 
-        Dim tmp As Single
-        If Single.TryParse(str, tmp) = True Then
-            If filter.Count > 0 Then
-                If filter.Contains(tmp) = False Then
-                    filter.Add(tmp)
-                End If
-            Else
+        If filter.Count > 0 Then
+            If filter.Contains(tmp) = False Then
                 filter.Add(tmp)
-                Single.TryParse("", tmp)
-                filter.Add(tmp)
-
             End If
+        Else
+            filter.Add(0)
+            filter.Add(tmp)
         End If
         Return filter
 
-
     End Function
-    Function SetFiltersString(str As String, filter As List(Of String))
+    Function AddFiltersStringCombobox(str As String, filter As List(Of String))
 
         If str <> "" Then
             If filter.Count > 0 Then
@@ -178,7 +172,8 @@ Module outils_base
 
 
     End Function
-    Public Sub get_outils(data As String, filter As String)
+
+    Public Sub GetDefaultTools(data As String, filter As String)
         Dim full_file() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
 
         Dim single_line As String
@@ -200,8 +195,7 @@ Module outils_base
 
             Dim newtool As New NewTool
 
-            If filter = "" Then
-                DataTable_buffer.Rows.Add(line)
+            DataTable_buffer.Rows.Add(line)
                 Dim tmp_line() As String = line.ToArray
 
                 newtool = FileImports.Fill_newTool(line(1), line(3), line(2), line(5), line(6), line(4), line(8), "FR2T", "0", "0", "0", "0", "0", "0", "0", "FRAISA", line(0), "0", "0", "0")
@@ -212,22 +206,6 @@ Module outils_base
                 filterL1 = AddFiltersCombobox(line(5), filterL1)
 
 
-
-                'If Single.TryParse(line(5), tmp) = True Then
-                '    If filterL1.Contains(tmp) = False Then
-                '        filterL1.Add(tmp)
-                '    End If
-                'End If
-
-
-            Else
-                    Dim tmp As String = Strings.Left(line(0), filter.Length)
-                If filter = tmp Then
-                    Main.toolsList.items.add(newtool)
-                    DataTable_buffer.Rows.Add(line)
-                    'Main.NewToolDataGridView.Rows.Insert(0, line.ToArray())
-                End If
-            End If
         Next
 
 
@@ -238,7 +216,7 @@ Module outils_base
 
 
         filterL1 = filterL1.OrderBy(Function(x) x).ToList()
-        With Main.filterL1_comboBox
+        With Main.filterL1_ComboBox
             .DataSource = filterL1
         End With
 
@@ -246,7 +224,7 @@ Module outils_base
 
         ' DataTable_buffer.DefaultView.Sort = "d ASC"
         'Main.NewToolDataGridView.DataSource = DataTable_buffer.DefaultView.ToTable
-        Main.NewToolDataGridView.DataSource = DataTable_buffer
+        '  Main.NewToolDataGridView.DataSource = DataTable_buffer
 
 
 
