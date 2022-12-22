@@ -226,60 +226,13 @@ Module outils_base
         'DataTable_buffer.DefaultView.Sort = "d ASC"
         'Main.NewToolDataGridView.DataSource = DataTable_buffer.DefaultView.ToTable
 
-        Main.NewToolDataGridView.DataSource = DataTable_buffer
-
-
-
-    End Sub
-
-
-
-    Private Sub FillDiamFilterDropbox(diam As String)
-        Dim tmp As Double
-        If Double.TryParse(diam, tmp) = True Then
-            If Main.filterD1_Combobox.Items.Contains(tmp) = False Then
-                Main.filterD1_Combobox.Items.Add(tmp)
-            End If
-        End If
-    End Sub
-
-    Public Sub Fill_db(file_reader As System.IO.StreamReader, filter As String)
-        Dim index As Integer = 1
-        Dim textline As String = ""
-        Dim splitLine() As String
-
-        Do While file_reader.Peek <> -1
-            textline = file_reader.ReadLine()
-            splitLine = Split(textline, ";")
-
-            'Dim list As New List(Of String)()             --------------> option to add index to DataGridView1
-            ' List.Add(index)
-            'For l = 0 To splitLine.Length - 1
-            'List.Add(splitLine(l))
-            'Next
-            'ReDim splitLine(9)
-            'For x = 0 To list.Count - 1
-            'splitLine(x) = list.Item(x)
-            'Next
-
-            If filter = "" Then
-                DataTable_buffer.Rows.Add(splitLine)
-                Main.NewToolDataGridView.Rows.Insert(0, splitLine.ToArray())
-
-            Else
-                Dim tmp As String = Strings.Left(splitLine(0), filter.Length)
-                If filter = tmp Then
-                    DataTable_buffer.Rows.Add(splitLine)
-                    Main.NewToolDataGridView.Rows.Insert(0, splitLine.ToArray())
-
-                End If
-            End If
-            index += 1
-        Loop
         'Main.NewToolDataGridView.DataSource = DataTable_buffer
-        file_reader.Close()
+
+
 
     End Sub
+
+
 
 
 End Module

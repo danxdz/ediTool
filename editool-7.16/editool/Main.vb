@@ -437,9 +437,9 @@ Public Class Main
 
         web.Navigate(New System.Uri("http://tools.semmip.local/"))
 
-        If web.DocumentText = Nothing Then
-            web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
-        End If
+        'If web.DocumentText = Nothing Then
+        '    web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
+        'End If
 
     End Sub
 
@@ -506,14 +506,26 @@ Public Class Main
                 'End If
                 readToolProgress_Label.Text = i
                 Try
-                    D_textbox.Text = toolsList.items(i).D1
-                    L_textbox.Text = toolsList.items(i).L1
+                    If filteredTools.Count > 0 Then
+                        D_textbox.Text = filteredTools(i).D1
+                        L_textbox.Text = filteredTools(i).L1
 
-                    CTS_AD_textbox.Text = toolsList.items(i).D2
-                    CTS_AL_textbox.Text = toolsList.items(i).L2
+                        CTS_AD_textbox.Text = filteredTools(i).D2
+                        CTS_AL_textbox.Text = filteredTools(i).L2
 
-                    SD_textbox.Text = toolsList.items(i).D3
-                    OL_textbox.Text = toolsList.items(i).L3
+                        SD_textbox.Text = filteredTools(i).D3
+                        OL_textbox.Text = filteredTools(i).L3
+                    Else
+                        D_textbox.Text = toolsList.items(i).D1
+                        L_textbox.Text = toolsList.items(i).L1
+
+                        CTS_AD_textbox.Text = toolsList.items(i).D2
+                        CTS_AL_textbox.Text = toolsList.items(i).L2
+
+                        SD_textbox.Text = toolsList.items(i).D3
+                        OL_textbox.Text = toolsList.items(i).L3
+                    End If
+
 
                     Refresh_outil()
                 Catch ex As Exception
@@ -662,9 +674,8 @@ Public Class Main
             End If
 
 
-
-
         End If
+
     End Sub
 
     Function SetFilters(sender As Object)
