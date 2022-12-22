@@ -10,7 +10,7 @@ Public Class Main
 
     Public ReadOnly toolsList = New ToolList
 
-    Dim filteredTool As New List(Of NewTool)
+    Dim filteredTools As New List(Of NewTool)
 
 
     Public started As Boolean = False
@@ -434,8 +434,12 @@ Public Class Main
 
         Dim web As New WebBrowser
         AddHandler web.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf Webtocsv)
+
         web.Navigate(New System.Uri("http://tools.semmip.local/"))
-        'web.Navigate(New System.Uri("C:/Downloaded%20Web%20Sites/tools.semmip.local/index.php.html"))
+
+        If web.DocumentText = Nothing Then
+            web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
+        End If
 
     End Sub
 
@@ -535,37 +539,43 @@ Public Class Main
     End Sub
 
     Private Sub FilterD1Combobox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles filterD1_Combobox.SelectedIndexChanged
-        If filterD1_Combobox.SelectedItem <> 0 Then
-            Dim sel As Single = filterD1_Combobox.SelectedItem
-
-            For Each tool As NewTool In toolsList.items
-                Dim tmp As Single = tool.D1
-                If tmp <> sel Then
-                    filteredTool.Remove(tool)
-                End If
-            Next
-            NewToolDataGridView.DataSource = filteredTool
-
-            filterL1_ComboBox.DataSource = Nothing
-            filterL1_ComboBox.Items.Clear()
-
-            Dim filterL1 As New List(Of Single)
-
-            For Each tool As NewTool In filteredTool
-                filterL1 = AddFiltersCombobox(tool.L1, filterL1)
-            Next
 
 
-            filterL1 = filterL1.OrderBy(Function(x) x).ToList()
-            With filterL1_ComboBox
-                .DataSource = filterL1
-            End With
-        End If
+        'If filterD1_Combobox.SelectedItem <> 0 Then
+        '    Dim tempList As New List(Of NewTool)
+
+        '    Dim sel As Single = filterD1_Combobox.SelectedItem
+
+        '    For Each tool As NewTool In toolsList.items
+        '        Dim tmp As Single = tool.D1
+        '        If tmp = sel Then
+        '            tempList.Add(tool)
+        '        End If
+        '    Next
+        '    NewToolDataGridView.DataSource = tempList
+
+        '    filterL1_ComboBox.DataSource = Nothing
+        '    filterL1_ComboBox.Items.Clear()
+
+        '    Dim filterL1 As New List(Of Single)
+
+        '    For Each tool As NewTool In tempList
+        '        filterL1 = AddFiltersCombobox(tool.L1, filterL1)
+        '    Next
+
+
+        '    filterL1 = filterL1.OrderBy(Function(x) x).ToList()
+        '    With filterL1_ComboBox
+        '        .DataSource = filterL1
+        '    End With
+        '    filteredTools = tempList
+
+        'End If
 
     End Sub
 
 
-    Private Sub filterL1_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles filterL1_ComboBox.SelectedIndexChanged
+    Private Sub FilterL1_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles filterL1_ComboBox.SelectedIndexChanged
 
         'If filterL1_ComboBox.SelectedItem <> 0 Then
 
@@ -617,82 +627,115 @@ Public Class Main
     Public Sub Filters_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles filterMat_ComboBox.SelectedIndexChanged, filterL1_ComboBox.SelectedIndexChanged, filterD1_Combobox.SelectedIndexChanged
         Dim selected As String = sender.selectedItem
 
+
+
+
         If selected <> "" And selected <> "0" Then
 
+            If sender.name = "filterD1_Combobox" Then
+                filterL1_ComboBox.DataSource = Nothing
+                filterL1_ComboBox.Items.Clear()
+            End If
+
+
             NewToolDataGridView.DataSource = ""
-            filteredTool.Clear()
-            filteredTool = SetFilters(sender)
-            NewToolDataGridView.DataSource = filteredTool
+            filteredTools.Clear()
+            filteredTools = toolsList.items
+            filteredTools = SetFilters(sender)
+            NewToolDataGridView.DataSource = filteredTools
+
+            If sender.name = "filterMat_ComboBox" Then
+                filterD1_Combobox.DataSource = Nothing
+                filterD1_Combobox.Items.Clear()
+                filterL1_ComboBox.DataSource = Nothing
+                filterL1_ComboBox.Items.Clear()
+
+                Dim filter As New List(Of Single)
+
+                For Each tool As NewTool In filteredTools
+                    filter = AddFiltersCombobox(tool.D1, filter)
+                Next
+                filter = filter.OrderBy(Function(x) x).ToList()
+                With filterD1_Combobox
+                    .DataSource = filter
+                End With
+            End If
+
+
+
 
         End If
     End Sub
 
     Function SetFilters(sender As Object)
 
+        Dim toolList As New List(Of NewTool)
 
         Dim filterCB As ComboBox = sender
-        Dim seltmp As String = filterCB.SelectedItem
-
         Dim sel As String = filterCB.SelectedItem
 
-        If sel <> "" Then
-            For Each tool As NewTool In toolsList.Items
-                Dim tmpFilter As String
+        Dim selD1 As String = filterD1_Combobox.SelectedItem
+        Dim selL1 As String = filterL1_ComboBox.SelectedItem
+        Dim selMat As String = filterMat_ComboBox.SelectedItem
 
-                If sender.Items.Count > 0 Then
-                    'Select Case sender.name
-                    '    Case "filterMat_ComboBox"
-                    '        tmpFilter = tool.GroupeMat
-                    '        If tmpFilter = seltmp Then
-                    '            filteredTool.Add(tool)
-
-                    '        End If
-                    '    Case "filterD1_Combobox"
-                    '        tmpFilter = tool.D1
-                    '        If tmpFilter = seltmp Then
-                    '            filteredTool.Add(tool)
-
-                    '        End If
-                    '    Case "filterL1_ComboBox"
+        Dim add As Boolean
 
 
-
-                    tmpFilter = tool.L1
-                    Dim selD1 As String = filterD1_Combobox.SelectedItem
-                    Dim selL1 As String = filterL1_ComboBox.SelectedItem
-                    Dim selMat As String = filterMat_ComboBox.SelectedItem
-
-                    If selD1 <> "0" And selMat <> "" Then
-                        If tmpFilter = seltmp And selD1 = tool.D1 And selMat = tool.GroupeMat Then
-                            filteredTool.Add(tool)
-                        End If
-                    Else
-                        If selD1 <> "0" Then
-                            If tmpFilter = seltmp And selD1 = tool.D1 Then
-                                filteredTool.Add(tool)
-                            End If
-                        ElseIf selMat <> "0" And selL1 <> "0" Then
-                            If tmpFilter = seltmp And selMat = tool.GroupeMat Then
-                                filteredTool.Add(tool)
-                            End If
-
-                        Else
-                            If tmpFilter = seltmp Then
-                                filteredTool.Add(tool)
-                            End If
-                        End If
-                    End If
-
-                    'End Select
-
+        For Each tool As NewTool In filteredTools
+            add = True
+            If selD1 <> 0 Then
+                If selD1 <> tool.D1 Then
+                    add = False
                 End If
+            End If
+            If selL1 <> 0 Then
+                If selL1 <> tool.L1 Then
+                    add = False
+                End If
+            End If
+            If selMat <> "" Then
+                If selMat <> tool.GroupeMat Then
+                    add = False
+                End If
+            End If
+            If add = True Then
+                toolList.Add(tool)
+            End If
+        Next
 
+
+
+
+        If selL1 = 0 Then
+            Dim filterL1 As New List(Of Single)
+
+            For Each tool As NewTool In toolList
+                filterL1 = AddFiltersCombobox(tool.L1, filterL1)
             Next
+            filterL1 = filterL1.OrderBy(Function(x) x).ToList()
+            With filterL1_ComboBox
+                .DataSource = filterL1
+            End With
         End If
 
-        Return filteredTool
+
+        Return toolList
 
 
 
     End Function
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        timer_label.Text += 1
+    End Sub
+
+
+
+    Private Sub filterMat_ComboBox_MouseHover(sender As Object, e As EventArgs) Handles filterMat_ComboBox.MouseHover
+        ToolTip1.Show("groupe matiere", filterMat_ComboBox)
+    End Sub
+
+    Private Sub NewToolDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles NewToolDataGridView.CellContentClick
+
+    End Sub
 End Class

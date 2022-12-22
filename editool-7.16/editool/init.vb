@@ -222,9 +222,11 @@ Module outils_base
 
 
 
-        ' DataTable_buffer.DefaultView.Sort = "d ASC"
+        'if we want to filter/order data
+        'DataTable_buffer.DefaultView.Sort = "d ASC"
         'Main.NewToolDataGridView.DataSource = DataTable_buffer.DefaultView.ToTable
-        '  Main.NewToolDataGridView.DataSource = DataTable_buffer
+
+        Main.NewToolDataGridView.DataSource = DataTable_buffer
 
 
 

@@ -711,6 +711,9 @@ Partial Class Main
         Me.ToolStripMenuItem3.Size = New System.Drawing.Size(110, 22)
         Me.ToolStripMenuItem3.Text = "effacer"
         '
+        'Timer1
+        '
+        '
         'timer_label
         '
         Me.timer_label.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
