@@ -437,9 +437,9 @@ Public Class Main
 
         web.Navigate(New System.Uri("http://tools.semmip.local/"))
 
-        If web.DocumentText = Nothing Then
-            web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
-        End If
+        'If web.DocumentText = Nothing Then
+        '    web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
+        'End If
 
     End Sub
 
@@ -643,19 +643,29 @@ Public Class Main
 
 
         If selected <> "" And selected <> "0" Then
+            If sender.name = "filterMat_ComboBox" Then
+                filteredTools = toolsList.items
+                filteredTools = SetFilters(sender)
 
+                NewToolDataGridView.DataSource = ""
+                NewToolDataGridView.DataSource = filteredTools
+            End If
             If sender.name = "filterD1_Combobox" Then
                 filterL1_ComboBox.DataSource = Nothing
                 filterL1_ComboBox.Items.Clear()
             End If
 
 
-            NewToolDataGridView.DataSource = ""
             filteredTools.Clear()
             filteredTools = toolsList.items
             filteredTools = SetFilters(sender)
+
+            NewToolDataGridView.DataSource = ""
             NewToolDataGridView.DataSource = filteredTools
 
+
+
+        Else
             If sender.name = "filterMat_ComboBox" Then
                 filterD1_Combobox.DataSource = Nothing
                 filterD1_Combobox.Items.Clear()
@@ -672,7 +682,6 @@ Public Class Main
                     .DataSource = filter
                 End With
             End If
-
 
         End If
 

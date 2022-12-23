@@ -51,7 +51,7 @@ Module ts
                         TopSolidHost.Documents.EnsureIsDirty(model_fr)
                         '// Perform document modification.
 
-                        MakeTool(model_fr)
+                        MakeTool(model_fr, newTool)
                         TopSolidHost.Pdm.CheckIn(TopSolidHost.Pdm.SearchDocumentByName(lib_models(0), TopSolidHost.Documents.GetName(model_fr))(0), True)
 
                         MsgBox("Outil " + Main.Name_textbox.Text + " crée")
@@ -151,7 +151,7 @@ Module ts
 
     End Sub
 
-    Private Sub MakeTool(docId As DocumentId)
+    Private Sub MakeTool(docId As DocumentId, newTool As NewTool)
 
         Dim list_par As List(Of ElementId) = TopSolidHost.Parameters.GetParameters(docId)
         Dim names As String
@@ -162,7 +162,7 @@ Module ts
             'ComboBox1.Items.Add(names)
         Next
 
-        Set_parametre_outil(docId)
+        Set_parametre_outil(docId, newTool)
         TopSolidHost.Application.EndModification(True, False)
 
         If Main.AutoOpen_checkBox.Checked = True Then
@@ -187,7 +187,7 @@ Module ts
 
     End Sub
 
-    Private Sub Set_parametre_outil(newTool_docId As DocumentId)
+    Private Sub Set_parametre_outil(newTool_docId As DocumentId, newTool As NewTool)
 
         SetReal(newTool_docId, "D", Strip_doubles(Main.D_textbox.Text))
         SetReal(newTool_docId, "SD", Strip_doubles(Main.SD_textbox.Text))
@@ -247,24 +247,32 @@ Module ts
 
         '***************
         'Debug -> get elements param list
-        'Dim sys_pard As List(Of ElementId) = TopSolidHost.Elements.GetElements(newTool)
+        'Dim sys_pard As List(Of ElementId) = TopSolidHost.Elements.GetElements(newTool_docId)
         'Dim tmp As String
         'Dim lst As String() = New String(sys_pard.Count - 1) {}
 
         'For i As Integer = 0 To sys_pard.Count - 1
-        'tmp = TopSolidHost.Elements.GetName(sys_pard(i))
-        'lst(i) = tmp
+        '    tmp = TopSolidHost.Elements.GetName(sys_pard(i))
+        '    lst(i) = tmp
         'Next
         '***************
 
 
+
         TopSolidHost.Parameters.PublishText(newTool_docId, "Designation_outil", New SmartText(TopSolidHost.Parameters.GetDescriptionParameter(newTool_docId)))
+
 
         TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.ManufacturerPartNumber"), Main.manref_TextBox.Text)
 
         TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Manufacturer"), Main.manuf_comboBox.Text)
 
         TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.VirtualDocument"), False)
+
+        TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Code"), newTool.CodeBar)
+        TopSolidHost.Parameters.PublishText(newTool_docId, "codeBar", New SmartText(TopSolidHost.Parameters.GetCodeParameter(newTool_docId)))
+
+
+
         Try
             TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Cam.NC.Tool.TX.MachiningComponents.NotAllowedForMachining"), True)
         Catch ex As Exception
