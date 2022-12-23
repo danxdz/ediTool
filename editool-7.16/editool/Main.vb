@@ -437,9 +437,9 @@ Public Class Main
 
         web.Navigate(New System.Uri("http://tools.semmip.local/"))
 
-        'If web.DocumentText = Nothing Then
-        '    web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
-        'End If
+        If web.DocumentText = Nothing Then
+            web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
+        End If
 
     End Sub
 
@@ -504,7 +504,7 @@ Public Class Main
                 'If My.Settings.DefManuf <> "FRAISA" Then
                 '    i = tmp - i
                 'End If
-                readToolProgress_Label.Text = i
+                indexLabel.Text = i
                 Try
                     If filteredTools.Count > 0 Then
                         D_textbox.Text = filteredTools(i).D1
@@ -729,6 +729,7 @@ Public Class Main
             End With
         End If
 
+        readToolProgress_Label.Text = toolList.Count
 
         Return toolList
 

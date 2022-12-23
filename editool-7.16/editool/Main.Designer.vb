@@ -88,6 +88,7 @@ Partial Class Main
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.filterL1_ComboBox = New System.Windows.Forms.ComboBox()
         Me.filterMat_ComboBox = New System.Windows.Forms.ComboBox()
+        Me.indexLabel = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolsBar.SuspendLayout()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -753,6 +754,17 @@ Partial Class Main
         Me.filterMat_ComboBox.TabIndex = 66
         Me.filterMat_ComboBox.Text = " "
         '
+        'indexLabel
+        '
+        Me.indexLabel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.indexLabel.AutoSize = True
+        Me.indexLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.indexLabel.Location = New System.Drawing.Point(263, 445)
+        Me.indexLabel.Name = "indexLabel"
+        Me.indexLabel.Size = New System.Drawing.Size(24, 25)
+        Me.indexLabel.TabIndex = 67
+        Me.indexLabel.Text = "0"
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -760,6 +772,7 @@ Partial Class Main
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1008, 486)
+        Me.Controls.Add(Me.indexLabel)
         Me.Controls.Add(Me.filterMat_ComboBox)
         Me.Controls.Add(Me.filterL1_ComboBox)
         Me.Controls.Add(Me.CheckBox2)
@@ -885,4 +898,5 @@ Partial Class Main
     Friend WithEvents CheckBox2 As CheckBox
     Friend WithEvents filterL1_ComboBox As ComboBox
     Friend WithEvents filterMat_ComboBox As ComboBox
+    Friend WithEvents indexLabel As Label
 End Class
