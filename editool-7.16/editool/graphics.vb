@@ -90,18 +90,18 @@
                 'half revolved preview tool 
                 'CUT
                 'FR 2T et Alesoir *************************
-                If My.Settings.ToolType = "FR2T" Or My.Settings.ToolType = "AL" Then
+                If My.Settings.ToolType = "FR2T" Or My.Settings.ToolType = "ALFI" Then
                     myOutil.FillRectangle(Brushes.Orange, 0, D_tmp, L_tmp, StartY - D_tmp)
                     'contour
                     myOutil.DrawLine(myPen, 0, StartY, 0, D_tmp)
                     myOutil.DrawLine(myPen, 0, D_tmp, L_tmp, D_tmp)
-                ElseIf My.Settings.ToolType = "FB" Then
+                ElseIf My.Settings.ToolType = "FRHE" Then
                     'FR Spherique ***********************
                     myOutil.FillEllipse(Brushes.Black, 0, D_tmp, (StartY - D_tmp) * 2, (StartY - D_tmp) * 2)
                     myOutil.FillEllipse(Brushes.Orange, 1, D_tmp + 1, ((StartY - D_tmp) * 2), (StartY - D_tmp) * 2)
                     myOutil.FillRectangle(Brushes.Orange, (StartY - D_tmp), D_tmp, L_tmp - (StartY - D_tmp), StartY - D_tmp)
                     myOutil.DrawLine(myPen, (StartY - D_tmp), D_tmp, L_tmp, D_tmp)
-                ElseIf My.Settings.ToolType = "FT" Then
+                ElseIf My.Settings.ToolType = "FRTO" Then
                     'FR Torique ***********************
                     myOutil.FillEllipse(Brushes.Black, 0, D_tmp, (StartY - R_tmp) * 2, (StartY - R_tmp) * 2)
                     myOutil.FillEllipse(Brushes.Orange, 1, D_tmp + 1, ((StartY - R_tmp) * 2), (StartY - R_tmp) * 2)
@@ -113,7 +113,7 @@
 
 
 
-                If My.Settings.ToolType = "FOCA" Or My.Settings.ToolType = "FP" Then
+                If My.Settings.ToolType = "FOCA" Or My.Settings.ToolType = "FOP9" Then
                     'Forets et Forets a pointer ***********************
                     'CUT
                     Dim pnts() As Point = {

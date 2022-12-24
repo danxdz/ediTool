@@ -111,7 +111,7 @@ Public Class Main
         My.Settings.Save()
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
-
+        AskTools()
         Refresh_outil()
 
     End Sub
@@ -125,10 +125,11 @@ Public Class Main
         AL.BackColor = color
         FO.BackColor = color
 
-        My.Settings.ToolType = "FP"
+        My.Settings.ToolType = "FOP9"
         My.Settings.Save()
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FP
+        AskTools()
 
         Refresh_outil()
 
@@ -143,10 +144,11 @@ Public Class Main
         AL.BackColor = color
         FO.BackColor = color
 
-        My.Settings.ToolType = "FB"
+        My.Settings.ToolType = "FRHE"
         My.Settings.Save()
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FB
+        AskTools()
 
         Refresh_outil()
 
@@ -161,10 +163,11 @@ Public Class Main
         AL.BackColor = color
         FO.BackColor = color
 
-        My.Settings.ToolType = "FT"
+        My.Settings.ToolType = "FRTO"
         My.Settings.Save()
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FT
+        AskTools()
 
         Refresh_outil()
 
@@ -183,6 +186,7 @@ Public Class Main
         My.Settings.Save()
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FO
+        AskTools()
 
         Refresh_outil()
 
@@ -196,15 +200,17 @@ Public Class Main
         FAP.BackColor = color
         FO.BackColor = color
 
-        My.Settings.ToolType = "AL"
+        My.Settings.ToolType = "ALFI"
         My.Settings.Save()
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_AL
+        AskTools()
 
         Refresh_outil()
 
     End Sub
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles XML_ToolStripButton.Click
+
         OpenFile()
     End Sub
 
@@ -271,7 +277,6 @@ Public Class Main
         readToolProgress_Label.Text = 0
 
 
-
         Dim objList As New List(Of String)
         DataTableOrderTools = New DataTable
 
@@ -283,11 +288,6 @@ Public Class Main
                 column = tblcols.Item(x).InnerHtml
                 column = Replace(column, "<br>", " ")
 
-                Dim col = New DataGridViewTextBoxColumn With {
-                               .HeaderText = column,
-                               .SortMode = DataGridViewColumnSortMode.NotSortable
-                           }
-                'Dim colIndex As Integer = NewToolDataGridView.Columns.Add(col)
                 objList.Add(column)
             Next
         End If
@@ -302,7 +302,6 @@ Public Class Main
 
             Dim stock As HtmlElementCollection
 
-            'NewToolDataGridView.Rows.Add()
             Dim newTool = New NewTool
             Try
                 stock = tblcols.Item(0).GetElementsByTagName("strong")
@@ -413,8 +412,7 @@ Public Class Main
 
     End Sub
 
-
-    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles OrderTools_ToolStripButton.Click
+    Private Sub AskTools()
 
         My.Settings.DefManuf = ""
         My.Settings.Save()
@@ -437,10 +435,13 @@ Public Class Main
 
         web.Navigate(New System.Uri("http://tools.semmip.local/"))
 
-        'If web.DocumentText = Nothing Then
-        '    web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
-        'End If
+        If web.DocumentText = Nothing Then
+            web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
+        End If
+    End Sub
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles OrderTools_ToolStripButton.Click
 
+        AskTools()
     End Sub
 
 
@@ -550,122 +551,10 @@ Public Class Main
         Set_filter()
     End Sub
 
-    Private Sub FilterD1Combobox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles filterD1_Combobox.SelectedIndexChanged
-
-
-        'If filterD1_Combobox.SelectedItem <> 0 Then
-        '    Dim tempList As New List(Of NewTool)
-
-        '    Dim sel As Single = filterD1_Combobox.SelectedItem
-
-        '    For Each tool As NewTool In toolsList.items
-        '        Dim tmp As Single = tool.D1
-        '        If tmp = sel Then
-        '            tempList.Add(tool)
-        '        End If
-        '    Next
-        '    NewToolDataGridView.DataSource = tempList
-
-        '    filterL1_ComboBox.DataSource = Nothing
-        '    filterL1_ComboBox.Items.Clear()
-
-        '    Dim filterL1 As New List(Of Single)
-
-        '    For Each tool As NewTool In tempList
-        '        filterL1 = AddFiltersCombobox(tool.L1, filterL1)
-        '    Next
-
-
-        '    filterL1 = filterL1.OrderBy(Function(x) x).ToList()
-        '    With filterL1_ComboBox
-        '        .DataSource = filterL1
-        '    End With
-        '    filteredTools = tempList
-
-        'End If
-
-    End Sub
-
-
-    Private Sub FilterL1_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles filterL1_ComboBox.SelectedIndexChanged
-
-        'If filterL1_ComboBox.SelectedItem <> 0 Then
-
-        '    Try
-        '        Dim filter_D1 As String
-        '        Dim filter_L1 As String
-        '        Dim filteredTool As New List(Of NewTool)
-
-        '        For Each tool As NewTool In toolsList.items
-        '            Dim tmp_L1 As Single = tool.L1
-        '            Dim tmp_D1 As Single = tool.D1
-
-        '            If filterD1_Combobox.Items.Count > 0 Then
-        '                filter_D1 = filterD1_Combobox.SelectedItem
-        '                If filterL1_ComboBox.Items.Count > 0 Then
-        '                    filter_L1 = filterL1_ComboBox.SelectedItem
-
-        '                    If tmp_D1 = filter_D1 And tmp_L1 = filter_L1 Then
-        '                        filteredTool.Add(tool)
-        '                    End If
-
-        '                Else
-        '                    If tmp_D1 = filter_D1 Then
-        '                        filteredTool.Add(tool)
-        '                    End If
-        '                End If
-        '            Else
-        '                If filterL1_ComboBox.SelectedItem = True Then
-        '                    filter_L1 = filterL1_ComboBox.SelectedItem
-
-        '                    If tmp_L1 = filter_L1 Then
-        '                        filteredTool.Add(tool)
-        '                    End If
-        '                End If
-        '            End If
-
-
-
-        '        Next
-        '        NewToolDataGridView.DataSource = filteredTool
-        '    Catch ex As Exception
-
-        '    End Try
-
-        'End If
-
-    End Sub
-
     Public Sub Filters_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles filterMat_ComboBox.SelectedIndexChanged, filterL1_ComboBox.SelectedIndexChanged, filterD1_Combobox.SelectedIndexChanged
         Dim selected As String = sender.selectedItem
 
-
-
-
         If selected <> "" And selected <> "0" Then
-            If sender.name = "filterMat_ComboBox" Then
-                filteredTools = toolsList.items
-                filteredTools = SetFilters(sender)
-
-                NewToolDataGridView.DataSource = ""
-                NewToolDataGridView.DataSource = filteredTools
-            End If
-            If sender.name = "filterD1_Combobox" Then
-                filterL1_ComboBox.DataSource = Nothing
-                filterL1_ComboBox.Items.Clear()
-            End If
-
-
-            filteredTools.Clear()
-            filteredTools = toolsList.items
-            filteredTools = SetFilters(sender)
-
-            NewToolDataGridView.DataSource = ""
-            NewToolDataGridView.DataSource = filteredTools
-
-
-
-        Else
             If sender.name = "filterMat_ComboBox" Then
                 filterD1_Combobox.DataSource = Nothing
                 filterD1_Combobox.Items.Clear()
@@ -683,6 +572,35 @@ Public Class Main
                 End With
             End If
 
+            If sender.name = "filterD1_Combobox" Then
+                filterL1_ComboBox.DataSource = Nothing
+                filterL1_ComboBox.Items.Clear()
+            End If
+
+
+            filteredTools.Clear()
+            filteredTools = toolsList.items
+            filteredTools = SetFilters(sender)
+
+            NewToolDataGridView.DataSource = ""
+            NewToolDataGridView.DataSource = filteredTools
+
+        Else
+
+            If sender.name = "filterMat_ComboBox" Then
+                filteredTools = toolsList.items
+                filteredTools = SetFilters(sender)
+
+                NewToolDataGridView.DataSource = ""
+                NewToolDataGridView.DataSource = filteredTools
+            End If
+            If sender.name = "filterD1_Combobox" Then
+                filteredTools = toolsList.items
+                filteredTools = SetFilters(sender)
+
+                NewToolDataGridView.DataSource = ""
+                NewToolDataGridView.DataSource = filteredTools
+            End If
         End If
 
     End Sub
@@ -694,7 +612,7 @@ Public Class Main
         Dim filterCB As ComboBox = sender
         Dim sel As String = filterCB.SelectedItem
 
-        Dim selD1 As String = filterD1_Combobox.SelectedItem
+        Dim selD1 As Single = Convert.ToSingle(filterD1_Combobox.SelectedItem)
         Dim selL1 As String = filterL1_ComboBox.SelectedItem
         Dim selMat As String = filterMat_ComboBox.SelectedItem
 
@@ -704,7 +622,9 @@ Public Class Main
         For Each tool As NewTool In filteredTools
             add = True
             If selD1 <> 0 Then
+
                 If selD1 <> tool.D1 Then
+
                     add = False
                 End If
             End If
@@ -750,9 +670,7 @@ Public Class Main
         timer_label.Text += 1
     End Sub
 
-
-
-    Private Sub filterMat_ComboBox_MouseHover(sender As Object, e As EventArgs) Handles filterMat_ComboBox.MouseHover
+    Private Sub FilterMat_ComboBox_MouseHover(sender As Object, e As EventArgs) Handles filterMat_ComboBox.MouseHover
         ToolTip1.Show("groupe matiere", filterMat_ComboBox)
     End Sub
 

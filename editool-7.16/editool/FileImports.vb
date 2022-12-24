@@ -86,7 +86,10 @@ Module FileImports
 
         Dim newTool As New NewTool
 
+
+        Main.NewToolDataGridView.DataSource = ""
         Main.NewToolDataGridView.Columns.Clear()
+
 
 
 
@@ -150,7 +153,6 @@ Module FileImports
                 reader.Close()
                 FillDataGrid(newTool, Main.NewToolDataGridView)
                 Main.toolsList.items.Add(newTool)
-
             End If
         End While
 
@@ -162,25 +164,17 @@ Module FileImports
 
     Public Sub FillDataGrid(NewTool As NewTool, DGV As DataGridView)
 
+        Dim tmpData = New System.Data.DataTable
 
+        If Main.toolsList.Count > 0 Then
+            tmpData = Main.toolsList
+
+        End If
 
         Dim objList As New List(Of String)({"ref", "D", "SD", "CTS_AD", "OL", "L", "CTS_AL", "AngDeg", "NoTT", "chf", "manuf"})
 
-        Dim rowIndex As Integer
+        tmpData = SetDataGridColumnsTitle(objList.ToArray, tmpData)
 
-        If DGV.Rows.Count = 0 Then
-            For i As Integer = 0 To objList.Count - 1
-
-                Dim col = New DataGridViewTextBoxColumn With {
-                            .HeaderText = objList(i),
-                            .SortMode = DataGridViewColumnSortMode.NotSortable
-                        }
-                Dim colIndex As Integer = DGV.Columns.Add(col)
-            Next
-            rowIndex = DGV.Rows.Count - 1
-        Else
-            rowIndex = DGV.Rows.Count - 1
-        End If
         With NewTool
             Dim row As New List(Of String) From {
             .ManufRef,
@@ -196,9 +190,10 @@ Module FileImports
             .Manuf
         }
 
-            DGV.Rows.Insert(0, row.ToArray())
+            tmpData.Rows.add(row.ToArray())
         End With
-
+        Main.NewToolDataGridView.DataSource = tmpData
+        Refresh_outil()
     End Sub
 
     Public Sub OpenFile()
@@ -212,8 +207,8 @@ Module FileImports
 
         Dim openFileDialog1 As New OpenFileDialog With {
             .InitialDirectory = startPath,
-            .Filter = "Txt files (*.txt)|*.txt|All files (*.*)|*.*|CSV files (*.csv)|*.csv|Excel Files|*.xls;*.xlsx",
-            .FilterIndex = 2,
+            .Filter = "XML files (*.xml)|*.xml|Txt files (*.txt)|*.txt|CSV files (*.csv)|*.csv|Excel Files|*.xls;*.xlsx|All files (*.*)|*.*",
+            .FilterIndex = 1,
             .RestoreDirectory = True
         }
 
