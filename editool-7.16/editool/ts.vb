@@ -209,8 +209,9 @@ Module ts
 
         Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")
 
-        If My.Settings.ToolType = "FP" Or My.Settings.ToolType = "FOCA" Then
-            Dim tmpAngleRad = Main.A_TextBox.Text * Math.PI / 180
+        If My.Settings.ToolType = "FOC9" Or My.Settings.ToolType = "FOCA" Then
+            'Dim tmpAngleRad = Main.A_TextBox.Text * Math.PI / 180
+            Dim tmpAngleRad = newTool.AngleDeg * Math.PI / 180
             SetReal(newTool_docId, "A", tmpAngleRad)
 
             Select Case My.Settings.ToolType
@@ -220,7 +221,7 @@ Module ts
                     TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOCA)
 
             End Select
-        ElseIf My.Settings.ToolType = "AL" Then
+        ElseIf My.Settings.ToolType = "ALFI" Then
             TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_AL)
         Else
             SetReal(newTool_docId, "CTS_AD", Strip_doubles(Main.CTS_AD_textbox.Text))
@@ -246,11 +247,11 @@ Module ts
                 SetReal(newTool_docId, "CTS_EL", CTS_EL) 'TODO
             End If
 
-            If My.Settings.ToolType = "FT" Then
+            If My.Settings.ToolType = "FRTO" Then
                 Dim r As Double = Strip_doubles(Main.Chf_textbox.Text)
                 SetReal(newTool_docId, "r", r) 'TODO
                 TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FT)
-            ElseIf My.Settings.ToolType = "FB" Then
+            ElseIf My.Settings.ToolType = "FRHE" Then
                 TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FB)
             Else
                 TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FR)
