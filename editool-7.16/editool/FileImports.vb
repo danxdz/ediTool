@@ -166,14 +166,14 @@ Module FileImports
 
         Dim tmpData = New System.Data.DataTable
 
-        If Main.toolsList.Count > 0 Then
-            tmpData = Main.toolsList
+        'If Main.toolsList.items.Count > 0 Then
+        'tmpData = Main.toolsList.items
 
-        End If
+        ' End If
 
-        Dim objList As New List(Of String)({"ref", "D", "SD", "CTS_AD", "OL", "L", "CTS_AL", "AngDeg", "NoTT", "chf", "manuf"})
+        Dim objList() As String = {"ref", "D", "SD", "CTS_AD", "OL", "L", "CTS_AL", "AngDeg", "NoTT", "chf", "manuf"}
 
-        tmpData = SetDataGridColumnsTitle(objList.ToArray, tmpData)
+        tmpData = SetDataGridColumnsTitle(objList, tmpData)
 
         With NewTool
             Dim row As New List(Of String) From {

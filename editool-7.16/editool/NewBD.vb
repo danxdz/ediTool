@@ -1,4 +1,5 @@
 ﻿
+Option Explicit On
 
 
 Public Class NewBD

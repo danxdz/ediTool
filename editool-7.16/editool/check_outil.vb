@@ -1,4 +1,6 @@
-﻿Friend Module check_outil
+﻿Option Explicit On
+
+Friend Module check_outil
 
     Public Sub Outil_exists(file_reader As System.IO.StreamReader, nom As String)
 

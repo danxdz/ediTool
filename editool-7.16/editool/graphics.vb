@@ -1,5 +1,5 @@
-﻿Module graphics
-
+﻿Option Explicit On
+Module graphics
 
 
     Public Sub Refresh_outil()

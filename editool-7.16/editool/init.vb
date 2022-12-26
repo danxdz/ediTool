@@ -1,4 +1,4 @@
-﻿
+﻿Option Explicit On
 
 Module outils_base
     Dim DataTable_buffer As DataTable

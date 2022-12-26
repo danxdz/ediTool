@@ -1,4 +1,6 @@
-﻿Imports TopSolid.Cad.Design.Automating
+﻿Option Explicit On
+
+Imports TopSolid.Cad.Design.Automating
 
 Module ts
 

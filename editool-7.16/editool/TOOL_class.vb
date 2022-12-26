@@ -1,4 +1,6 @@
-﻿Module Tools
+﻿Option Explicit On
+
+Module Tools
     Public Class NewTool
         Public Property Name As String
         Public Property Type As String

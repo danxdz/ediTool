@@ -1,4 +1,6 @@
-﻿Public Class ToolName_config
+﻿Option Explicit On
+
+Public Class ToolName_config
     Private Sub SaveBt_Click(sender As Object, e As EventArgs) Handles SaveBt.Click
         'My.Settings.NameMask = Namemask_textbox.Text
         My.Settings.MaskTT_FR = MaskTT_FR.Text
