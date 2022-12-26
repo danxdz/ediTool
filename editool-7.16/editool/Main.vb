@@ -21,7 +21,7 @@ Public Class Main
     ReadOnly color_green = Drawing.Color.SpringGreen
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        AskTools()
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
 
         My.Settings.DefManuf = "FRAISA"
@@ -73,7 +73,7 @@ Public Class Main
 
         Dim i As Integer = NewToolDataGridView.CurrentRow().Index
 
-        Dim newTool As NewTool = toolsList.Items(i)
+        Dim newTool As NewTool = filteredTools(i)
 
         Create_outil(newTool)
 
@@ -127,7 +127,7 @@ Public Class Main
         My.Settings.ToolType = "FOP9"
         My.Settings.Save()
 
-        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FP
+        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FOC9
         AskTools()
 
         Refresh_outil()
@@ -184,7 +184,7 @@ Public Class Main
         My.Settings.ToolType = "FOCA"
         My.Settings.Save()
 
-        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FO
+        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FOCA
         AskTools()
 
         Refresh_outil()
@@ -249,6 +249,7 @@ Public Class Main
 
 
     Private Sub Webtocsv(ByVal sender As Object, ByVal e As WebBrowserDocumentCompletedEventArgs)
+        OrderTools_ToolStripButton.Enabled = True
 
         Dim DataTableOrderTools As DataTable
         DataTableOrderTools = New DataTable
@@ -434,12 +435,24 @@ Public Class Main
 
         web.Navigate(New System.Uri("http://tools.semmip.local/"))
 
-        If web.DocumentText = Nothing Then
-            web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
-        End If
-    End Sub
-    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles OrderTools_ToolStripButton.Click
 
+        Try
+            If web.ReadyState() = 0 Then
+                OrderTools_ToolStripButton.Enabled = False
+            Else
+                OrderTools_ToolStripButton.Enabled = True
+
+            End If
+
+        Catch ex As Exception
+
+
+        End Try
+        'If web.DocumentText = Nothing Then
+        'web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
+        'End If
+    End Sub
+    Private Sub ORDERTOOLS_ToolStripButton_Click(sender As Object, e As EventArgs) Handles OrderTools_ToolStripButton.Click
         AskTools()
     End Sub
 

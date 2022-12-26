@@ -1,5 +1,6 @@
 ﻿Option Explicit On
 
+Imports System.Security.Cryptography
 Imports TopSolid.Cad.Design.Automating
 
 Module ts
@@ -26,15 +27,15 @@ Module ts
         Select Case toolType
             Case "FR2T"
                 model_id = "Side Mill D20 L35 SD20"
-            Case "FT"
+            Case "FRTO"
                 model_id = "Radiused Mill D16 L40 r3 SD16"
-            Case "FB"
+            Case "FRHE"
                 model_id = "Ball Nose Mill D8 L30 SD8"
-            Case "FP"
+            Case "FOP9"
                 model_id = "Spotting Drill D10 SD10"
             Case "FOCA"
                 model_id = "Twisted Drill D10 L35 SD10"
-            Case "AL"
+            Case "ALFI"
                 model_id = "Constant Reamer D10 L20 SD9"
         End Select
 
@@ -43,6 +44,11 @@ Module ts
         ''newTool_lib = TopSolidHost.Pdm.SearchProjectByName("EdiTool")
 
         Try
+            Try
+                TopSolidHost.Application.EndModification(False, False)
+            Catch ex As Exception
+            End Try
+
             model_fr = Open_file(model_id, lib_models)
             If model_fr.IsEmpty Then
                 MsgBox("can't find file ( " + model_id + " )")
@@ -53,7 +59,8 @@ Module ts
                         TopSolidHost.Documents.EnsureIsDirty(model_fr)
                         '// Perform document modification.
 
-                        MakeTool(model_fr, newTool)
+                        Set_parametre_outil(model_fr, newTool)
+                        MakeTool(model_fr)
                         TopSolidHost.Pdm.CheckIn(TopSolidHost.Pdm.SearchDocumentByName(lib_models(0), TopSolidHost.Documents.GetName(model_fr))(0), True)
 
                         MsgBox("Outil " + Main.Name_textbox.Text + " crée")
@@ -153,18 +160,17 @@ Module ts
 
     End Sub
 
-    Private Sub MakeTool(docId As DocumentId, newTool As NewTool)
+    Private Sub MakeTool(docId As DocumentId)
 
-        Dim list_par As List(Of ElementId) = TopSolidHost.Parameters.GetParameters(docId)
-        Dim names As String
-        Dim types As ParameterType
-        For i As Integer = 0 To list_par.Count - 1
-            types = TopSolidHost.Parameters.GetParameterType(list_par(i))
-            names = TopSolidHost.Elements.GetName(list_par(i))
-            'ComboBox1.Items.Add(names)
-        Next
+        'Dim list_par As List(Of ElementId) = TopSolidHost.Parameters.GetParameters(docId)
+        'Dim names As String
+        'Dim types As ParameterType
+        'For i As Integer = 0 To list_par.Count - 1
+        '    types = TopSolidHost.Parameters.GetParameterType(list_par(i))
+        '    names = TopSolidHost.Elements.GetName(list_par(i))
+        '    'ComboBox1.Items.Add(names)
+        'Next
 
-        Set_parametre_outil(docId, newTool)
         TopSolidHost.Application.EndModification(True, False)
 
         If Main.AutoOpen_checkBox.Checked = True Then
@@ -182,7 +188,7 @@ Module ts
         Return res
     End Function
 
-    Private Sub SetReal(newtool As DocumentId, dbl As String, value As Double)
+    Private Sub SetReal(newtool As DocumentId, dbl As String, value As Single)
 
         Dim tmpReal As ElementId = TopSolidHost.Elements.SearchByName(newtool, dbl)
         TopSolidHost.Parameters.SetRealValue(tmpReal, value)
@@ -191,10 +197,15 @@ Module ts
 
     Private Sub Set_parametre_outil(newTool_docId As DocumentId, newTool As NewTool)
 
-        SetReal(newTool_docId, "D", Strip_doubles(Main.D_textbox.Text))
-        SetReal(newTool_docId, "SD", Strip_doubles(Main.SD_textbox.Text))
-        SetReal(newTool_docId, "OL", Strip_doubles(Main.OL_textbox.Text))
-        SetReal(newTool_docId, "L", Strip_doubles(Main.L_textbox.Text))
+        'SetReal(newTool_docId, "D", Strip_doubles(Main.D_textbox.Text))
+        'SetReal(newTool_docId, "SD", Strip_doubles(Main.SD_textbox.Text))
+        'SetReal(newTool_docId, "OL", Strip_doubles(Main.OL_textbox.Text))
+        'SetReal(newTool_docId, "L", Strip_doubles(Main.L_textbox.Text))
+        SetReal(newTool_docId, "D", newTool.D1 / 1000)
+        SetReal(newTool_docId, "SD", newTool.D3 / 1000)
+        SetReal(newTool_docId, "OL", newTool.L3 / 1000)
+        SetReal(newTool_docId, "L", newTool.L1 / 1000)
+
 
         Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")
 
@@ -203,10 +214,10 @@ Module ts
             SetReal(newTool_docId, "A", tmpAngleRad)
 
             Select Case My.Settings.ToolType
-                Case "FP"
-                    TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FP)
-                Case "FO"
-                    TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FO)
+                Case "FOC9"
+                    TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOC9)
+                Case "FOCA"
+                    TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOCA)
 
             End Select
         ElseIf My.Settings.ToolType = "AL" Then
@@ -264,13 +275,18 @@ Module ts
         TopSolidHost.Parameters.PublishText(newTool_docId, "Designation_outil", New SmartText(TopSolidHost.Parameters.GetDescriptionParameter(newTool_docId)))
 
 
-        TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.ManufacturerPartNumber"), Main.manref_TextBox.Text)
+        'TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.ManufacturerPartNumber"), Main.manref_TextBox.Text)
+        TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.ManufacturerPartNumber"), newTool.ManufRef)
 
-        TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Manufacturer"), Main.manuf_comboBox.Text)
+        'TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Manufacturer"), Main.manuf_comboBox.Text)
+        TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Manufacturer"), newTool.Manuf)
 
+        'TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.VirtualDocument"), False)
         TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.VirtualDocument"), False)
 
+        'TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Code"), newTool.CodeBar)
         TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Code"), newTool.CodeBar)
+        'TopSolidHost.Parameters.PublishText(newTool_docId, "codeBar", New SmartText(TopSolidHost.Parameters.GetCodeParameter(newTool_docId)))
         TopSolidHost.Parameters.PublishText(newTool_docId, "codeBar", New SmartText(TopSolidHost.Parameters.GetCodeParameter(newTool_docId)))
 
 
@@ -289,16 +305,21 @@ Module ts
         Dim temp_model As DocumentId
 
         If lib_models.Count > 0 Then
+
             TopSolidHost.Pdm.OpenProject(lib_models(0))
             Dim model_fr_id As List(Of PdmObjectId)
             For i As Integer = 0 To (lib_models.Count - 1)
                 model_fr_id = TopSolidHost.Pdm.SearchDocumentByName(lib_models(i), model)
             Next
 
-            If model_fr_id.Count > 0 Then
+            'If model_fr_id.Count > 0 Then
+            Try
                 model_fr = TopSolidHost.Documents.GetDocument(model_fr_id(0))
                 temp_model = TopSolidHost.Documents.SaveAs(model_fr, lib_models(0), "temp") 'Main.Name_textbox.Text)
-            End If
+            Catch ex As Exception
+                MsgBox("cant find tool model")
+            End Try
+            'End If
         Else
             MsgBox("cant find lib 'EdiTool'")
             'Close()

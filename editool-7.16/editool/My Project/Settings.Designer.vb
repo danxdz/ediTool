@@ -141,9 +141,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("FP Ø[D] [NoTT]z Lc[L]")>  _
-        Public Property MaskTT_FP() As String
+        Public Property MaskTT_FOC9() As String
             Get
-                Return CType(Me("MaskTT_FP"),String)
+                Return CType(Me("MaskTT_FOC9"), String)
             End Get
             Set
                 Me("MaskTT_FP") = value
@@ -153,9 +153,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("FO Ø[D] [NoTT]z Lc[L]")>  _
-        Public Property MaskTT_FO() As String
+        Public Property MaskTT_FOCA() As String
             Get
-                Return CType(Me("MaskTT_FO"),String)
+                Return CType(Me("MaskTT_FOCA"), String)
             End Get
             Set
                 Me("MaskTT_FO") = value

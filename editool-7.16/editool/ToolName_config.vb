@@ -6,8 +6,8 @@ Public Class ToolName_config
         My.Settings.MaskTT_FR = MaskTT_FR.Text
         My.Settings.MaskTT_FT = MaskTT_FT.Text
         My.Settings.MaskTT_FB = MaskTT_FB.Text
-        My.Settings.MaskTT_FP = MaskTT_FP.Text
-        My.Settings.MaskTT_FO = MaskTT_FO.Text
+        My.Settings.MaskTT_FOC9 = MaskTT_FP.Text
+        My.Settings.MaskTT_FOCA = MaskTT_FO.Text
         My.Settings.MaskTT_AL = MaskTT_AL.Text
         My.Settings.Save()
         Me.Hide()
@@ -26,10 +26,10 @@ Public Class ToolName_config
         My.Settings.MaskTT_FB = Me.MaskTT_FB.Text
     End Sub
     Private Sub MaskTT_FP_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_FP.TextChanged
-        My.Settings.MaskTT_FP = Me.MaskTT_FP.Text
+        My.Settings.MaskTT_FOC9 = Me.MaskTT_FP.Text
     End Sub
     Private Sub MaskTT_FO_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_FO.TextChanged
-        My.Settings.MaskTT_FO = Me.MaskTT_FO.Text
+        My.Settings.MaskTT_FOCA = Me.MaskTT_FO.Text
     End Sub
     Private Sub MaskTT_AL_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_AL.TextChanged
         My.Settings.MaskTT_AL = Me.MaskTT_AL.Text
@@ -42,8 +42,8 @@ Public Class ToolName_config
             MaskTT_FR.Text = My.Settings.MaskTT_FR
             MaskTT_FT.Text = My.Settings.MaskTT_FT
             MaskTT_FB.Text = My.Settings.MaskTT_FB
-            MaskTT_FP.Text = My.Settings.MaskTT_FP
-            MaskTT_FO.Text = My.Settings.MaskTT_FO
+            MaskTT_FP.Text = My.Settings.MaskTT_FOC9
+            MaskTT_FO.Text = My.Settings.MaskTT_FOCA
             MaskTT_AL.Text = My.Settings.MaskTT_AL
         End If
     End Sub
