@@ -2,7 +2,7 @@
 
 Module Tools
     Public Class NewTool
-        Public Property Name As String
+        Private Property Name As String
         Public Property Type As String
         Public Property D1 As Single
         Public Property D2 As Single
@@ -27,6 +27,19 @@ Module Tools
 
         Public Property Code As String
         Public Property CodeBar As String
+
+
+
+        Public Property GSName As Integer
+            Get
+                Return Name
+            End Get
+            Set(value As Integer)
+                Name = value
+            End Set
+        End Property
+
+
 
     End Class
 
