@@ -1,6 +1,4 @@
 ﻿Option Explicit On
-
-Imports System.Security.Cryptography
 Imports TopSolid.Cad.Design.Automating
 
 Module ts
@@ -94,7 +92,6 @@ Module ts
         End If
     End Function
     Private Sub GetV6Tool()
-        Dim newTool As New NewTool
         'NewBD.DataGridView1.SelectedCells.Count '-> get selected rows number
         Dim Temp_row As String = NewBD.DataGridView1.CurrentCell.Value
         Dim line() As String
@@ -126,11 +123,13 @@ Module ts
         My.Settings.ToolType = type
 
         My.Settings.Save()
+        Dim newTool As New NewTool
         newTool.Type = type
 
         name = line(2)
 
-        newTool.Name = name
+        newTool.GSName = name
+
         Main.Name_textbox.Text = name
 
 
