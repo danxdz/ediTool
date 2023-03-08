@@ -10,6 +10,14 @@ Module FileImports
     Dim xlWorkBook As Excel.Workbook
     Dim xlWorkSheet As Excel.Worksheet
 
+    Public Sub PopulateFilters(ByVal filterList As List(Of Decimal), ByVal comboBox As ComboBox)
+        filterList = filterList.OrderBy(Function(x) x).ToList()
+        With comboBox
+            .DataSource = filterList
+        End With
+    End Sub
+
+
     Public Function Fill_newTool(d1 As String, d2 As String, d3 As String, l1 As String, l2 As String, l3 As String, nott As String, type As String, groupeMat As String,
                             Rbout As String, chanfrein As String, coupeCentre As String, arrCentre As String, typeTar As String, pasTar As String, manuf As String,
                             manufRef As String, manufRefSec As String, code As String, codeBar As String)
@@ -86,12 +94,8 @@ Module FileImports
 
         Dim newTool As New NewTool
 
-
         Main.NewToolDataGridView.DataSource = ""
         Main.NewToolDataGridView.Columns.Clear()
-
-
-
 
         Dim reader As New XmlTextReader(path)
         FindTool(reader)
@@ -152,7 +156,13 @@ Module FileImports
             ElseIf (reader.Name = "tecsets") Then
                 reader.Close()
                 FillDataGrid(newTool, Main.NewToolDataGridView)
+                Main.toolsList.items.Clear()
+                Main.filteredTools.Clear()
+
+                Dim sas As List(Of NewTool) = Main.toolsList.items
+
                 Main.toolsList.items.Add(newTool)
+
             End If
         End While
 
@@ -196,7 +206,7 @@ Module FileImports
         Refresh_outil()
     End Sub
 
-    Public Sub OpenFile()
+    Public Sub OpenXmlFile()
         Dim startPath As String = ""
         Dim myStream As Stream
 

@@ -4,7 +4,7 @@ Module graphics
 
     Public Sub Refresh_outil()
 
-        If Main.started = True Then
+        If Main.started Then
 
             Try
                 Dim w As Integer = Main.PictureBox1.Width
@@ -23,7 +23,7 @@ Module graphics
 
                 Dim half_h As Integer = StartY / 2
 
-                Dim D As Double = Replace(Main.D_textBox.Text, ".", ",")
+                Dim D As Double = Replace(Main.D_textbox.Text, ".", ",")
                 Dim SD As Double = Replace(Main.SD_textbox.Text, ".", ",")
                 Dim CTS_AD As Double = Replace(Main.CTS_AD_textbox.Text, ".", ",")
                 Dim OL As Double = Replace(Main.OL_textbox.Text, ".", ",")
@@ -44,36 +44,36 @@ Module graphics
                 '-------   grid
 
                 'For i = 1 To SD / 2 Step 1
-                'Dim x As Single = i * scale
+                'Dim x As Decimal = i * scale
                 'myOutil.DrawLine(myPenRED, 0, h - x, w, h - x)
                 'Next
                 'For i = 1 To OL Step 1
-                'Dim x As Single = i * scale
+                'Dim x As Decimal = i * scale
                 'myOutil.DrawString(i, drawFont, drawBrush, x + dif_w, 10)
                 'myOutil.DrawLine(myPenRED, dif_w + x, 0, dif_w + x, h)
                 'Next
 
 
-                Dim D_tmp As Single = StartY - ((D / 2) * scale)
-                Dim SD_tmp As Single = StartY - ((SD / 2) * scale)
-                Dim CTS_AD_tmp As Single = StartY - ((CTS_AD / 2) * scale)
-                Dim OL_tmp As Single = OL * scale
-                Dim L_tmp As Single = L * scale
-                Dim CTS_AL_tmp As Single = CTS_AL * scale
+                Dim D_tmp As Decimal = StartY - ((D / 2) * scale)
+                Dim SD_tmp As Decimal = StartY - ((SD / 2) * scale)
+                Dim CTS_AD_tmp As Decimal = StartY - ((CTS_AD / 2) * scale)
+                Dim OL_tmp As Decimal = OL * scale
+                Dim L_tmp As Decimal = L * scale
+                Dim CTS_AL_tmp As Decimal = CTS_AL * scale
 
-                Dim R_tmp As Single = StartY - (r * scale)
+                Dim R_tmp As Decimal = StartY - (r * scale)
 
 
-                Dim A_tmp As Single = ((D / 2) / (Math.Tan((A_point * Math.PI) / 180)) * scale)
+                Dim A_tmp As Decimal = ((D / 2) / (Math.Tan((A_point * Math.PI) / 180)) * scale)
 
-                Dim CTS_ED_tmp As Single
+                Dim CTS_ED_tmp As Decimal
                 If CTS_AD > 0 Then
                     CTS_ED_tmp = CTS_AD_tmp
                 Else
                     CTS_ED_tmp = SD_tmp
                 End If
 
-                Dim CTS_EL_tmp As Single
+                Dim CTS_EL_tmp As Decimal
                 If Alpha = 0 Then
                     CTS_EL_tmp = CTS_AL_tmp
                 ElseIf Alpha = 0 And CTS_AL_tmp = 0 Then

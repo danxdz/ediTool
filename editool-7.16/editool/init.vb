@@ -26,6 +26,7 @@ Module outils_base
         Else
             Return value
         End If
+
         If param = "CTS_AD" And value = 0 Then
             Return Main.D_textBox.Text
         Else
@@ -143,7 +144,7 @@ Module outils_base
         Main.DefineName_Bt.Text = splitLine(labels.Length + 3)
 
     End Sub
-    Function AddFiltersCombobox(tmp As Single, filter As List(Of Single))
+    Function AddFiltersCombobox(tmp As Decimal, filter As List(Of Decimal))
 
         If filter.Count > 0 Then
             If filter.Contains(tmp) = False Then
@@ -185,8 +186,8 @@ Module outils_base
         DataTable_buffer = SetDataGridColumnsTitle(objList, DataTable_buffer)
 
 
-        Dim filterD1 As New List(Of Single)
-        Dim filterL1 As New List(Of Single)
+        Dim filterD1 As New List(Of Decimal)
+        Dim filterL1 As New List(Of Decimal)
 
 
         For i As Integer = 0 To 4000 'full_file.Length - 1
@@ -209,16 +210,9 @@ Module outils_base
         Next
 
 
-        filterD1 = filterD1.OrderBy(Function(x) x).ToList()
-        With Main.filterD1_Combobox
-            .DataSource = filterD1
-        End With
+        PopulateFilters(filterD1, Main.filterD1_Combobox)
+        PopulateFilters(filterL1, Main.filterL1_ComboBox)
 
-
-        filterL1 = filterL1.OrderBy(Function(x) x).ToList()
-        With Main.filterL1_ComboBox
-            .DataSource = filterL1
-        End With
 
 
 

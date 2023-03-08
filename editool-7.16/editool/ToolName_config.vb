@@ -6,7 +6,7 @@ Public Class ToolName_config
         My.Settings.MaskTT_FR = MaskTT_FR.Text
         My.Settings.MaskTT_FT = MaskTT_FT.Text
         My.Settings.MaskTT_FB = MaskTT_FB.Text
-        My.Settings.MaskTT_FOC9 = MaskTT_FP.Text
+        My.Settings.MaskTT_FOC9 = MaskTT_FOC9.Text
         My.Settings.MaskTT_FOCA = MaskTT_FO.Text
         My.Settings.MaskTT_AL = MaskTT_AL.Text
         My.Settings.Save()
@@ -25,8 +25,8 @@ Public Class ToolName_config
     Private Sub MaskTT_FB_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_FB.TextChanged
         My.Settings.MaskTT_FB = Me.MaskTT_FB.Text
     End Sub
-    Private Sub MaskTT_FP_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_FP.TextChanged
-        My.Settings.MaskTT_FOC9 = Me.MaskTT_FP.Text
+    Private Sub MaskTT_FP_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_FOC9.TextChanged
+        My.Settings.MaskTT_FOC9 = Me.MaskTT_FOC9.Text
     End Sub
     Private Sub MaskTT_FO_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_FO.TextChanged
         My.Settings.MaskTT_FOCA = Me.MaskTT_FO.Text
@@ -42,14 +42,14 @@ Public Class ToolName_config
             MaskTT_FR.Text = My.Settings.MaskTT_FR
             MaskTT_FT.Text = My.Settings.MaskTT_FT
             MaskTT_FB.Text = My.Settings.MaskTT_FB
-            MaskTT_FP.Text = My.Settings.MaskTT_FOC9
+            MaskTT_FOC9.Text = My.Settings.MaskTT_FOC9
             MaskTT_FO.Text = My.Settings.MaskTT_FOCA
             MaskTT_AL.Text = My.Settings.MaskTT_AL
         End If
     End Sub
     Public Sub Set_default_toolname_masks(data As String)
         Dim splitLine() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
-        Dim labels() As TextBox = {MaskTT_FR, MaskTT_FT, MaskTT_FB, MaskTT_FP, MaskTT_FO, MaskTT_AL}
+        Dim labels() As TextBox = {MaskTT_FR, MaskTT_FT, MaskTT_FB, MaskTT_FOC9, MaskTT_FO, MaskTT_AL}
         For i As Integer = 0 To labels.Length - 1
             labels(i).Text = splitLine(i)
         Next
@@ -67,7 +67,7 @@ Public Class ToolName_config
         Me.MaskTT_FB.Text = "FB Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]"
     End Sub
     Private Sub FAP_ResetBt_Click(sender As Object, e As EventArgs) Handles FAP_ResetBt.Click
-        Me.MaskTT_FP.Text = "FP Ø[D] A[A]"
+        Me.MaskTT_FOC9.Text = "FP Ø[D] A[A]"
     End Sub
     Private Sub FO_ResetBt_Click(sender As Object, e As EventArgs) Handles FO_ResetBt.Click
         Me.MaskTT_FO.Text = "FO Ø[D] [NoTT]z A[A] Lc[L]"

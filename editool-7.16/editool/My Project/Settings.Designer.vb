@@ -146,7 +146,7 @@ Namespace My
                 Return CType(Me("MaskTT_FOC9"), String)
             End Get
             Set
-                Me("MaskTT_FP") = value
+                Me("MaskTT_FOC9") = Value
             End Set
         End Property
         
@@ -158,7 +158,7 @@ Namespace My
                 Return CType(Me("MaskTT_FOCA"), String)
             End Get
             Set
-                Me("MaskTT_FO") = value
+                Me("MaskTT_FOCA") = Value
             End Set
         End Property
         

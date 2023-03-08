@@ -30,7 +30,7 @@ Partial Class ToolName_config
         Me.MaskTT_FR = New System.Windows.Forms.TextBox()
         Me.MaskTT_FT = New System.Windows.Forms.TextBox()
         Me.MaskTT_FB = New System.Windows.Forms.TextBox()
-        Me.MaskTT_FP = New System.Windows.Forms.TextBox()
+        Me.MaskTT_FOC9 = New System.Windows.Forms.TextBox()
         Me.MaskTT_FO = New System.Windows.Forms.TextBox()
         Me.MaskTT_AL = New System.Windows.Forms.TextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -111,10 +111,10 @@ Partial Class ToolName_config
         '
         'MaskTT_FP
         '
-        Me.MaskTT_FP.Location = New System.Drawing.Point(32, 187)
-        Me.MaskTT_FP.Name = "MaskTT_FP"
-        Me.MaskTT_FP.Size = New System.Drawing.Size(204, 20)
-        Me.MaskTT_FP.TabIndex = 7
+        Me.MaskTT_FOC9.Location = New System.Drawing.Point(32, 187)
+        Me.MaskTT_FOC9.Name = "MaskTT_FP"
+        Me.MaskTT_FOC9.Size = New System.Drawing.Size(204, 20)
+        Me.MaskTT_FOC9.TabIndex = 7
         '
         'MaskTT_FO
         '
@@ -270,7 +270,7 @@ Partial Class ToolName_config
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.MaskTT_AL)
         Me.Controls.Add(Me.MaskTT_FO)
-        Me.Controls.Add(Me.MaskTT_FP)
+        Me.Controls.Add(Me.MaskTT_FOC9)
         Me.Controls.Add(Me.MaskTT_FB)
         Me.Controls.Add(Me.MaskTT_FT)
         Me.Controls.Add(Me.MaskTT_FR)
@@ -299,7 +299,7 @@ Partial Class ToolName_config
     Friend WithEvents MaskTT_FR As TextBox
     Friend WithEvents MaskTT_FT As TextBox
     Friend WithEvents MaskTT_FB As TextBox
-    Friend WithEvents MaskTT_FP As TextBox
+    Friend WithEvents MaskTT_FOC9 As TextBox
     Friend WithEvents MaskTT_FO As TextBox
     Friend WithEvents MaskTT_AL As TextBox
     Friend WithEvents PictureBox1 As PictureBox

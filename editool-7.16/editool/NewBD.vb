@@ -10,7 +10,7 @@ Public Class NewBD
     End Sub
 
     Private Sub Open_file_bt_Click(sender As Object, e As EventArgs) Handles open_file_bt.Click
-        OpenFile()
+        OpenXmlFile()
     End Sub
 
     Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs) Handles Row_NumericUpDown.ValueChanged
