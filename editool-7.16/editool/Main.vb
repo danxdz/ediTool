@@ -9,7 +9,7 @@ Public Class Main
     Public ReadOnly toolsList = New ToolList
 
     Public filteredTools = New ToolList
-
+    Private ReadOnly newTool As NewTool
 
     Public started As Boolean = False
 
@@ -44,6 +44,8 @@ Public Class Main
             Close()
             End
         End Try
+
+
     End Sub
 
 
@@ -77,7 +79,7 @@ Public Class Main
         If filteredTools.count > 0 Then
             newTool = filteredTools(i)
         Else
-            newTool = toolsList.items(i)
+            newTool = toolsList.Tool(i)
         End If
 
         Create_outil(newTool)
@@ -116,7 +118,7 @@ Public Class Main
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
         AskTools()
-        Refresh_outil()
+        Refresh_outil(newTool)
 
     End Sub
 
@@ -135,7 +137,7 @@ Public Class Main
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FOC9
         AskTools()
 
-        Refresh_outil()
+        Refresh_outil(newTool)
 
     End Sub
 
@@ -154,7 +156,7 @@ Public Class Main
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FB
         AskTools()
 
-        Refresh_outil()
+        Refresh_outil(newTool)
 
     End Sub
 
@@ -173,7 +175,7 @@ Public Class Main
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FT
         AskTools()
 
-        Refresh_outil()
+        Refresh_outil(newTool)
 
     End Sub
 
@@ -192,7 +194,7 @@ Public Class Main
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FOCA
         AskTools()
 
-        Refresh_outil()
+        Refresh_outil(newTool)
 
     End Sub
     Private Sub AL_Click(sender As Object, e As EventArgs) Handles AL.Click
@@ -210,7 +212,6 @@ Public Class Main
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_AL
         AskTools()
 
-        Refresh_outil()
 
     End Sub
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles XML_ToolStripButton.Click
@@ -223,33 +224,34 @@ Public Class Main
     End Sub
 
     Private Sub A_TextBox_LostFocus(sender As Object, e As EventArgs) Handles A_TextBox.LostFocus
-        Refresh_outil()
+
+        Refresh_outil(newTool)
     End Sub
 
     Private Sub D_textbox_LostFocus(sender As Object, e As EventArgs)
-        Refresh_outil()
+        Refresh_outil(newTool)
     End Sub
     Private Sub L_textbox_LostFocus(sender As Object, e As EventArgs)
-        Refresh_outil()
+        Refresh_outil(newTool)
     End Sub
     Private Sub CTS_AL_textbox_LostFocus(sender As Object, e As EventArgs)
-        Refresh_outil()
+        Refresh_outil(newTool)
     End Sub
     Private Sub CTS_AD_textbox_LostFocus(sender As Object, e As EventArgs)
-        Refresh_outil()
+        Refresh_outil(newTool)
     End Sub
     Private Sub SD_textbox_LostFocus(sender As Object, e As EventArgs)
-        Refresh_outil()
+        Refresh_outil(newTool)
     End Sub
     Private Sub OL_textbox_LostFocus(sender As Object, e As EventArgs)
-        Refresh_outil()
+        Refresh_outil(newTool)
     End Sub
     Private Sub NoTT_LostFocus(sender As Object, e As EventArgs) Handles NoTT.LostFocus
-        Refresh_outil()
+        Refresh_outil(newTool)
     End Sub
 
     Private Sub Chf_textbox_LostFocus(sender As Object, e As EventArgs) Handles Chf_textbox.LostFocus
-        Refresh_outil()
+        Refresh_outil(newTool)
     End Sub
 
 
@@ -379,7 +381,7 @@ Public Class Main
                     filterMat = AddFiltersStringCombobox(newTool.GroupeMat, filterMat)
 
 
-                    toolsList.items.Add(newTool)
+                    toolsList.Tool.Add(newTool)
                     'FileImports.FillDataGrid(newTool, NewToolDataGridView)
                 End If
 
@@ -429,7 +431,7 @@ Public Class Main
         filterMat_ComboBox.DataSource = Nothing
         filterMat_ComboBox.Items.Clear()
 
-        toolsList.items.clear()
+        toolsList.tool.clear()
 
         StartLoadTimer = Now().ToUniversalTime
 
@@ -486,14 +488,14 @@ Public Class Main
 
         Dim i As Integer = NewToolDataGridView.CurrentRow().Index + 1
 
-        D_textbox.Text = toolsList.items(i).D1
-        L_textbox.Text = toolsList.items(i).L1
+        D_textbox.Text = toolsList.Tool(i).D1
+        L_textbox.Text = toolsList.Tool(i).L1
 
-        CTS_AD_textbox.Text = toolsList.items(i).D2
-        CTS_AL_textbox.Text = toolsList.items(i).L2
+        CTS_AD_textbox.Text = toolsList.Tool(i).D2
+        CTS_AL_textbox.Text = toolsList.Tool(i).L2
 
-        SD_textbox.Text = toolsList.items(i).D3
-        OL_textbox.Text = toolsList.items(i).L3
+        SD_textbox.Text = toolsList.Tool(i).D3
+        OL_textbox.Text = toolsList.Tool(i).L3
 
     End Sub
 
@@ -516,7 +518,7 @@ Public Class Main
             started = True
             Dim num As Integer = NewToolDataGridView.SelectedRows().Count
             Dim i As Integer = NewToolDataGridView.CurrentRow().Index '+ 1
-            Dim tmp = toolsList.items.Count
+            Dim tmp = toolsList.Tool.Count
 
             If num = 1 Then
 
@@ -535,18 +537,18 @@ Public Class Main
                         SD_textbox.Text = filteredTools(i).D3
                         OL_textbox.Text = filteredTools(i).L3
                     Else
-                        D_textbox.Text = toolsList.items(i).D1
-                        L_textbox.Text = toolsList.items(i).L1
+                        D_textbox.Text = toolsList.Tool(i).D1
+                        L_textbox.Text = toolsList.Tool(i).L1
 
-                        CTS_AD_textbox.Text = toolsList.items(i).D2
-                        CTS_AL_textbox.Text = toolsList.items(i).L2
+                        CTS_AD_textbox.Text = toolsList.Tool(i).D2
+                        CTS_AL_textbox.Text = toolsList.Tool(i).L2
 
-                        SD_textbox.Text = toolsList.items(i).D3
-                        OL_textbox.Text = toolsList.items(i).L3
+                        SD_textbox.Text = toolsList.Tool(i).D3
+                        OL_textbox.Text = toolsList.Tool(i).L3
                     End If
 
 
-                    Refresh_outil()
+                    Refresh_outil(toolsList.Tool(i))
                 Catch ex As Exception
                     MsgBox("tool data error") 'TODO
                 End Try
@@ -608,7 +610,7 @@ Public Class Main
 
             ' Clear the filtered tools list and reset it to the original list
             filteredTools.Clear()
-            filteredTools = toolsList.items
+            filteredTools = toolsList.Tool
 
             ' Apply the filters and update the DataGridView
             filteredTools = SetFilters(sender)
@@ -621,7 +623,7 @@ Public Class Main
             ' If the sender was the material ComboBox
             If sender.name = "filterMat_ComboBox" Then
                 ' Reset the filtered tools list and apply the filters
-                filteredTools = toolsList.items
+                filteredTools = toolsList.Tool
                 filteredTools = SetFilters(sender)
 
                 ' Update the DataGridView
@@ -632,7 +634,16 @@ Public Class Main
             ' If the sender was the D1 ComboBox
             If sender.name = "filterD1_Combobox" Then
                 ' Reset the filtered tools list and apply the filters
-                filteredTools = toolsList.items
+                filteredTools = toolsList.Tool
+                filteredTools = SetFilters(sender)
+
+                ' Update the DataGridView
+                NewToolDataGridView.DataSource = ""
+                NewToolDataGridView.DataSource = filteredTools
+            End If
+            If sender.name = "filterL1_ComboBox" Then
+                ' Reset the filtered tools list and apply the filters
+                filteredTools = toolsList.Tool
                 filteredTools = SetFilters(sender)
 
                 ' Update the DataGridView
@@ -647,7 +658,10 @@ Public Class Main
     Function SetFilters(sender As Object)
         ' Get selected filter values
         Dim selD1 As Decimal = GetFilterValues(filterD1_Combobox)
-        Dim selL1 As Decimal = GetFilterValues(filterL1_ComboBox)
+        Dim selL1 As Decimal = 0
+        If filterL1_ComboBox.Items.Count > 0 Then
+            selL1 = GetFilterValues(filterL1_ComboBox)
+        End If
         Dim selMat As String = GetFilterValues(filterMat_ComboBox)
 
         ' Filter the tools based on the selected values
@@ -726,5 +740,7 @@ Public Class Main
         ToolTip1.Show("groupe matiere", filterMat_ComboBox)
     End Sub
 
+    Private Sub NewToolDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles NewToolDataGridView.CellContentClick
 
+    End Sub
 End Class

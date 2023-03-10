@@ -156,19 +156,19 @@ Module FileImports
             ElseIf (reader.Name = "tecsets") Then
                 reader.Close()
                 FillDataGrid(newTool, Main.NewToolDataGridView)
-                Main.toolsList.items.Clear()
+                Main.toolsList.Tool.Clear()
                 Main.filteredTools.Clear()
 
-                Dim sas As List(Of NewTool) = Main.toolsList.items
+                Dim sas As List(Of NewTool) = Main.toolsList.Tool
 
-                Main.toolsList.items.Add(newTool)
+                Main.toolsList.Tool.Add(newTool)
 
             End If
         End While
 
 
         ' End While
-        Refresh_outil()
+        Refresh_outil(newTool)
 
     End Sub
 
@@ -203,7 +203,7 @@ Module FileImports
             tmpData.Rows.add(row.ToArray())
         End With
         Main.NewToolDataGridView.DataSource = tmpData
-        Refresh_outil()
+        Refresh_outil(NewTool)
     End Sub
 
     Public Sub OpenXmlFile()
@@ -318,4 +318,78 @@ Module FileImports
 
 
 
+    Private Function IsInt(val As Integer)
+        If Integer.TryParse(val, Nothing) Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+    Private Sub GetV6Tool()
+        'NewBD.DataGridView1.SelectedCells.Count '-> get selected rows number
+        Dim Temp_row As String = NewBD.DataGridView1.CurrentCell.Value
+        Dim line() As String
+        Temp_row = Replace(Temp_row, ",", ".")
+        Temp_row = Replace(Temp_row, "  ", "")
+        line = Split(Temp_row, ";")
+
+        Dim type, name, d1, d2, d3, l1, l2, l3, NoTT As String
+
+        type = line(0)
+
+
+
+        Select Case type
+            Case "FR"
+                type = "Side Mill D20 L35 SD20"
+            Case "FT"
+                type = "Radiused Mill D16 L40 r3 SD16"
+            Case "FR_HEMI "
+                type = "FB"
+            Case "FP"
+                type = "Spotting Drill D10 SD10"
+            Case "FO"
+                type = "Twisted Drill D10 L35 SD10"
+            Case "AL"
+                type = "Constant Reamer D10 L20 SD9"
+        End Select
+
+        My.Settings.ToolType = type
+
+        My.Settings.Save()
+        Dim newTool As New NewTool
+        newTool.Type = type
+
+        name = line(2)
+
+        newTool.GSName = name
+
+        Main.Name_textbox.Text = name
+
+
+        d1 = Replace(line(8), "Tool.Diam=", "")
+
+        l1 = Replace(line(9), "Tool.UtilLength=", "")
+        d2 = Replace(line(12), "Tool.DiamPoky=", "")
+        l2 = Replace(line(10), "Tool.ZProg=", "")
+        d3 = Replace(line(18), "Tool.LinkType=QC", "")
+        l3 = Replace(line(19), "Tool.TotalLength=", "")
+        NoTT = Replace(line(17), "Tool.NbCogs=", "")
+
+
+
+
+        If IsInt(d1) Then
+            newTool.D1 = Int(d1)
+            Main.D_textbox.Text = Int(d1)
+        End If
+
+        newTool.L1 = Replace(line(9), "Tool.UtilLength=", "")
+        newTool.D2 = Replace(line(12), "Tool.DiamPoky=", "")
+        newTool.L2 = Replace(line(10), "Tool.ZProg=", "")
+        newTool.D3 = Replace(line(18), "Tool.LinkType=QC", "")
+        newTool.L3 = Replace(line(19), "Tool.TotalLength=", "")
+        newTool.NoTT = Replace(line(17), "Tool.NbCogs=", "")
+
+    End Sub
 End Module

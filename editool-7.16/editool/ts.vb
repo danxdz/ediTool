@@ -2,27 +2,17 @@
 Imports TopSolid.Cad.Design.Automating
 
 Module ts
-
     Public Sub Create_outil(newTool As NewTool)
 
-
-
-        'TopSolidHost.Connect(1, 0, "server") 'option to network server
         TopSolidHost.Connect()
         TopSolidDesignHost.Connect()
 
-        Dim model_fr As New DocumentId
         Dim model_id As String = "Side Mill D20 L35 SD20"
+
         Dim toolType = newTool.Type
+        If toolType <> "" Then My.Settings.ToolType = toolType
 
-        If toolType <> "" Then
-            My.Settings.ToolType = toolType
-            My.Settings.Save()
-        Else
-            toolType = My.Settings.ToolType
-        End If
-
-        Select Case toolType
+        Select Case My.Settings.ToolType
             Case "FR2T"
                 model_id = "Side Mill D20 L35 SD20"
             Case "FRTO"
@@ -37,127 +27,34 @@ Module ts
                 model_id = "Constant Reamer D10 L20 SD9"
         End Select
 
-        Dim lib_models As List(Of PdmObjectId)
-        lib_models = TopSolidHost.Pdm.SearchProjectByName("EdiTool")
-        ''newTool_lib = TopSolidHost.Pdm.SearchProjectByName("EdiTool")
+        Dim model_fr = Open_file(model_id, TopSolidHost.Pdm.SearchProjectByName("EdiTool"))
+        If model_fr.IsEmpty Then
+            MsgBox("Can't find file ( " + model_id + " )")
+            Exit Sub
+        End If
 
         Try
-            Try
-                TopSolidHost.Application.EndModification(False, False)
-            Catch ex As Exception
-            End Try
-
-            model_fr = Open_file(model_id, lib_models)
-            If model_fr.IsEmpty Then
-                MsgBox("can't find file ( " + model_id + " )")
-            Else
-                If TopSolidHost.Application.StartModification("model_fr", True) Then
-                    'Modify document.
-                    Try
-                        TopSolidHost.Documents.EnsureIsDirty(model_fr)
-                        '// Perform document modification.
-
-                        Set_parametre_outil(model_fr, newTool)
-                        MakeTool(model_fr)
-                        TopSolidHost.Pdm.CheckIn(TopSolidHost.Pdm.SearchDocumentByName(lib_models(0), TopSolidHost.Documents.GetName(model_fr))(0), True)
-
-                        MsgBox("Outil " + Main.Name_textbox.Text + " crée")
-
-                    Catch
-                        '// End modification (failure).
-                        MsgBox("failure not dirty - EndModification")
-                        TopSolidHost.Application.EndModification(False, False)
-                    End Try
-                Else
-                    MsgBox("StartModification failure")
-                    TopSolidHost.Application.EndModification(False, False)
-                End If
+            If Not TopSolidHost.Application.StartModification("model_fr", True) Then
+                MsgBox("StartModification failure")
+                Exit Sub
             End If
+
+            TopSolidHost.Documents.EnsureIsDirty(model_fr)
+            Set_parametre_outil(model_fr, newTool)
+            MakeTool(model_fr)
+            TopSolidHost.Pdm.CheckIn(TopSolidHost.Pdm.SearchDocumentByName(
+                TopSolidHost.Pdm.SearchProjectByName("EdiTool")(0),
+                TopSolidHost.Documents.GetName(model_fr))(0), True)
+
+            MsgBox("Outil " + Main.Name_textbox.Text + " crée")
         Catch
-            MsgBox("Cant open file, close everything in Topsolid" + Environment.NewLine + Environment.NewLine + "Impossible ouvrir le fichier, fermer tout sur Topsolid")
-            Try
-                TopSolidHost.Application.EndModification(False, False)
-            Catch
-            End Try
+            MsgBox("Failed to create tool")
+        Finally
+            'TopSolidHost.Application.EndModification(False, False)
         End Try
 
-
     End Sub
 
-    Private Function IsInt(val As Integer)
-        If Integer.TryParse(val, Nothing) Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
-    Private Sub GetV6Tool()
-        'NewBD.DataGridView1.SelectedCells.Count '-> get selected rows number
-        Dim Temp_row As String = NewBD.DataGridView1.CurrentCell.Value
-        Dim line() As String
-        Temp_row = Replace(Temp_row, ",", ".")
-        Temp_row = Replace(Temp_row, "  ", "")
-        line = Split(Temp_row, ";")
-
-        Dim type, name, d1, d2, d3, l1, l2, l3, NoTT As String
-
-        type = line(0)
-
-
-
-        Select Case type
-            Case "FR"
-                type = "Side Mill D20 L35 SD20"
-            Case "FT"
-                type = "Radiused Mill D16 L40 r3 SD16"
-            Case "FR_HEMI "
-                type = "FB"
-            Case "FP"
-                type = "Spotting Drill D10 SD10"
-            Case "FO"
-                type = "Twisted Drill D10 L35 SD10"
-            Case "AL"
-                type = "Constant Reamer D10 L20 SD9"
-        End Select
-
-        My.Settings.ToolType = type
-
-        My.Settings.Save()
-        Dim newTool As New NewTool
-        newTool.Type = type
-
-        name = line(2)
-
-        newTool.GSName = name
-
-        Main.Name_textbox.Text = name
-
-
-        d1 = Replace(line(8), "Tool.Diam=", "")
-
-        l1 = Replace(line(9), "Tool.UtilLength=", "")
-        d2 = Replace(line(12), "Tool.DiamPoky=", "")
-        l2 = Replace(line(10), "Tool.ZProg=", "")
-        d3 = Replace(line(18), "Tool.LinkType=QC", "")
-        l3 = Replace(line(19), "Tool.TotalLength=", "")
-        NoTT = Replace(line(17), "Tool.NbCogs=", "")
-
-
-
-
-        If IsInt(d1) Then
-            newTool.D1 = Int(d1)
-            Main.D_textbox.Text = Int(d1)
-        End If
-
-        newTool.L1 = Replace(line(9), "Tool.UtilLength=", "")
-        newTool.D2 = Replace(line(12), "Tool.DiamPoky=", "")
-        newTool.L2 = Replace(line(10), "Tool.ZProg=", "")
-        newTool.D3 = Replace(line(18), "Tool.LinkType=QC", "")
-        newTool.L3 = Replace(line(19), "Tool.TotalLength=", "")
-        newTool.NoTT = Replace(line(17), "Tool.NbCogs=", "")
-
-    End Sub
 
     Private Sub MakeTool(docId As DocumentId)
 
@@ -187,20 +84,20 @@ Module ts
         Return res
     End Function
 
-    Private Sub SetReal(newtool As DocumentId, dbl As String, value As Decimal)
+    ' This subroutine sets the value of a Real parameter in a TopSolid document
+    Private Sub SetReal(TopDoc As DocumentId, paramName As String, paramValue As Decimal)
 
-        Dim tmpReal As ElementId = TopSolidHost.Elements.SearchByName(newtool, dbl)
-        TopSolidHost.Parameters.SetRealValue(tmpReal, value)
+        ' Find the ElementId of the Real parameter using its name
+        Dim paramElementId As ElementId = TopSolidHost.Elements.SearchByName(TopDoc, paramName)
 
+        ' Set the value of the Real parameter using its ElementId and the desired value
+        TopSolidHost.Parameters.SetRealValue(paramElementId, paramValue)
 
     End Sub
 
+
     Private Sub Set_parametre_outil(newTool_docId As DocumentId, newTool As NewTool)
 
-        'SetReal(newTool_docId, "D", Strip_doubles(Main.D_textbox.Text))
-        'SetReal(newTool_docId, "SD", Strip_doubles(Main.SD_textbox.Text))
-        'SetReal(newTool_docId, "OL", Strip_doubles(Main.OL_textbox.Text))
-        'SetReal(newTool_docId, "L", Strip_doubles(Main.L_textbox.Text))
         SetReal(newTool_docId, "D", newTool.D1 / 1000)
         SetReal(newTool_docId, "SD", newTool.D3 / 1000)
         SetReal(newTool_docId, "OL", newTool.L3 / 1000)
@@ -283,21 +180,7 @@ Module ts
         'Next
         '***************
 
-
-        TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.ManufacturerPartNumber"), newTool.ManufRef)
-
-        TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Manufacturer"), newTool.Manuf)
-
-        TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Code"), newTool.CodeBar)
-
-        TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.VirtualDocument"), False)
-
-
-        TopSolidHost.Parameters.PublishText(newTool_docId, "Designation_outil", New SmartText(TopSolidHost.Parameters.GetDescriptionParameter(newTool_docId)))
-        TopSolidHost.Parameters.PublishText(newTool_docId, "codeBar", New SmartText(TopSolidHost.Parameters.GetCodeParameter(newTool_docId)))
-        TopSolidHost.Parameters.PublishText(newTool_docId, "id", New SmartText(TopSolidHost.Parameters.GetManufacturerPartNumberParameter(newTool_docId)))
-
-
+        newTool.PublishParameters(newTool_docId)
 
         Try
             TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Cam.NC.Tool.TX.MachiningComponents.NotAllowedForMachining"), True)
@@ -349,32 +232,5 @@ Module ts
 
 
 
-    Function Open_file_old(model As String, lib_models As List(Of PdmObjectId))
-
-        Dim model_fr As DocumentId
-        Dim temp_model As DocumentId
-
-        If lib_models.Count > 0 Then
-
-            TopSolidHost.Pdm.OpenProject(lib_models(0))
-            Dim model_fr_id As List(Of PdmObjectId)
-            For i As Integer = 0 To (lib_models.Count - 1)
-                model_fr_id = TopSolidHost.Pdm.SearchDocumentByName(lib_models(i), model)
-            Next
-
-            'If model_fr_id.Count > 0 Then
-            Try
-                model_fr = TopSolidHost.Documents.GetDocument(model_fr_id(0))
-                temp_model = TopSolidHost.Documents.SaveAs(model_fr, lib_models(0), "temp") 'Main.Name_textbox.Text)
-            Catch ex As Exception
-                MsgBox("cant find tool model")
-            End Try
-            'End If
-        Else
-            MsgBox("cant find lib 'EdiTool'")
-            'Close()
-        End If
-        Return temp_model
-    End Function
 
 End Module

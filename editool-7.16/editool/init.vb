@@ -200,7 +200,7 @@ Module outils_base
             Dim tmp_line() As String = line.ToArray
 
             newtool = FileImports.Fill_newTool(line(1), line(3), line(2), line(5), line(6), line(4), line(8), "FR2T", "0", "0", "0", "0", "0", "0", "0", "FRAISA", line(0), "0", "0", "0")
-            Main.toolsList.items.add(newtool)
+            Main.toolsList.Tool.add(newtool)
 
 
             filterD1 = AddFiltersCombobox(line(1), filterD1)

@@ -1,4 +1,5 @@
 ﻿Option Explicit On
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Module Tools
     Public Class NewTool
@@ -24,13 +25,10 @@ Module Tools
         Public Property ManufRef As String
         Public Property ManufRefSec As String
 
-
         Public Property Code As String
         Public Property CodeBar As String
-
-
-
         Public Property GSName As Integer
+
             Get
                 Return Name
             End Get
@@ -40,9 +38,18 @@ Module Tools
         End Property
 
 
+        Public Sub PublishParameters(DocId)
+            TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.ManufacturerPartNumber"), ManufRef)
+            TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Manufacturer"), Manuf)
+            TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Code"), CodeBar)
+            TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.VirtualDocument"), False)
+            TopSolidHost.Parameters.PublishText(DocId, "Designation_outil", New SmartText(TopSolidHost.Parameters.GetDescriptionParameter(DocId)))
+            TopSolidHost.Parameters.PublishText(DocId, "codeBar", New SmartText(TopSolidHost.Parameters.GetCodeParameter(DocId)))
+            TopSolidHost.Parameters.PublishText(DocId, "id", New SmartText(TopSolidHost.Parameters.GetManufacturerPartNumberParameter(DocId)))
+        End Sub
+
 
     End Class
-
 
     Public Class ToolList
         Public Property Name As String
@@ -50,6 +57,6 @@ Module Tools
         Public Property RoomDescription As String
         Public Property ValidExists As New List(Of String)
         Public Property Objects As New List(Of String)
-        Public Property Items As New List(Of NewTool)
+        Public Property Tool As New List(Of NewTool)
     End Class
 End Module
