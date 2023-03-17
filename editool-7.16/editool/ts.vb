@@ -98,13 +98,14 @@ Module ts
 
     Private Sub Set_parametre_outil(newTool_docId As DocumentId, newTool As NewTool)
 
+        Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")
+
         SetReal(newTool_docId, "D", newTool.D1 / 1000)
         SetReal(newTool_docId, "SD", newTool.D3 / 1000)
         SetReal(newTool_docId, "OL", newTool.L3 / 1000)
         SetReal(newTool_docId, "L", newTool.L1 / 1000)
 
 
-        Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")
 
         If My.Settings.ToolType = "FOC9" Or My.Settings.ToolType = "FOCA" Then
             'Dim tmpAngleRad = Main.A_TextBox.Text * Math.PI / 180
@@ -124,7 +125,7 @@ Module ts
         Else
 
             SetReal(newTool_docId, "CTS_AD", newTool.D2 / 1000)
-            SetReal(newTool_docId, "CTS_AD", newTool.L2 / 1000)
+            SetReal(newTool_docId, "CTS_AL", newTool.L2 / 1000)
             SetReal(newTool_docId, "CTS_ED", newTool.D2 / 1000)
 
             'SetReal(newTool_docId, "CTS_AD", Strip_doubles(Main.CTS_AD_textbox.Text))

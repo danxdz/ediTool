@@ -24,7 +24,7 @@ Module graphics
 
                 Dim half_h As Integer = StartY / 2
 
-                Dim D As Double = newTool.D1 'Replace(Main.D_textbox.Text, ".", ",")
+                Dim D As Decimal = newTool.D1 'Replace(Main.D_textbox.Text, ".", ",")
                 Dim SD As Double = Replace(Main.SD_textbox.Text, ".", ",")
                 Dim CTS_AD As Double = Replace(Main.CTS_AD_textbox.Text, ".", ",")
                 Dim OL As Double = Replace(Main.OL_textbox.Text, ".", ",")

@@ -1,5 +1,6 @@
 ﻿
 Option Explicit On
+Imports System.Net
 Imports System.Text.RegularExpressions
 
 
@@ -118,7 +119,9 @@ Public Class Main
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
         AskTools()
-        Refresh_outil(newTool)
+
+
+        Refresh_outil(filteredTools(0))
 
     End Sub
 
@@ -137,7 +140,7 @@ Public Class Main
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FOC9
         AskTools()
 
-        Refresh_outil(newTool)
+        Refresh_outil(filteredTools(0))
 
     End Sub
 
@@ -156,7 +159,7 @@ Public Class Main
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FB
         AskTools()
 
-        Refresh_outil(newTool)
+        Refresh_outil(filteredTools(0))
 
     End Sub
 
@@ -175,7 +178,7 @@ Public Class Main
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FT
         AskTools()
 
-        Refresh_outil(newTool)
+        Refresh_outil(filteredTools(0))
 
     End Sub
 
@@ -194,7 +197,7 @@ Public Class Main
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FOCA
         AskTools()
 
-        Refresh_outil(newTool)
+        Refresh_outil(filteredTools(0))
 
     End Sub
     Private Sub AL_Click(sender As Object, e As EventArgs) Handles AL.Click
@@ -438,28 +441,21 @@ Public Class Main
         timer_label.Text = Now().ToUniversalTime
 
         Dim web As New WebBrowser
-        AddHandler web.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf Webtocsv)
-
-        web.Navigate(New System.Uri("http://tools.semmip.local/"))
 
 
+        Dim url As String = "http://tools.semmip.local/"
+        Dim request As HttpWebRequest = CType(WebRequest.Create(url), HttpWebRequest)
+        request.Method = "HEAD"
         Try
-            If web.ReadyState() = 0 Then
-                If web.DocumentText = Nothing Then
-                    web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
-                End If
-                'OrderTools_ToolStripButton.Enabled = False
-            Else
-                    OrderTools_ToolStripButton.Enabled = True
-
-            End If
-
-        Catch ex As Exception
-
-
+            Dim response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
+            MessageBox.Show("Connected to " & url)
+            response.Close()
+        Catch ex As WebException
+            MessageBox.Show("Failed to connect to " & url)
         End Try
 
     End Sub
+
     Private Sub ORDERTOOLS_ToolStripButton_Click(sender As Object, e As EventArgs) Handles OrderTools_ToolStripButton.Click
         AskTools()
     End Sub
