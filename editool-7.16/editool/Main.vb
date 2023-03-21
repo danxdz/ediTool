@@ -27,6 +27,10 @@ Public Class Main
             Get_files(My.Resources.menu_fr)
         End If
 
+        Dim type As String = My.Settings.ToolType
+
+        Dim toolTypes As List(Of String) = GetToolTypes()
+
 
         FileImports.GetOrderTools()
 
@@ -34,7 +38,6 @@ Public Class Main
 
         'My.Settings.DefManuf = "FRAISA"
 
-        Dim type As String = My.Settings.ToolType
 
 
         Try
@@ -472,17 +475,16 @@ Public Class Main
 
 
 
-    Private Sub ToolType_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1
+    Private Sub ToolType_Click(sender As Object)
         My.Settings.ToolType = sender.ToString
         My.Settings.Save()
 
     End Sub
 
-    Private Sub NewToolDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles NewToolDataGridView.CellContentClick
-
-    End Sub
 
     Private Sub FR2T_Click(sender As Object, e As EventArgs) Handles FR2T.Click
-
+        ToolType_Click(sender)
+        Console.Write(e.ToString)
     End Sub
+
 End Class

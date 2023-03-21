@@ -89,6 +89,7 @@ Partial Class Main
         Me.filterL1_ComboBox = New System.Windows.Forms.ComboBox()
         Me.filterMat_ComboBox = New System.Windows.Forms.ComboBox()
         Me.indexLabel = New System.Windows.Forms.Label()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolsBar.SuspendLayout()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -769,6 +770,21 @@ Partial Class Main
         Me.indexLabel.TabIndex = 67
         Me.indexLabel.Text = "0"
         '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.AutoSize = False
+        Me.ToolStrip1.BackColor = System.Drawing.Color.Transparent
+        Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.None
+        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.ToolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
+        Me.ToolStrip1.Location = New System.Drawing.Point(243, 211)
+        Me.ToolStrip1.Margin = New System.Windows.Forms.Padding(15, 5, 5, 5)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+        Me.ToolStrip1.Size = New System.Drawing.Size(522, 64)
+        Me.ToolStrip1.TabIndex = 68
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -776,6 +792,7 @@ Partial Class Main
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1008, 486)
+        Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.indexLabel)
         Me.Controls.Add(Me.filterMat_ComboBox)
         Me.Controls.Add(Me.filterL1_ComboBox)
@@ -903,4 +920,5 @@ Partial Class Main
     Friend WithEvents filterL1_ComboBox As ComboBox
     Friend WithEvents filterMat_ComboBox As ComboBox
     Friend WithEvents indexLabel As Label
+    Friend WithEvents ToolStrip1 As ToolStrip
 End Class

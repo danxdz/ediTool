@@ -121,17 +121,34 @@ Module outils_base
     End Function
 
 
-    Public Function GetToolTypes() As Dictionary(Of String, String)
-        Dim toolTypes As New Dictionary(Of String, String)
-        Dim fileContents As String = My.Resources.menu_en_tooltypes
+    Public Function GetToolTypes() As List(Of String)
+
+        Dim toolTypes As New List(Of String)
+
+        Dim fileContents As String = My.Resources.tooltypes
 
         For Each line As String In fileContents.Split(Environment.NewLine)
-            Dim values() As String = line.Split(";")
-            toolTypes.Add(values(0), values(1))
+            If line <> vbLf Then
+                Dim values() As String = line.Split(";")
+                toolTypes.Add(values(1))
+                Dim btn As New ToolStripButton With {
+                    .Tag = values(0),
+                    .Text = values(1),
+                    .ToolTipText = values(2)}
+                '.Image = System.Drawing.Image.FromHbitmap
+                AddHandler btn.Click, AddressOf ToolTypeButton_Click
+                Main.ToolStrip1.Items.Add(btn)
+            End If
         Next
 
         Return toolTypes
     End Function
+
+    Private Sub ToolTypeButton_Click(sender As Object, e As EventArgs)
+
+        Console.Write(sender)
+        Console.Write(e.ToString)
+    End Sub
 
 
 
@@ -237,6 +254,12 @@ Module outils_base
 
 
 
+    End Sub
+    Public Sub PopulateFilters(ByVal filterList As List(Of Decimal), ByVal comboBox As ComboBox)
+        filterList = filterList.OrderBy(Function(x) x).ToList()
+        With comboBox
+            .DataSource = filterList
+        End With
     End Sub
 
 

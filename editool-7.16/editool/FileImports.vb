@@ -17,12 +17,6 @@ Module FileImports
     Dim xlWorkBook As Excel.Workbook
     Dim xlWorkSheet As Excel.Worksheet
 
-    Public Sub PopulateFilters(ByVal filterList As List(Of Decimal), ByVal comboBox As ComboBox)
-        filterList = filterList.OrderBy(Function(x) x).ToList()
-        With comboBox
-            .DataSource = filterList
-        End With
-    End Sub
 
 
     Public Function Fill_newTool(d1 As String, d2 As String, d3 As String, l1 As String, l2 As String, l3 As String, nott As String, type As String, groupeMat As String,
@@ -396,6 +390,11 @@ Module FileImports
 
     End Sub
 
+
+
+
+
+
     Private Sub Webtocsv(ByVal sender As Object, ByVal e As WebBrowserDocumentCompletedEventArgs)
 
         Dim DataTableOrderTools As New System.Data.DataTable
@@ -581,9 +580,12 @@ Module FileImports
         Catch ex As WebException
             'MessageBox.Show("Failed to connect to OrderTools") ' " & url)
             Main.OrderTools_ToolStripButton.Enabled = False
-            'web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
-            web.Navigate(New System.Uri("C:/Downloaded Web Sites/tools.semmip.local/index.php.html"))
+            web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
+            'web.Navigate(New System.Uri("C:/Downloaded Web Sites/tools.semmip.local/index.php.html"))
 
         End Try
     End Sub
+
+
+
 End Module
