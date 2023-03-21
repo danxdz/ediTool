@@ -9,7 +9,7 @@
       <Value Profile="(Default)">fr</Value>
     </Setting>
     <Setting Name="ToolType" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">FR2T</Value>
     </Setting>
     <Setting Name="MaskTT_FOP9" Type="System.String" Scope="User">
       <Value Profile="(Default)">FP Ø[D] [NoTT]z Lc[L]</Value>

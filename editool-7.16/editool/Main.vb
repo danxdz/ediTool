@@ -472,8 +472,17 @@ Public Class Main
 
 
 
-    Private Sub ToolType_Click(sender As Object, e As EventArgs) Handles FR2T.Click, AL.Click
+    Private Sub ToolType_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem1
+        My.Settings.ToolType = sender.ToString
+        My.Settings.Save()
 
+    End Sub
+
+    Private Sub NewToolDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles NewToolDataGridView.CellContentClick
+
+    End Sub
+
+    Private Sub FR2T_Click(sender As Object, e As EventArgs) Handles FR2T.Click
 
     End Sub
 End Class

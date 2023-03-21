@@ -571,7 +571,7 @@ Module FileImports
         Dim web As New WebBrowser
         AddHandler web.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf Webtocsv)
 
-        Dim url As String = "http://tools.semmip.local/"
+        Dim url As String = "http://tools.semmip.loca/"
         Dim request As HttpWebRequest = CType(WebRequest.Create(url), HttpWebRequest)
         request.Method = "HEAD"
         Try
@@ -581,7 +581,9 @@ Module FileImports
         Catch ex As WebException
             'MessageBox.Show("Failed to connect to OrderTools") ' " & url)
             Main.OrderTools_ToolStripButton.Enabled = False
-            web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
+            'web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
+            web.Navigate(New System.Uri("C:/Downloaded Web Sites/tools.semmip.local/index.php.html"))
+
         End Try
     End Sub
 End Module
