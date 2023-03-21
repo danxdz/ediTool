@@ -25,13 +25,13 @@ Module graphics
                 Dim half_h As Integer = StartY / 2
 
                 Dim D As Decimal = newTool.D1 'Replace(Main.D_textbox.Text, ".", ",")
-                Dim SD As Double = Replace(Main.SD_textbox.Text, ".", ",")
-                Dim CTS_AD As Double = Replace(Main.CTS_AD_textbox.Text, ".", ",")
-                Dim OL As Double = Replace(Main.OL_textbox.Text, ".", ",")
-                Dim L As Double = Replace(Main.L_textbox.Text, ".", ",")
-                Dim CTS_AL As Double = Replace(Main.CTS_AL_textbox.Text, ".", ",")
-                Dim Alpha As Double = Replace(Main.alpha.Text, ".", ",")
-                Dim r As Double = Replace(Main.Chf_textbox.Text, ".", ",")
+                Dim CTS_AD As Double = newTool.D2 'Replace(Main.CTS_AD_textbox.Text, ".", ",")
+                Dim SD As Double = newTool.D3 'Replace(Main.SD_textbox.Text, ".", ",")
+                Dim L As Double = newTool.L1 'Replace(Main.L_textbox.Text, ".", ",")
+                Dim CTS_AL As Double = newTool.L2 'Replace(Main.CTS_AL_textbox.Text, ".", ",")
+                Dim OL As Double = newTool.L3 'Replace(Main.OL_textbox.Text, ".", ",")
+                Dim Alpha As Double = newTool.AngleDeg 'Replace(Main.alpha.Text, ".", ",")
+                Dim r As Double = newTool.RayonBout 'Replace(Main.Chf_textbox.Text, ".", ",")
                 Dim A_point = Replace(Main.A_TextBox.Text, ".", ",")
                 A_point /= 2
 

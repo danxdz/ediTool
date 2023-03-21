@@ -1,6 +1,5 @@
 ﻿
 Option Explicit On
-Imports System.Net
 Imports System.Text.RegularExpressions
 
 
@@ -14,31 +13,32 @@ Public Class Main
 
     Public started As Boolean = False
 
-    Dim StartLoadTimer As Date
-    Dim EndLoadTimer As Date
 
     ReadOnly color = Drawing.Color.Transparent
     ReadOnly color_green = Drawing.Color.SpringGreen
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        AskTools()
-        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
 
-        My.Settings.DefManuf = "FRAISA"
-
-        Dim type As String = My.Settings.ToolType
-
-        'Dim columns() As String = {"Reference", "D", "SD", "CTS_AD", "OL", "L", "CTS_AL", "a", "z", "chf"} 'set columns titles into string array
-        'SetDataGridColumnsTitle(columns) 
-
-        If My.Settings.PrefLang = "en" Then
+        'Set lang settings and label text
+        Dim lang As String = My.Settings.PrefLang
+        If lang = "en" Then
             Get_files(My.Resources.menu_en)
         Else
             Get_files(My.Resources.menu_fr)
         End If
 
+
+        FileImports.GetOrderTools()
+
+        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
+
+        'My.Settings.DefManuf = "FRAISA"
+
+        Dim type As String = My.Settings.ToolType
+
+
         Try
-            GetDefaultTools(My.Resources.outils, "")
+            'GetDefaultTools(My.Resources.outils, "")
             'Set_Name_auto()
         Catch ex As Exception
             MsgBox("no db file    -->" & ex.ToString)
@@ -103,120 +103,51 @@ Public Class Main
     Private Sub DefineName_Bt_Click(sender As Object, e As EventArgs) Handles DefineName_Bt.Click
         ToolName_config.Show()
     End Sub
+    Public Sub HandleToolButtonClick(sender As Object, e As EventArgs)
+        Dim button As Button = DirectCast(sender, Button)
+        Dim toolType As String = button.Tag
+        Dim toolName As String = ""
 
-    Private Sub FR2T_Click(sender As Object, e As EventArgs) Handles FR2T.Click
+        ' Set all buttons to default color
+        For Each ctrl As Control In Me.Controls
+            If TypeOf ctrl Is Button Then
+                ctrl.BackColor = color.DefaultBackColor
+            End If
+        Next
 
-        FR2T.BackColor = color_green
+        ' Set the clicked button to green
+        button.BackColor = color.Green
 
-        FRBO.BackColor = color
-        FRTO.BackColor = color
-        FAP.BackColor = color
-        AL.BackColor = color
-        FO.BackColor = color
+        ' Update the tool name based on the selected tool type
+        Select Case toolType
+            Case "FR2T"
+                toolName = My.Settings.MaskTT_FR
+            Case "FOP9"
+                toolName = My.Settings.MaskTT_FOP9
+            Case "FRHE"
+                toolName = My.Settings.MaskTT_FB
+            Case "FRTO"
+                toolName = My.Settings.MaskTT_FT
+            Case "FOCA"
+                toolName = My.Settings.MaskTT_FOCA
+            Case "ALFI"
+                toolName = My.Settings.MaskTT_ALFI
+        End Select
 
-        My.Settings.ToolType = "FR2T"
-        My.Settings.Save()
+        ' Update the tool name textbox
+        ToolName_config.Namemask_textbox.Text = toolName
 
-        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
-        AskTools()
-
-
-        Refresh_outil(filteredTools(0))
-
+        ' Update the tool list based on the selected tool type
+        Dim filteredTools As List(Of NewTool) = toolsList.Tools.Where(Function(x) x.Type = toolType).ToList()
+        If filteredTools.Count > 0 Then
+            Refresh_outil(filteredTools(0))
+        End If
     End Sub
 
-    Private Sub FAP_Click(sender As Object, e As EventArgs) Handles FAP.Click
-
-        FAP.BackColor = color_green
-        FR2T.BackColor = color
-        FRTO.BackColor = color
-        FRBO.BackColor = color
-        AL.BackColor = color
-        FO.BackColor = color
-
-        My.Settings.ToolType = "FOP9"
-        My.Settings.Save()
-
-        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FOC9
-        AskTools()
-
-        Refresh_outil(filteredTools(0))
-
-    End Sub
-
-    Private Sub FRBO_Click(sender As Object, e As EventArgs) Handles FRBO.Click
-
-        FRBO.BackColor = color_green
-        FR2T.BackColor = color
-        FRTO.BackColor = color
-        FAP.BackColor = color
-        AL.BackColor = color
-        FO.BackColor = color
-
-        My.Settings.ToolType = "FRHE"
-        My.Settings.Save()
-
-        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FB
-        AskTools()
-
-        Refresh_outil(filteredTools(0))
-
-    End Sub
-
-    Private Sub FRTO_Click(sender As Object, e As EventArgs) Handles FRTO.Click
-
-        FRTO.BackColor = color_green
-        FR2T.BackColor = color
-        FRBO.BackColor = color
-        FAP.BackColor = color
-        AL.BackColor = color
-        FO.BackColor = color
-
-        My.Settings.ToolType = "FRTO"
-        My.Settings.Save()
-
-        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FT
-        AskTools()
-
-        Refresh_outil(filteredTools(0))
-
-    End Sub
-
-    Private Sub FO_Click(sender As Object, e As EventArgs) Handles FO.Click
-
-        FO.BackColor = color_green
-        FR2T.BackColor = color
-        FRTO.BackColor = color
-        FRBO.BackColor = color
-        FAP.BackColor = color
-        AL.BackColor = color
-
-        My.Settings.ToolType = "FOCA"
-        My.Settings.Save()
-
-        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FOCA
-        AskTools()
-
-        Refresh_outil(filteredTools(0))
-
-    End Sub
-    Private Sub AL_Click(sender As Object, e As EventArgs) Handles AL.Click
-
-        AL.BackColor = color_green
-        FR2T.BackColor = color
-        FRBO.BackColor = color
-        FRTO.BackColor = color
-        FAP.BackColor = color
-        FO.BackColor = color
-
-        My.Settings.ToolType = "ALFI"
-        My.Settings.Save()
-
-        ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_AL
-        AskTools()
 
 
-    End Sub
+
+
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles XML_ToolStripButton.Click
 
         OpenXmlFile()
@@ -258,206 +189,9 @@ Public Class Main
     End Sub
 
 
-    Private Sub Webtocsv(ByVal sender As Object, ByVal e As WebBrowserDocumentCompletedEventArgs)
-        OrderTools_ToolStripButton.Enabled = True
-
-        Dim DataTableOrderTools As DataTable
-        DataTableOrderTools = New DataTable
-
-        Dim toolTypeFilter As String = My.Settings.ToolType
-
-        Dim webcsv As WebBrowser = CType(sender, WebBrowser)
-
-        Dim tblrows As HtmlElementCollection
-        Dim tblcols As HtmlElementCollection
-        Dim column As String
-
-        Dim filterD1 As New List(Of Decimal)
-        Dim filterL1 As New List(Of Decimal)
-        Dim filterMat As New List(Of String)
-
-
-
-        Dim row As New List(Of String)()
-
-        tblrows = webcsv.Document.GetElementById("tableTool").GetElementsByTagName("tr")
-        NewToolDataGridView.DataSource = Nothing
-        'NewToolDataGridView.Columns.Clear()
-        'NewToolDataGridView.Rows.Clear()
-        readToolProgress_Label.Text = 0
-
-
-        Dim objList As New List(Of String)
-        DataTableOrderTools = New DataTable
-
-
-        tblcols = tblrows.Item(0).GetElementsByTagName("th")
-
-        If tblcols.Count > 0 Then
-            For x As Integer = 0 To tblcols.Count - 1
-                column = tblcols.Item(x).InnerHtml
-                column = Replace(column, "<br>", " ")
-
-                objList.Add(column)
-            Next
-        End If
-
-        DataTableOrderTools = SetDataGridColumnsTitle(objList.ToArray, DataTableOrderTools)
-
-
-
-
-        For r As Integer = 2 To tblrows.Count - 2
-            tblcols = tblrows.Item(r).GetElementsByTagName("td")
-
-            Dim stock As HtmlElementCollection
-
-            Dim newTool = New NewTool
-            Try
-                stock = tblcols.Item(0).GetElementsByTagName("strong")
-                Dim stockVal As Integer
-                If stock.Count > 0 Then
-                    stockVal = stock(0).InnerHtml
-                Else
-                    stockVal = 0
-                End If
-
-                If tblcols.Item(1).InnerHtml = toolTypeFilter Then
-                    'ListBox1.Items.Add(tblcols.Item(2).InnerHtml & " - " & tblcols.Item(3).InnerHtml & " - " & tblcols.Item(4).InnerHtml & " - " & tblcols.Item(8).InnerHtml)
-                    readToolProgress_Label.Text += 1
-                    With newTool
-                        .d1 = tblcols.Item(3).InnerHtml
-                        .d2 = tblcols.Item(3).InnerHtml - 0.2
-                        .d3 = tblcols.Item(7).InnerHtml
-                        .l1 = tblcols.Item(4).InnerHtml
-                        If tblcols.Item(5).InnerHtml > 0 Then
-                            .L2 = tblcols.Item(5).InnerHtml
-                        Else
-                            .L2 = newTool.L1
-                        End If
-                        .l3 = tblcols.Item(6).InnerHtml
-                        .nott = tblcols.Item(8).InnerHtml
-                        .Type = tblcols.Item(1).InnerHtml
-                        .GroupeMat = tblcols.Item(2).InnerHtml
-                        .RayonBout = tblcols.Item(9).InnerHtml
-                        .Chanfrein = tblcols.Item(10).InnerHtml
-                        .CoupeCentre = tblcols.Item(11).InnerHtml
-                        .ArrCentre = tblcols.Item(12).InnerHtml
-                        .TypeTar = tblcols.Item(13).InnerHtml
-                        .PasTar = tblcols.Item(14).InnerHtml
-                        .Manuf = tblcols.Item(15).InnerHtml
-                        .ManufRef = tblcols.Item(16).InnerHtml
-                        .ManufRefSec = Replace(tblcols.Item(17).InnerHtml, "    ", "")
-                        '.Link = tblcols.Item(18).InnerHtml
-                        .Code = tblcols.Item(21).InnerHtml
-                        .CodeBar = tblcols.Item(22).InnerHtml
-
-                        Dim rowTmp() As String = {
-                            stockVal,
-                            .Type,
-                            .GroupeMat,
-                            .D1,
-                            .L1,
-                            .L2,
-                            .L3,
-                            .D3,
-                            .NoTT,
-                            .RayonBout,
-                            .Chanfrein,
-                            .CoupeCentre,
-                            .ArrCentre,
-                            .TypeTar,
-                            .PasTar,
-                            .Manuf,
-                            .ManufRef,
-                            .ManufRefSec,
-                            .Code,
-                            .CodeBar
-                        }
-
-                        DataTableOrderTools.Rows.Add(rowTmp)
-
-                    End With
-
-                    filterD1 = AddFiltersCombobox(newTool.d1, filterD1)
-                    filterL1 = AddFiltersCombobox(newTool.l1, filterL1)
-                    filterMat = AddFiltersStringCombobox(newTool.GroupeMat, filterMat)
-
-
-                    toolsList.Tool.Add(newTool)
-                    'FileImports.FillDataGrid(newTool, NewToolDataGridView)
-                End If
-
-            Catch ex As Exception
-                'MsgBox("cant read tool")
-            End Try
-
-
-        Next
-        NewToolDataGridView.DataSource = DataTableOrderTools
-
-
-
-
-        filterD1 = filterD1.OrderBy(Function(x) x).ToList()
-        With filterD1_Combobox
-            .DataSource = filterD1
-        End With
-
-
-        filterL1 = filterL1.OrderBy(Function(x) x).ToList()
-        With filterL1_ComboBox
-            .DataSource = filterL1
-        End With
-
-        filterMat = filterMat.OrderBy(Function(x) x).ToList()
-        With filterMat_ComboBox
-            .DataSource = filterMat
-        End With
-
-        EndLoadTimer = Now().ToUniversalTime
-
-        timer_label.Text = DateDiff(DateInterval.Second, StartLoadTimer, EndLoadTimer)
-
-
-    End Sub
-
-    Private Sub AskTools()
-
-        My.Settings.DefManuf = ""
-        My.Settings.Save()
-
-        filterD1_Combobox.DataSource = Nothing
-        filterD1_Combobox.Items.Clear()
-        filterL1_ComboBox.DataSource = Nothing
-        filterL1_ComboBox.Items.Clear()
-        filterMat_ComboBox.DataSource = Nothing
-        filterMat_ComboBox.Items.Clear()
-
-        toolsList.tool.clear()
-
-        StartLoadTimer = Now().ToUniversalTime
-
-        timer_label.Text = Now().ToUniversalTime
-
-        Dim web As New WebBrowser
-
-
-        Dim url As String = "http://tools.semmip.local/"
-        Dim request As HttpWebRequest = CType(WebRequest.Create(url), HttpWebRequest)
-        request.Method = "HEAD"
-        Try
-            Dim response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
-            MessageBox.Show("Connected to " & url)
-            response.Close()
-        Catch ex As WebException
-            MessageBox.Show("Failed to connect to " & url)
-        End Try
-
-    End Sub
 
     Private Sub ORDERTOOLS_ToolStripButton_Click(sender As Object, e As EventArgs) Handles OrderTools_ToolStripButton.Click
-        AskTools()
+        GetOrderTools()
     End Sub
 
 
@@ -736,7 +470,10 @@ Public Class Main
         ToolTip1.Show("groupe matiere", filterMat_ComboBox)
     End Sub
 
-    Private Sub NewToolDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles NewToolDataGridView.CellContentClick
+
+
+    Private Sub ToolType_Click(sender As Object, e As EventArgs) Handles FR2T.Click, AL.Click
+
 
     End Sub
 End Class

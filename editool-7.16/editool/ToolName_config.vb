@@ -6,9 +6,9 @@ Public Class ToolName_config
         My.Settings.MaskTT_FR = MaskTT_FR.Text
         My.Settings.MaskTT_FT = MaskTT_FT.Text
         My.Settings.MaskTT_FB = MaskTT_FB.Text
-        My.Settings.MaskTT_FOC9 = MaskTT_FOC9.Text
+        My.Settings.MaskTT_FOP9 = MaskTT_FOC9.Text
         My.Settings.MaskTT_FOCA = MaskTT_FO.Text
-        My.Settings.MaskTT_AL = MaskTT_AL.Text
+        My.Settings.MaskTT_ALFI = MaskTT_AL.Text
         My.Settings.Save()
         Me.Hide()
         Set_Name_auto()
@@ -26,25 +26,25 @@ Public Class ToolName_config
         My.Settings.MaskTT_FB = Me.MaskTT_FB.Text
     End Sub
     Private Sub MaskTT_FP_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_FOC9.TextChanged
-        My.Settings.MaskTT_FOC9 = Me.MaskTT_FOC9.Text
+        My.Settings.MaskTT_FOP9 = Me.MaskTT_FOC9.Text
     End Sub
     Private Sub MaskTT_FO_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_FO.TextChanged
         My.Settings.MaskTT_FOCA = Me.MaskTT_FO.Text
     End Sub
     Private Sub MaskTT_AL_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_AL.TextChanged
-        My.Settings.MaskTT_AL = Me.MaskTT_AL.Text
+        My.Settings.MaskTT_ALFI = Me.MaskTT_AL.Text
     End Sub
 
     Private Sub ToolName_config_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If My.Settings.MaskTT_AL = "" Then
+        If My.Settings.MaskTT_ALFI = "" Then
             Set_default_toolname_masks(My.Resources.tooltypes)
         Else
             MaskTT_FR.Text = My.Settings.MaskTT_FR
             MaskTT_FT.Text = My.Settings.MaskTT_FT
             MaskTT_FB.Text = My.Settings.MaskTT_FB
-            MaskTT_FOC9.Text = My.Settings.MaskTT_FOC9
+            MaskTT_FOC9.Text = My.Settings.MaskTT_FOP9
             MaskTT_FO.Text = My.Settings.MaskTT_FOCA
-            MaskTT_AL.Text = My.Settings.MaskTT_AL
+            MaskTT_AL.Text = My.Settings.MaskTT_ALFI
         End If
     End Sub
     Public Sub Set_default_toolname_masks(data As String)

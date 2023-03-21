@@ -1,10 +1,17 @@
 ﻿Option Explicit On
 Imports System.IO
+Imports System.Net
 Imports System.Xml
 Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Excel
 
+
 Module FileImports
+
+    Dim StartLoadTimer As Date
+    Dim EndLoadTimer As Date
+
+
     ' CREATE EXCEL OBJECTS.
     Dim xlApp As Excel.Application
     Dim xlWorkBook As Excel.Workbook
@@ -56,7 +63,7 @@ Module FileImports
     End Function
 
 
-    Private Sub Fill_HM_XML(name As String, val As String, type As String)
+    Private Sub Fill_HM_XML(name As String, val As String)
         Select Case name
             Case "orderingCode"
                 Main.manref_TextBox.Text = val
@@ -72,7 +79,7 @@ Module FileImports
             Case "toolShaftDiameter"
                 Main.SD_textbox.Text = val
             Case "toolDiameter"
-                Main.D_textBox.Text = val
+                Main.D_textbox.Text = val
             Case "taperHeight"
                 Main.CTS_AL_textbox.Text = val
             Case "tipDiameter"
@@ -127,10 +134,9 @@ Module FileImports
                     Case "toolShaftDiameter"
                         Main.SD_textbox.Text = val
                         newTool.D3 = val
-
                     Case "toolDiameter"
-                        Main.D_textBox.Text = val
-                        Main.CTS_AD_TextBox.Text = val - 0.2
+                        Main.D_textbox.Text = val
+                        Main.CTS_AD_textbox.Text = val - 0.2
 
                         newTool.D1 = val
                         newTool.D2 = val - 0.2
@@ -357,8 +363,9 @@ Module FileImports
         My.Settings.ToolType = type
 
         My.Settings.Save()
-        Dim newTool As New NewTool
-        newTool.Type = type
+        Dim newTool As New NewTool With {
+            .Type = type
+        }
 
         name = line(2)
 
@@ -376,14 +383,10 @@ Module FileImports
         l3 = Replace(line(19), "Tool.TotalLength=", "")
         NoTT = Replace(line(17), "Tool.NbCogs=", "")
 
-
-
-
         If IsInt(d1) Then
             newTool.D1 = Int(d1)
             Main.D_textbox.Text = Int(d1)
         End If
-
         newTool.L1 = Replace(line(9), "Tool.UtilLength=", "")
         newTool.D2 = Replace(line(12), "Tool.DiamPoky=", "")
         newTool.L2 = Replace(line(10), "Tool.ZProg=", "")
@@ -391,5 +394,194 @@ Module FileImports
         newTool.L3 = Replace(line(19), "Tool.TotalLength=", "")
         newTool.NoTT = Replace(line(17), "Tool.NbCogs=", "")
 
+    End Sub
+
+    Private Sub Webtocsv(ByVal sender As Object, ByVal e As WebBrowserDocumentCompletedEventArgs)
+
+        Dim DataTableOrderTools As New System.Data.DataTable
+
+        Dim toolTypeFilter As String = My.Settings.ToolType
+
+        Dim webcsv As WebBrowser = CType(sender, WebBrowser)
+
+        Dim tblrows As HtmlElementCollection
+        Dim tblcols As HtmlElementCollection
+        Dim column As String
+
+        Dim filterD1 As New List(Of Decimal)
+        Dim filterL1 As New List(Of Decimal)
+        Dim filterMat As New List(Of String)
+
+        Dim row As New List(Of String)()
+        With Main
+
+            tblrows = webcsv.Document.GetElementById("tableTool").GetElementsByTagName("tr")
+            .NewToolDataGridView.DataSource = Nothing
+            'NewToolDataGridView.Columns.Clear()
+            'NewToolDataGridView.Rows.Clear()
+            .readToolProgress_Label.Text = 0
+            Dim objList As New List(Of String)
+            tblcols = tblrows.Item(0).GetElementsByTagName("th")
+
+            If tblcols.Count > 0 Then
+                For x As Integer = 0 To tblcols.Count - 1
+                    column = tblcols.Item(x).InnerHtml
+                    column = Replace(column, "<br>", " ")
+
+                    objList.Add(column)
+                Next
+            End If
+
+            DataTableOrderTools = SetDataGridColumnsTitle(objList.ToArray, DataTableOrderTools)
+
+            For r As Integer = 0 To tblrows.Count - 2
+                tblcols = tblrows.Item(r).GetElementsByTagName("td")
+
+                Dim stock As HtmlElementCollection
+
+                Dim newTool = New NewTool
+                Try
+                    stock = tblcols.Item(0).GetElementsByTagName("strong")
+                    Dim stockVal As Integer
+                    If stock.Count > 0 Then
+                        stockVal = stock(0).InnerHtml
+                    Else
+                        stockVal = 0
+                    End If
+
+                    If tblcols.Item(1).InnerHtml = toolTypeFilter Then   ' Or 1 = 1 Then
+                        'ListBox1.Items.Add(tblcols.Item(2).InnerHtml & " - " & tblcols.Item(3).InnerHtml & " - " & tblcols.Item(4).InnerHtml & " - " & tblcols.Item(8).InnerHtml)
+                        .readToolProgress_Label.Text += 1
+                        With newTool
+                            .Type = tblcols.Item(1).InnerHtml
+                            .GroupeMat = tblcols.Item(2).InnerHtml
+                            .d1 = tblcols.Item(3).InnerHtml
+                            .d2 = tblcols.Item(3).InnerHtml - 0.2
+                            .l1 = tblcols.Item(4).InnerHtml
+                            If tblcols.Item(5).InnerHtml > 0 Then
+                                .L2 = tblcols.Item(5).InnerHtml
+                            Else
+                                .L2 = newTool.L1
+                            End If
+                            .l3 = tblcols.Item(6).InnerHtml
+                            .d3 = tblcols.Item(7).InnerHtml
+                            .nott = tblcols.Item(8).InnerHtml
+                            .RayonBout = tblcols.Item(9).InnerHtml
+                            .Chanfrein = tblcols.Item(10).InnerHtml
+                            .CoupeCentre = tblcols.Item(11).InnerHtml
+                            .ArrCentre = tblcols.Item(12).InnerHtml
+                            .TypeTar = tblcols.Item(13).InnerHtml
+                            .PasTar = tblcols.Item(14).InnerHtml
+                            .Manuf = tblcols.Item(15).InnerHtml
+                            .ManufRef = tblcols.Item(16).InnerHtml
+                            .ManufRefSec = Replace(tblcols.Item(17).InnerHtml, "    ", "")
+                            '.Link = tblcols.Item(18).InnerHtml
+                            .Code = tblcols.Item(21).InnerHtml
+                            .CodeBar = tblcols.Item(22).InnerHtml
+
+                            Dim rowTmp() As String = {
+                                stockVal,
+                                .Type,
+                                .GroupeMat,
+                                .D1,
+                                .L1,
+                                .L2,
+                                .L3,
+                                .D3,
+                                .NoTT,
+                                .RayonBout,
+                                .Chanfrein,
+                                .CoupeCentre,
+                                .ArrCentre,
+                                .TypeTar,
+                                .PasTar,
+                                .Manuf,
+                                .ManufRef,
+                                .ManufRefSec,
+                                .Code,
+                                .CodeBar
+                            }
+
+                            DataTableOrderTools.Rows.Add(rowTmp)
+
+                        End With
+
+                        filterD1 = AddFiltersCombobox(newTool.d1, filterD1)
+                        filterL1 = AddFiltersCombobox(newTool.l1, filterL1)
+                        filterMat = AddFiltersStringCombobox(newTool.GroupeMat, filterMat)
+                        .toolsList.Tool.Add(newTool)
+                        'FileImports.FillDataGrid(newTool, NewToolDataGridView)
+                    End If
+
+                Catch ex As Exception
+                    'MsgBox("cant read tool")
+                End Try
+            Next
+            .NewToolDataGridView.DataSource = DataTableOrderTools
+
+
+
+
+            filterD1 = filterD1.OrderBy(Function(x) x).ToList()
+            With .filterD1_Combobox
+                .DataSource = filterD1
+            End With
+            filterL1 = filterL1.OrderBy(Function(x) x).ToList()
+            With .filterL1_ComboBox
+                .DataSource = filterL1
+            End With
+            filterMat = filterMat.OrderBy(Function(x) x).ToList()
+            With .filterMat_ComboBox
+                .DataSource = filterMat
+            End With
+
+            EndLoadTimer = Now().ToUniversalTime
+
+            .timer_label.Text = DateDiff(DateInterval.Second, StartLoadTimer, EndLoadTimer)
+        End With
+
+    End Sub
+
+    Private Sub OrderAndSetComboBoxDataSource(list As List(Of String), combobox As ComboBox)
+        list = list.OrderBy(Function(x) x).ToList()
+        With combobox
+            .DataSource = list
+        End With
+    End Sub
+
+    Public Sub GetOrderTools()
+        StartLoadTimer = Now().ToUniversalTime
+
+        'My.Settings.DefManuf = ""
+        'My.Settings.Save()
+
+        With Main
+            .filterD1_Combobox.DataSource = Nothing
+            .filterD1_Combobox.Items.Clear()
+            .filterL1_ComboBox.DataSource = Nothing
+            .filterL1_ComboBox.Items.Clear()
+            .filterMat_ComboBox.DataSource = Nothing
+            .filterMat_ComboBox.Items.Clear()
+
+            'toolsList.tool.clear()
+
+            .timer_label.Text = Now().ToUniversalTime
+        End With
+
+        Dim web As New WebBrowser
+        AddHandler web.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf Webtocsv)
+
+        Dim url As String = "http://tools.semmip.local/"
+        Dim request As HttpWebRequest = CType(WebRequest.Create(url), HttpWebRequest)
+        request.Method = "HEAD"
+        Try
+            Dim response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
+            MessageBox.Show("Connected to " & url)
+            response.Close()
+        Catch ex As WebException
+            'MessageBox.Show("Failed to connect to OrderTools") ' " & url)
+            Main.OrderTools_ToolStripButton.Enabled = False
+            web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
+        End Try
     End Sub
 End Module

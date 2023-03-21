@@ -30,6 +30,8 @@ Module ts
         Dim model_fr = Open_file(model_id, TopSolidHost.Pdm.SearchProjectByName("EdiTool"))
         If model_fr.IsEmpty Then
             MsgBox("Can't find file ( " + model_id + " )")
+            TopSolidHost.Application.EndModification(True, False)
+
             Exit Sub
         End If
 
@@ -98,70 +100,66 @@ Module ts
 
     Private Sub Set_parametre_outil(newTool_docId As DocumentId, newTool As NewTool)
 
+        Dim ToolType = My.Settings.ToolType
+
         Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")
 
-        SetReal(newTool_docId, "D", newTool.D1 / 1000)
-        SetReal(newTool_docId, "SD", newTool.D3 / 1000)
-        SetReal(newTool_docId, "OL", newTool.L3 / 1000)
-        SetReal(newTool_docId, "L", newTool.L1 / 1000)
+        Dim D1 As Decimal = newTool.D1 / 1000
+        Dim D2 As Decimal = newTool.D2 / 1000
+        Dim D3 As Decimal = newTool.D3 / 1000
+        Dim L1 As Decimal = newTool.L1 / 1000
+        Dim L2 As Decimal = newTool.L2 / 1000
+        Dim L3 As Decimal = newTool.L3 / 1000
+
+        SetReal(newTool_docId, "D", D1)
+        SetReal(newTool_docId, "SD", D3)
+        SetReal(newTool_docId, "OL", L3)
+        SetReal(newTool_docId, "L", L1)
 
 
-
-        If My.Settings.ToolType = "FOC9" Or My.Settings.ToolType = "FOCA" Then
+        If ToolType = "FOC9" Or ToolType = "FOCA" Then
             'Dim tmpAngleRad = Main.A_TextBox.Text * Math.PI / 180
             Dim tmpAngleRad = newTool.AngleDeg
             SetReal(newTool_docId, "A", tmpAngleRad)
 
-
-            Select Case My.Settings.ToolType
+            Select Case ToolType
                 Case "FOC9"
-                    TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOC9)
+                    TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOP9)
                 Case "FOCA"
                     TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOCA)
-
             End Select
-        ElseIf My.Settings.ToolType = "ALFI" Then
-            TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_AL)
+
+        ElseIf ToolType = "ALFI" Then
+            TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_ALFI)
         Else
 
-            SetReal(newTool_docId, "CTS_AD", newTool.D2 / 1000)
-            SetReal(newTool_docId, "CTS_AL", newTool.L2 / 1000)
-            SetReal(newTool_docId, "CTS_ED", newTool.D2 / 1000)
+            SetReal(newTool_docId, "CTS_AD", D2)
+            SetReal(newTool_docId, "CTS_AL", L2)
+            SetReal(newTool_docId, "CTS_ED", D2)
 
-            'SetReal(newTool_docId, "CTS_AD", Strip_doubles(Main.CTS_AD_textbox.Text))
-            'SetReal(newTool_docId, "CTS_AL", Strip_doubles(Main.CTS_AL_textbox.Text))
-            'SetReal(newTool_docId, "CTS_ED", Strip_doubles(Main.SD_textbox.Text))
-
-            'Dim CTS_AD_tmp As Double = Strip_doubles(Main.CTS_AD_textbox.Text)
-            Dim CTS_AD_tmp As Double = newTool.D2 / 1000
-
+            Dim CTS_AD_tmp As Double = D2
 
             If CTS_AD_tmp > 0 Then
-                SetReal(newTool_docId, "CTS_EBD", CTS_AD_tmp) 'TODO
+                SetReal(newTool_docId, "CTS_EBD", CTS_AD_tmp) 'TODO ****************
             Else
-                CTS_AD_tmp = Strip_doubles(Main.D_textbox.Text)
+                CTS_AD_tmp = Strip_doubles(Main.D_textbox.Text) ' if 0 gets from TextBox
                 SetReal(newTool_docId, "CTS_EBD", CTS_AD_tmp)
             End If
 
-            'Dim CTS_EL As ElementId = TopSolidHost.Elements.SearchByName(newTool, "CTS_EL")
-            'TopSolidHost.Parameters.SetRealValue(CTS_EL, Main.L3.Text / 1000)
-
-            'Dim CTS_EL As Double = Strip_doubles(Main.CTS_AL_textbox.Text)
-            Dim CTS_EL As Double = newTool.L2 / 1000
+            Dim CTS_EL As Double = L2
             If (Main.alpha.Text = 0) Then
                 SetReal(newTool_docId, "CTS_EL", CTS_EL) 'TODO
             Else
-                'CTS_EL = (Strip_doubles(Main.SD_textbox.Text) - Strip_doubles(Main.D_textbox.Text)) / 2
                 CTS_EL = newTool.D3 - newTool.D1 / 2
                 CTS_EL /= Math.Tan((Main.alpha.Text * Math.PI) / 180)
                 SetReal(newTool_docId, "CTS_EL", CTS_EL) 'TODO
             End If
 
-            If My.Settings.ToolType = "FRTO" Then
+            If ToolType = "FRTO" Then
                 Dim r As Double = Strip_doubles(Main.Chf_textbox.Text)
                 SetReal(newTool_docId, "r", r) 'TODO
                 TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FT)
-            ElseIf My.Settings.ToolType = "FRHE" Then
+            ElseIf ToolType = "FRHE" Then
                 TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FB)
             Else
                 TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FR)
@@ -176,8 +174,8 @@ Module ts
         'Dim lst As String() = New String(sys_pard.Count - 1) {}
 
         'For i As Integer = 0 To sys_pard.Count - 1
-        '    tmp = TopSolidHost.Elements.GetName(sys_pard(i))
-        '    lst(i) = tmp
+        'tmp = TopSolidHost.Elements.GetName(sys_pard(i))
+        'lst(i) = tmp
         'Next
         '***************
 

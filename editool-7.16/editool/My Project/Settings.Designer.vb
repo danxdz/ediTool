@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.3.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -80,18 +80,6 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("FR Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]")>  _
-        Public Property NameMask() As String
-            Get
-                Return CType(Me("NameMask"),String)
-            End Get
-            Set
-                Me("NameMask") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
         Public Property ToolType() As String
             Get
@@ -104,49 +92,13 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("FR Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]")>  _
-        Public Property MaskTT_FR() As String
-            Get
-                Return CType(Me("MaskTT_FR"),String)
-            End Get
-            Set
-                Me("MaskTT_FR") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("FT Ø[D] r[r] [NoTT]z Lc[L] Lu[CTS_AL]")>  _
-        Public Property MaskTT_FT() As String
-            Get
-                Return CType(Me("MaskTT_FT"),String)
-            End Get
-            Set
-                Me("MaskTT_FT") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("FB Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]")>  _
-        Public Property MaskTT_FB() As String
-            Get
-                Return CType(Me("MaskTT_FB"),String)
-            End Get
-            Set
-                Me("MaskTT_FB") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("FP Ø[D] [NoTT]z Lc[L]")>  _
-        Public Property MaskTT_FOC9() As String
+        Public Property MaskTT_FOP9() As String
             Get
-                Return CType(Me("MaskTT_FOC9"), String)
+                Return CType(Me("MaskTT_FOP9"),String)
             End Get
             Set
-                Me("MaskTT_FOC9") = Value
+                Me("MaskTT_FOP9") = value
             End Set
         End Property
         
@@ -155,28 +107,28 @@ Namespace My
          Global.System.Configuration.DefaultSettingValueAttribute("FO Ø[D] [NoTT]z Lc[L]")>  _
         Public Property MaskTT_FOCA() As String
             Get
-                Return CType(Me("MaskTT_FOCA"), String)
+                Return CType(Me("MaskTT_FOCA"),String)
             End Get
             Set
-                Me("MaskTT_FOCA") = Value
+                Me("MaskTT_FOCA") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property MaskTT_AL() As String
+        Public Property MaskTT_ALFI() As String
             Get
-                Return CType(Me("MaskTT_AL"),String)
+                Return CType(Me("MaskTT_ALFI"),String)
             End Get
             Set
-                Me("MaskTT_AL") = value
+                Me("MaskTT_ALFI") = value
             End Set
         End Property
-
-        <Global.System.Configuration.UserScopedSettingAttribute(),
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-         Global.System.Configuration.DefaultSettingValueAttribute("")>
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
         Public Property lastPath() As String
             Get
                 Return CType(Me("lastPath"),String)
@@ -197,8 +149,54 @@ Namespace My
                 Me("V6_default_path") = value
             End Set
         End Property
-
-        Public Property DefManuf As Object
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("FR Ø[D] [NoTT]z Lc[L] Lu[CTS_EL]")>  _
+        Public Property NameMask() As String
+            Get
+                Return CType(Me("NameMask"),String)
+            End Get
+            Set
+                Me("NameMask") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("FR Ø[D] [NoTT]z Lc[L] Lu[CTS_EL]")>  _
+        Public Property MaskTT_FR() As String
+            Get
+                Return CType(Me("MaskTT_FR"),String)
+            End Get
+            Set
+                Me("MaskTT_FR") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("FT Ø[D] r[r] [NoTT]z Lc[L] Lu[CTS_EL]")>  _
+        Public Property MaskTT_FT() As String
+            Get
+                Return CType(Me("MaskTT_FT"),String)
+            End Get
+            Set
+                Me("MaskTT_FT") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("FB Ø[D] [NoTT]z Lc[L] Lu[CTS_EL]")>  _
+        Public Property MaskTT_FB() As String
+            Get
+                Return CType(Me("MaskTT_FB"),String)
+            End Get
+            Set
+                Me("MaskTT_FB") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

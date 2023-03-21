@@ -1,5 +1,4 @@
 ﻿Option Explicit On
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 Module Tools
     Public Class NewTool
@@ -42,10 +41,30 @@ Module Tools
             TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.ManufacturerPartNumber"), ManufRef)
             TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Manufacturer"), Manuf)
             TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Code"), CodeBar)
+            TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Author"), "Editool")
+
             TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.VirtualDocument"), False)
             TopSolidHost.Parameters.PublishText(DocId, "Designation_outil", New SmartText(TopSolidHost.Parameters.GetDescriptionParameter(DocId)))
             TopSolidHost.Parameters.PublishText(DocId, "codeBar", New SmartText(TopSolidHost.Parameters.GetCodeParameter(DocId)))
             TopSolidHost.Parameters.PublishText(DocId, "id", New SmartText(TopSolidHost.Parameters.GetManufacturerPartNumberParameter(DocId)))
+
+
+            'Debug -> get elements param list
+            'Dim sys_pard As List(Of ElementId) = TopSolidHost.Elements.GetElements(DocId)
+            'Dim tmp As String
+            'Dim lst As String() = New String(sys_pard.Count - 1) {}
+
+            'For i As Integer = 0 To sys_pard.Count - 1
+            '    tmp = TopSolidHost.Elements.GetName(sys_pard(i))
+            '    If tmp = "" Then
+            '        tmp = TopSolidHost.Elements.GetDescription(sys_pard(i))
+
+            '        lst(i) = "aze"
+            '    End If
+            '    lst(i) = tmp
+            'Next
+
+            '***************
         End Sub
 
 

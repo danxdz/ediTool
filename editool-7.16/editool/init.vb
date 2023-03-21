@@ -121,6 +121,20 @@ Module outils_base
     End Function
 
 
+    Public Function GetToolTypes() As Dictionary(Of String, String)
+        Dim toolTypes As New Dictionary(Of String, String)
+        Dim fileContents As String = My.Resources.menu_en_tooltypes
+
+        For Each line As String In fileContents.Split(Environment.NewLine)
+            Dim values() As String = line.Split(";")
+            toolTypes.Add(values(0), values(1))
+        Next
+
+        Return toolTypes
+    End Function
+
+
+
     Public Sub Get_prefs(data As String)
         Dim splitLine() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
         Dim pref_lang As String = Right(splitLine(0), 2)
@@ -194,12 +208,11 @@ Module outils_base
             single_line = full_file(i)
             line = Split(single_line, ";")
 
-            Dim newtool As New NewTool
 
             DataTable_buffer.Rows.Add(line)
             Dim tmp_line() As String = line.ToArray
 
-            newtool = FileImports.Fill_newTool(line(1), line(3), line(2), line(5), line(6), line(4), line(8), "FR2T", "0", "0", "0", "0", "0", "0", "0", "FRAISA", line(0), "0", "0", "0")
+            Dim newtool As NewTool = FileImports.Fill_newTool(line(1), line(3), line(2), line(5), line(6), line(4), line(8), "FR2T", "0", "0", "0", "0", "0", "0", "0", "FRAISA", line(0), "0", "0", "0")
             Main.toolsList.Tool.add(newtool)
 
 

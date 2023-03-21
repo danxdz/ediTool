@@ -530,7 +530,8 @@ Partial Class Main
         Me.FR2T.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.FR2T.Name = "FR2T"
         Me.FR2T.Size = New System.Drawing.Size(40, 60)
-        Me.FR2T.Text = "FR 2T"
+        Me.FR2T.Text = "FR2T"
+        Me.FR2T.ToolTipText = "Fraise 2 tailles"
         '
         'FRTO
         '
@@ -553,7 +554,7 @@ Partial Class Main
         Me.FRBO.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.FRBO.Name = "FRBO"
         Me.FRBO.Size = New System.Drawing.Size(40, 60)
-        Me.FRBO.Text = "FRBO"
+        Me.FRBO.Text = "FRHE"
         Me.FRBO.ToolTipText = "Fraise hemesferique"
         '
         'FAP
@@ -578,7 +579,7 @@ Partial Class Main
         Me.FO.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.FO.Name = "FO"
         Me.FO.Size = New System.Drawing.Size(40, 60)
-        Me.FO.Text = "FO"
+        Me.FO.Text = "Forets"
         '
         'AL
         '
@@ -590,6 +591,7 @@ Partial Class Main
         Me.AL.Name = "AL"
         Me.AL.Size = New System.Drawing.Size(40, 60)
         Me.AL.Text = "AL"
+        Me.AL.ToolTipText = "Alesoirs fixe"
         '
         'ToolStripSeparator1
         '
