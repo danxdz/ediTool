@@ -29,10 +29,10 @@ Public Class Main
 
         Dim type As String = My.Settings.ToolType
 
-        Dim toolTypes As List(Of String) = GetToolTypes()
 
 
         FileImports.GetOrderTools()
+
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
 
@@ -473,18 +473,18 @@ Public Class Main
         ToolTip1.Show("groupe matiere", filterMat_ComboBox)
     End Sub
 
+    Private Sub FR2T_Click(sender As Object, e As EventArgs) Handles FR2T.Click, FRTO.Click
+        ToolTypeButton_Click(sender, e)
+        Console.Write(e.ToString)
+    End Sub
 
-
-    Private Sub ToolType_Click(sender As Object)
+    Public Sub ToolTypeButton_Click(sender As Object, e As EventArgs)
         My.Settings.ToolType = sender.ToString
         My.Settings.Save()
 
-    End Sub
-
-
-    Private Sub FR2T_Click(sender As Object, e As EventArgs) Handles FR2T.Click
-        ToolType_Click(sender)
         Console.Write(e.ToString)
+        Console.Write(sender)
     End Sub
+
 
 End Class

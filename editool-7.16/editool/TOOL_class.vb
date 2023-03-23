@@ -77,5 +77,29 @@ Module Tools
         Public Property ValidExists As New List(Of String)
         Public Property Objects As New List(Of String)
         Public Property Tool As New List(Of NewTool)
+
+
+        Public Shared Function GetToolsTypes(tools As ToolList) As List(Of String)
+            Dim toolTypes As New List(Of String)
+
+            For Each tool As NewTool In tools.Tool
+                If Not toolTypes.Contains(tool.Type) Then
+                    toolTypes.Add(tool.Type)
+                    Dim btn As New ToolStripButton With {
+                        .Text = tool.Type
+                    }
+
+                    ' .ToolTipText = tool.
+
+                    AddHandler btn.Click, AddressOf Main.ToolTypeButton_Click
+                    Main.ToolStrip1.Items.Add(btn)
+                End If
+            Next
+
+            Return toolTypes
+        End Function
+
     End Class
+
+
 End Module

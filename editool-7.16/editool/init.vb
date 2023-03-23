@@ -120,8 +120,7 @@ Module outils_base
         Return dt
     End Function
 
-
-    Public Function GetToolTypes() As List(Of String)
+    Public Function GetToolTypes_old() As List(Of String)
 
         Dim toolTypes As New List(Of String)
 
