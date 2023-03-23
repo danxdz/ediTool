@@ -81,9 +81,13 @@ Module Tools
 
         Public Shared Function GetToolsTypes(tools As ToolList) As List(Of String)
             Dim toolTypes As New List(Of String)
+            Dim Filter As String = "FR2T"
 
-            For Each tool As NewTool In tools.Tool
-                If Not toolTypes.Contains(tool.Type) Then
+
+            'For Each tool As NewTool In tools.Tool.Where(Function(t) t.Type.Contains(Filter))
+
+            'For Each tool As NewTool In tools.Tool
+            If Not toolTypes.Contains(tool.Type) Then
                     toolTypes.Add(tool.Type)
                     Dim btn As New ToolStripButton With {
                         .Text = tool.Type
