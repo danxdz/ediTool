@@ -86,8 +86,8 @@ Module Tools
 
             'For Each tool As NewTool In tools.Tool.Where(Function(t) t.Type.Contains(Filter))
 
-            'For Each tool As NewTool In tools.Tool
-            If Not toolTypes.Contains(tool.Type) Then
+            For Each tool As NewTool In tools.Tool
+                If Not toolTypes.Contains(tool.Type) Then
                     toolTypes.Add(tool.Type)
                     Dim btn As New ToolStripButton With {
                         .Text = tool.Type

@@ -465,7 +465,7 @@ Partial Class Main
         '
         'Lang_en
         '
-        Me.Lang_en.Location = New System.Drawing.Point(969, 2)
+        Me.Lang_en.Location = New System.Drawing.Point(972, 29)
         Me.Lang_en.Name = "Lang_en"
         Me.Lang_en.Size = New System.Drawing.Size(31, 29)
         Me.Lang_en.TabIndex = 47
@@ -474,7 +474,7 @@ Partial Class Main
         '
         'Lang_fr
         '
-        Me.Lang_fr.Location = New System.Drawing.Point(932, 2)
+        Me.Lang_fr.Location = New System.Drawing.Point(935, 29)
         Me.Lang_fr.Name = "Lang_fr"
         Me.Lang_fr.Size = New System.Drawing.Size(31, 29)
         Me.Lang_fr.TabIndex = 48

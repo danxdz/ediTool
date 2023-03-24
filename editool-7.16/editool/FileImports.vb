@@ -448,9 +448,10 @@ Module FileImports
                         stockVal = 0
                     End If
 
-                    If tblcols.Item(1).InnerHtml = toolTypeFilter Then   ' Or 1 = 1 Then
-                        'ListBox1.Items.Add(tblcols.Item(2).InnerHtml & " - " & tblcols.Item(3).InnerHtml & " - " & tblcols.Item(4).InnerHtml & " - " & tblcols.Item(8).InnerHtml)
-                        .readToolProgress_Label.Text += 1
+                    'Get all tools
+                    'If tblcols.Item(1).InnerHtml = toolTypeFilter Then   ' Or 1 = 1 Then
+                    'ListBox1.Items.Add(tblcols.Item(2).InnerHtml & " - " & tblcols.Item(3).InnerHtml & " - " & tblcols.Item(4).InnerHtml & " - " & tblcols.Item(8).InnerHtml)
+                    .readToolProgress_Label.Text += 1
                         With newTool
                             .Type = tblcols.Item(1).InnerHtml
                             .GroupeMat = tblcols.Item(2).InnerHtml
@@ -509,8 +510,8 @@ Module FileImports
                         filterL1 = AddFiltersCombobox(newTool.l1, filterL1)
                         filterMat = AddFiltersStringCombobox(newTool.GroupeMat, filterMat)
                         .toolsList.Tool.Add(newTool)
-                        'FileImports.FillDataGrid(newTool, NewToolDataGridView)
-                    End If
+                    'FileImports.FillDataGrid(newTool, NewToolDataGridView)
+                    'End If
 
                 Catch ex As Exception
                     'MsgBox("cant read tool")
@@ -584,8 +585,8 @@ Module FileImports
         Catch ex As WebException
             'MessageBox.Show("Failed to connect to OrderTools") ' " & url)
             Main.OrderTools_ToolStripButton.Enabled = False
-            'web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
-            web.Navigate(New System.Uri("C:/Downloaded Web Sites/tools.semmip.local/index.php.html"))
+            web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
+            'web.Navigate(New System.Uri("C:/Downloaded Web Sites/tools.semmip.local/index.php.html"))
 
         End Try
     End Sub
