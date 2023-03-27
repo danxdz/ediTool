@@ -2,22 +2,64 @@
 Option Explicit On
 Imports System.Text.RegularExpressions
 
-
-
 Public Class Main
 
     Public ReadOnly toolsList = New ToolList
 
     Public filteredTools = New ToolList
+
     Private ReadOnly newTool As NewTool
 
     Public started As Boolean = False
 
-
     ReadOnly color = Drawing.Color.Transparent
     ReadOnly color_green = Drawing.Color.SpringGreen
 
+
+    Private Sub Preload()
+        ' Show splash screen
+        Dim splashForm As New Preload()
+
+        splashForm.output.Visible = False
+
+        ' Load TopSolid information
+        splashForm.path_label.Text = GetTopSolidPath()
+
+        Dim topSolidVersion As String = GetTopSolidVersion()
+
+
+        splashForm.version_label.Text = topSolidVersion
+
+
+
+        ' Add event handler for click on splash screen
+        AddHandler splashForm.Click, Sub(sender, e)
+                                         ' Close splash screen and show main form
+                                         splashForm.Close()
+                                         Me.Show()
+                                     End Sub
+
+        splashForm.output.Text = "libs loaded"
+        splashForm.output.Visible = True
+
+        ' Show splash screen
+        splashForm.ShowDialog()
+        splashForm.Close()
+
+
+    End Sub
+
+
+    ReadOnly api As New TopSolidAPI()
+
+
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        'api.Initialize()
+
+
+        Preload()
+
 
         'Set lang settings and label text
         Dim lang As String = My.Settings.PrefLang
@@ -32,7 +74,7 @@ Public Class Main
 
 
 
-        FileImports.GetOrderTools()
+        'FileImports.GetOrderTools()
 
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
@@ -486,6 +528,5 @@ Public Class Main
         Console.Write(e.ToString)
         Console.Write(sender)
     End Sub
-
 
 End Class

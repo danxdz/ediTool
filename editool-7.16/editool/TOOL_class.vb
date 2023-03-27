@@ -1,4 +1,5 @@
 ﻿Option Explicit On
+Imports System.Reflection
 
 Module Tools
     Public Class NewTool
@@ -26,6 +27,7 @@ Module Tools
 
         Public Property Code As String
         Public Property CodeBar As String
+
         Public Property GSName As Integer
 
             Get
@@ -38,16 +40,32 @@ Module Tools
 
 
         Public Sub PublishParameters(DocId)
-            TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.ManufacturerPartNumber"), ManufRef)
-            TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Manufacturer"), Manuf)
-            TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Code"), CodeBar)
-            TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Author"), "Editool")
-            TopSolidHost.Parameters.SetTextValue(TopSolidHost.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.PartNumber"), Code)
 
-            TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.VirtualDocument"), False)
-            TopSolidHost.Parameters.PublishText(DocId, "Designation_outil", New SmartText(TopSolidHost.Parameters.GetDescriptionParameter(DocId)))
-            TopSolidHost.Parameters.PublishText(DocId, "codeBar", New SmartText(TopSolidHost.Parameters.GetCodeParameter(DocId)))
-            TopSolidHost.Parameters.PublishText(DocId, "id", New SmartText(TopSolidHost.Parameters.GetPartNumberParameter(DocId)))
+            Dim topSolidKernel As Assembly = api.GetTsAssembly()
+
+            Dim smartTextType As Type = topSolidKernel.GetType("TopSolid.Kernel.Automating.SmartText")
+            Dim constructor = smartTextType.GetConstructor({GetType(String)})
+
+
+            api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.ManufacturerPartNumber"), ManufRef)
+            api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Manufacturer"), Manuf)
+            api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Code"), CodeBar)
+            api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Author"), "Editool")
+            api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.PartNumber"), Code)
+
+            api.TopSolidExt.Parameters.SetBooleanValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.VirtualDocument"), False)
+            Dim smartTextTypeInstance = constructor.Invoke({"Designation_outil1"})
+
+            'smartTextType = api.TopSolidExt.Parameters.GetDescriptionParameter(DocId)
+            api.TopSolidExt.Parameters.PublishText(DocId, "Designation_outil", smartTextTypeInstance)
+            'smartTextType = api.TopSolidExt.Parameters.GetCodeParameter(DocId)
+            smartTextTypeInstance = constructor.Invoke({"codeBar"})
+
+            api.TopSolidExt.Parameters.PublishText(DocId, "codeBar", smartTextTypeInstance)
+            'smartTextType = api.TopSolidExt.Parameters.GetPartNumberParameter(DocId)
+            smartTextTypeInstance = constructor.Invoke({"id"})
+
+            api.TopSolidExt.Parameters.PublishText(DocId, "id", smartTextTypeInstance)
 
             'Debug -> get elements param list
             'Dim sys_pard As List(Of ElementId) = TopSolidHost.Elements.GetElements(DocId)

@@ -76,7 +76,6 @@ Partial Class Main
         Me.OrderTools_ToolStripButton = New System.Windows.Forms.ToolStripButton()
         Me.A_TextBox = New System.Windows.Forms.TextBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.readToolProgress_Label = New System.Windows.Forms.Label()
         Me.filterD1_Combobox = New System.Windows.Forms.ComboBox()
         Me.NewToolDataGridView = New System.Windows.Forms.DataGridView()
         Me.newToolMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -90,10 +89,15 @@ Partial Class Main
         Me.filterMat_ComboBox = New System.Windows.Forms.ComboBox()
         Me.indexLabel = New System.Windows.Forms.Label()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.readToolProgress_Label = New System.Windows.Forms.Label()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolsBar.SuspendLayout()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.newToolMenu.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'OpenFileDialog1
@@ -192,7 +196,7 @@ Partial Class Main
         Me.alpha.BackColor = System.Drawing.Color.LightGray
         Me.alpha.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.alpha.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.alpha.Location = New System.Drawing.Point(96, 182)
+        Me.alpha.Location = New System.Drawing.Point(96, 219)
         Me.alpha.Margin = New System.Windows.Forms.Padding(10)
         Me.alpha.Name = "alpha"
         Me.alpha.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -206,7 +210,7 @@ Partial Class Main
         Me.NoTT.BackColor = System.Drawing.Color.LightGray
         Me.NoTT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.NoTT.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NoTT.Location = New System.Drawing.Point(30, 182)
+        Me.NoTT.Location = New System.Drawing.Point(30, 219)
         Me.NoTT.Margin = New System.Windows.Forms.Padding(10)
         Me.NoTT.Name = "NoTT"
         Me.NoTT.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -289,7 +293,7 @@ Partial Class Main
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(137, 189)
+        Me.Label7.Location = New System.Drawing.Point(137, 226)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(13, 13)
         Me.Label7.TabIndex = 17
@@ -298,7 +302,7 @@ Partial Class Main
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(71, 189)
+        Me.Label8.Location = New System.Drawing.Point(71, 226)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(12, 13)
         Me.Label8.TabIndex = 18
@@ -341,7 +345,7 @@ Partial Class Main
         Me.Name_textbox.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolTip
         Me.Name_textbox.Enabled = False
         Me.Name_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Name_textbox.Location = New System.Drawing.Point(27, 110)
+        Me.Name_textbox.Location = New System.Drawing.Point(27, 162)
         Me.Name_textbox.Name = "Name_textbox"
         Me.Name_textbox.Size = New System.Drawing.Size(246, 26)
         Me.Name_textbox.TabIndex = 27
@@ -352,7 +356,7 @@ Partial Class Main
         Me.Chf_textbox.BackColor = System.Drawing.Color.LightGray
         Me.Chf_textbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Chf_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Chf_textbox.Location = New System.Drawing.Point(163, 182)
+        Me.Chf_textbox.Location = New System.Drawing.Point(163, 219)
         Me.Chf_textbox.Margin = New System.Windows.Forms.Padding(10)
         Me.Chf_textbox.Name = "Chf_textbox"
         Me.Chf_textbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -364,7 +368,7 @@ Partial Class Main
         'menu_2
         '
         Me.menu_2.AutoSize = True
-        Me.menu_2.Location = New System.Drawing.Point(162, 159)
+        Me.menu_2.Location = New System.Drawing.Point(162, 196)
         Me.menu_2.Name = "menu_2"
         Me.menu_2.Size = New System.Drawing.Size(35, 13)
         Me.menu_2.TabIndex = 29
@@ -403,7 +407,7 @@ Partial Class Main
         'menu_3
         '
         Me.menu_3.AutoSize = True
-        Me.menu_3.Location = New System.Drawing.Point(93, 166)
+        Me.menu_3.Location = New System.Drawing.Point(93, 203)
         Me.menu_3.Name = "menu_3"
         Me.menu_3.Size = New System.Drawing.Size(35, 13)
         Me.menu_3.TabIndex = 33
@@ -412,7 +416,7 @@ Partial Class Main
         'menu_4
         '
         Me.menu_4.AutoSize = True
-        Me.menu_4.Location = New System.Drawing.Point(29, 166)
+        Me.menu_4.Location = New System.Drawing.Point(29, 203)
         Me.menu_4.Name = "menu_4"
         Me.menu_4.Size = New System.Drawing.Size(35, 13)
         Me.menu_4.TabIndex = 34
@@ -421,7 +425,7 @@ Partial Class Main
         'menu_1
         '
         Me.menu_1.AutoSize = True
-        Me.menu_1.Location = New System.Drawing.Point(29, 96)
+        Me.menu_1.Location = New System.Drawing.Point(29, 145)
         Me.menu_1.Name = "menu_1"
         Me.menu_1.Size = New System.Drawing.Size(35, 13)
         Me.menu_1.TabIndex = 35
@@ -430,7 +434,7 @@ Partial Class Main
         'manref_TextBox
         '
         Me.manref_TextBox.FormattingEnabled = True
-        Me.manref_TextBox.Location = New System.Drawing.Point(218, 223)
+        Me.manref_TextBox.Location = New System.Drawing.Point(214, 448)
         Me.manref_TextBox.Name = "manref_TextBox"
         Me.manref_TextBox.Size = New System.Drawing.Size(181, 21)
         Me.manref_TextBox.TabIndex = 36
@@ -439,7 +443,7 @@ Partial Class Main
         '
         Me.manuf_comboBox.FormattingEnabled = True
         Me.manuf_comboBox.Items.AddRange(New Object() {"FRAISA", "SECO", "HOFFMAN"})
-        Me.manuf_comboBox.Location = New System.Drawing.Point(27, 223)
+        Me.manuf_comboBox.Location = New System.Drawing.Point(27, 448)
         Me.manuf_comboBox.Name = "manuf_comboBox"
         Me.manuf_comboBox.Size = New System.Drawing.Size(181, 21)
         Me.manuf_comboBox.TabIndex = 41
@@ -448,7 +452,7 @@ Partial Class Main
         'ForceName_checkBox
         '
         Me.ForceName_checkBox.AutoSize = True
-        Me.ForceName_checkBox.Location = New System.Drawing.Point(27, 141)
+        Me.ForceName_checkBox.Location = New System.Drawing.Point(93, 146)
         Me.ForceName_checkBox.Name = "ForceName_checkBox"
         Me.ForceName_checkBox.Size = New System.Drawing.Size(54, 17)
         Me.ForceName_checkBox.TabIndex = 42
@@ -456,7 +460,7 @@ Partial Class Main
         '
         'DefineName_Bt
         '
-        Me.DefineName_Bt.Location = New System.Drawing.Point(198, 141)
+        Me.DefineName_Bt.Location = New System.Drawing.Point(163, 142)
         Me.DefineName_Bt.Name = "DefineName_Bt"
         Me.DefineName_Bt.Size = New System.Drawing.Size(75, 23)
         Me.DefineName_Bt.TabIndex = 45
@@ -642,7 +646,7 @@ Partial Class Main
         Me.A_TextBox.BackColor = System.Drawing.Color.LightGray
         Me.A_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.A_TextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.A_TextBox.Location = New System.Drawing.Point(199, 182)
+        Me.A_TextBox.Location = New System.Drawing.Point(199, 219)
         Me.A_TextBox.Margin = New System.Windows.Forms.Padding(10)
         Me.A_TextBox.Name = "A_TextBox"
         Me.A_TextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -654,28 +658,17 @@ Partial Class Main
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(341, 162)
+        Me.CheckBox1.Location = New System.Drawing.Point(304, 171)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(54, 17)
         Me.CheckBox1.TabIndex = 56
         Me.CheckBox1.Text = "empty"
         Me.CheckBox1.Visible = False
         '
-        'readToolProgress_Label
-        '
-        Me.readToolProgress_Label.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.readToolProgress_Label.AutoSize = True
-        Me.readToolProgress_Label.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.readToolProgress_Label.Location = New System.Drawing.Point(25, 451)
-        Me.readToolProgress_Label.Name = "readToolProgress_Label"
-        Me.readToolProgress_Label.Size = New System.Drawing.Size(24, 25)
-        Me.readToolProgress_Label.TabIndex = 58
-        Me.readToolProgress_Label.Text = "0"
-        '
         'filterD1_Combobox
         '
         Me.filterD1_Combobox.FormattingEnabled = True
-        Me.filterD1_Combobox.Location = New System.Drawing.Point(153, 255)
+        Me.filterD1_Combobox.Location = New System.Drawing.Point(153, 286)
         Me.filterD1_Combobox.Name = "filterD1_Combobox"
         Me.filterD1_Combobox.Size = New System.Drawing.Size(120, 21)
         Me.filterD1_Combobox.TabIndex = 59
@@ -686,11 +679,11 @@ Partial Class Main
         Me.NewToolDataGridView.AllowUserToOrderColumns = True
         Me.NewToolDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
         Me.NewToolDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.NewToolDataGridView.Location = New System.Drawing.Point(27, 282)
+        Me.NewToolDataGridView.Location = New System.Drawing.Point(27, 314)
         Me.NewToolDataGridView.MultiSelect = False
         Me.NewToolDataGridView.Name = "NewToolDataGridView"
         Me.NewToolDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.NewToolDataGridView.Size = New System.Drawing.Size(973, 160)
+        Me.NewToolDataGridView.Size = New System.Drawing.Size(973, 128)
         Me.NewToolDataGridView.TabIndex = 61
         '
         'newToolMenu
@@ -725,7 +718,7 @@ Partial Class Main
         Me.timer_label.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.timer_label.AutoSize = True
         Me.timer_label.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.timer_label.Location = New System.Drawing.Point(696, 6)
+        Me.timer_label.Location = New System.Drawing.Point(874, 286)
         Me.timer_label.Name = "timer_label"
         Me.timer_label.Size = New System.Drawing.Size(24, 25)
         Me.timer_label.TabIndex = 63
@@ -734,7 +727,7 @@ Partial Class Main
         'CheckBox2
         '
         Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(396, 134)
+        Me.CheckBox2.Location = New System.Drawing.Point(304, 139)
         Me.CheckBox2.Name = "CheckBox2"
         Me.CheckBox2.Size = New System.Drawing.Size(55, 17)
         Me.CheckBox2.TabIndex = 64
@@ -744,7 +737,7 @@ Partial Class Main
         'filterL1_ComboBox
         '
         Me.filterL1_ComboBox.FormattingEnabled = True
-        Me.filterL1_ComboBox.Location = New System.Drawing.Point(279, 255)
+        Me.filterL1_ComboBox.Location = New System.Drawing.Point(279, 286)
         Me.filterL1_ComboBox.Name = "filterL1_ComboBox"
         Me.filterL1_ComboBox.Size = New System.Drawing.Size(120, 21)
         Me.filterL1_ComboBox.TabIndex = 65
@@ -753,7 +746,7 @@ Partial Class Main
         'filterMat_ComboBox
         '
         Me.filterMat_ComboBox.FormattingEnabled = True
-        Me.filterMat_ComboBox.Location = New System.Drawing.Point(27, 255)
+        Me.filterMat_ComboBox.Location = New System.Drawing.Point(27, 286)
         Me.filterMat_ComboBox.Name = "filterMat_ComboBox"
         Me.filterMat_ComboBox.Size = New System.Drawing.Size(120, 21)
         Me.filterMat_ComboBox.TabIndex = 66
@@ -764,7 +757,7 @@ Partial Class Main
         Me.indexLabel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.indexLabel.AutoSize = True
         Me.indexLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.indexLabel.Location = New System.Drawing.Point(263, 445)
+        Me.indexLabel.Location = New System.Drawing.Point(791, 33)
         Me.indexLabel.Name = "indexLabel"
         Me.indexLabel.Size = New System.Drawing.Size(24, 25)
         Me.indexLabel.TabIndex = 67
@@ -776,13 +769,46 @@ Partial Class Main
         Me.ToolStrip1.BackColor = System.Drawing.Color.Transparent
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ToolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
-        Me.ToolStrip1.Location = New System.Drawing.Point(5, 5)
+        Me.ToolStrip1.Location = New System.Drawing.Point(5, 29)
         Me.ToolStrip1.Margin = New System.Windows.Forms.Padding(15, 5, 5, 5)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.ToolStrip1.Size = New System.Drawing.Size(998, 23)
         Me.ToolStrip1.TabIndex = 68
         Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'readToolProgress_Label
+        '
+        Me.readToolProgress_Label.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.readToolProgress_Label.AutoSize = True
+        Me.readToolProgress_Label.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.readToolProgress_Label.Location = New System.Drawing.Point(976, 286)
+        Me.readToolProgress_Label.Name = "readToolProgress_Label"
+        Me.readToolProgress_Label.Size = New System.Drawing.Size(24, 25)
+        Me.readToolProgress_Label.TabIndex = 69
+        Me.readToolProgress_Label.Text = "0"
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(5, 5)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(998, 24)
+        Me.MenuStrip1.TabIndex = 70
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'FileToolStripMenuItem
+        '
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem})
+        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.FileToolStripMenuItem.Text = "File"
+        '
+        'OpenToolStripMenuItem
+        '
+        Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.OpenToolStripMenuItem.Text = "Open"
         '
         'Main
         '
@@ -791,6 +817,7 @@ Partial Class Main
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1008, 486)
+        Me.Controls.Add(Me.readToolProgress_Label)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.indexLabel)
         Me.Controls.Add(Me.filterMat_ComboBox)
@@ -798,6 +825,7 @@ Partial Class Main
         Me.Controls.Add(Me.CheckBox2)
         Me.Controls.Add(Me.timer_label)
         Me.Controls.Add(Me.ToolsBar)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.Lang_en)
         Me.Controls.Add(Me.Lang_fr)
         Me.Controls.Add(Me.menu_10)
@@ -821,7 +849,6 @@ Partial Class Main
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.NewToolDataGridView)
         Me.Controls.Add(Me.filterD1_Combobox)
-        Me.Controls.Add(Me.readToolProgress_Label)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.A_TextBox)
         Me.Controls.Add(Me.ValidateBt)
@@ -841,6 +868,7 @@ Partial Class Main
         Me.Controls.Add(Me.alpha)
         Me.Controls.Add(Me.NoTT)
         Me.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "Main"
         Me.Padding = New System.Windows.Forms.Padding(5)
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -850,6 +878,8 @@ Partial Class Main
         Me.ToolsBar.PerformLayout()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.newToolMenu.ResumeLayout(False)
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -904,7 +934,6 @@ Partial Class Main
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents XML_ToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
-    Friend WithEvents readToolProgress_Label As Label
     Friend WithEvents filterD1_Combobox As ComboBox
     Friend WithEvents NewToolDataGridView As DataGridView
     Friend WithEvents Top6_ToolStripButton As ToolStripButton
@@ -920,4 +949,8 @@ Partial Class Main
     Friend WithEvents filterMat_ComboBox As ComboBox
     Friend WithEvents indexLabel As Label
     Friend WithEvents ToolStrip1 As ToolStrip
+    Friend WithEvents readToolProgress_Label As Label
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
 End Class

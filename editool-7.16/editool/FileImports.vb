@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Net
 Imports System.Xml
+Imports editool.Tools
 Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Excel
 
@@ -287,7 +288,7 @@ Module FileImports
                 Exit For        ' BAIL OUT IF REACHED THE LAST ROW.
             Else
                 NewBD.DataGridView1.Rows.Add()
-                Main.readToolProgress_Label.Text += 1
+                Preload.toolCountLabel.Text += 1
                 ' CREATE A STRING ARRAY USING THE VALUES IN EACH ROW OF THE SHEET.
                 For i As Integer = 1 To iColCount
 
@@ -418,7 +419,7 @@ Module FileImports
             .NewToolDataGridView.DataSource = Nothing
             'NewToolDataGridView.Columns.Clear()
             'NewToolDataGridView.Rows.Clear()
-            .readToolProgress_Label.Text = 0
+            Preload.toolCountLabel.Text = 0
             Dim objList As New List(Of String)
             tblcols = tblrows.Item(0).GetElementsByTagName("th")
 
@@ -449,9 +450,12 @@ Module FileImports
                     End If
 
                     'Get all tools
-                    'If tblcols.Item(1).InnerHtml = toolTypeFilter Then   ' Or 1 = 1 Then
-                    'ListBox1.Items.Add(tblcols.Item(2).InnerHtml & " - " & tblcols.Item(3).InnerHtml & " - " & tblcols.Item(4).InnerHtml & " - " & tblcols.Item(8).InnerHtml)
-                    .readToolProgress_Label.Text += 1
+                    If tblcols.Item(1).InnerHtml = toolTypeFilter Then   ' Or 1 = 1 Then
+                        'ListBox1.Items.Add(tblcols.Item(2).InnerHtml & " - " & tblcols.Item(3).InnerHtml & " - " & tblcols.Item(4).InnerHtml & " - " & tblcols.Item(8).InnerHtml)
+
+
+                        Preload.ToolCount(.toolsList.Tool)
+
                         With newTool
                             .Type = tblcols.Item(1).InnerHtml
                             .GroupeMat = tblcols.Item(2).InnerHtml
@@ -510,8 +514,8 @@ Module FileImports
                         filterL1 = AddFiltersCombobox(newTool.l1, filterL1)
                         filterMat = AddFiltersStringCombobox(newTool.GroupeMat, filterMat)
                         .toolsList.Tool.Add(newTool)
-                    'FileImports.FillDataGrid(newTool, NewToolDataGridView)
-                    'End If
+                        'FileImports.FillDataGrid(newTool, NewToolDataGridView)
+                    End If
 
                 Catch ex As Exception
                     'MsgBox("cant read tool")

@@ -1,13 +1,224 @@
 ﻿Option Explicit On
-Imports TopSolid.Cad.Design.Automating
+
+Imports System.IO
+Imports Microsoft.Win32
+Imports System.Reflection
+
 
 Module ts
+    Public ReadOnly api As New TopSolidAPI()
+
+    Private Sub InitializeApi()
+        Try
+            api.Initialize()
+            ' Do something with the API here
+        Catch ex As Exception
+            ' Handle any errors that occur during initialization
+        End Try
+    End Sub
+
+    Public Class TopSolidAPI
+
+        Public TopSolidExt As Object
+        Public TopSolidDesignExt As Object
+        Private _pdmObjectID As Object
+        Private _documentID As Object
+
+        Public Property PdmObjectID As Object
+            Get
+                Return _pdmObjectID
+            End Get
+            Set(value As Object)
+                _pdmObjectID = value
+            End Set
+        End Property
+
+        Public Property DocumentId As Object
+            Get
+                Return _documentID
+            End Get
+            Set(value As Object)
+                _documentID = value
+            End Set
+        End Property
+
+        Private Property TopSolidPath As String
+
+        Friend Function CopyModelFile(model, libModel)
+            Return CopyFile(model, libModel)
+
+        End Function
+        Friend Sub Initialize()
+            GetTsPdmObjectId()
+
+        End Sub
+        Friend Function GetTsAssembly()
+            Return GetTsDLL()
+
+        End Function
+        Friend Function StartModif()
+            Return StartModifTopSolid()
+        End Function
+
+        Function CopyFile(model, lib_models)
+
+            'Dim topSolidKernel As Assembly = api.GetTsAssembly()
+            'Dim documentIdType As Type = topSolidKernel.GetType("TopSolid.Kernel.Automating.DocumentId")
+            'Dim documentIdConstructor As ConstructorInfo = documentIdType.GetConstructor(New Type() {GetType(String)})
+            'Dim pdmDocumentId As String = "your_pdm_document_id_here"
+            'Dim documentIdInstance As Object = documentIdConstructor.Invoke(New Object() {pdmDocumentId})
+
+            Dim model_fr As Object
+            'Dim model_fr As DocumentId
+
+            Dim temp_model As Object
+
+            ' Check if there are any models in the specified library
+            If lib_models.Count > 0 Then
+
+                ' Open the first object in the list
+                TopSolidExt.Pdm.OpenProject(lib_models(0))
+
+                ' Search for the specified model in all the models
+                Dim model_fr_id
+                For i As Integer = 0 To (lib_models.Count - 1)
+                    model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models(i), model)
+                Next
+                ' If the model was found, open it and save it as a temporary file
+                If model_fr_id.Count > 0 Then
+                    Try
+                        model_fr = TopSolidExt.Documents.GetDocument(model_fr_id(0))
+                        temp_model = TopSolidExt.Documents.SaveAs(model_fr, lib_models(0), "temp") 'Main.Name_textbox.Text)
+                    Catch ex As Exception
+                        MsgBox("cant find tool model")
+                    End Try
+                Else
+                    ' If the model was not found, display an error message
+                    MsgBox("cant find tool model")
+                End If
+            Else
+                ' If the library was not found, display an error message
+                MsgBox("cant find lib 'EdiTool'")
+            End If
+
+            ' Return the temporary model document ID
+            Return temp_model
+        End Function
+        Private Function StartModifTopSolid()
+
+            Dim conn = GetTsPdmObjectId()
+
+
+            TopSolidExt.Connect()
+            'TopSolidExt.Pdm.OpenProject("Editool")
+            conn = TopSolidExt.Pdm.SearchProjectByName("EdiTool")
+
+            Return conn
+            Dim connected As Boolean = False
+            Dim isconnected As Boolean = False
+            connected = TopSolidExt.Connect()
+            isconnected = TopSolidExt.isConnected()
+            If isconnected Then
+                Console.WriteLine("conn :  ", isconnected)
+
+            End If
+            Console.WriteLine(":  ", connected)
+
+        End Function
+        Private Function GetTsDLL() As Assembly
+            TopSolidPath = GetTopSolidPath()
+
+            ' Load DLL's
+            Dim topSolidKernelSxPath As String = Path.Combine(TopSolidPath, "bin", "TopSolid.Kernel.SX.dll")
+            Console.WriteLine($"Loading dll: {topSolidKernelSxPath}")
+            Dim topSolidKernelSx As Assembly = Assembly.LoadFrom(topSolidKernelSxPath)
+            '*************************
+            Dim topSolidKernelPath As String = Path.Combine(TopSolidPath, "bin", "TopSolid.Kernel.Automating.dll")
+            Console.WriteLine($"Loading dll: {topSolidKernelPath}")
+            Dim topSolidKernel As Assembly = Assembly.LoadFrom(topSolidKernelPath)
+            Return topSolidKernel
+        End Function
+        Private Function GetTsPdmObjectId()
+            Try
+                TopSolidPath = GetTopSolidPath()
+
+                Dim topSolidKernel As Assembly = GetTsDLL()
+
+                Dim type As Type = topSolidKernel.GetType("TopSolid.Kernel.Automating.TopSolidHostInstance")
+                TopSolidExt = Activator.CreateInstance(type)
+                Dim pdmObjectIdType = topSolidKernel.GetType("TopSolid.Kernel.Automating.PdmObjectId")
+                Dim DocumentIdType = topSolidKernel.GetType("TopSolid.Kernel.Automating.DocumentId")
+                Dim listType = GetType(List(Of )).MakeGenericType(pdmObjectIdType)
+
+                'TopSolidExt.Connect()
+                'TopSolidExt.Pdm.OpenProject("Editool")
+                'listType = TopSolidExt.Pdm.SearchProjectByName("EdiTool")
+
+
+
+
+                Return listType
+
+
+            Catch ex As Exception
+                Console.WriteLine($"Failed to load dll: {ex.Message}")
+            End Try
+
+        End Function
+
+
+    End Class
+
+
+
+    ReadOnly keyPath As String = "SOFTWARE\TOPSOLID\TopSolid'Cam"
+
+    'Function to get the last subkey of a given key
+    Private Function GetLastSubKey()
+
+        Dim subKeys() As String = Registry.LocalMachine.OpenSubKey(keyPath).GetSubKeyNames()
+
+        If subKeys.Length > 0 Then
+            Return subKeys(subKeys.Length - 1)
+        Else
+            Return ""
+        End If
+    End Function
+
+    'Function to get the TopSolid path
+    Public Function GetTopSolidPath() As String
+
+        Dim subKey As String = GetLastSubKey()
+
+        If Not String.IsNullOrEmpty(subKey) Then
+            Dim path As String = Registry.GetValue("HKEY_LOCAL_MACHINE\" & keyPath & "\" & subKey, "InstallDir", "")
+            Return path
+        Else
+            Return "TS path not found"
+        End If
+    End Function
+
+    'Function to get the TopSolid version
+    Public Function GetTopSolidVersion() As String
+        Dim subKey As String = GetLastSubKey()
+
+        If Not String.IsNullOrEmpty(subKey) Then
+            Dim version As String = Registry.GetValue("HKEY_LOCAL_MACHINE\" & keyPath & "\" & subKey, "Version", "")
+            Return version
+        Else
+            Return "no TS version founded"
+        End If
+    End Function
+
+
+
     Public Sub Create_outil(newTool As NewTool)
+        Dim modelLib = api.StartModif()
+        Console.WriteLine(":  ", modelLib)
+        'TopSolidHost.Connect()
+        'TopSolidDesignHost.Connect()
 
-        TopSolidHost.Connect()
-        TopSolidDesignHost.Connect()
-
-        Dim model_id As String = "Side Mill D20 L35 SD20"
+        Dim model_id As String = "Fraise 2 Tailles D20 L35 SD20"
 
         Dim toolType = newTool.Type
         If toolType <> "" Then My.Settings.ToolType = toolType
@@ -27,38 +238,66 @@ Module ts
                 model_id = "Constant Reamer D10 L20 SD9"
         End Select
 
-        Dim model_fr = Open_file(model_id, TopSolidHost.Pdm.SearchProjectByName("EdiTool"))
+
+
+
+        ''Dim asss As List(Of PdmObjectId) = TopSolidHost.Pdm.SearchProjectByName("EdiTool")
+        ''TopSolidHost.Pdm.OpenProject(asss(0))
+        'InitializeApi()
+
+        ' api.TopSolidExt.Connect()
+
+        Dim model_fr = api.CopyFile(model_id, modelLib)
+        'Open_file(model_id, api.TopSolidExt.Pdm.SearchProjectByName("EdiTool"))
+
+        '********
+        '********
+        '********
+        '********
+        '********
+        'uncomment to unblock TS
+        'api.TopSolidExt.Application.EndModification(True, False)
+
         If model_fr.IsEmpty Then
             MsgBox("Can't find file ( " + model_id + " )")
-            TopSolidHost.Application.EndModification(True, False)
+            api.TopSolidExt.Application.EndModification(True, False)
 
             Exit Sub
         End If
 
         Try
-            If Not TopSolidHost.Application.StartModification("model_fr", True) Then
+            If Not api.TopSolidExt.Application.StartModification("model_fr", True) Then
                 MsgBox("StartModification failure")
+                api.TopSolidExt.Application.EndModification(True, False)
+
                 Exit Sub
             End If
 
-            TopSolidHost.Documents.EnsureIsDirty(model_fr)
+            api.TopSolidExt.Documents.EnsureIsDirty(model_fr)
             Set_parametre_outil(model_fr, newTool)
             MakeTool(model_fr)
-            TopSolidHost.Pdm.CheckIn(TopSolidHost.Pdm.SearchDocumentByName(
-                TopSolidHost.Pdm.SearchProjectByName("EdiTool")(0),
-                TopSolidHost.Documents.GetName(model_fr))(0), True)
+            api.TopSolidExt.Pdm.CheckIn(api.TopSolidExt.Pdm.SearchDocumentByName(
+                api.TopSolidExt.Pdm.SearchProjectByName("EdiTool")(0),
+                api.TopSolidExt.Documents.GetName(model_fr))(0), True)
 
             MsgBox("Outil " + Main.Name_textbox.Text + " crée")
-        Catch
+        Catch ex As Exception
+
             MsgBox("Failed to create tool")
         Finally
-            'TopSolidHost.Application.EndModification(False, False)
+            Try
+                api.TopSolidExt.Application.EndModification(False, False)
+
+            Catch ex As Exception
+                Console.Write("app closed -> modification end")
+            End Try
         End Try
 
     End Sub
 
 
-    Private Sub MakeTool(docId As DocumentId)
+
+    Private Sub MakeTool(docId)
 
         'Dim list_par As List(Of ElementId) = TopSolidHost.Parameters.GetParameters(docId)
         'Dim names As String
@@ -69,13 +308,13 @@ Module ts
         '    'ComboBox1.Items.Add(names)
         'Next
 
-        TopSolidHost.Application.EndModification(True, False)
+        api.TopSolidExt.Application.EndModification(True, False)
 
         If Main.AutoOpen_checkBox.Checked = True Then
-            TopSolidHost.Documents.Open(docId)
+            api.TopSolidExt.Documents.Open(docId)
         End If
 
-        TopSolidHost.Documents.Save(docId)
+        api.TopSolidExt.Documents.Save(docId)
         ''TopSolidHost.Documents.Close(newTool, False, False)
 
     End Sub
@@ -87,22 +326,24 @@ Module ts
     End Function
 
     ' This subroutine sets the value of a Real parameter in a TopSolid document
-    Private Sub SetReal(TopDoc As DocumentId, paramName As String, paramValue As Decimal)
+    'Private Sub SetReal(TopDoc As DocumentId, paramName As String, paramValue As Decimal)
+    Private Sub SetReal(TopDoc, paramName, paramValue)
 
         ' Find the ElementId of the Real parameter using its name
-        Dim paramElementId As ElementId = TopSolidHost.Elements.SearchByName(TopDoc, paramName)
+        Dim paramElementId = api.TopSolidExt.Elements.SearchByName(TopDoc, paramName)
 
         ' Set the value of the Real parameter using its ElementId and the desired value
-        TopSolidHost.Parameters.SetRealValue(paramElementId, paramValue)
+        api.TopSolidExt.Parameters.SetRealValue(paramElementId, paramValue)
 
     End Sub
 
 
-    Private Sub Set_parametre_outil(newTool_docId As DocumentId, newTool As NewTool)
+    Private Sub Set_parametre_outil(newTool_docId, newTool)
 
         Dim ToolType = My.Settings.ToolType
 
-        Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")
+        'Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")
+        Dim Name = api.TopSolidExt.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")
 
         Dim D1 As Decimal = newTool.D1 / 1000
         Dim D2 As Decimal = newTool.D2 / 1000
@@ -124,13 +365,13 @@ Module ts
 
             Select Case ToolType
                 Case "FOC9"
-                    TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOP9)
+                    api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOP9)
                 Case "FOCA"
-                    TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOCA)
+                    api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOCA)
             End Select
 
         ElseIf ToolType = "ALFI" Then
-            TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_ALFI)
+            api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_ALFI)
         Else
 
             SetReal(newTool_docId, "CTS_AD", D2)
@@ -158,11 +399,11 @@ Module ts
             If ToolType = "FRTO" Then
                 Dim r As Double = Strip_doubles(Main.Chf_textbox.Text)
                 SetReal(newTool_docId, "r", r) 'TODO
-                TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FT)
+                api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FT)
             ElseIf ToolType = "FRHE" Then
-                TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FB)
+                api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FB)
             Else
-                TopSolidHost.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FR)
+                api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FR)
             End If
 
         End If
@@ -182,7 +423,7 @@ Module ts
         newTool.PublishParameters(newTool_docId)
 
         Try
-            TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Cam.NC.Tool.TX.MachiningComponents.NotAllowedForMachining"), True)
+            'TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Cam.NC.Tool.TX.MachiningComponents.NotAllowedForMachining"), True)
         Catch ex As Exception
         End Try
 
@@ -190,44 +431,6 @@ Module ts
     End Sub
 
 
-    Function Open_file(model As String, lib_models As List(Of PdmObjectId))
-
-        Dim model_fr As DocumentId
-        Dim temp_model As DocumentId
-
-        ' Check if there are any models in the specified library
-        If lib_models.Count > 0 Then
-
-            ' Open the first library in the list
-            TopSolidHost.Pdm.OpenProject(lib_models(0))
-
-            ' Search for the specified model in all the libraries
-            Dim model_fr_id As New List(Of PdmObjectId)()
-            For i As Integer = 0 To (lib_models.Count - 1)
-                model_fr_id = TopSolidHost.Pdm.SearchDocumentByName(lib_models(i), model)
-            Next
-
-
-            ' If the model was found, open it and save it as a temporary file
-            If model_fr_id.Count > 0 Then
-                Try
-                    model_fr = TopSolidHost.Documents.GetDocument(model_fr_id(0))
-                    temp_model = TopSolidHost.Documents.SaveAs(model_fr, lib_models(0), "temp") 'Main.Name_textbox.Text)
-                Catch ex As Exception
-                    MsgBox("cant find tool model")
-                End Try
-            Else
-                ' If the model was not found, display an error message
-                MsgBox("cant find tool model")
-            End If
-        Else
-            ' If the library was not found, display an error message
-            MsgBox("cant find lib 'EdiTool'")
-        End If
-
-        ' Return the temporary model document ID
-        Return temp_model
-    End Function
 
 
 

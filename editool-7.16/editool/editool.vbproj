@@ -18,7 +18,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <PublishUrl>C:\Users\topsolid1\Desktop\123\</PublishUrl>
+    <PublishUrl>C:\Users\user\Downloads\EdiTool\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -99,20 +99,6 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="TopSolid.Cad.Design.Automating, Version=7.14.300.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\TOPSOLID\TopSolid 7.16\bin\TopSolid.Cad.Design.Automating.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TopSolid.Cam.NC.Kernel.Automating">
-      <HintPath>C:\Program Files\TOPSOLID\TopSolid 7.16\bin\TopSolid.Cam.NC.Kernel.Automating.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="TopSolid.Kernel.Automating, Version=7.14.300.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\TOPSOLID\TopSolid 7.16\bin\TopSolid.Kernel.Automating.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -141,6 +127,12 @@
       <DependentUpon>NewBD.vb</DependentUpon>
     </Compile>
     <Compile Include="NewBD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preload.Designer.vb">
+      <DependentUpon>Preload.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Preload.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TOOL_class.vb" />
@@ -180,6 +172,9 @@
   <ItemGroup>
     <EmbeddedResource Include="NewBD.resx">
       <DependentUpon>NewBD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preload.resx">
+      <DependentUpon>Preload.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolName_config.resx">
       <DependentUpon>ToolName_config.vb</DependentUpon>
