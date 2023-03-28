@@ -43,9 +43,13 @@ Partial Class Preload
         '
         'MainLayoutPanel
         '
+        Me.MainLayoutPanel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MainLayoutPanel.AutoSize = True
         Me.MainLayoutPanel.BackColor = System.Drawing.SystemColors.Control
         Me.MainLayoutPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.MainLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
         Me.MainLayoutPanel.ColumnCount = 3
         Me.MainLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 635.0!))
         Me.MainLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250.0!))
@@ -54,7 +58,8 @@ Partial Class Preload
         Me.MainLayoutPanel.Controls.Add(Me.ApplicationTitle, 1, 0)
         Me.MainLayoutPanel.Controls.Add(Me.Panel1, 0, 0)
         Me.MainLayoutPanel.Controls.Add(Me.Panel2, 0, 1)
-        Me.MainLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MainLayoutPanel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize
+        Me.MainLayoutPanel.ImeMode = System.Windows.Forms.ImeMode.[On]
         Me.MainLayoutPanel.Location = New System.Drawing.Point(0, 0)
         Me.MainLayoutPanel.Name = "MainLayoutPanel"
         Me.MainLayoutPanel.RowCount = 2
@@ -68,9 +73,9 @@ Partial Class Preload
         Me.Version.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Version.BackColor = System.Drawing.Color.Transparent
         Me.Version.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Version.Location = New System.Drawing.Point(888, 0)
+        Me.Version.Location = New System.Drawing.Point(891, 1)
         Me.Version.Name = "Version"
-        Me.Version.Size = New System.Drawing.Size(79, 334)
+        Me.Version.Size = New System.Drawing.Size(75, 334)
         Me.Version.TabIndex = 1
         Me.Version.Text = "v. {0}.{1:00}"
         Me.Version.TextAlign = System.Drawing.ContentAlignment.BottomLeft
@@ -80,7 +85,7 @@ Partial Class Preload
         Me.ApplicationTitle.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.ApplicationTitle.BackColor = System.Drawing.Color.Transparent
         Me.ApplicationTitle.Font = New System.Drawing.Font("Impact", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ApplicationTitle.Location = New System.Drawing.Point(638, 0)
+        Me.ApplicationTitle.Location = New System.Drawing.Point(640, 1)
         Me.ApplicationTitle.Name = "ApplicationTitle"
         Me.ApplicationTitle.Size = New System.Drawing.Size(244, 334)
         Me.ApplicationTitle.TabIndex = 0
@@ -92,7 +97,7 @@ Partial Class Preload
         Me.Panel1.Controls.Add(Me.version_label)
         Me.Panel1.Controls.Add(Me.path_label)
         Me.Panel1.Controls.Add(Me.output)
-        Me.Panel1.Location = New System.Drawing.Point(3, 3)
+        Me.Panel1.Location = New System.Drawing.Point(4, 4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(629, 328)
         Me.Panel1.TabIndex = 3
@@ -139,9 +144,9 @@ Partial Class Preload
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Location = New System.Drawing.Point(3, 337)
+        Me.Panel2.Location = New System.Drawing.Point(4, 339)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(629, 46)
+        Me.Panel2.Size = New System.Drawing.Size(629, 43)
         Me.Panel2.TabIndex = 60
         '
         'toolCountLabel
@@ -160,7 +165,7 @@ Partial Class Preload
         Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(9, 115)
+        Me.Label1.Location = New System.Drawing.Point(9, 113)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(623, 41)
         Me.Label1.TabIndex = 4
@@ -172,7 +177,7 @@ Partial Class Preload
         Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.Label2.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(9, 78)
+        Me.Label2.Location = New System.Drawing.Point(9, 76)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(620, 37)
         Me.Label2.TabIndex = 3
@@ -184,7 +189,7 @@ Partial Class Preload
         Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label3.BackColor = System.Drawing.Color.Transparent
         Me.Label3.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(9, 6)
+        Me.Label3.Location = New System.Drawing.Point(9, 4)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(65, 40)
         Me.Label3.TabIndex = 2

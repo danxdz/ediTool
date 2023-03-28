@@ -516,7 +516,7 @@ Public Class Main
         ToolTip1.Show("groupe matiere", filterMat_ComboBox)
     End Sub
 
-    Private Sub FR2T_Click(sender As Object, e As EventArgs) Handles FR2T.Click, FRTO.Click
+    Private Sub FR2T_Click(sender As Object, e As EventArgs) Handles FR2T.Click, FRTO.Click, FRBO.Click
         ToolTypeButton_Click(sender, e)
         Console.Write(e.ToString)
     End Sub
@@ -525,6 +525,7 @@ Public Class Main
         My.Settings.ToolType = sender.ToString
         My.Settings.Save()
 
+        ToolName_config.Namemask_textbox.Text = sender.ToString
         Console.Write(e.ToString)
         Console.Write(sender)
     End Sub

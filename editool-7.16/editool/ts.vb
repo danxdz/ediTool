@@ -225,11 +225,11 @@ Module ts
 
         Select Case My.Settings.ToolType
             Case "FR2T"
-                model_id = "Side Mill D20 L35 SD20"
+                model_id = "Side Mill D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
             Case "FRTO"
-                model_id = "Radiused Mill D16 L40 r3 SD16"
+                model_id = "Fraise hémisphérique D8 L30 SD8"
             Case "FRHE"
-                model_id = "Ball Nose Mill D8 L30 SD8"
+                model_id = "Ball Nose Mill D8 L30 SD8"'"Fraise hémisphérique D8 L30 SD8"
             Case "FOP9"
                 model_id = "Spotting Drill D10 SD10"
             Case "FOCA"

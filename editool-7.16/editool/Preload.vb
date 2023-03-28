@@ -31,7 +31,7 @@
         'Copyright.Text = My.Application.Info.Copyright
 
     End Sub
-    Public Sub ToolCount(qsd As String)
+    Public Sub ToolCount()
         If toolCountLabel.InvokeRequired Then
             toolCountLabel.BeginInvoke(Sub() ToolCount())
             Return
