@@ -91,13 +91,9 @@ Partial Class Main
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.readToolProgress_Label = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ToolsBar.SuspendLayout()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.newToolMenu.SuspendLayout()
-        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'OpenFileDialog1
@@ -516,12 +512,11 @@ Partial Class Main
         Me.ToolsBar.BackColor = System.Drawing.Color.Transparent
         Me.ToolsBar.Dock = System.Windows.Forms.DockStyle.None
         Me.ToolsBar.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ToolsBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FR2T, Me.FRTO, Me.FRBO, Me.FAP, Me.FO, Me.AL, Me.ToolStripSeparator1, Me.XML_ToolStripButton, Me.Top6_ToolStripButton, Me.OrderTools_ToolStripButton})
         Me.ToolsBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
-        Me.ToolsBar.Location = New System.Drawing.Point(5, 29)
+        Me.ToolsBar.Location = New System.Drawing.Point(5, 62)
         Me.ToolsBar.Margin = New System.Windows.Forms.Padding(15, 5, 5, 5)
         Me.ToolsBar.Name = "ToolsBar"
-        Me.ToolsBar.Size = New System.Drawing.Size(527, 60)
+        Me.ToolsBar.Size = New System.Drawing.Size(268, 64)
         Me.ToolsBar.TabIndex = 54
         Me.ToolsBar.Text = "ToolsBar"
         '
@@ -769,7 +764,7 @@ Partial Class Main
         Me.ToolStrip1.BackColor = System.Drawing.Color.Transparent
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ToolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
-        Me.ToolStrip1.Location = New System.Drawing.Point(5, 29)
+        Me.ToolStrip1.Location = New System.Drawing.Point(5, 5)
         Me.ToolStrip1.Margin = New System.Windows.Forms.Padding(15, 5, 5, 5)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -790,25 +785,11 @@ Partial Class Main
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
-        Me.MenuStrip1.Location = New System.Drawing.Point(5, 5)
+        Me.MenuStrip1.Location = New System.Drawing.Point(5, 28)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(998, 24)
         Me.MenuStrip1.TabIndex = 70
         Me.MenuStrip1.Text = "MenuStrip1"
-        '
-        'FileToolStripMenuItem
-        '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem})
-        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
-        Me.FileToolStripMenuItem.Text = "File"
-        '
-        'OpenToolStripMenuItem
-        '
-        Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.OpenToolStripMenuItem.Text = "Open"
         '
         'Main
         '
@@ -817,6 +798,7 @@ Partial Class Main
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1008, 486)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.readToolProgress_Label)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.indexLabel)
@@ -825,7 +807,6 @@ Partial Class Main
         Me.Controls.Add(Me.CheckBox2)
         Me.Controls.Add(Me.timer_label)
         Me.Controls.Add(Me.ToolsBar)
-        Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.Lang_en)
         Me.Controls.Add(Me.Lang_fr)
         Me.Controls.Add(Me.menu_10)
@@ -874,12 +855,8 @@ Partial Class Main
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ediTool"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ToolsBar.ResumeLayout(False)
-        Me.ToolsBar.PerformLayout()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.newToolMenu.ResumeLayout(False)
-        Me.MenuStrip1.ResumeLayout(False)
-        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -951,6 +928,4 @@ Partial Class Main
     Friend WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents readToolProgress_Label As Label
     Friend WithEvents MenuStrip1 As MenuStrip
-    Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
 End Class

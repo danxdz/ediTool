@@ -62,7 +62,7 @@ Namespace My.Resources
         
         '''<summary>
         '''  Recherche une chaîne localisée semblable à tool name
-        '''chamfer
+        '''rayon
         '''angle
         '''teeth num
         '''cutting diameter
@@ -71,12 +71,12 @@ Namespace My.Resources
         '''cutting length
         '''clearance length
         '''overall length
-        '''reference
-        '''cutting diameter
         '''force name
         '''open tool
         '''create tool
-        '''config.
+        '''config
+        '''reference
+        '''cutting diameter.
         '''</summary>
         Friend ReadOnly Property menu_en() As String
             Get
@@ -85,22 +85,14 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à tool name
-        '''chamfer
-        '''angle
-        '''teeth num
-        '''cutting diameter
-        '''clearance diameter
-        '''body diameter
-        '''cutting length
-        '''clearance length
-        '''overall length
-        '''reference
-        '''cutting diameter
-        '''force name
-        '''open tool
-        '''create tool
-        '''config.
+        '''  Recherche une chaîne localisée semblable à 1;FR2T;Fraise 2 tailles;Side Mill D20 L35 SD20
+        '''2;FRTO;Fraise torique;Radiused Mill D16 L40 r3 SD16
+        '''3;FRHE;Fraise hémisphérique;Ball Nose Mill D8 L30 SD8
+        '''4;FOP9;Foret a pointer;Spotting Drill D10 SD10
+        '''5;FOCA;Foret hélicoïdal;Twisted Drill D10 L35 SD10
+        '''6;ALFI;Alesoir fixe;Constant Reamer D10 L20 SD9
+        '''7;TAR;Taraud
+        '''8;FRTB;Fraise à tourbillonner.
         '''</summary>
         Friend ReadOnly Property menu_en_tooltypes() As String
             Get
@@ -110,7 +102,7 @@ Namespace My.Resources
         
         '''<summary>
         '''  Recherche une chaîne localisée semblable à nom outil
-        '''chanfrein
+        '''rayon
         '''angle
         '''n. de dents
         '''diamètre de coupe
@@ -119,12 +111,12 @@ Namespace My.Resources
         '''longueur de coupe
         '''longueur détalonné
         '''longueur total
-        '''référence
-        '''diamètre de coupe
         '''force nom
         '''ouvrir outil
         '''créer outil
-        '''config.
+        '''config
+        '''référence
+        '''diamètre de coupe.
         '''</summary>
         Friend ReadOnly Property menu_fr() As String
             Get
@@ -172,12 +164,20 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à FR Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
+        '''  Recherche une chaîne localisée semblable à Editool
+        '''Other.
+        '''</summary>
+        Friend ReadOnly Property tools_custom_libs() As String
+            Get
+                Return ResourceManager.GetString("tools_custom_libs", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à FR2T Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
         '''FT Ø[D] r[r] [NoTT]z Lc[L] Lu[CTS_AL]
         '''FB Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
-        '''FAP Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
-        '''FO Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
-        '''AL Ø[D] [NoTT]z Lc[L] Lu[CTS_AL].
+        '''FP Ø[D] [NoTT]z Lc[L].
         '''</summary>
         Friend ReadOnly Property tooltypes() As String
             Get

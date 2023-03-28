@@ -49,7 +49,6 @@ Public Class Main
 
     End Sub
 
-
     ReadOnly api As New TopSolidAPI()
 
 
@@ -57,9 +56,8 @@ Public Class Main
 
         'api.Initialize()
 
-
         Preload()
-
+        FillMainMenu(My.Resources.tools_custom_libs)
 
         'Set lang settings and label text
         Dim lang As String = My.Settings.PrefLang
@@ -72,16 +70,11 @@ Public Class Main
 
         'Dim type As String = My.Settings.ToolType
 
-
-
         'FileImports.GetOrderTools()
-
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
 
         'My.Settings.DefManuf = "FRAISA"
-
-
 
         Try
             'GetDefaultTools(My.Resources.outils, "")
@@ -94,6 +87,7 @@ Public Class Main
 
 
     End Sub
+
 
 
     Private Sub TextBox_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs)
@@ -530,4 +524,17 @@ Public Class Main
         Console.Write(sender)
     End Sub
 
+
+
+    Private Sub MenuStrip1_Click(sender As Object, e As EventArgs) Handles MenuStrip1.Click
+        Debug.Write(sender)
+        Debug.Write(e)
+
+
+
+    End Sub
+
+    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
+
+    End Sub
 End Class

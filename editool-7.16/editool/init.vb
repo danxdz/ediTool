@@ -263,5 +263,72 @@ Module outils_base
 
 
 
+    Public Sub FillMainMenu(data As String)
+        Dim splitLine() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
 
+        Dim currentMenu As ToolStripMenuItem = Nothing
+        Dim currentSubmenu As ToolStripMenuItem = Nothing
+        Dim currentSubsubmenu As ToolStripMenuItem = Nothing
+
+        Dim inLibrarySubMenu As Boolean = False
+        Dim subsubmenuNames As New List(Of String)
+
+        For Each line As String In splitLine
+            Dim depth As Integer = 0
+            While line(depth) = "-"c
+                depth += 1
+            End While
+            Dim text As String = line.Substring(depth)
+
+            Select Case depth
+                Case 0
+                    ' menu
+                    currentMenu = New ToolStripMenuItem(text)
+                    Main.MenuStrip1.Items.Add(currentMenu)
+                    currentSubmenu = Nothing
+                    currentSubsubmenu = Nothing
+
+                Case 1
+                    ' submenu
+                    If inLibrarySubMenu Then
+                        currentSubmenu = New ToolStripMenuItem(text.TrimEnd("#"c))
+                    Else
+                        currentSubmenu = New ToolStripMenuItem(text.TrimEnd("#"c))
+                        If text.EndsWith("#") Then
+                            currentSubmenu.CheckOnClick = True
+                        End If
+                    End If
+                    currentMenu.DropDownItems.Add(currentSubmenu)
+                    currentSubsubmenu = Nothing
+
+                Case 2
+                    ' subsubmenu
+                    If inLibrarySubMenu Then
+                        subsubmenuNames.Add(text.TrimEnd("#"c))
+                    Else
+                        currentSubsubmenu = New ToolStripMenuItem(text.TrimEnd("#"c))
+                        If text.EndsWith("#") Then
+                            currentSubsubmenu.CheckOnClick = True
+                        End If
+                        currentSubmenu.DropDownItems.Add(currentSubsubmenu)
+                    End If
+            End Select
+        Next
+
+        For Each subMenuItem As ToolStripMenuItem In Main.MenuStrip1.Items.OfType(Of ToolStripMenuItem)()
+            AddHandler subMenuItem.Click, AddressOf SubmenuItem_Click
+        Next
+    End Sub
+
+    Private Sub SubmenuItem_Click(sender As Object, e As EventArgs)
+        Dim clickedItem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
+        Dim parentMenu As ToolStripDropDownMenu = DirectCast(clickedItem.Owner, ToolStripDropDownMenu)
+
+        ' Percorre todos os itens do submenu e desmarca-os, exceto pelo item clicado
+        For Each item As ToolStripMenuItem In parentMenu.Items
+            If item IsNot clickedItem Then
+                item.Checked = False
+            End If
+        Next
+    End Sub
 End Module

@@ -589,9 +589,15 @@ Module FileImports
         Catch ex As WebException
             'MessageBox.Show("Failed to connect to OrderTools") ' " & url)
             Main.OrderTools_ToolStripButton.Enabled = False
-            'web.Navigate(New System.Uri("C:/Users/user/Downloads/tools.semmip.local/tools.semmip.local/index.php.html"))
-            web.Navigate(New System.Uri("C:/Downloaded Web Sites/tools.semmip.local/index.php.html"))
+            If File.Exists("C:\Downloaded Web Sites\tools.semmip.local\index.php.html") Then
+                ' O arquivo existe, pode carregá-lo no controle WebBrowser
+                web.Navigate(New Uri("C:\Downloaded Web Sites\tools.semmip.local\index.php.html"))
 
+            Else
+                web.Navigate(New Uri("C:\Users\user\Downloads\tools.semmip.local\tools.semmip.local\index.php.html"))
+            End If
+
+            Console.WriteLine("web: ", web)
         End Try
     End Sub
 

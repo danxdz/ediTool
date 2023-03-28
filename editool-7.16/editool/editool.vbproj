@@ -228,6 +228,7 @@
     <None Include="data\reg.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\tools_custom_libs.txt" />
     <None Include="data\menu_en_tooltypes.txt" />
     <Content Include="data\tooltypes.txt" />
   </ItemGroup>

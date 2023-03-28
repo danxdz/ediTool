@@ -103,4 +103,7 @@ Public Class NewBD
 
     End Sub
 
+    Private Sub valider_bt_Click(sender As Object, e As EventArgs) Handles valider_bt.Click
+
+    End Sub
 End Class

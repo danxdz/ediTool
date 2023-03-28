@@ -111,7 +111,7 @@ Module ts
 
             TopSolidExt.Connect()
             'TopSolidExt.Pdm.OpenProject("Editool")
-            conn = TopSolidExt.Pdm.SearchProjectByName("EdiTool")
+            conn = TopSolidExt.Pdm.SearchProjectByName("TopSolid Machining User Tools")
 
             Return conn
             Dim connected As Boolean = False
@@ -225,7 +225,7 @@ Module ts
 
         Select Case My.Settings.ToolType
             Case "FR2T"
-                model_id = "Side Mill D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
+                model_id = "Fraise 2 tailles D20 L35 SD20"'"Side Mill D20 L35 SD20"'
             Case "FRTO"
                 model_id = "Fraise hémisphérique D8 L30 SD8"
             Case "FRHE"

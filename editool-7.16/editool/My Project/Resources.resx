@@ -133,6 +133,9 @@
   <data name="reg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\reg.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="tools_custom_libs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\tools_custom_libs.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="tooltypes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\tooltypes.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
