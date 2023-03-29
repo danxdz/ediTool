@@ -1,6 +1,7 @@
 ﻿Option Explicit On
 
-Module outils_base
+Module Init
+
     Dim DataTable_buffer As DataTable
     Public Sub Set_filter()
         'Dim dv As New DataView(DataTable_buffer)
@@ -28,14 +29,14 @@ Module outils_base
         End If
 
         If param = "CTS_AD" And value = 0 Then
-            Return Main.D_textBox.Text
+            Return Main.D_textbox.Text
         Else
             Return value
         End If
     End Function
     Function Pick_param(param As String)
         Select Case param
-            Case "D" : Return Main.D_textBox.Text
+            Case "D" : Return Main.D_textbox.Text
             Case "L" : Return Main.L_textbox.Text
             Case "OL" : Return Main.OL_textbox.Text
             Case "SD" : Return Main.SD_textbox.Text
@@ -261,78 +262,98 @@ Module outils_base
         End With
     End Sub
 
-
-
     Public Sub FillMainMenu(data As String)
         Dim splitLine() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
 
         Dim currentMenu As ToolStripMenuItem = Nothing
-        Dim currentSubmenu As ToolStripMenuItem = Nothing
-        Dim currentSubsubmenu As ToolStripMenuItem = Nothing
-
-        Dim inLibrarySubMenu As Boolean = False
-        Dim subsubmenuNames As New List(Of String)
+        Dim currentSubMenu As ToolStripMenuItem = Nothing
 
         For Each line As String In splitLine
-            Dim depth As Integer = 0
-            While line(depth) = "-"c
-                depth += 1
-            End While
-            Dim text As String = line.Substring(depth)
+            Dim depth As Integer = line.Count(Function(c) c = "-"c)
+            Dim text As String = line.TrimStart("-"c)
 
-            Select Case depth
-                Case 0
-                    ' menu
-                    currentMenu = New ToolStripMenuItem(text)
-                    Main.MenuStrip1.Items.Add(currentMenu)
-                    currentSubmenu = Nothing
-                    currentSubsubmenu = Nothing
+            If text.EndsWith("#") Then
+                text = text.TrimEnd("#"c)
+            End If
 
-                Case 1
-                    ' submenu
-                    If inLibrarySubMenu Then
-                        currentSubmenu = New ToolStripMenuItem(text.TrimEnd("#"c))
-                    Else
-                        currentSubmenu = New ToolStripMenuItem(text.TrimEnd("#"c))
-                        If text.EndsWith("#") Then
-                            currentSubmenu.CheckOnClick = True
-                            currentSubsubmenu.CheckOnClick = True
-                            AddHandler currentSubsubmenu.Click, AddressOf SubmenuItem_Click
-                        End If
-                    End If
-                    currentMenu.DropDownItems.Add(currentSubmenu)
-                    currentSubsubmenu = Nothing
-
-                Case 2
-                    ' subsubmenu
-                    If inLibrarySubMenu Then
-                        subsubmenuNames.Add(text.TrimEnd("#"c))
-                    Else
-                        currentSubsubmenu = New ToolStripMenuItem(text.TrimEnd("#"c))
-                        If text.EndsWith("#") Then
-                            currentSubsubmenu.CheckOnClick = True
-                            AddHandler currentSubsubmenu.Click, AddressOf SubmenuItem_Click
-                        End If
-                        currentSubmenu.DropDownItems.Add(currentSubsubmenu)
-                    End If
-            End Select
-        Next
-
-        ' For Each subMenuItem As ToolStripMenuItem In Main.MenuStrip1.Items.OfType(Of ToolStripMenuItem)()
-        ' AddHandler subMenuItem.Click, AddressOf SubmenuItem_Click
-        ' Next
-    End Sub
-
-    Private Sub SubmenuItem_Click(sender As Object, e As EventArgs)
-        Dim clickedItem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
-
-        Debug.Print(clickedItem.Text)
-        For Each t As ToolStripMenuItem In clickedItem.DropDownItems
-            Console.WriteLine(t.Text)
-            t.CheckState = False
-
+            If depth = 0 Then
+                ' New main menu item
+                currentMenu = New ToolStripMenuItem(text)
+                Main.MenuStrip1.Items.Add(currentMenu)
+            ElseIf depth = 1 Then
+                ' New sub-menu item
+                currentSubMenu = New ToolStripMenuItem(text)
+                currentMenu.DropDownItems.Add(currentSubMenu)
+                If line.EndsWith("#") Then
+                    currentSubMenu.CheckOnClick = False
+                    AddHandler currentSubMenu.Click, AddressOf MenuItem_Click
+                End If
+            ElseIf depth = 2 Then
+                ' New sub-sub-menu item
+                Dim subSubMenuItem As New ToolStripMenuItem(text)
+                currentSubMenu.DropDownItems.Add(subSubMenuItem)
+                If line.EndsWith("#") Then
+                    subSubMenuItem.CheckOnClick = False
+                    AddHandler subSubMenuItem.Click, AddressOf MenuItem_Click
+                End If
+            End If
         Next
     End Sub
 
+
+
+    Private Sub MenuItem_Click(sender As Object, e As EventArgs)
+        Dim clickedItem As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+
+        Console.WriteLine(clickedItem.Text)
+
+        ' Uncheck all other items in the same sub-menu
+        If TypeOf clickedItem.OwnerItem Is ToolStripMenuItem Then
+            For Each item As ToolStripMenuItem In CType(clickedItem.OwnerItem, ToolStripMenuItem).DropDownItems
+                If item IsNot clickedItem AndAlso item.Checked Then
+                    item.Checked = False
+                End If
+            Next
+        End If
+
+        ' Check the clicked item
+        clickedItem.Checked = True
+        My.Settings.toolLib = clickedItem.Text
+        My.Settings.Save()
+
+    End Sub
+
+    Public Sub Preload()
+        ' Show splash screen
+        Dim splashForm As New Preload()
+
+        splashForm.output.Visible = False
+
+        ' Load TopSolid information
+        splashForm.path_label.Text = GetTopSolidPath()
+
+        Dim topSolidVersion As String = GetTopSolidVersion()
+
+
+        splashForm.version_label.Text = topSolidVersion
+
+
+
+        ' Add event handler for click on splash screen
+        AddHandler splashForm.Click, Sub(sender, e)
+                                         ' Close splash screen and show main form
+                                         splashForm.Close()
+                                         Main.Show()
+                                     End Sub
+
+        splashForm.output.Text = "libs loaded"
+        splashForm.output.Visible = True
+
+        ' Show splash screen
+        splashForm.ShowDialog()
+        splashForm.Close()
+
+
+    End Sub
 
 End Module

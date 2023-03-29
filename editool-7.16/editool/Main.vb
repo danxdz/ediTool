@@ -16,38 +16,6 @@ Public Class Main
     ReadOnly color_green = Drawing.Color.SpringGreen
 
 
-    Private Sub Preload()
-        ' Show splash screen
-        Dim splashForm As New Preload()
-
-        splashForm.output.Visible = False
-
-        ' Load TopSolid information
-        splashForm.path_label.Text = GetTopSolidPath()
-
-        Dim topSolidVersion As String = GetTopSolidVersion()
-
-
-        splashForm.version_label.Text = topSolidVersion
-
-
-
-        ' Add event handler for click on splash screen
-        AddHandler splashForm.Click, Sub(sender, e)
-                                         ' Close splash screen and show main form
-                                         splashForm.Close()
-                                         Me.Show()
-                                     End Sub
-
-        splashForm.output.Text = "libs loaded"
-        splashForm.output.Visible = True
-
-        ' Show splash screen
-        splashForm.ShowDialog()
-        splashForm.Close()
-
-
-    End Sub
 
     ReadOnly api As New TopSolidAPI()
 
@@ -56,8 +24,31 @@ Public Class Main
 
         'api.Initialize()
 
-        Preload()
+        Init.Preload()
+
+
         FillMainMenu(My.Resources.tools_custom_libs)
+
+        Dim selectedItem As String = My.Settings.toolLib
+
+
+        ' Percorrer todos os itens do menu
+        For Each item As ToolStripMenuItem In MenuStrip1.Items
+            If TypeOf item Is ToolStripMenuItem Then
+                ' Verificar se o item tem a propriedade Tag igual ao valor armazenado
+                For Each subitem As ToolStripMenuItem In item.DropDownItems
+                    If subitem.Text.Equals(selectedItem) Then
+                        ' Selecionar o item correto
+                        CType(subitem, ToolStripMenuItem).Checked = True
+                        Exit For
+                    End If
+                Next
+
+
+            End If
+        Next
+
+
 
         'Set lang settings and label text
         Dim lang As String = My.Settings.PrefLang
@@ -135,7 +126,13 @@ Public Class Main
         Set_pref_lang("en")
         Get_files(My.Resources.menu_en)
     End Sub
+
+
+
+
     Private Sub Lang_fr_Click_1(sender As Object, e As EventArgs) Handles Lang_fr.Click
+
+
         Set_pref_lang("fr")
         Get_files(My.Resources.menu_fr)
     End Sub
@@ -526,15 +523,4 @@ Public Class Main
 
 
 
-    Private Sub MenuStrip1_Click(sender As Object, e As EventArgs) Handles MenuStrip1.Click
-        Debug.Write(sender)
-        Debug.Write(e)
-
-
-
-    End Sub
-
-    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
-
-    End Sub
 End Class

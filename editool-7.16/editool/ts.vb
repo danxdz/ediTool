@@ -74,23 +74,31 @@ Module ts
             Dim temp_model As Object
 
             ' Check if there are any models in the specified library
-            If lib_models.Count > 0 Then
+            If lib_models IsNot Nothing Then
 
                 ' Open the first object in the list
-                TopSolidExt.Pdm.OpenProject(lib_models(0))
+                TopSolidExt.Pdm.OpenProject(lib_models)
 
                 ' Search for the specified model in all the models
                 Dim model_fr_id
-                For i As Integer = 0 To (lib_models.Count - 1)
-                    model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models(i), model)
-                Next
+                'For i As Integer = 0 To (lib_models.Count - 1)
+                'model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models(i), model)
+                model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models(0), model)
+                'Next
+
+                Dim asd = TopSolidExt.Pdm.WorkingProjectsRootFolder
+                Dim sfg = TopSolidExt.Pdm.CreateProject("tesyt00ts", True)
+
+
                 ' If the model was found, open it and save it as a temporary file
                 If model_fr_id.Count > 0 Then
                     Try
                         model_fr = TopSolidExt.Documents.GetDocument(model_fr_id(0))
-                        temp_model = TopSolidExt.Documents.SaveAs(model_fr, lib_models(0), "temp") 'Main.Name_textbox.Text)
+                        Dim model_ = TopSolidExt.Documents.Consult(model_fr)
+
+                        temp_model = TopSolidExt.Pdm.CopySeveral(model_fr, sfg) 'lib_models(0), "temp") 
                     Catch ex As Exception
-                        MsgBox("cant find tool model")
+                        MsgBox("cant copy tool model")
                     End Try
                 Else
                     ' If the model was not found, display an error message
@@ -104,25 +112,45 @@ Module ts
             ' Return the temporary model document ID
             Return temp_model
         End Function
+
+        Private Function GetSelectedMenuItem() As ToolStripMenuItem
+            For Each mainMenuItem As ToolStripMenuItem In Main.MenuStrip1.Items
+                For Each subMenuItem As ToolStripMenuItem In mainMenuItem.DropDownItems
+                    If subMenuItem.Checked Then
+                        Return subMenuItem
+                    End If
+
+                    For Each subSubMenuItem As ToolStripMenuItem In subMenuItem.DropDownItems
+                        If subSubMenuItem.Checked Then
+                            Return subSubMenuItem
+                        End If
+                    Next
+                Next
+            Next
+
+            Return Nothing
+        End Function
         Private Function StartModifTopSolid()
 
-            Dim conn = GetTsPdmObjectId()
+            'Dim conn = GetTsPdmObjectId()
 
-
+            Dim topSolidKernel As Assembly = GetTsDLL()
+            Dim type As Type = topSolidKernel.GetType("TopSolid.Kernel.Automating.TopSolidHostInstance")
+            TopSolidExt = Activator.CreateInstance(type)
             TopSolidExt.Connect()
-            'TopSolidExt.Pdm.OpenProject("Editool")
-            conn = TopSolidExt.Pdm.SearchProjectByName("TopSolid Machining User Tools")
 
-            Return conn
-            Dim connected As Boolean = False
-            Dim isconnected As Boolean = False
-            connected = TopSolidExt.Connect()
-            isconnected = TopSolidExt.isConnected()
-            If isconnected Then
-                Console.WriteLine("conn :  ", isconnected)
+            Dim DocumentIdType = topSolidKernel.GetType("TopSolid.Kernel.Automating.PdmObjectId")
 
+            If Main.MenuStrip1.Items.Count > 0 Then
+                Dim unused = My.Settings.toolLib
+                If unused = " Default" Then
+                    DocumentIdType = TopSolidExt.Pdm.SearchProjectByName("TopSolid Machining User Tools")
+                ElseIf unused = " EdiTool" Then
+                    DocumentIdType = TopSolidExt.Pdm.SearchProjectByName("Editool") ' OpenProject
+                End If
             End If
-            Console.WriteLine(":  ", connected)
+
+            Return DocumentIdType
 
         End Function
         Private Function GetTsDLL() As Assembly
@@ -153,8 +181,6 @@ Module ts
                 'TopSolidExt.Connect()
                 'TopSolidExt.Pdm.OpenProject("Editool")
                 'listType = TopSolidExt.Pdm.SearchProjectByName("EdiTool")
-
-
 
 
                 Return listType
@@ -225,7 +251,7 @@ Module ts
 
         Select Case My.Settings.ToolType
             Case "FR2T"
-                model_id = "Fraise 2 tailles D20 L35 SD20"'"Side Mill D20 L35 SD20"'
+                model_id = "Side Mill D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
             Case "FRTO"
                 model_id = "Fraise hémisphérique D8 L30 SD8"
             Case "FRHE"

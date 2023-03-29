@@ -87,9 +87,9 @@ Partial Class Main
         Me.filterL1_ComboBox = New System.Windows.Forms.ComboBox()
         Me.filterMat_ComboBox = New System.Windows.Forms.ComboBox()
         Me.indexLabel = New System.Windows.Forms.Label()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.readToolProgress_Label = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.newToolMenu.SuspendLayout()
@@ -743,20 +743,6 @@ Partial Class Main
         Me.indexLabel.TabIndex = 67
         Me.indexLabel.Text = "0"
         '
-        'ToolStrip1
-        '
-        Me.ToolStrip1.AutoSize = False
-        Me.ToolStrip1.BackColor = System.Drawing.Color.Transparent
-        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ToolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
-        Me.ToolStrip1.Location = New System.Drawing.Point(5, 5)
-        Me.ToolStrip1.Margin = New System.Windows.Forms.Padding(15, 5, 5, 5)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.ToolStrip1.Size = New System.Drawing.Size(998, 23)
-        Me.ToolStrip1.TabIndex = 68
-        Me.ToolStrip1.Text = "ToolStrip1"
-        '
         'readToolProgress_Label
         '
         Me.readToolProgress_Label.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -770,11 +756,19 @@ Partial Class Main
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Location = New System.Drawing.Point(5, 28)
+        Me.MenuStrip1.Location = New System.Drawing.Point(5, 5)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(998, 24)
         Me.MenuStrip1.TabIndex = 70
         Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.Location = New System.Drawing.Point(5, 29)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(998, 25)
+        Me.ToolStrip1.TabIndex = 71
+        Me.ToolStrip1.Text = "ToolStrip1"
         '
         'Main
         '
@@ -783,9 +777,9 @@ Partial Class Main
         Me.AutoSize = True
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1008, 486)
+        Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.readToolProgress_Label)
-        Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.indexLabel)
         Me.Controls.Add(Me.filterMat_ComboBox)
         Me.Controls.Add(Me.filterL1_ComboBox)
@@ -908,7 +902,7 @@ Partial Class Main
     Friend WithEvents filterL1_ComboBox As ComboBox
     Friend WithEvents filterMat_ComboBox As ComboBox
     Friend WithEvents indexLabel As Label
-    Friend WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents readToolProgress_Label As Label
     Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents ToolStrip1 As ToolStrip
 End Class

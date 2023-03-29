@@ -1,6 +1,8 @@
 ﻿File
 - Open
 - Save
-Library
+- Exit
+Setup
+- Library
 - Default#
 - Editool#
