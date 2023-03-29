@@ -63,7 +63,6 @@ Partial Class Main
         Me.Lang_fr = New System.Windows.Forms.Button()
         Me.ValidateBt = New System.Windows.Forms.Button()
         Me.AutoOpen_checkBox = New System.Windows.Forms.CheckBox()
-        Me.ToolsBar = New System.Windows.Forms.ToolStrip()
         Me.FR2T = New System.Windows.Forms.ToolStripButton()
         Me.FRTO = New System.Windows.Forms.ToolStripButton()
         Me.FRBO = New System.Windows.Forms.ToolStripButton()
@@ -465,7 +464,7 @@ Partial Class Main
         '
         'Lang_en
         '
-        Me.Lang_en.Location = New System.Drawing.Point(972, 29)
+        Me.Lang_en.Location = New System.Drawing.Point(972, 55)
         Me.Lang_en.Name = "Lang_en"
         Me.Lang_en.Size = New System.Drawing.Size(31, 29)
         Me.Lang_en.TabIndex = 47
@@ -474,7 +473,7 @@ Partial Class Main
         '
         'Lang_fr
         '
-        Me.Lang_fr.Location = New System.Drawing.Point(935, 29)
+        Me.Lang_fr.Location = New System.Drawing.Point(935, 55)
         Me.Lang_fr.Name = "Lang_fr"
         Me.Lang_fr.Size = New System.Drawing.Size(31, 29)
         Me.Lang_fr.TabIndex = 48
@@ -505,20 +504,6 @@ Partial Class Main
         Me.AutoOpen_checkBox.Text = "empty"
         Me.AutoOpen_checkBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.AutoOpen_checkBox.UseVisualStyleBackColor = True
-        '
-        'ToolsBar
-        '
-        Me.ToolsBar.AutoSize = False
-        Me.ToolsBar.BackColor = System.Drawing.Color.Transparent
-        Me.ToolsBar.Dock = System.Windows.Forms.DockStyle.None
-        Me.ToolsBar.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ToolsBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow
-        Me.ToolsBar.Location = New System.Drawing.Point(5, 62)
-        Me.ToolsBar.Margin = New System.Windows.Forms.Padding(15, 5, 5, 5)
-        Me.ToolsBar.Name = "ToolsBar"
-        Me.ToolsBar.Size = New System.Drawing.Size(268, 64)
-        Me.ToolsBar.TabIndex = 54
-        Me.ToolsBar.Text = "ToolsBar"
         '
         'FR2T
         '
@@ -806,7 +791,6 @@ Partial Class Main
         Me.Controls.Add(Me.filterL1_ComboBox)
         Me.Controls.Add(Me.CheckBox2)
         Me.Controls.Add(Me.timer_label)
-        Me.Controls.Add(Me.ToolsBar)
         Me.Controls.Add(Me.Lang_en)
         Me.Controls.Add(Me.Lang_fr)
         Me.Controls.Add(Me.menu_10)
@@ -904,7 +888,6 @@ Partial Class Main
     Friend WithEvents FRTO As ToolStripButton
     Friend WithEvents FRBO As ToolStripButton
     Friend WithEvents FAP As ToolStripButton
-    Private WithEvents ToolsBar As ToolStrip
     Friend WithEvents FO As ToolStripButton
     Friend WithEvents AL As ToolStripButton
     Friend WithEvents A_TextBox As TextBox

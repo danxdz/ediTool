@@ -296,6 +296,8 @@ Module outils_base
                         currentSubmenu = New ToolStripMenuItem(text.TrimEnd("#"c))
                         If text.EndsWith("#") Then
                             currentSubmenu.CheckOnClick = True
+                            currentSubsubmenu.CheckOnClick = True
+                            AddHandler currentSubsubmenu.Click, AddressOf SubmenuItem_Click
                         End If
                     End If
                     currentMenu.DropDownItems.Add(currentSubmenu)
@@ -309,26 +311,28 @@ Module outils_base
                         currentSubsubmenu = New ToolStripMenuItem(text.TrimEnd("#"c))
                         If text.EndsWith("#") Then
                             currentSubsubmenu.CheckOnClick = True
+                            AddHandler currentSubsubmenu.Click, AddressOf SubmenuItem_Click
                         End If
                         currentSubmenu.DropDownItems.Add(currentSubsubmenu)
                     End If
             End Select
         Next
 
-        For Each subMenuItem As ToolStripMenuItem In Main.MenuStrip1.Items.OfType(Of ToolStripMenuItem)()
-            AddHandler subMenuItem.Click, AddressOf SubmenuItem_Click
-        Next
+        ' For Each subMenuItem As ToolStripMenuItem In Main.MenuStrip1.Items.OfType(Of ToolStripMenuItem)()
+        ' AddHandler subMenuItem.Click, AddressOf SubmenuItem_Click
+        ' Next
     End Sub
 
     Private Sub SubmenuItem_Click(sender As Object, e As EventArgs)
         Dim clickedItem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
-        Dim parentMenu As ToolStripDropDownMenu = DirectCast(clickedItem.Owner, ToolStripDropDownMenu)
 
-        ' Percorre todos os itens do submenu e desmarca-os, exceto pelo item clicado
-        For Each item As ToolStripMenuItem In parentMenu.Items
-            If item IsNot clickedItem Then
-                item.Checked = False
-            End If
+        Debug.Print(clickedItem.Text)
+        For Each t As ToolStripMenuItem In clickedItem.DropDownItems
+            Console.WriteLine(t.Text)
+            t.CheckState = False
+
         Next
     End Sub
+
+
 End Module
