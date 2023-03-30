@@ -118,6 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="mainMenu_en" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\mainmenu_en.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="mainMenu_fr" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\mainmenu_fr.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="mainMenu_pt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\mainmenu_pt.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="menu_en" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\menu_en.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
@@ -134,7 +143,7 @@
     <value>..\data\reg.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="tools_custom_libs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\data\tools_custom_libs.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+    <value>..\data\mainMenu_en.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="tooltypes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\tooltypes.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

@@ -197,16 +197,28 @@ Namespace My
                 Me("MaskTT_FB") = value
             End Set
         End Property
-
-        <Global.System.Configuration.UserScopedSettingAttribute(),
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-         Global.System.Configuration.DefaultSettingValueAttribute("")>
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
         Public Property toolLib() As String
             Get
-                Return CType(Me("toolLib"), String)
+                Return CType(Me("toolLib"),String)
             End Get
             Set
-                Me("toolLib") = Value
+                Me("toolLib") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property customToolLib() As String
+            Get
+                Return CType(Me("customToolLib"),String)
+            End Get
+            Set
+                Me("customToolLib") = value
             End Set
         End Property
     End Class

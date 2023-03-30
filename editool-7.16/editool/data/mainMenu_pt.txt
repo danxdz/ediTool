@@ -1,0 +1,27 @@
+﻿Ficheiro
+- Abrir
+- Guardar
+- Sair
+Ferramentas
+- Fresas
+-- Fresa de topo
+-- Fresa raionada
+-- Fresa esférica
+- Brocas
+-- Broca de centrar
+-- Broca de ponto
+-- Broca helicoidal
+-- Broca helicoidal de carboneto
+-- Broca fundo pla
+- Roscas
+-- Macho
+-- Fresa para roscas
+- Mandril
+-- Mandril fixo
+Configuração
+- Biblioteca fonte
+-- Default#
+-- Editool#
+- Biblioteca de destino
+-- {customToolLib}#
+-- Adicionar 

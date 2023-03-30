@@ -26,37 +26,26 @@ Public Class Main
 
         Init.Preload()
 
-
-        FillMainMenu(My.Resources.tools_custom_libs)
-
-        Dim selectedItem As String = My.Settings.toolLib
-
-
-        ' Percorrer todos os itens do menu
-        For Each item As ToolStripMenuItem In MenuStrip1.Items
-            If TypeOf item Is ToolStripMenuItem Then
-                ' Verificar se o item tem a propriedade Tag igual ao valor armazenado
-                For Each subitem As ToolStripMenuItem In item.DropDownItems
-                    If subitem.Text.Equals(selectedItem) Then
-                        ' Selecionar o item correto
-                        CType(subitem, ToolStripMenuItem).Checked = True
-                        Exit For
-                    End If
-                Next
-
-
-            End If
-        Next
-
-
+        Dim customToolLib = My.Settings.customToolLib
+        If customToolLib = "" Then
+            Dim libName As String = InputBox("custom lib name", "Custom Tools", "Tool Lib")
+            My.Settings.customToolLib = libName
+            My.Settings.Save()
+        End If
 
         'Set lang settings and label text
         Dim lang As String = My.Settings.PrefLang
+
         If lang = "en" Then
+            FillMainMenu(My.Resources.mainMenu_en)
             Get_files(My.Resources.menu_en)
         Else
+            FillMainMenu(My.Resources.mainMenu_fr)
             Get_files(My.Resources.menu_fr)
         End If
+
+
+
 
 
         'Dim type As String = My.Settings.ToolType
@@ -65,16 +54,16 @@ Public Class Main
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
 
-        'My.Settings.DefManuf = "FRAISA"
+            'My.Settings.DefManuf = "FRAISA"
 
-        Try
-            'GetDefaultTools(My.Resources.outils, "")
-            'Set_Name_auto()
-        Catch ex As Exception
-            MsgBox("no db file    -->" & ex.ToString)
-            Close()
-            End
-        End Try
+            Try
+                'GetDefaultTools(My.Resources.outils, "")
+                'Set_Name_auto()
+            Catch ex As Exception
+                MsgBox("no db file    -->" & ex.ToString)
+                Close()
+                End
+            End Try
 
 
     End Sub
@@ -123,16 +112,12 @@ Public Class Main
     End Sub
 
     Private Sub Lang_en_Click_1(sender As Object, e As EventArgs) Handles Lang_en.Click
+        FillMainMenu(My.Resources.mainMenu_en)
         Set_pref_lang("en")
         Get_files(My.Resources.menu_en)
     End Sub
-
-
-
-
-    Private Sub Lang_fr_Click_1(sender As Object, e As EventArgs) Handles Lang_fr.Click
-
-
+    Private Sub Lang_fr_Click_1(sender As Object, e As EventArgs)
+        FillMainMenu(My.Resources.mainMenu_fr)
         Set_pref_lang("fr")
         Get_files(My.Resources.menu_fr)
     End Sub
@@ -521,6 +506,11 @@ Public Class Main
         Console.Write(sender)
     End Sub
 
+    Private Sub AutoCheckIn_checkBox_CheckedChanged(sender As Object, e As EventArgs) Handles AutoCheckIn_checkBox.CheckedChanged
 
+    End Sub
 
+    Private Sub AutoOpen_checkBox_CheckedChanged(sender As Object, e As EventArgs) Handles AutoOpen_checkBox.CheckedChanged
+
+    End Sub
 End Class

@@ -99,9 +99,6 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="TopSolid.Kernel.Automating">
-      <HintPath>..\..\..\..\..\..\..\Program Files\TOPSOLID\TopSolid 7.17\bin\TopSolid.Kernel.Automating.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -231,8 +228,10 @@
     <None Include="data\reg.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\tools_custom_libs.txt" />
+    <None Include="data\mainMenu_en.txt" />
     <None Include="data\menu_en_tooltypes.txt" />
+    <None Include="data\mainMenu_fr.txt" />
+    <None Include="data\mainMenu_pt.txt" />
     <Content Include="data\tooltypes.txt" />
   </ItemGroup>
   <ItemGroup>

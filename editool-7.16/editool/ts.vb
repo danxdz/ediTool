@@ -3,7 +3,9 @@
 Imports System.IO
 Imports Microsoft.Win32
 Imports System.Reflection
-
+Imports TopSolid.Kernel.Automating
+Imports Microsoft.Office.Interop.Excel
+Imports System.Security.Cryptography
 
 Module ts
     Public ReadOnly api As New TopSolidAPI()
@@ -60,7 +62,7 @@ Module ts
             Return StartModifTopSolid()
         End Function
 
-        Function CopyFile(model, lib_models)
+        Private Function CopyFile(model, lib_models)
 
             'Dim topSolidKernel As Assembly = api.GetTsAssembly()
             'Dim documentIdType As Type = topSolidKernel.GetType("TopSolid.Kernel.Automating.DocumentId")
@@ -77,7 +79,7 @@ Module ts
             If lib_models IsNot Nothing Then
 
                 ' Open the first object in the list
-                TopSolidExt.Pdm.OpenProject(lib_models)
+                TopSolidExt.Pdm.OpenProject(lib_models(0))
 
                 ' Search for the specified model in all the models
                 Dim model_fr_id
@@ -86,17 +88,41 @@ Module ts
                 model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models(0), model)
                 'Next
 
-                Dim asd = TopSolidExt.Pdm.WorkingProjectsRootFolder
-                Dim sfg = TopSolidExt.Pdm.CreateProject("tesyt00ts", True)
 
+                Try
+                    api.TopSolidExt.Application.EndModification(False, False)
+
+                Catch
+
+                End Try
+
+
+                Dim customToolsProjectName = My.Settings.customToolLib
+                Dim customProject
+                Try
+                    customProject = TopSolidExt.Pdm.SearchProjectByName(customToolsProjectName)(0)
+                Catch ex As Exception
+
+                End Try
+
+                If customProject Is Nothing Then
+                    customProject = TopSolidExt.Pdm.CreateProject(customToolsProjectName, True)
+                End If
+
+                model_fr_id.RemoveRange(1, model_fr_id.Count - 1)
 
                 ' If the model was found, open it and save it as a temporary file
                 If model_fr_id.Count > 0 Then
                     Try
-                        model_fr = TopSolidExt.Documents.GetDocument(model_fr_id(0))
-                        Dim model_ = TopSolidExt.Documents.Consult(model_fr)
 
-                        temp_model = TopSolidExt.Pdm.CopySeveral(model_fr, sfg) 'lib_models(0), "temp") 
+                        'model_fr = TopSolidExt.Documents.GetDocument(model_fr_id(0))
+                        'model_fr = TopSolidExt.Pdm.GetCurrentProject() 'TopSolidExt.Pdm.GetDocument(model_fr_id(0))
+
+                        ' Appeler la méthode CopySeveral avec la liste de PdmObjectId
+                        temp_model = TopSolidExt.Pdm.CopySeveral(model_fr_id, customProject)
+
+
+                        'temp_model = TopSolidExt.Pdm.CopySeveral(models, sfg) 'lib_models(0), "temp") 
                     Catch ex As Exception
                         MsgBox("cant copy tool model")
                     End Try
@@ -139,18 +165,19 @@ Module ts
             TopSolidExt = Activator.CreateInstance(type)
             TopSolidExt.Connect()
 
-            Dim DocumentIdType = topSolidKernel.GetType("TopSolid.Kernel.Automating.PdmObjectId")
+            Dim PdmObjectIdType = topSolidKernel.GetType("TopSolid.Kernel.Automating.PdmObjectId")
+
 
             If Main.MenuStrip1.Items.Count > 0 Then
-                Dim unused = My.Settings.toolLib
-                If unused = " Default" Then
-                    DocumentIdType = TopSolidExt.Pdm.SearchProjectByName("TopSolid Machining User Tools")
-                ElseIf unused = " EdiTool" Then
-                    DocumentIdType = TopSolidExt.Pdm.SearchProjectByName("Editool") ' OpenProject
+                Dim toolLib = My.Settings.toolLib
+                If toolLib = " Default" Then
+                    PdmObjectIdType = TopSolidExt.Pdm.SearchProjectByName("TopSolid Machining User Tools")
+                ElseIf toolLib = " EdiTool" Then
+                    PdmObjectIdType = TopSolidExt.Pdm.SearchProjectByName("Editool") ' OpenProject
                 End If
             End If
 
-            Return DocumentIdType
+            Return PdmObjectIdType
 
         End Function
         Private Function GetTsDLL() As Assembly
@@ -273,7 +300,7 @@ Module ts
 
         ' api.TopSolidExt.Connect()
 
-        Dim model_fr = api.CopyFile(model_id, modelLib)
+        Dim model_fr = api.CopyModelFile(model_id, modelLib)
         'Open_file(model_id, api.TopSolidExt.Pdm.SearchProjectByName("EdiTool"))
 
         '********
@@ -284,7 +311,7 @@ Module ts
         'uncomment to unblock TS
         'api.TopSolidExt.Application.EndModification(True, False)
 
-        If model_fr.IsEmpty Then
+        If model_fr(0).isEmpty Then
             MsgBox("Can't find file ( " + model_id + " )")
             api.TopSolidExt.Application.EndModification(True, False)
 
@@ -299,17 +326,37 @@ Module ts
                 Exit Sub
             End If
 
-            api.TopSolidExt.Documents.EnsureIsDirty(model_fr)
-            Set_parametre_outil(model_fr, newTool)
-            MakeTool(model_fr)
-            api.TopSolidExt.Pdm.CheckIn(api.TopSolidExt.Pdm.SearchDocumentByName(
-                api.TopSolidExt.Pdm.SearchProjectByName("EdiTool")(0),
-                api.TopSolidExt.Documents.GetName(model_fr))(0), True)
+            Dim tmp = api.TopSolidExt.Documents.GetDocument(model_fr(0))
+
+            api.TopSolidExt.Documents.EnsureIsDirty(tmp)
+            Set_parametre_outil(tmp, newTool)
+
+
+            api.TopSolidExt.Application.EndModification(True, False)
+
+            If Main.AutoOpen_checkBox.Checked = True Then
+                api.TopSolidExt.Documents.Open(tmp)
+            End If
+
+            api.TopSolidExt.Documents.Save(tmp)
+
+            ''TopSolidHost.Documents.Close(newTool, False, False)
+
+
+            If Main.AutoCheckIn_checkBox.Checked = True Then
+                Dim customToolProject = My.Settings.customToolLib
+                api.TopSolidExt.Pdm.CheckIn(api.TopSolidExt.Pdm.SearchDocumentByName(
+            api.TopSolidExt.Pdm.SearchProjectByName(customToolProject)(0),
+            api.TopSolidExt.Documents.GetName(tmp))(0), True)
+
+            End If
+
+
 
             MsgBox("Outil " + Main.Name_textbox.Text + " crée")
         Catch ex As Exception
 
-            MsgBox("Failed to create tool")
+            MsgBox("Failed to edit copied ( new ) tool")
         Finally
             Try
                 api.TopSolidExt.Application.EndModification(False, False)
@@ -321,29 +368,6 @@ Module ts
 
     End Sub
 
-
-
-    Private Sub MakeTool(docId)
-
-        'Dim list_par As List(Of ElementId) = TopSolidHost.Parameters.GetParameters(docId)
-        'Dim names As String
-        'Dim types As ParameterType
-        'For i As Integer = 0 To list_par.Count - 1
-        '    types = TopSolidHost.Parameters.GetParameterType(list_par(i))
-        '    names = TopSolidHost.Elements.GetName(list_par(i))
-        '    'ComboBox1.Items.Add(names)
-        'Next
-
-        api.TopSolidExt.Application.EndModification(True, False)
-
-        If Main.AutoOpen_checkBox.Checked = True Then
-            api.TopSolidExt.Documents.Open(docId)
-        End If
-
-        api.TopSolidExt.Documents.Save(docId)
-        ''TopSolidHost.Documents.Close(newTool, False, False)
-
-    End Sub
     Function Strip_doubles(tmp As String)
         Dim tmp_string As String = tmp
         tmp_string = Replace(tmp_string, ".", ",") ' replace , -> .

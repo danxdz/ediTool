@@ -1,0 +1,26 @@
+﻿File
+- Open
+- Save
+- Exit
+Tools
+- Mills
+-- End Mill
+-- Toroidal Mill
+-- Ball Nose Mill
+- Drilling
+-- Spotting Drill
+-- Twist Drill
+-- Carbide Twist Drill
+-- Flat Drill
+- Tarauds
+-- Tap
+-- Thread Milling Cutter
+- Alesoirs
+-- Constant Reamer
+Setup
+- Library source
+-- Default#
+-- Editool#
+- Destination library
+-- {customToolLib}#
+-- Add

@@ -1,4 +1,5 @@
 ﻿Option Explicit On
+Imports System.Text.RegularExpressions
 
 Module Init
 
@@ -262,7 +263,101 @@ Module Init
         End With
     End Sub
 
+
+
     Public Sub FillMainMenu(data As String)
+
+        Main.MenuStrip1.Items.Clear()
+
+        Dim splitLine() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
+
+        Dim currentMenu As ToolStripMenuItem = Nothing
+        Dim currentSubMenu As ToolStripMenuItem = Nothing
+
+        For Each line As String In splitLine
+            Dim depth As Integer = line.Count(Function(c) c = "-"c)
+            Dim text As String = line.TrimStart("-"c)
+            Dim paramName As String = ""
+            If text.EndsWith("#") Then
+                text = text.TrimEnd("#"c)
+            End If
+
+            ' Check for parameters in curly braces {}
+            Dim regex As New Regex("\{(.*?)\}")
+            Dim matches As MatchCollection = regex.Matches(text)
+
+            For Each match As Match In matches
+                ' Get the parameter name without the curly braces
+                paramName = match.Value.Replace("{", "").Replace("}", "")
+
+                ' Get the value of the parameter from the My.Settings
+                Dim paramValue As String = My.Settings(paramName)
+
+                ' Replace the parameter with its value in the menu text
+                text = text.Replace(match.Value, paramValue)
+            Next
+
+            If depth = 0 Then
+                ' New main menu item
+                currentMenu = New ToolStripMenuItem(text)
+                Main.MenuStrip1.Items.Add(currentMenu)
+            ElseIf depth = 1 Then
+                ' New sub-menu item
+                currentSubMenu = New ToolStripMenuItem(text)
+                currentMenu.DropDownItems.Add(currentSubMenu)
+                If line.EndsWith("#") Then
+                    If paramName <> "" Then
+                        currentSubMenu.Checked = True
+                    End If
+                    currentSubMenu.CheckOnClick = False
+                    AddHandler currentSubMenu.Click, AddressOf MenuItem_Click
+                End If
+            ElseIf depth = 2 Then
+                ' New sub-sub-menu item
+                Dim subSubMenuItem As New ToolStripMenuItem(text)
+                currentSubMenu.DropDownItems.Add(subSubMenuItem)
+                If line.EndsWith("#") Then
+                    If paramName <> "" Then
+                        subSubMenuItem.Checked = True
+                    End If
+                    subSubMenuItem.CheckOnClick = False
+                    AddHandler subSubMenuItem.Click, AddressOf MenuItem_Click
+                End If
+            End If
+        Next
+
+
+
+        Dim selectedItem As String = My.Settings.toolLib
+
+        ' Percorrer todos os itens do menu
+        For Each item As ToolStripMenuItem In Main.MenuStrip1.Items
+            If TypeOf item Is ToolStripMenuItem Then
+
+                ' Verificar se o item tem a propriedade Tag igual ao valor armazenado
+                For Each subitem As ToolStripMenuItem In item.DropDownItems
+                    If TypeOf item Is ToolStripMenuItem Then
+                        For Each subsubitem As ToolStripMenuItem In subitem.DropDownItems
+                            If subsubitem.Text.Equals(selectedItem) Then
+                                ' Selecionar o item correto
+                                CType(subsubitem, ToolStripMenuItem).Checked = True
+                                Exit For
+                            End If
+                        Next
+                    End If
+                Next
+            End If
+        Next
+
+    End Sub
+
+
+
+    Public Sub FillMainMenu_old(data As String)
+
+        Main.MenuStrip1.Items.Clear()
+
+
         Dim splitLine() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
 
         Dim currentMenu As ToolStripMenuItem = Nothing

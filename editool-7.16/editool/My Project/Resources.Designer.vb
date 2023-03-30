@@ -61,6 +61,69 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à File
+        '''- Open
+        '''- Save
+        '''- Exit
+        '''Tools
+        '''- End Mills
+        '''- Forets
+        '''- Tarauds
+        '''- Alesoirs
+        '''Setup
+        '''- Library
+        '''- Default#
+        '''- Editool#.
+        '''</summary>
+        Friend ReadOnly Property mainMenu_en() As String
+            Get
+                Return ResourceManager.GetString("mainMenu_en", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Fichier
+        '''- Ouvrir
+        '''- Enregistrer
+        '''- Quitter
+        '''Outils
+        '''- Fraiseuses
+        '''- Forets
+        '''- Tarauds
+        '''- Alésoirs
+        '''Configuration
+        '''- Bibliothèque
+        '''-- Default#
+        '''-- Editool#.
+        '''</summary>
+        Friend ReadOnly Property mainMenu_fr() As String
+            Get
+                Return ResourceManager.GetString("mainMenu_fr", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à Ficheiro
+        '''- Abrir
+        '''- Guardar
+        '''- Sair
+        '''Ferramentas
+        '''- Fresas
+        '''- Brocas
+        '''- Machos
+        '''- Escareadores
+        '''Configuração
+        '''-Biblioteca
+        '''-- Predefinido#
+        '''-- Editool#.
+        '''</summary>
+        Friend ReadOnly Property mainMenu_pt() As String
+            Get
+                Return ResourceManager.GetString("mainMenu_pt", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à tool name
         '''rayon
         '''angle
@@ -164,8 +227,19 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Editool
-        '''Other.
+        '''  Recherche une chaîne localisée semblable à File
+        '''- Open
+        '''- Save
+        '''- Exit
+        '''Tools
+        '''- End Mills
+        '''- Forets
+        '''- Tarauds
+        '''- Alesoirs
+        '''Setup
+        '''- Library
+        '''- Default#
+        '''- Editool#.
         '''</summary>
         Friend ReadOnly Property tools_custom_libs() As String
             Get

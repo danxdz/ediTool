@@ -22,6 +22,57 @@ editool
   les recherches de ressources à l'aide de cette classe de ressource fortement typée.
 </summary>
 </member>
+<member name="P:editool.My.Resources.Resources.mainMenu_en">
+<summary>
+  Recherche une chaîne localisée semblable à File
+- Open
+- Save
+- Exit
+Tools
+- End Mills
+- Forets
+- Tarauds
+- Alesoirs
+Setup
+- Library
+- Default#
+- Editool#.
+</summary>
+</member>
+<member name="P:editool.My.Resources.Resources.mainMenu_fr">
+<summary>
+  Recherche une chaîne localisée semblable à Fichier
+- Ouvrir
+- Enregistrer
+- Quitter
+Outils
+- Fraiseuses
+- Forets
+- Tarauds
+- Alésoirs
+Configuration
+- Bibliothèque
+-- Default#
+-- Editool#.
+</summary>
+</member>
+<member name="P:editool.My.Resources.Resources.mainMenu_pt">
+<summary>
+  Recherche une chaîne localisée semblable à Ficheiro
+- Abrir
+- Guardar
+- Sair
+Ferramentas
+- Fresas
+- Brocas
+- Machos
+- Escareadores
+Configuração
+-Biblioteca
+-- Predefinido#
+-- Editool#.
+</summary>
+</member>
 <member name="P:editool.My.Resources.Resources.menu_en">
 <summary>
   Recherche une chaîne localisée semblable à tool name
@@ -107,8 +158,19 @@ FR Ø4 2z Lc11 Lu16
 </member>
 <member name="P:editool.My.Resources.Resources.tools_custom_libs">
 <summary>
-  Recherche une chaîne localisée semblable à Editool
-Other.
+  Recherche une chaîne localisée semblable à File
+- Open
+- Save
+- Exit
+Tools
+- End Mills
+- Forets
+- Tarauds
+- Alesoirs
+Setup
+- Library
+- Default#
+- Editool#.
 </summary>
 </member>
 <member name="P:editool.My.Resources.Resources.tooltypes">

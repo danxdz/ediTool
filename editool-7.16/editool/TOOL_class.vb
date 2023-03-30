@@ -50,7 +50,7 @@ Module Tools
             api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.ManufacturerPartNumber"), ManufRef)
             api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Manufacturer"), Manuf)
             api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Code"), CodeBar)
-            api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Author"), "Editool")
+            ' api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Author"), "Editool")
             api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.PartNumber"), Code)
 
             api.TopSolidExt.Parameters.SetBooleanValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.VirtualDocument"), False)
