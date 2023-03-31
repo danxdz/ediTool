@@ -135,6 +135,7 @@
     <Compile Include="Preload.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Settings.vb" />
     <Compile Include="TOOL_class.vb" />
     <Compile Include="ToolName_config.Designer.vb">
       <DependentUpon>ToolName_config.vb</DependentUpon>
@@ -216,10 +217,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\menu_en.txt" />
+    <None Include="data\UI_text_en" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\menu_fr.txt" />
+    <None Include="data\UI_text_fr" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\outils.txt" />

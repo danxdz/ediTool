@@ -1,7 +1,7 @@
 ﻿Fichier
-- Ouvrir
-- Enregistrer
-- Quitter
+- Ouvrir@
+- Enregistrer@
+- Quitter@
 Outils
 - Fraises
 -- Fraise 2 tailles

@@ -111,12 +111,13 @@ Public Class Main
         'Outil_exists(file_reader, Name_textbox.Text)
     End Sub
 
-    Private Sub Lang_en_Click_1(sender As Object, e As EventArgs) Handles Lang_en.Click
+    Private Sub Lang_en_Click(sender As Object, e As EventArgs) Handles Lang_en.Click
         FillMainMenu(My.Resources.mainMenu_en)
         Set_pref_lang("en")
         Get_files(My.Resources.menu_en)
     End Sub
-    Private Sub Lang_fr_Click_1(sender As Object, e As EventArgs)
+
+    Private Sub Lang_fr_Click(sender As Object, e As EventArgs) Handles Lang_fr.Click
         FillMainMenu(My.Resources.mainMenu_fr)
         Set_pref_lang("fr")
         Get_files(My.Resources.menu_fr)
@@ -513,4 +514,5 @@ Public Class Main
     Private Sub AutoOpen_checkBox_CheckedChanged(sender As Object, e As EventArgs) Handles AutoOpen_checkBox.CheckedChanged
 
     End Sub
+
 End Class

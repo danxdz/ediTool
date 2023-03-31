@@ -29,31 +29,58 @@ editool
 - Save
 - Exit
 Tools
-- End Mills
-- Forets
+- Mills
+-- End Mill
+-- Toroidal Mill
+-- Ball Nose Mill
+- Drilling
+-- Spotting Drill
+-- Twist Drill
+-- Carbide Twist Drill
+-- Flat Drill
 - Tarauds
+-- Tap
+-- Thread Milling Cutter
 - Alesoirs
+-- Constant Reamer
 Setup
-- Library
-- Default#
-- Editool#.
+- Library source
+-- Default#
+-- Editool#
+- Destination library
+-- {customToolLib}#
+-- Add.
 </summary>
 </member>
 <member name="P:editool.My.Resources.Resources.mainMenu_fr">
 <summary>
   Recherche une chaîne localisée semblable à Fichier
-- Ouvrir
-- Enregistrer
-- Quitter
+- Ouvrir@
+- Enregistrer@
+- Quitter@
 Outils
-- Fraiseuses
+- Fraises
+-- Fraise 2 tailles
+-- Fraise torique
+-- Fraise hémisphérique
 - Forets
+-- Foret à centrer
+-- Foret à pointer
+-- Foret hélicoïdal
+-- Foret hélicoïdal carbure
+-- Forêt à fond plat
 - Tarauds
+-- Taraud
+-- Fraise a fileter
 - Alésoirs
+-- Alésoir fixe
 Configuration
-- Bibliothèque
+- Bibliothèque source
 -- Default#
--- Editool#.
+-- Editool#
+- Bibliothèque de destination
+-- {customToolLib}#
+-- Ajouter.
 </summary>
 </member>
 <member name="P:editool.My.Resources.Resources.mainMenu_pt">
@@ -64,13 +91,27 @@ Configuration
 - Sair
 Ferramentas
 - Fresas
+-- Fresa de topo
+-- Fresa raionada
+-- Fresa esférica
 - Brocas
-- Machos
-- Escareadores
+-- Broca de centrar
+-- Broca de ponto
+-- Broca helicoidal
+-- Broca helicoidal de carboneto
+-- Broca fundo pla
+- Roscas
+-- Macho
+-- Fresa para roscas
+- Mandril
+-- Mandril fixo
 Configuração
--Biblioteca
--- Predefinido#
--- Editool#.
+- Biblioteca fonte
+-- Default#
+-- Editool#
+- Biblioteca de destino
+-- {customToolLib}#
+-- Adicionar .
 </summary>
 </member>
 <member name="P:editool.My.Resources.Resources.menu_en">
@@ -90,7 +131,8 @@ open tool
 create tool
 config
 reference
-cutting diameter.
+cutting diameter
+check-in.
 </summary>
 </member>
 <member name="P:editool.My.Resources.Resources.menu_en_tooltypes">
@@ -122,7 +164,8 @@ ouvrir outil
 créer outil
 config
 référence
-diamètre de coupe.
+diamètre de coupe
+mettre au coffre.
 </summary>
 </member>
 <member name="P:editool.My.Resources.Resources.outils">
@@ -156,27 +199,12 @@ FR Ø4 2z Lc11 Lu16
 .
 </summary>
 </member>
-<member name="P:editool.My.Resources.Resources.tools_custom_libs">
-<summary>
-  Recherche une chaîne localisée semblable à File
-- Open
-- Save
-- Exit
-Tools
-- End Mills
-- Forets
-- Tarauds
-- Alesoirs
-Setup
-- Library
-- Default#
-- Editool#.
-</summary>
-</member>
 <member name="P:editool.My.Resources.Resources.tooltypes">
 <summary>
   Recherche une chaîne localisée semblable à FR2T Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
 FT Ø[D] r[r] [NoTT]z Lc[L] Lu[CTS_AL]
+FB Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
+FP Ø[D] [NoTT]z Lc[L]
 FB Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
 FP Ø[D] [NoTT]z Lc[L].
 </summary>

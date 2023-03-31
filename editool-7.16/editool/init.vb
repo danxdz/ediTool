@@ -103,7 +103,6 @@ Module Init
                 ''If Main.CTS_AL_textbox.Text <> "" And Main.CTS_AL_textbox.Text <> "0" Then
                 ''Main.Name_textbox.Text += " Lu" + Main.CTS_AL_textbox.Text ' nome += Longueur util
                 ''
-
                 'ToolPreview()
             Catch ex As Exception
                 MsgBox("Name Mask Error - " + ex.ToString)
@@ -122,36 +121,11 @@ Module Init
         Return dt
     End Function
 
-    Public Function GetToolTypes_old() As List(Of String)
-
-        Dim toolTypes As New List(Of String)
-
-        Dim fileContents As String = My.Resources.tooltypes
-
-        For Each line As String In fileContents.Split(Environment.NewLine)
-            If line <> vbLf Then
-                Dim values() As String = line.Split(";")
-                toolTypes.Add(values(1))
-                Dim btn As New ToolStripButton With {
-                    .Tag = values(0),
-                    .Text = values(1),
-                    .ToolTipText = values(2)}
-                '.Image = System.Drawing.Image.FromHbitmap
-                AddHandler btn.Click, AddressOf ToolTypeButton_Click
-                Main.ToolStrip1.Items.Add(btn)
-            End If
-        Next
-
-        Return toolTypes
-    End Function
-
     Private Sub ToolTypeButton_Click(sender As Object, e As EventArgs)
 
         Console.Write(sender)
         Console.Write(e.ToString)
     End Sub
-
-
 
     Public Sub Get_prefs(data As String)
         Dim splitLine() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
@@ -174,6 +148,9 @@ Module Init
         Main.AutoOpen_checkBox.Text = splitLine(labels.Length + 1)
         Main.ValidateBt.Text = splitLine(labels.Length + 2)
         Main.DefineName_Bt.Text = splitLine(labels.Length + 3)
+        Main.toolRef_checkBox.Text = splitLine(labels.Length + 4)
+        Main.toolDiam_checkBox.Text = splitLine(labels.Length + 5)
+        Main.AutoCheckIn_checkBox.Text = splitLine(labels.Length + 6)
 
     End Sub
     Function AddFiltersCombobox(tmp As Decimal, filter As List(Of Decimal))
@@ -203,7 +180,6 @@ Module Init
         End If
         Return filter
 
-
     End Function
 
     Public Sub GetDefaultTools(data As String, filter As String)
@@ -217,15 +193,12 @@ Module Init
         DataTable_buffer = New DataTable
         DataTable_buffer = SetDataGridColumnsTitle(objList, DataTable_buffer)
 
-
         Dim filterD1 As New List(Of Decimal)
         Dim filterL1 As New List(Of Decimal)
-
 
         For i As Integer = 0 To 4000 'full_file.Length - 1
             single_line = full_file(i)
             line = Split(single_line, ";")
-
 
             DataTable_buffer.Rows.Add(line)
             Dim tmp_line() As String = line.ToArray
@@ -233,27 +206,18 @@ Module Init
             Dim newtool As NewTool = FileImports.Fill_newTool(line(1), line(3), line(2), line(5), line(6), line(4), line(8), "FR2T", "0", "0", "0", "0", "0", "0", "0", "FRAISA", line(0), "0", "0", "0")
             Main.toolsList.Tool.add(newtool)
 
-
             filterD1 = AddFiltersCombobox(line(1), filterD1)
             filterL1 = AddFiltersCombobox(line(5), filterL1)
 
-
         Next
-
-
         PopulateFilters(filterD1, Main.filterD1_Combobox)
         PopulateFilters(filterL1, Main.filterL1_ComboBox)
-
-
-
 
         'if we want to filter/order data
         'DataTable_buffer.DefaultView.Sort = "d ASC"
         'Main.NewToolDataGridView.DataSource = DataTable_buffer.DefaultView.ToTable
 
         'Main.NewToolDataGridView.DataSource = DataTable_buffer
-
-
 
     End Sub
     Public Sub PopulateFilters(ByVal filterList As List(Of Decimal), ByVal comboBox As ComboBox)
@@ -280,6 +244,9 @@ Module Init
             Dim paramName As String = ""
             If text.EndsWith("#") Then
                 text = text.TrimEnd("#"c)
+            End If
+            If text.EndsWith("@") Then
+                text = text.TrimEnd("@"c)
             End If
 
             ' Check for parameters in curly braces {}
@@ -310,7 +277,10 @@ Module Init
                         currentSubMenu.Checked = True
                     End If
                     currentSubMenu.CheckOnClick = False
-                    AddHandler currentSubMenu.Click, AddressOf MenuItem_Click
+                    AddHandler currentSubMenu.Click, AddressOf MenuItemCheckedItem
+                End If
+                If line.EndsWith("@") Then
+                    AddHandler currentSubMenu.Click, AddressOf MenuItem_Function
                 End If
             ElseIf depth = 2 Then
                 ' New sub-sub-menu item
@@ -321,12 +291,13 @@ Module Init
                         subSubMenuItem.Checked = True
                     End If
                     subSubMenuItem.CheckOnClick = False
-                    AddHandler subSubMenuItem.Click, AddressOf MenuItem_Click
+                    AddHandler subSubMenuItem.Click, AddressOf MenuItemCheckedItem
+                End If
+                If line.EndsWith("@") Then
+                    AddHandler subSubMenuItem.Click, AddressOf MenuItem_Function
                 End If
             End If
         Next
-
-
 
         Dim selectedItem As String = My.Settings.toolLib
 
@@ -352,52 +323,12 @@ Module Init
     End Sub
 
 
+    Private Sub MenuItem_Function(sender As Object, e As EventArgs)
+        Console.WriteLine(sender)
+        Console.WriteLine(e)
 
-    Public Sub FillMainMenu_old(data As String)
-
-        Main.MenuStrip1.Items.Clear()
-
-
-        Dim splitLine() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
-
-        Dim currentMenu As ToolStripMenuItem = Nothing
-        Dim currentSubMenu As ToolStripMenuItem = Nothing
-
-        For Each line As String In splitLine
-            Dim depth As Integer = line.Count(Function(c) c = "-"c)
-            Dim text As String = line.TrimStart("-"c)
-
-            If text.EndsWith("#") Then
-                text = text.TrimEnd("#"c)
-            End If
-
-            If depth = 0 Then
-                ' New main menu item
-                currentMenu = New ToolStripMenuItem(text)
-                Main.MenuStrip1.Items.Add(currentMenu)
-            ElseIf depth = 1 Then
-                ' New sub-menu item
-                currentSubMenu = New ToolStripMenuItem(text)
-                currentMenu.DropDownItems.Add(currentSubMenu)
-                If line.EndsWith("#") Then
-                    currentSubMenu.CheckOnClick = False
-                    AddHandler currentSubMenu.Click, AddressOf MenuItem_Click
-                End If
-            ElseIf depth = 2 Then
-                ' New sub-sub-menu item
-                Dim subSubMenuItem As New ToolStripMenuItem(text)
-                currentSubMenu.DropDownItems.Add(subSubMenuItem)
-                If line.EndsWith("#") Then
-                    subSubMenuItem.CheckOnClick = False
-                    AddHandler subSubMenuItem.Click, AddressOf MenuItem_Click
-                End If
-            End If
-        Next
     End Sub
-
-
-
-    Private Sub MenuItem_Click(sender As Object, e As EventArgs)
+    Private Sub MenuItemCheckedItem(sender As Object, e As EventArgs)
         Dim clickedItem As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
 
         Console.WriteLine(clickedItem.Text)

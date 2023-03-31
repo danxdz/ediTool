@@ -66,14 +66,27 @@ Namespace My.Resources
         '''- Save
         '''- Exit
         '''Tools
-        '''- End Mills
-        '''- Forets
+        '''- Mills
+        '''-- End Mill
+        '''-- Toroidal Mill
+        '''-- Ball Nose Mill
+        '''- Drilling
+        '''-- Spotting Drill
+        '''-- Twist Drill
+        '''-- Carbide Twist Drill
+        '''-- Flat Drill
         '''- Tarauds
+        '''-- Tap
+        '''-- Thread Milling Cutter
         '''- Alesoirs
+        '''-- Constant Reamer
         '''Setup
-        '''- Library
-        '''- Default#
-        '''- Editool#.
+        '''- Library source
+        '''-- Default#
+        '''-- Editool#
+        '''- Destination library
+        '''-- {customToolLib}#
+        '''-- Add.
         '''</summary>
         Friend ReadOnly Property mainMenu_en() As String
             Get
@@ -83,18 +96,32 @@ Namespace My.Resources
         
         '''<summary>
         '''  Recherche une chaîne localisée semblable à Fichier
-        '''- Ouvrir
-        '''- Enregistrer
-        '''- Quitter
+        '''- Ouvrir@
+        '''- Enregistrer@
+        '''- Quitter@
         '''Outils
-        '''- Fraiseuses
+        '''- Fraises
+        '''-- Fraise 2 tailles
+        '''-- Fraise torique
+        '''-- Fraise hémisphérique
         '''- Forets
+        '''-- Foret à centrer
+        '''-- Foret à pointer
+        '''-- Foret hélicoïdal
+        '''-- Foret hélicoïdal carbure
+        '''-- Forêt à fond plat
         '''- Tarauds
+        '''-- Taraud
+        '''-- Fraise a fileter
         '''- Alésoirs
+        '''-- Alésoir fixe
         '''Configuration
-        '''- Bibliothèque
+        '''- Bibliothèque source
         '''-- Default#
-        '''-- Editool#.
+        '''-- Editool#
+        '''- Bibliothèque de destination
+        '''-- {customToolLib}#
+        '''-- Ajouter.
         '''</summary>
         Friend ReadOnly Property mainMenu_fr() As String
             Get
@@ -109,13 +136,27 @@ Namespace My.Resources
         '''- Sair
         '''Ferramentas
         '''- Fresas
+        '''-- Fresa de topo
+        '''-- Fresa raionada
+        '''-- Fresa esférica
         '''- Brocas
-        '''- Machos
-        '''- Escareadores
+        '''-- Broca de centrar
+        '''-- Broca de ponto
+        '''-- Broca helicoidal
+        '''-- Broca helicoidal de carboneto
+        '''-- Broca fundo pla
+        '''- Roscas
+        '''-- Macho
+        '''-- Fresa para roscas
+        '''- Mandril
+        '''-- Mandril fixo
         '''Configuração
-        '''-Biblioteca
-        '''-- Predefinido#
-        '''-- Editool#.
+        '''- Biblioteca fonte
+        '''-- Default#
+        '''-- Editool#
+        '''- Biblioteca de destino
+        '''-- {customToolLib}#
+        '''-- Adicionar .
         '''</summary>
         Friend ReadOnly Property mainMenu_pt() As String
             Get
@@ -139,7 +180,8 @@ Namespace My.Resources
         '''create tool
         '''config
         '''reference
-        '''cutting diameter.
+        '''cutting diameter
+        '''check-in.
         '''</summary>
         Friend ReadOnly Property menu_en() As String
             Get
@@ -179,7 +221,8 @@ Namespace My.Resources
         '''créer outil
         '''config
         '''référence
-        '''diamètre de coupe.
+        '''diamètre de coupe
+        '''mettre au coffre.
         '''</summary>
         Friend ReadOnly Property menu_fr() As String
             Get
@@ -227,29 +270,10 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à File
-        '''- Open
-        '''- Save
-        '''- Exit
-        '''Tools
-        '''- End Mills
-        '''- Forets
-        '''- Tarauds
-        '''- Alesoirs
-        '''Setup
-        '''- Library
-        '''- Default#
-        '''- Editool#.
-        '''</summary>
-        Friend ReadOnly Property tools_custom_libs() As String
-            Get
-                Return ResourceManager.GetString("tools_custom_libs", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à FR2T Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
         '''FT Ø[D] r[r] [NoTT]z Lc[L] Lu[CTS_AL]
+        '''FB Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
+        '''FP Ø[D] [NoTT]z Lc[L]
         '''FB Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
         '''FP Ø[D] [NoTT]z Lc[L].
         '''</summary>
