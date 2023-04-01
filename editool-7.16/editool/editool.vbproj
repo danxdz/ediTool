@@ -123,6 +123,11 @@
     <Compile Include="check_outil.vb" />
     <Compile Include="FileImports.vb" />
     <Compile Include="Import_TopV6.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="NewBD.Designer.vb">
       <DependentUpon>NewBD.vb</DependentUpon>
     </Compile>
@@ -157,11 +162,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
       <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -217,10 +217,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\UI_text_en" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="data\UI_text_fr" />
+    <None Include="data\text_mainMenu.txt" />
+    <Content Include="data\text_UI.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\outils.txt" />
@@ -229,10 +227,6 @@
     <None Include="data\reg.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\mainMenu_en.txt" />
-    <None Include="data\menu_en_tooltypes.txt" />
-    <None Include="data\mainMenu_fr.txt" />
-    <None Include="data\mainMenu_pt.txt" />
     <Content Include="data\tooltypes.txt" />
   </ItemGroup>
   <ItemGroup>

@@ -26,7 +26,9 @@ Public Class Main
 
         Init.Preload()
 
+        'First time load - check tool lib to save new tools
         Dim customToolLib = My.Settings.customToolLib
+        'if not defined as for ne one
         If customToolLib = "" Then
             Dim libName As String = InputBox("custom lib name", "Custom Tools", "Tool Lib")
             My.Settings.customToolLib = libName
@@ -34,18 +36,14 @@ Public Class Main
         End If
 
         'Set lang settings and label text
-        Dim lang As String = My.Settings.PrefLang
+        Dim language As String = My.Settings.PrefLang
 
-        If lang = "en" Then
-            FillMainMenu(My.Resources.mainMenu_en)
-            Get_files(My.Resources.menu_en)
-        Else
-            FillMainMenu(My.Resources.mainMenu_fr)
-            Get_files(My.Resources.menu_fr)
+        If language = "" Then
+            language = "en"
         End If
+        FillMainMenu(language)
 
-
-
+        FillUI(language)
 
 
         'Dim type As String = My.Settings.ToolType
@@ -54,16 +52,16 @@ Public Class Main
 
         ToolName_config.Namemask_textbox.Text = My.Settings.MaskTT_FR
 
-            'My.Settings.DefManuf = "FRAISA"
+        'My.Settings.DefManuf = "FRAISA"
 
-            Try
-                'GetDefaultTools(My.Resources.outils, "")
-                'Set_Name_auto()
-            Catch ex As Exception
-                MsgBox("no db file    -->" & ex.ToString)
-                Close()
-                End
-            End Try
+        Try
+            'GetDefaultTools(My.Resources.outils, "")
+            'Set_Name_auto()
+        Catch ex As Exception
+            MsgBox("no db file    -->" & ex.ToString)
+            Close()
+            End
+        End Try
 
 
     End Sub
@@ -77,7 +75,8 @@ Public Class Main
     End Sub
     Private Sub TextBox_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles D_textbox.KeyPress, SD_textbox.KeyPress, CTS_AD_textbox.KeyPress, OL_textbox.KeyPress, L_textbox.KeyPress, CTS_AL_textbox.KeyPress
         Dim digitsOnly As New Regex("[^\d]")
-        Me.Text = digitsOnly.Replace(Me.Text, "")
+        sender.Text = digitsOnly.Replace(sender.Text, "")
+        ' Refresh_outil(toolsList(NewToolDataGridView.CurrentRow().Index))
     End Sub
     Private Sub Set_pref_lang(lang As String)
         My.Settings.PrefLang = lang
@@ -111,17 +110,13 @@ Public Class Main
         'Outil_exists(file_reader, Name_textbox.Text)
     End Sub
 
-    Private Sub Lang_en_Click(sender As Object, e As EventArgs) Handles Lang_en.Click
-        FillMainMenu(My.Resources.mainMenu_en)
-        Set_pref_lang("en")
-        Get_files(My.Resources.menu_en)
+    Private Sub LanguageButton_Click(sender As Object, e As EventArgs) Handles Lang_en.Click, Lang_fr.Click, Lang_pt.Click
+        Set_pref_lang(sender.text)
+        FillMainMenu(sender.text)
+        FillUI(sender.text)
     End Sub
 
-    Private Sub Lang_fr_Click(sender As Object, e As EventArgs) Handles Lang_fr.Click
-        FillMainMenu(My.Resources.mainMenu_fr)
-        Set_pref_lang("fr")
-        Get_files(My.Resources.menu_fr)
-    End Sub
+
 
     Private Sub DefineName_Bt_Click(sender As Object, e As EventArgs) Handles DefineName_Bt.Click
         ToolName_config.Show()
@@ -278,7 +273,7 @@ Public Class Main
                 'If My.Settings.DefManuf <> "FRAISA" Then
                 '    i = tmp - i
                 'End If
-                indexLabel.Text = i
+                'indexLabel.Text = i
                 Try
                     If filteredTools.Count > 0 Then
                         D_textbox.Text = filteredTools(i).D1
@@ -507,12 +502,5 @@ Public Class Main
         Console.Write(sender)
     End Sub
 
-    Private Sub AutoCheckIn_checkBox_CheckedChanged(sender As Object, e As EventArgs) Handles AutoCheckIn_checkBox.CheckedChanged
-
-    End Sub
-
-    Private Sub AutoOpen_checkBox_CheckedChanged(sender As Object, e As EventArgs) Handles AutoOpen_checkBox.CheckedChanged
-
-    End Sub
 
 End Class

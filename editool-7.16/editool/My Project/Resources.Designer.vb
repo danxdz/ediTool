@@ -61,176 +61,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à File
-        '''- Open
-        '''- Save
-        '''- Exit
-        '''Tools
-        '''- Mills
-        '''-- End Mill
-        '''-- Toroidal Mill
-        '''-- Ball Nose Mill
-        '''- Drilling
-        '''-- Spotting Drill
-        '''-- Twist Drill
-        '''-- Carbide Twist Drill
-        '''-- Flat Drill
-        '''- Tarauds
-        '''-- Tap
-        '''-- Thread Milling Cutter
-        '''- Alesoirs
-        '''-- Constant Reamer
-        '''Setup
-        '''- Library source
-        '''-- Default#
-        '''-- Editool#
-        '''- Destination library
-        '''-- {customToolLib}#
-        '''-- Add.
-        '''</summary>
-        Friend ReadOnly Property mainMenu_en() As String
-            Get
-                Return ResourceManager.GetString("mainMenu_en", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Fichier
-        '''- Ouvrir@
-        '''- Enregistrer@
-        '''- Quitter@
-        '''Outils
-        '''- Fraises
-        '''-- Fraise 2 tailles
-        '''-- Fraise torique
-        '''-- Fraise hémisphérique
-        '''- Forets
-        '''-- Foret à centrer
-        '''-- Foret à pointer
-        '''-- Foret hélicoïdal
-        '''-- Foret hélicoïdal carbure
-        '''-- Forêt à fond plat
-        '''- Tarauds
-        '''-- Taraud
-        '''-- Fraise a fileter
-        '''- Alésoirs
-        '''-- Alésoir fixe
-        '''Configuration
-        '''- Bibliothèque source
-        '''-- Default#
-        '''-- Editool#
-        '''- Bibliothèque de destination
-        '''-- {customToolLib}#
-        '''-- Ajouter.
-        '''</summary>
-        Friend ReadOnly Property mainMenu_fr() As String
-            Get
-                Return ResourceManager.GetString("mainMenu_fr", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à Ficheiro
-        '''- Abrir
-        '''- Guardar
-        '''- Sair
-        '''Ferramentas
-        '''- Fresas
-        '''-- Fresa de topo
-        '''-- Fresa raionada
-        '''-- Fresa esférica
-        '''- Brocas
-        '''-- Broca de centrar
-        '''-- Broca de ponto
-        '''-- Broca helicoidal
-        '''-- Broca helicoidal de carboneto
-        '''-- Broca fundo pla
-        '''- Roscas
-        '''-- Macho
-        '''-- Fresa para roscas
-        '''- Mandril
-        '''-- Mandril fixo
-        '''Configuração
-        '''- Biblioteca fonte
-        '''-- Default#
-        '''-- Editool#
-        '''- Biblioteca de destino
-        '''-- {customToolLib}#
-        '''-- Adicionar .
-        '''</summary>
-        Friend ReadOnly Property mainMenu_pt() As String
-            Get
-                Return ResourceManager.GetString("mainMenu_pt", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à tool name
-        '''rayon
-        '''angle
-        '''teeth num
-        '''cutting diameter
-        '''clearance diameter
-        '''body diameter
-        '''cutting length
-        '''clearance length
-        '''overall length
-        '''force name
-        '''open tool
-        '''create tool
-        '''config
-        '''reference
-        '''cutting diameter
-        '''check-in.
-        '''</summary>
-        Friend ReadOnly Property menu_en() As String
-            Get
-                Return ResourceManager.GetString("menu_en", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à 1;FR2T;Fraise 2 tailles;Side Mill D20 L35 SD20
-        '''2;FRTO;Fraise torique;Radiused Mill D16 L40 r3 SD16
-        '''3;FRHE;Fraise hémisphérique;Ball Nose Mill D8 L30 SD8
-        '''4;FOP9;Foret a pointer;Spotting Drill D10 SD10
-        '''5;FOCA;Foret hélicoïdal;Twisted Drill D10 L35 SD10
-        '''6;ALFI;Alesoir fixe;Constant Reamer D10 L20 SD9
-        '''7;TAR;Taraud
-        '''8;FRTB;Fraise à tourbillonner.
-        '''</summary>
-        Friend ReadOnly Property menu_en_tooltypes() As String
-            Get
-                Return ResourceManager.GetString("menu_en_tooltypes", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Recherche une chaîne localisée semblable à nom outil
-        '''rayon
-        '''angle
-        '''n. de dents
-        '''diamètre de coupe
-        '''diamètre détalonné
-        '''diamètre corps
-        '''longueur de coupe
-        '''longueur détalonné
-        '''longueur total
-        '''force nom
-        '''ouvrir outil
-        '''créer outil
-        '''config
-        '''référence
-        '''diamètre de coupe
-        '''mettre au coffre.
-        '''</summary>
-        Friend ReadOnly Property menu_fr() As String
-            Get
-                Return ResourceManager.GetString("menu_fr", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Recherche une chaîne localisée semblable à 15232120;1.5;6;0;38;3;0;11.5;3
         '''15232140;2;6;0;38;3;0;11;3
         '''15232160;2.5;6;0;38;3;0;10;3
@@ -270,12 +100,51 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à Index;File;Parent;PT;FR;EN
+        '''1;File;1;Ficheiro;Fichier;File
+        '''2;Open;1;Abrir;Ouvrir;Open@
+        '''3;XML;2;XML;XML;XML@
+        '''4;Excel ( model );2;Excel ( modelo );Excel ( modèle );Excel ( model )@
+        '''5;TopSolid 6;2;TopSolid 6;TopSolid 6;TopSolid 6@
+        '''6;Save;1;Guardar;Enregistrer;Save@
+        '''7;Exit;1;Sair;Quitter;Exit
+        '''8;Tools;8;Ferramentas;Outils;Tools
+        '''9;Mills;8;Fresas;Fraises;Mills
+        '''10;End Mill;9;Fresa de topo;Fraise 2 tailles;End Mill
+        '''11;Toroidal Mill;9;Fresa toroidal;Fraise toroïdale;Toroidal Mill
+        '''12;Ball Nose Mill;9;Fresa  [le reste de la chaîne a été tronqué]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property textMainMenu() As String
+            Get
+                Return ResourceManager.GetString("textMainMenu", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à ID;Key;en;fr;pt
+        '''1;toolName;Tool Name;Nom de l&apos;outil;Nome da ferramenta
+        '''2;rayon;Radius;Rayon;Raio
+        '''3;angle;Angle;Angle;Ângulo
+        '''4;teethNum;Number of Teeth;Nombre de dents;Número de dentes
+        '''5;cuttingDiameter;Cutting Diameter;Diamètre de coupe;Diâmetro de corte
+        '''6;clearanceDiameter;Clearance Diameter;Diamètre de dégagement;Diâmetro de folga
+        '''7;bodyDiameter;Body Diameter;Diamètre du corps;Diâmetro do corpo
+        '''8;cuttingLength;Cutting Length;Longueur de coupe;Comprimento de corte
+        '''9;clearanceLength;Clearance Lengt [le reste de la chaîne a été tronqué]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property textUI() As String
+            Get
+                Return ResourceManager.GetString("textUI", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à FR2T Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
-        '''FT Ø[D] r[r] [NoTT]z Lc[L] Lu[CTS_AL]
-        '''FB Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
-        '''FP Ø[D] [NoTT]z Lc[L]
-        '''FB Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
-        '''FP Ø[D] [NoTT]z Lc[L].
+        '''FRTO Ø[D] r[r] [NoTT]z Lc[L] Lu[CTS_AL]
+        '''FRHE Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
+        '''FOP9 Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
+        '''FOCA Ø[D] [NoTT]z Lc[L]
+        '''ALFI Ø[D] [NoTT]z Lc[L].
         '''</summary>
         Friend ReadOnly Property tooltypes() As String
             Get

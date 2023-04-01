@@ -56,18 +56,6 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("123456789987")>  _
-        Public Property testP() As String
-            Get
-                Return CType(Me("testP"),String)
-            End Get
-            Set
-                Me("testP") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("fr")>  _
         Public Property PrefLang() As String
             Get
@@ -219,6 +207,18 @@ Namespace My
             End Get
             Set
                 Me("customToolLib") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property Library_source() As String
+            Get
+                Return CType(Me("Library_source"),String)
+            End Get
+            Set
+                Me("Library_source") = value
             End Set
         End Property
     End Class

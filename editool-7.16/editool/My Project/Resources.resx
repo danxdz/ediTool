@@ -118,29 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="mainMenu_en" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\data\mainmenu_en.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="mainMenu_fr" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\data\mainmenu_fr.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="mainMenu_pt" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\data\mainmenu_pt.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="menu_en" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\data\UI_text_en;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="menu_en_tooltypes" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\data\menu_en_tooltypes.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
-  <data name="menu_fr" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\data\UI_text_fr;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
-  </data>
   <data name="outils" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\outils.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="reg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\reg.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="textMainMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\text_mainmenu.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="textUI" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\text_UI.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
   <data name="tooltypes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\tooltypes.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

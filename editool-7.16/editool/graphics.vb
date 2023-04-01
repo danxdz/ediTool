@@ -42,18 +42,6 @@ Module graphics
                     .Alignment = StringAlignment.Center
                 }
 
-                '-------   grid
-
-                'For i = 1 To SD / 2 Step 1
-                'Dim x As Decimal = i * scale
-                'myOutil.DrawLine(myPenRED, 0, h - x, w, h - x)
-                'Next
-                'For i = 1 To OL Step 1
-                'Dim x As Decimal = i * scale
-                'myOutil.DrawString(i, drawFont, drawBrush, x + dif_w, 10)
-                'myOutil.DrawLine(myPenRED, dif_w + x, 0, dif_w + x, h)
-                'Next
-
 
                 Dim D_tmp As Decimal = StartY - ((D / 2) * scale)
                 Dim SD_tmp As Decimal = StartY - ((SD / 2) * scale)
@@ -167,9 +155,9 @@ Module graphics
                 Dim axe_petite As Integer = axe_big / 8
                 Dim space As Integer = 0
 
-                Dim x As Short
 
-                For x = 1 To 10
+
+                For x As Integer = 1 To 10
                     myOutil.DrawLine(myPenRED, space, StartY - 1, axe_petite + space, StartY - 1)
                     space = space + axe_petite + 10
                     myOutil.DrawLine(myPenRED, space, StartY - 1, axe_big + space, StartY - 1)

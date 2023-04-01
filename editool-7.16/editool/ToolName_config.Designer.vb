@@ -33,7 +33,7 @@ Partial Class ToolName_config
         Me.MaskTT_FOC9 = New System.Windows.Forms.TextBox()
         Me.MaskTT_FO = New System.Windows.Forms.TextBox()
         Me.MaskTT_AL = New System.Windows.Forms.TextBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.EndMill = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
@@ -45,7 +45,7 @@ Partial Class ToolName_config
         Me.All_ResetBt = New System.Windows.Forms.Button()
         Me.FO_ResetBt = New System.Windows.Forms.Button()
         Me.AL_ResetBt = New System.Windows.Forms.Button()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.EndMill, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -109,10 +109,10 @@ Partial Class ToolName_config
         Me.MaskTT_FB.Size = New System.Drawing.Size(204, 20)
         Me.MaskTT_FB.TabIndex = 6
         '
-        'MaskTT_FP
+        'MaskTT_FOC9
         '
         Me.MaskTT_FOC9.Location = New System.Drawing.Point(32, 187)
-        Me.MaskTT_FOC9.Name = "MaskTT_FP"
+        Me.MaskTT_FOC9.Name = "MaskTT_FOC9"
         Me.MaskTT_FOC9.Size = New System.Drawing.Size(204, 20)
         Me.MaskTT_FOC9.TabIndex = 7
         '
@@ -130,16 +130,17 @@ Partial Class ToolName_config
         Me.MaskTT_AL.Size = New System.Drawing.Size(204, 20)
         Me.MaskTT_AL.TabIndex = 9
         '
-        'PictureBox1
+        'EndMill
         '
-        Me.PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), System.Drawing.Image)
-        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.PictureBox1.ErrorImage = CType(resources.GetObject("PictureBox1.ErrorImage"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(5, 34)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(21, 44)
-        Me.PictureBox1.TabIndex = 10
-        Me.PictureBox1.TabStop = False
+        Me.EndMill.BackgroundImage = CType(resources.GetObject("EndMill.BackgroundImage"), System.Drawing.Image)
+        Me.EndMill.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.EndMill.ErrorImage = CType(resources.GetObject("EndMill.ErrorImage"), System.Drawing.Image)
+        Me.EndMill.Location = New System.Drawing.Point(5, 34)
+        Me.EndMill.Name = "EndMill"
+        Me.EndMill.Size = New System.Drawing.Size(21, 44)
+        Me.EndMill.TabIndex = 10
+        Me.EndMill.TabStop = False
+        Me.EndMill.Tag = "Fraise 2 tailles"
         '
         'PictureBox2
         '
@@ -267,7 +268,7 @@ Partial Class ToolName_config
         Me.Controls.Add(Me.PictureBox6)
         Me.Controls.Add(Me.PictureBox3)
         Me.Controls.Add(Me.PictureBox2)
-        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.EndMill)
         Me.Controls.Add(Me.MaskTT_AL)
         Me.Controls.Add(Me.MaskTT_FO)
         Me.Controls.Add(Me.MaskTT_FOC9)
@@ -281,7 +282,7 @@ Partial Class ToolName_config
         Me.Name = "ToolName_config"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Tool Name Config"
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.EndMill, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
@@ -302,7 +303,7 @@ Partial Class ToolName_config
     Friend WithEvents MaskTT_FOC9 As TextBox
     Friend WithEvents MaskTT_FO As TextBox
     Friend WithEvents MaskTT_AL As TextBox
-    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents EndMill As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents PictureBox4 As PictureBox

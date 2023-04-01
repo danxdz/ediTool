@@ -70,7 +70,7 @@ Module ts
             'Dim pdmDocumentId As String = "your_pdm_document_id_here"
             'Dim documentIdInstance As Object = documentIdConstructor.Invoke(New Object() {pdmDocumentId})
 
-            Dim model_fr As Object
+            'Dim model_fr As Object
             'Dim model_fr As DocumentId
 
             Dim temp_model As Object

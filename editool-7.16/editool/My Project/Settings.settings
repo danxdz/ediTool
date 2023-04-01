@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="testP" Type="System.String" Scope="User">
-      <Value Profile="(Default)">123456789987</Value>
-    </Setting>
     <Setting Name="PrefLang" Type="System.String" Scope="User">
       <Value Profile="(Default)">fr</Value>
     </Setting>
@@ -42,6 +39,9 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="customToolLib" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Library_source" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>
