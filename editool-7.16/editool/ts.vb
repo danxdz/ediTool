@@ -47,7 +47,7 @@ Module ts
         Private Property TopSolidPath As String
 
         Friend Function CopyModelFile(model, libModel)
-            Return CopyFile(model, libModel)
+            Return CopyFileFromDefaultLib(model, libModel)
 
         End Function
         Friend Sub Initialize()
@@ -62,77 +62,55 @@ Module ts
             Return StartModifTopSolid()
         End Function
 
-        Private Function CopyFile(model, lib_models)
-
-            'Dim topSolidKernel As Assembly = api.GetTsAssembly()
-            'Dim documentIdType As Type = topSolidKernel.GetType("TopSolid.Kernel.Automating.DocumentId")
-            'Dim documentIdConstructor As ConstructorInfo = documentIdType.GetConstructor(New Type() {GetType(String)})
-            'Dim pdmDocumentId As String = "your_pdm_document_id_here"
-            'Dim documentIdInstance As Object = documentIdConstructor.Invoke(New Object() {pdmDocumentId})
-
-            'Dim model_fr As Object
-            'Dim model_fr As DocumentId
+        Private Function CopyFileFromDefaultLib(model, lib_models)
 
             Dim temp_model As Object
+            Dim model_fr_id
+
+            'Just to check if some modification to end
+            Try
+                api.TopSolidExt.Application.EndModification(False, False)
+            Catch e As Exception
+            End Try
 
             ' Check if there are any models in the specified library
             If lib_models IsNot Nothing Then
-
-                ' Open the first object in the list
-                TopSolidExt.Pdm.OpenProject(lib_models(0))
-
-                ' Search for the specified model in all the models
-                Dim model_fr_id
-                'For i As Integer = 0 To (lib_models.Count - 1)
-                'model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models(i), model)
-                model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models(0), model)
-                'Next
-
-
                 Try
-                    api.TopSolidExt.Application.EndModification(False, False)
+                    'Check if custom tool lib exists, or create it
+                    Dim customToolsProjectName = My.Settings.customToolLib
+                    Dim outputProject = If(TopSolidExt.Pdm.SearchProjectByName(customToolsProjectName)(0), TopSolidExt.Pdm.CreateProject(customToolsProjectName, True))
 
-                Catch
-
-                End Try
-
-
-                Dim customToolsProjectName = My.Settings.customToolLib
-                Dim customProject
-                Try
-                    customProject = TopSolidExt.Pdm.SearchProjectByName(customToolsProjectName)(0)
-                Catch ex As Exception
-
-                End Try
-
-                If customProject Is Nothing Then
-                    customProject = TopSolidExt.Pdm.CreateProject(customToolsProjectName, True)
-                End If
-
-                model_fr_id.RemoveRange(1, model_fr_id.Count - 1)
-
-                ' If the model was found, open it and save it as a temporary file
-                If model_fr_id.Count > 0 Then
-                    Try
-
-                        'model_fr = TopSolidExt.Documents.GetDocument(model_fr_id(0))
-                        'model_fr = TopSolidExt.Pdm.GetCurrentProject() 'TopSolidExt.Pdm.GetDocument(model_fr_id(0))
-
+                    ' código aqui para lidar com o caso em que lib_models é uma lista com mais de um elemento
+                    ' Open the first object in the list
+                    TopSolidExt.Pdm.OpenProject(lib_models(0))
+                        model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models(0), model)
+                        model_fr_id.RemoveRange(1, model_fr_id.Count - 1)
                         ' Appeler la méthode CopySeveral avec la liste de PdmObjectId
-                        temp_model = TopSolidExt.Pdm.CopySeveral(model_fr_id, customProject)
+                        temp_model = TopSolidExt.Pdm.CopySeveral(model_fr_id, outputProject)
 
 
-                        'temp_model = TopSolidExt.Pdm.CopySeveral(models, sfg) 'lib_models(0), "temp") 
-                    Catch ex As Exception
-                        MsgBox("cant copy tool model")
-                    End Try
-                Else
+                Catch ex As Exception
                     ' If the model was not found, display an error message
                     MsgBox("cant find tool model")
-                End If
+                End Try
+
+                '  TopSolidExt.Pdm.OpenProject(lib_models)
+
+
+                ' Search for the specified model in all the models
+                'For i As Integer = 0 To (lib_models.Count - 1)
+                'model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models(i), model)
+                'Next
+                ' If the model was found, open it and save it as a temporary file
+
+                'model_fr = TopSolidExt.Documents.GetDocument(model_fr_id(0))
+                'model_fr = TopSolidExt.Pdm.GetCurrentProject() 'TopSolidExt.Pdm.GetDocument(model_fr_id(0))
+
+
+
             Else
                 ' If the library was not found, display an error message
-                MsgBox("cant find lib 'EdiTool'")
+                MsgBox("cant find output lib")
             End If
 
             ' Return the temporary model document ID
@@ -167,13 +145,13 @@ Module ts
 
             Dim PdmObjectIdType = topSolidKernel.GetType("TopSolid.Kernel.Automating.PdmObjectId")
 
-
+            ' OpenProject
             If Main.MenuStrip1.Items.Count > 0 Then
-                Dim toolLib = My.Settings.toolLib
-                If toolLib = " Default" Then
+                Dim toolLib = My.Settings.librarySource
+                If toolLib = "Default" Then
                     PdmObjectIdType = TopSolidExt.Pdm.SearchProjectByName("TopSolid Machining User Tools")
-                ElseIf toolLib = " EdiTool" Then
-                    PdmObjectIdType = TopSolidExt.Pdm.SearchProjectByName("Editool") ' OpenProject
+                Else
+                    PdmObjectIdType = TopSolidExt.Pdm.SearchProjectByName(toolLib)
                 End If
             End If
 
@@ -267,28 +245,28 @@ Module ts
 
     Public Sub Create_outil(newTool As NewTool)
         Dim modelLib = api.StartModif()
-        Console.WriteLine(":  ", modelLib)
-        'TopSolidHost.Connect()
-        'TopSolidDesignHost.Connect()
 
-        Dim model_id As String = "Fraise 2 Tailles D20 L35 SD20"
+        Dim model_name As String
 
         Dim toolType = newTool.Type
-        If toolType <> "" Then My.Settings.ToolType = toolType
+        If toolType <> "" And My.Settings.ToolType <> toolType Then
+            My.Settings.ToolType = toolType
+            My.Settings.Save()
+        End If
 
-        Select Case My.Settings.ToolType
+        Select Case toolType
             Case "FR2T"
-                model_id = "Side Mill D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
+                model_name = "Side Mill D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
             Case "FRTO"
-                model_id = "Fraise hémisphérique D8 L30 SD8"
+                model_name = "Fraise hémisphérique D8 L30 SD8"
             Case "FRHE"
-                model_id = "Ball Nose Mill D8 L30 SD8"'"Fraise hémisphérique D8 L30 SD8"
+                model_name = "Ball Nose Mill D8 L30 SD8"'"Fraise hémisphérique D8 L30 SD8"
             Case "FOP9"
-                model_id = "Spotting Drill D10 SD10"
+                model_name = "Spotting Drill D10 SD10"
             Case "FOCA"
-                model_id = "Twisted Drill D10 L35 SD10"
+                model_name = "Twisted Drill D10 L35 SD10"
             Case "ALFI"
-                model_id = "Constant Reamer D10 L20 SD9"
+                model_name = "Constant Reamer D10 L20 SD9"
         End Select
 
 
@@ -300,7 +278,7 @@ Module ts
 
         ' api.TopSolidExt.Connect()
 
-        Dim model_fr = api.CopyModelFile(model_id, modelLib)
+        Dim model_fr = api.CopyModelFile(model_name, modelLib)
         'Open_file(model_id, api.TopSolidExt.Pdm.SearchProjectByName("EdiTool"))
 
         '********
@@ -312,7 +290,7 @@ Module ts
         'api.TopSolidExt.Application.EndModification(True, False)
 
         If model_fr(0).isEmpty Then
-            MsgBox("Can't find file ( " + model_id + " )")
+            MsgBox("Can't find file ( " + model_name + " )")
             api.TopSolidExt.Application.EndModification(True, False)
 
             Exit Sub

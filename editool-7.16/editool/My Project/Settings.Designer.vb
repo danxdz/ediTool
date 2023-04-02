@@ -200,7 +200,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("EdiTool")>  _
         Public Property customToolLib() As String
             Get
                 Return CType(Me("customToolLib"),String)
@@ -212,13 +212,13 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property Library_source() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("EdiTool")>  _
+        Public Property librarySource() As String
             Get
-                Return CType(Me("Library_source"),String)
+                Return CType(Me("librarySource"),String)
             End Get
             Set
-                Me("Library_source") = value
+                Me("librarySource") = value
             End Set
         End Property
     End Class

@@ -218,6 +218,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="data\text_mainMenu.txt" />
+    <None Include="data\config.txt" />
     <Content Include="data\text_UI.txt" />
   </ItemGroup>
   <ItemGroup>

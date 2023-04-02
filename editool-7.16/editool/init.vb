@@ -300,6 +300,7 @@ Module Init
             If parent = index And text <> "" Then
                 currentMenu = New ToolStripMenuItem(text)
                 currentMenu.Name = name
+
                 dictMenus.Add(index, currentMenu)
                 Main.MenuStrip1.Items.Add(currentMenu)
             ElseIf parent <> index And text <> "" Then
@@ -318,15 +319,16 @@ Module Init
                             My.Settings(parentName) = savedDefaultLib
                             My.Settings.Save()
                         End If
-                        If currentSubMenu.Text = savedDefaultLib Then
+                        If currentSubMenu.Name = savedDefaultLib Then
                             currentSubMenu.Checked = True
                         End If
                     End If
                     AddHandler currentSubMenu.Click, Sub(sender, e) MenuItemCheckedItem(parentName, sender, e)
 
                 ElseIf isFunction And text <> "" Then
-                    currentSubMenu.Name = text
-                    AddHandler currentSubMenu.Click, AddressOf MenuItem_Function_
+                    currentSubMenu.Name = name
+                    AddHandler currentSubMenu.Click, AddressOf MenuItemFunction
+
                 End If
                 dictMenus(parent).DropDownItems.Add(currentSubMenu)
                 dictMenus.Add(index, currentSubMenu)
@@ -339,18 +341,25 @@ Module Init
 
     End Sub
 
-
-    Private Sub MenuItem_Function_(sender As Object, e As EventArgs)
+    Private Sub MenuItemFunction(sender As Object, e As EventArgs)
         Console.WriteLine(sender)
         Console.WriteLine(e)
 
-        OpenXmlFile()
+
+        Select Case sender.Name
+            Case "xml"
+                OpenXmlFile()
+            Case "OtherFunction"
+                ' Call other function here
+            Case Else
+                ' Handle unknown function here
+        End Select
 
     End Sub
     Private Sub MenuItemCheckedItem(name As String, sender As Object, e As EventArgs)
         Dim clickedItem As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
 
-        Console.WriteLine(clickedItem.Text)
+        Console.WriteLine(clickedItem.Text, " - ", clickedItem.Name)
 
         ' Uncheck all other items in the same sub-menu
         If TypeOf clickedItem.OwnerItem Is ToolStripMenuItem Then
@@ -363,7 +372,7 @@ Module Init
 
         ' Check the clicked item
         clickedItem.Checked = True
-        My.Settings(name) = clickedItem.Text
+        My.Settings(name) = clickedItem.Name
         My.Settings.Save()
 
     End Sub
@@ -373,9 +382,7 @@ Module Init
     Public Sub Preload()
         ' Show splash screen
         Dim splashForm As New Preload()
-
-        splashForm.output.Visible = False
-
+        splashForm.output.Visible = True
         ' Load TopSolid information
         splashForm.path_label.Text = GetTopSolidPath()
 
@@ -402,5 +409,8 @@ Module Init
 
 
     End Sub
+
+
+
 
 End Module

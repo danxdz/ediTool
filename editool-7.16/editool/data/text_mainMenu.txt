@@ -1,31 +1,31 @@
-﻿Index;File;Parent;PT;FR;EN
-1;File;1;Ficheiro;Fichier;File
-2;Open;1;Abrir;Ouvrir;Open
-3;XML;2;XML;XML;XML@
-4;Excel ( model );2;Excel ( modelo );Excel ( modèle );Excel ( model )@
-5;TopSolid 6;2;TopSolid 6;TopSolid 6;TopSolid 6@
-6;Save;1;Guardar;Enregistrer;Save@
-7;Exit;1;Sair;Quitter;Exit@
-8;Tools;8;Ferramentas;Outils;Tools
-9;Mills;8;Fresas;Fraises;Mills
-10;End_Mill;9;Fresa de topo;Fraise 2 tailles;End Mill
-11;Toroidal_Mill;9;Fresa toroidal;Fraise toroïdale;Toroidal Mill
-12;Ball_Nose_Mill;9;Fresa esférica;Fraise sphérique;Ball Nose Mill
-13;Drilling;8;Furação;Perçage;Drilling
-14;Spotting_Drill;13;Broca de centragem;Foret à pointer;Spotting Drill
-15;Twist_Drill;13;Broca helicoidal;Foret hélicoïdal;Twist Drill
-16;Carbide_Twist_Drill;13;Broca helicoidal em metal duro;Foret carbure;Carbide Twist Drill
-17;Flat_Drill;13;Broca chata;Foret plat;Flat Drill
-18;Tarauds;8;Rosqueamento;Taraudage;Tapping
-19;Tap;18;Tarraxa;Taraud;Tap
-20;Thread Milling Cutter;18;Fresa para roscas;Fraise à fileter;Thread Milling Cutter
-21;Alesoirs;8;Alesagem;Alésage;Reaming
-22;Constant Reamer;21;Alesador de mandril fixo;Alésoir fixe;Constant Reamer
-23;Setup;23;Configuração;Configuration;Setup
-24;Library_source;23;Fonte da biblioteca;Source de bibliothèque;Library source
-25;Default;24;Predefinido;Défaut;Default#
-26;Editool;24;Editool;Editool;Editool#
-27;Add;24;Adicionar;Ajouter;Add@
-28;Destination_library;23;Biblioteca de destino;Bibliothèque de destination;Destination library
+﻿Index;File;Parent;EN;FR;PT
+1;file;1;File;Fichier;Ficheiro
+2;open;1;Open;Ouvrir;Abrir
+3;xml;2;XML;XML;XML@
+4;excel;2;Excel ( model );Excel ( modèle );Excel ( modelo )@
+5;topsolid;2;TopSolid 6;TopSolid 6;TopSolid 6@
+6;save;1;Save;Enregistrer;Guardar@
+7;exit;1;Exit;Quitter;Sair@
+8;tools;8;Tool;Outils;Ferramentas
+9;mills;8;Mills;Fraises;Fresas
+10;endMill;9;End Mill;Fraise 2 tailles;Fresa de topo@
+11;toroidalMill;9;Toroidal Mill;Fraise toroïdale;Fresa toroidal
+12;ballNoseMill;9;Ball Nose Mill;Fraise sphérique;Fresa esférica
+13;drilling;8;Drilling;Perçage;Furação
+14;spottingDrill;13;Spotting Drill;Foret à pointer;Broca de centragem
+15;twistDrill;13;Twist Drill;Foret hélicoïdal;Broca helicoidal
+16;carbideTwist_Drill;13;Carbide Twist Drill;Foret carbure;Broca helicoidal em metal duro
+17;flatDrill;13;Flat Drill;Foret plat;Broca chata
+18;tarauds;8;Tapping;Taraudage;Roscas
+19;tap;18;Tap;Taraud;Macho
+20;thread Milling Cutter;18;Thread Milling Cutter;Fraise à fileter;Fresa para roscas
+21;alesoirs;8;Reaming;Alésage;Alesagem
+22;constantReamer;21;Constant Reamer;Alésoir fixe;Alesador de mandril fixo
+23;setup;23;Setup;Configuration;Configuração
+24;librarySource;23;Library source;Source de bibliothèque;Fonte da biblioteca
+25;default;24;Default;Défaut;Predefinido#
+26;ediTool;24;EdiTool;EdiTool;EdiTool#
+27;addLibrarySource;24;Add;Ajouter;Adicionar@
+28;destination_library;23;Destination library;Bibliothèque de destination;Biblioteca de destino
 29;{customToolLib};28;{customToolLib};{customToolLib};{customToolLib}#
-30;Add;28;Adicionar;Ajouter;Add@
+30;addDestination_library;28;Add;Ajouter;Adicionar@

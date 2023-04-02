@@ -22,8 +22,6 @@ Public Class Main
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        'api.Initialize()
-
         Init.Preload()
 
         'First time load - check tool lib to save new tools
@@ -41,8 +39,8 @@ Public Class Main
         If language = "" Then
             language = "en"
         End If
-        FillMainMenu(language)
 
+        FillMainMenu(language)
         FillUI(language)
 
 

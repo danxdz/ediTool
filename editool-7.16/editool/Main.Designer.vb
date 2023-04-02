@@ -193,7 +193,7 @@ Partial Class Main
         Me.alpha.BackColor = System.Drawing.Color.LightGray
         Me.alpha.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.alpha.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.alpha.Location = New System.Drawing.Point(91, 142)
+        Me.alpha.Location = New System.Drawing.Point(348, 92)
         Me.alpha.Margin = New System.Windows.Forms.Padding(10)
         Me.alpha.Name = "alpha"
         Me.alpha.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -207,7 +207,7 @@ Partial Class Main
         Me.NoTT.BackColor = System.Drawing.Color.LightGray
         Me.NoTT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.NoTT.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.NoTT.Location = New System.Drawing.Point(25, 142)
+        Me.NoTT.Location = New System.Drawing.Point(348, 63)
         Me.NoTT.Margin = New System.Windows.Forms.Padding(10)
         Me.NoTT.Name = "NoTT"
         Me.NoTT.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -310,7 +310,7 @@ Partial Class Main
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(132, 149)
+        Me.Label7.Location = New System.Drawing.Point(393, 109)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(13, 13)
         Me.Label7.TabIndex = 17
@@ -319,7 +319,7 @@ Partial Class Main
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(66, 149)
+        Me.Label8.Location = New System.Drawing.Point(393, 78)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(12, 13)
         Me.Label8.TabIndex = 18
@@ -361,19 +361,18 @@ Partial Class Main
         Me.Name_textbox.AccessibleName = "tthth"
         Me.Name_textbox.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolTip
         Me.Name_textbox.Enabled = False
-        Me.Name_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Name_textbox.Location = New System.Drawing.Point(27, 81)
+        Me.Name_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Name_textbox.Location = New System.Drawing.Point(11, 97)
         Me.Name_textbox.Name = "Name_textbox"
-        Me.Name_textbox.Size = New System.Drawing.Size(246, 26)
+        Me.Name_textbox.Size = New System.Drawing.Size(311, 31)
         Me.Name_textbox.TabIndex = 27
-        Me.Name_textbox.Text = "123"
         '
         'Chf_textbox
         '
         Me.Chf_textbox.BackColor = System.Drawing.Color.LightGray
         Me.Chf_textbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Chf_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Chf_textbox.Location = New System.Drawing.Point(158, 142)
+        Me.Chf_textbox.Location = New System.Drawing.Point(348, 121)
         Me.Chf_textbox.Margin = New System.Windows.Forms.Padding(10)
         Me.Chf_textbox.Name = "Chf_textbox"
         Me.Chf_textbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -385,7 +384,7 @@ Partial Class Main
         'menu_2
         '
         Me.menu_2.AutoSize = True
-        Me.menu_2.Location = New System.Drawing.Point(155, 127)
+        Me.menu_2.Location = New System.Drawing.Point(393, 128)
         Me.menu_2.Name = "menu_2"
         Me.menu_2.Size = New System.Drawing.Size(35, 13)
         Me.menu_2.TabIndex = 29
@@ -424,7 +423,7 @@ Partial Class Main
         'menu_3
         '
         Me.menu_3.AutoSize = True
-        Me.menu_3.Location = New System.Drawing.Point(88, 126)
+        Me.menu_3.Location = New System.Drawing.Point(393, 96)
         Me.menu_3.Name = "menu_3"
         Me.menu_3.Size = New System.Drawing.Size(35, 13)
         Me.menu_3.TabIndex = 33
@@ -433,7 +432,7 @@ Partial Class Main
         'menu_4
         '
         Me.menu_4.AutoSize = True
-        Me.menu_4.Location = New System.Drawing.Point(24, 126)
+        Me.menu_4.Location = New System.Drawing.Point(393, 63)
         Me.menu_4.Name = "menu_4"
         Me.menu_4.Size = New System.Drawing.Size(35, 13)
         Me.menu_4.TabIndex = 34
@@ -442,7 +441,7 @@ Partial Class Main
         'menu_1
         '
         Me.menu_1.AutoSize = True
-        Me.menu_1.Location = New System.Drawing.Point(29, 64)
+        Me.menu_1.Location = New System.Drawing.Point(8, 72)
         Me.menu_1.Name = "menu_1"
         Me.menu_1.Size = New System.Drawing.Size(35, 13)
         Me.menu_1.TabIndex = 35
@@ -469,7 +468,7 @@ Partial Class Main
         'ForceName_checkBox
         '
         Me.ForceName_checkBox.AutoSize = True
-        Me.ForceName_checkBox.Location = New System.Drawing.Point(280, 66)
+        Me.ForceName_checkBox.Location = New System.Drawing.Point(92, 152)
         Me.ForceName_checkBox.Name = "ForceName_checkBox"
         Me.ForceName_checkBox.Size = New System.Drawing.Size(54, 17)
         Me.ForceName_checkBox.TabIndex = 42
@@ -477,7 +476,7 @@ Partial Class Main
         '
         'DefineName_Bt
         '
-        Me.DefineName_Bt.Location = New System.Drawing.Point(278, 88)
+        Me.DefineName_Bt.Location = New System.Drawing.Point(11, 148)
         Me.DefineName_Bt.Name = "DefineName_Bt"
         Me.DefineName_Bt.Size = New System.Drawing.Size(75, 23)
         Me.DefineName_Bt.TabIndex = 45
@@ -510,6 +509,8 @@ Partial Class Main
         '
         Me.AutoOpen_checkBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.AutoOpen_checkBox.AutoSize = True
+        Me.AutoOpen_checkBox.Checked = True
+        Me.AutoOpen_checkBox.CheckState = System.Windows.Forms.CheckState.Checked
         Me.AutoOpen_checkBox.Location = New System.Drawing.Point(801, 550)
         Me.AutoOpen_checkBox.Name = "AutoOpen_checkBox"
         Me.AutoOpen_checkBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -640,7 +641,7 @@ Partial Class Main
         Me.A_TextBox.BackColor = System.Drawing.Color.LightGray
         Me.A_TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.A_TextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.A_TextBox.Location = New System.Drawing.Point(194, 142)
+        Me.A_TextBox.Location = New System.Drawing.Point(348, 152)
         Me.A_TextBox.Margin = New System.Windows.Forms.Padding(10)
         Me.A_TextBox.Name = "A_TextBox"
         Me.A_TextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -768,6 +769,8 @@ Partial Class Main
         '
         Me.AutoCheckIn_checkBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.AutoCheckIn_checkBox.AutoSize = True
+        Me.AutoCheckIn_checkBox.Checked = True
+        Me.AutoCheckIn_checkBox.CheckState = System.Windows.Forms.CheckState.Checked
         Me.AutoCheckIn_checkBox.Location = New System.Drawing.Point(801, 577)
         Me.AutoCheckIn_checkBox.Name = "AutoCheckIn_checkBox"
         Me.AutoCheckIn_checkBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes

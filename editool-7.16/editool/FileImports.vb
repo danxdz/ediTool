@@ -6,24 +6,19 @@ Imports editool.Tools
 Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Excel
 
-
 Module FileImports
 
     Dim StartLoadTimer As Date
     Dim EndLoadTimer As Date
-
 
     ' CREATE EXCEL OBJECTS.
     Dim xlApp As Excel.Application
     Dim xlWorkBook As Excel.Workbook
     Dim xlWorkSheet As Excel.Worksheet
 
-
-
     Public Function Fill_newTool(d1 As String, d2 As String, d3 As String, l1 As String, l2 As String, l3 As String, nott As String, type As String, groupeMat As String,
                             Rbout As String, chanfrein As String, coupeCentre As String, arrCentre As String, typeTar As String, pasTar As String, manuf As String,
                             manufRef As String, manufRefSec As String, code As String, codeBar As String)
-
         Dim newtool As New NewTool
 
         With newtool
@@ -54,9 +49,7 @@ Module FileImports
             .CodeBar = codeBar
         End With
         Return newtool
-
     End Function
-
 
     Private Sub Fill_HM_XML(name As String, val As String)
         Select Case name
@@ -136,7 +129,6 @@ Module FileImports
                         newTool.D1 = val
                         newTool.D2 = val - 0.2
 
-
                     Case "taperHeight"
                         Main.CTS_AL_textbox.Text = val
                         If val <> 0 Then
@@ -152,6 +144,8 @@ Module FileImports
                     Case "cornerRadius"
                         Main.Chf_textbox.Text = val
 
+                    Case "cuttingMaterial"
+                        newTool.Type = val
 
                 End Select
             ElseIf (reader.Name = "tecsets") Then
@@ -167,8 +161,6 @@ Module FileImports
             End If
         End While
 
-
-        ' End While
         Refresh_outil(newTool)
 
     End Sub
@@ -304,8 +296,6 @@ Module FileImports
 
         Next
 
-
-
         xlWorkBook.Close() : xlApp.Quit()
 
         ' CLEAN UP. (CLOSE INSTANCES OF EXCEL OBJECTS.)
@@ -313,11 +303,7 @@ Module FileImports
         System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkBook) : xlWorkBook = Nothing
         System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkSheet) : xlWorkSheet = Nothing
 
-
     End Sub
-
-
-
 
     Private Function IsInt(val As Integer)
         If Integer.TryParse(val, Nothing) Then
@@ -337,8 +323,6 @@ Module FileImports
         Dim type, name, d1, d2, d3, l1, l2, l3, NoTT As String
 
         type = line(0)
-
-
 
         Select Case type
             Case "FR"
@@ -368,9 +352,7 @@ Module FileImports
 
         Main.Name_textbox.Text = name
 
-
         d1 = Replace(line(8), "Tool.Diam=", "")
-
         l1 = Replace(line(9), "Tool.UtilLength=", "")
         d2 = Replace(line(12), "Tool.DiamPoky=", "")
         l2 = Replace(line(10), "Tool.ZProg=", "")
@@ -390,11 +372,6 @@ Module FileImports
         newTool.NoTT = Replace(line(17), "Tool.NbCogs=", "")
 
     End Sub
-
-
-
-
-
 
     Private Sub Webtocsv(ByVal sender As Object, ByVal e As WebBrowserDocumentCompletedEventArgs)
 
@@ -452,7 +429,6 @@ Module FileImports
                     'Get all tools
                     If tblcols.Item(1).InnerHtml = toolTypeFilter Then   ' Or 1 = 1 Then
                         'ListBox1.Items.Add(tblcols.Item(2).InnerHtml & " - " & tblcols.Item(3).InnerHtml & " - " & tblcols.Item(4).InnerHtml & " - " & tblcols.Item(8).InnerHtml)
-
 
                         Preload.ToolCount()
 
@@ -525,9 +501,6 @@ Module FileImports
             Dim toolTypes As List(Of String) = ToolList.GetToolsTypes(.toolsList)
             .NewToolDataGridView.DataSource = DataTableOrderTools
 
-
-
-
             filterD1 = filterD1.OrderBy(Function(x) x).ToList()
             With .filterD1_Combobox
                 .DataSource = filterD1
@@ -545,8 +518,6 @@ Module FileImports
 
             .timer_label.Text = DateDiff(DateInterval.Second, StartLoadTimer, EndLoadTimer)
         End With
-
-
 
     End Sub
 
@@ -600,7 +571,5 @@ Module FileImports
             Console.WriteLine("web: ", web)
         End Try
     End Sub
-
-
 
 End Module
