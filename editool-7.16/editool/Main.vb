@@ -29,7 +29,7 @@ Public Class Main
 
 
         'First time load - check tool lib to save new tools
-        Dim customToolLib = My.Settings.destinationLibrary
+        Dim customToolLib As String = My.Settings.destinationLibrary
         'if not defined as for ne one
         If customToolLib = "" Then
 
@@ -95,18 +95,26 @@ Public Class Main
         End If
     End Sub
     Private Sub ValidateBt_Click_1(sender As Object, e As EventArgs) Handles ValidateBt.Click
+        If NewToolDataGridView.CurrentRow Is Nothing Then
 
-        Dim i As Integer = NewToolDataGridView.CurrentRow().Index
-
-        Dim newTool As NewTool
-
-        If filteredTools.count > 0 Then
-            newTool = filteredTools(i)
         Else
-            newTool = toolsList.Tool(i)
+            Dim i As Integer = NewToolDataGridView.CurrentRow().Index
+
+            Dim newTool As NewTool
+            If filteredTools Is Nothing Then
+
+                If filteredTools.count > 0 Then
+                    newTool = filteredTools(i)
+                Else
+                    newTool = toolsList.Tool(i)
+                End If
+
+                Create_outil(newTool)
+
+            End If
         End If
 
-        Create_outil(newTool)
+
 
         'REG CREATED TOOLS
         'Dim file_reader As IO.StreamReader

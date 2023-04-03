@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F9356AE8-14E8-41A8-B0DB-D85E366E02F1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>editool.My.MyApplication</StartupObject>
-    <RootNamespace>editool</RootNamespace>
+    <StartupObject>EdiTool.My.MyApplication</StartupObject>
+    <RootNamespace>EdiTool</RootNamespace>
     <AssemblyName>editool</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>

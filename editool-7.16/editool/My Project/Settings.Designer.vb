@@ -200,7 +200,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("EdiTool")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
         Public Property destinationLibrary() As String
             Get
                 Return CType(Me("destinationLibrary"),String)
@@ -212,7 +212,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("EdiTool")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
         Public Property sourceLibrary() As String
             Get
                 Return CType(Me("sourceLibrary"),String)
@@ -232,9 +232,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.editool.My.MySettings
+        Friend ReadOnly Property Settings() As Global.EdiTool.My.MySettings
             Get
-                Return Global.editool.My.MySettings.Default
+                Return Global.EdiTool.My.MySettings.Default
             End Get
         End Property
     End Module

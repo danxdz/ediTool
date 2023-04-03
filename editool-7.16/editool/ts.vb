@@ -202,8 +202,8 @@ Module ts
 
     ReadOnly keyPath As String = "SOFTWARE\TOPSOLID\TopSolid'Cam"
 
-    'Function to get the last subkey of a given key
-    Private Function GetLastSubKey()
+    'Function to get the last subkey of a given key from registry
+    Public Function GetVersion()
 
         Dim subKeys() As String = Registry.LocalMachine.OpenSubKey(keyPath).GetSubKeyNames()
 
@@ -214,31 +214,20 @@ Module ts
         End If
     End Function
 
-    'Function to get the TopSolid path
     Public Function GetTopSolidPath() As String
 
-        Dim subKey As String = GetLastSubKey()
+        Dim topSolidVersion As String = GetVersion()
 
-        If Not String.IsNullOrEmpty(subKey) Then
-            Dim path As String = Registry.GetValue("HKEY_LOCAL_MACHINE\" & keyPath & "\" & subKey, "InstallDir", "")
+
+        'Get TS installation path
+        If Not String.IsNullOrEmpty(topSolidVersion) Then
+            Dim path As String = Registry.GetValue("HKEY_LOCAL_MACHINE\" & keyPath & "\" & topSolidVersion, "InstallDir", "")
             Return path
         Else
             Return "TS path not found"
         End If
+
     End Function
-
-    'Function to get the TopSolid version
-    Public Function GetTopSolidVersion() As String
-        Dim subKey As String = GetLastSubKey()
-
-        If Not String.IsNullOrEmpty(subKey) Then
-            Dim version As String = Registry.GetValue("HKEY_LOCAL_MACHINE\" & keyPath & "\" & subKey, "Version", "")
-            Return version
-        Else
-            Return "no TS version founded"
-        End If
-    End Function
-
 
 
     Public Sub Create_outil(newTool As NewTool)

@@ -2,7 +2,6 @@
 Imports System.IO
 Imports System.Text.RegularExpressions
 Imports editool.My
-
 Module Init
 
     Dim DataTable_buffer As DataTable
@@ -347,6 +346,9 @@ Module Init
 
 
         Select Case sender.Name
+            Case "exit"
+                Main.Close()
+
             Case "xml"
                 OpenXmlFile()
             Case "OtherFunction"
@@ -383,15 +385,18 @@ Module Init
         ' Show splash screen
         Dim splashForm As New Preload()
         splashForm.output.Visible = True
+
         ' Load TopSolid information
-        splashForm.path_label.Text = GetTopSolidPath()
+        Dim topSolidVersion As String = GetVersion()
 
-        Dim topSolidVersion As String = GetTopSolidVersion()
-
-
-        splashForm.version_label.Text = topSolidVersion
-
-
+        If Not String.IsNullOrEmpty(topSolidVersion) Then
+            splashForm.path_label.Text = GetTopSolidPath(topSolidVersion)
+            splashForm.version_label.Text = topSolidVersion
+            splashForm.output.Text = "libs loaded"
+            splashForm.output.Visible = True
+        Else
+            splashForm.path_label.Text = "TS path not found"
+        End If
 
         ' Add event handler for click on splash screen
         AddHandler splashForm.Click, Sub(sender, e)
@@ -399,9 +404,6 @@ Module Init
                                          splashForm.Close()
                                          Main.Show()
                                      End Sub
-
-        splashForm.output.Text = "libs loaded"
-        splashForm.output.Visible = True
 
         ' Show splash screen
         splashForm.ShowDialog()

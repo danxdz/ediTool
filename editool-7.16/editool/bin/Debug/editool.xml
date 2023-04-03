@@ -6,28 +6,28 @@ editool
 </name>
 </assembly>
 <members>
-<member name="T:editool.My.Resources.Resources">
+<member name="T:EdiTool.My.Resources.Resources">
 <summary>
   Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
 </summary>
 </member>
-<member name="P:editool.My.Resources.Resources.ResourceManager">
+<member name="P:EdiTool.My.Resources.Resources.ResourceManager">
 <summary>
   Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
 </summary>
 </member>
-<member name="P:editool.My.Resources.Resources.Culture">
+<member name="P:EdiTool.My.Resources.Resources.Culture">
 <summary>
   Remplace la propriété CurrentUICulture du thread actuel pour toutes
   les recherches de ressources à l'aide de cette classe de ressource fortement typée.
 </summary>
 </member>
-<member name="P:editool.My.Resources.Resources.customLibraryData">
+<member name="P:EdiTool.My.Resources.Resources.customLibraryData">
 <summary>
   Recherche une chaîne localisée semblable à .
 </summary>
 </member>
-<member name="P:editool.My.Resources.Resources.outils">
+<member name="P:EdiTool.My.Resources.Resources.outils">
 <summary>
   Recherche une chaîne localisée semblable à 15232120;1.5;6;0;38;3;0;11.5;3
 15232140;2;6;0;38;3;0;11;3
@@ -49,7 +49,7 @@ editool
 1552045 [le reste de la chaîne a été tronqué]&quot;;.
 </summary>
 </member>
-<member name="P:editool.My.Resources.Resources.reg">
+<member name="P:EdiTool.My.Resources.Resources.reg">
 <summary>
   Recherche une chaîne localisée semblable à FR Ø8 3z Lc9
 FR Ø10 2z Lc22 Lu31
@@ -58,7 +58,7 @@ FR Ø4 2z Lc11 Lu16
 .
 </summary>
 </member>
-<member name="P:editool.My.Resources.Resources.textMainMenu">
+<member name="P:EdiTool.My.Resources.Resources.textMainMenu">
 <summary>
   Recherche une chaîne localisée semblable à Index;File;Parent;EN;FR;PT
 1;file;1;File;Fichier;Ficheiro
@@ -75,7 +75,7 @@ FR Ø4 2z Lc11 Lu16
 12;ballNoseMill;9;Ball Nose Mill;Fraise  [le reste de la chaîne a été tronqué]&quot;;.
 </summary>
 </member>
-<member name="P:editool.My.Resources.Resources.textUI">
+<member name="P:EdiTool.My.Resources.Resources.textUI">
 <summary>
   Recherche une chaîne localisée semblable à ID;Key;en;fr;pt
 1;toolName;Tool Name;Nom de l&apos;outil;Nome da ferramenta
@@ -89,7 +89,7 @@ FR Ø4 2z Lc11 Lu16
 9;clearanceLength;Clearance Length;Longueur  [le reste de la chaîne a été tronqué]&quot;;.
 </summary>
 </member>
-<member name="P:editool.My.Resources.Resources.tooltypes">
+<member name="P:EdiTool.My.Resources.Resources.tooltypes">
 <summary>
   Recherche une chaîne localisée semblable à FR2T Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]
 FRTO Ø[D] r[r] [NoTT]z Lc[L] Lu[CTS_AL]
