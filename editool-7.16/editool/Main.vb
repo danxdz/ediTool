@@ -23,14 +23,20 @@ Public Class Main
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Init.Preload()
+        'Clean settings
+        'My.Settings.destinationLibrary = ""
+        'My.Settings.Save()
+
 
         'First time load - check tool lib to save new tools
-        Dim customToolLib = My.Settings.customToolLib
+        Dim customToolLib = My.Settings.destinationLibrary
         'if not defined as for ne one
         If customToolLib = "" Then
+
             Dim libName As String = InputBox("custom lib name", "Custom Tools", "Tool Lib")
-            My.Settings.customToolLib = libName
+            My.Settings.destinationLibrary = libName
             My.Settings.Save()
+
         End If
 
         'Set lang settings and label text

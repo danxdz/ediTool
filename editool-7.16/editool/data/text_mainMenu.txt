@@ -22,10 +22,10 @@
 21;alesoirs;8;Reaming;Alésage;Alesagem
 22;constantReamer;21;Constant Reamer;Alésoir fixe;Alesador de mandril fixo
 23;setup;23;Setup;Configuration;Configuração
-24;librarySource;23;Library source;Source de bibliothèque;Fonte da biblioteca
+24;sourceLibrary;23;Library source;Source de bibliothèque;Fonte da biblioteca
 25;default;24;Default;Défaut;Predefinido#
 26;ediTool;24;EdiTool;EdiTool;EdiTool#
 27;addLibrarySource;24;Add;Ajouter;Adicionar@
-28;destination_library;23;Destination library;Bibliothèque de destination;Biblioteca de destino
-29;{customToolLib};28;{customToolLib};{customToolLib};{customToolLib}#
-30;addDestination_library;28;Add;Ajouter;Adicionar@
+28;destinationLibrary;23;Destination library;Bibliothèque de destination;Biblioteca de destino
+29;{destinationLibrary};28;{destinationLibrary};{destinationLibrary};{destinationLibrary}#
+30;addDestinationLibrary;28;Add;Ajouter;Adicionar@

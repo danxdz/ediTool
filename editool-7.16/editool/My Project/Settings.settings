@@ -38,10 +38,10 @@
     <Setting Name="toolLib" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="customToolLib" Type="System.String" Scope="User">
+    <Setting Name="destinationLibrary" Type="System.String" Scope="User">
       <Value Profile="(Default)">EdiTool</Value>
     </Setting>
-    <Setting Name="librarySource" Type="System.String" Scope="User">
+    <Setting Name="sourceLibrary" Type="System.String" Scope="User">
       <Value Profile="(Default)">EdiTool</Value>
     </Setting>
   </Settings>

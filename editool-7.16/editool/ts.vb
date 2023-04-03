@@ -77,17 +77,17 @@ Module ts
             If lib_models IsNot Nothing Then
                 Try
                     'Check if custom tool lib exists, or create it
-                    Dim customToolsProjectName = My.Settings.customToolLib
+                    Dim customToolsProjectName = My.Settings.destinationLibrary
                     Dim outputProject = If(TopSolidExt.Pdm.SearchProjectByName(customToolsProjectName)(0), TopSolidExt.Pdm.CreateProject(customToolsProjectName, True))
 
-                    ' código aqui para lidar com o caso em que lib_models é uma lista com mais de um elemento
                     ' Open the first object in the list
                     TopSolidExt.Pdm.OpenProject(lib_models(0))
-                        model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models(0), model)
-                        model_fr_id.RemoveRange(1, model_fr_id.Count - 1)
-                        ' Appeler la méthode CopySeveral avec la liste de PdmObjectId
-                        temp_model = TopSolidExt.Pdm.CopySeveral(model_fr_id, outputProject)
-
+                    model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models(0), model)
+                    model_fr_id.RemoveRange(1, model_fr_id.Count - 1)
+                    'Call CopySeveral so we can copy read only files
+                    temp_model = TopSolidExt.Pdm.CopySeveral(model_fr_id, outputProject)
+                    ' Return the temporary model document ID
+                    Return temp_model
 
                 Catch ex As Exception
                     ' If the model was not found, display an error message
@@ -112,9 +112,7 @@ Module ts
                 ' If the library was not found, display an error message
                 MsgBox("cant find output lib")
             End If
-
-            ' Return the temporary model document ID
-            Return temp_model
+            Return "error:  cant copy tool"
         End Function
 
         Private Function GetSelectedMenuItem() As ToolStripMenuItem
@@ -147,15 +145,15 @@ Module ts
 
             ' OpenProject
             If Main.MenuStrip1.Items.Count > 0 Then
-                Dim toolLib = My.Settings.librarySource
-                If toolLib = "Default" Then
+                Dim toolLib = My.Settings.sourceLibrary
+                If toolLib = "default" Then
                     PdmObjectIdType = TopSolidExt.Pdm.SearchProjectByName("TopSolid Machining User Tools")
                 Else
                     PdmObjectIdType = TopSolidExt.Pdm.SearchProjectByName(toolLib)
                 End If
             End If
 
-            Return PdmObjectIdType
+                Return PdmObjectIdType
 
         End Function
         Private Function GetTsDLL() As Assembly
@@ -322,7 +320,7 @@ Module ts
 
 
             If Main.AutoCheckIn_checkBox.Checked = True Then
-                Dim customToolProject = My.Settings.customToolLib
+                Dim customToolProject = My.Settings.destinationLibrary
                 api.TopSolidExt.Pdm.CheckIn(api.TopSolidExt.Pdm.SearchDocumentByName(
             api.TopSolidExt.Pdm.SearchProjectByName(customToolProject)(0),
             api.TopSolidExt.Documents.GetName(tmp))(0), True)

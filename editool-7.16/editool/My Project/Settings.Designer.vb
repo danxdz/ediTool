@@ -201,24 +201,24 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("EdiTool")>  _
-        Public Property customToolLib() As String
+        Public Property destinationLibrary() As String
             Get
-                Return CType(Me("customToolLib"),String)
+                Return CType(Me("destinationLibrary"),String)
             End Get
             Set
-                Me("customToolLib") = value
+                Me("destinationLibrary") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("EdiTool")>  _
-        Public Property librarySource() As String
+        Public Property sourceLibrary() As String
             Get
-                Return CType(Me("librarySource"),String)
+                Return CType(Me("sourceLibrary"),String)
             End Get
             Set
-                Me("librarySource") = value
+                Me("sourceLibrary") = value
             End Set
         End Property
     End Class
