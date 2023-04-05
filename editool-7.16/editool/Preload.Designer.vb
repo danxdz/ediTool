@@ -28,17 +28,15 @@ Partial Class Preload
         Me.Version = New System.Windows.Forms.Label()
         Me.ApplicationTitle = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.version_label = New System.Windows.Forms.Label()
-        Me.path_label = New System.Windows.Forms.Label()
-        Me.output = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.toolCountLabel = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.output = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.version_label = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.path_label = New System.Windows.Forms.Label()
         Me.MainLayoutPanel.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'MainLayoutPanel
@@ -49,20 +47,17 @@ Partial Class Preload
         Me.MainLayoutPanel.AutoSize = True
         Me.MainLayoutPanel.BackColor = System.Drawing.SystemColors.Control
         Me.MainLayoutPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.MainLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
-        Me.MainLayoutPanel.ColumnCount = 3
+        Me.MainLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Outset
+        Me.MainLayoutPanel.ColumnCount = 1
         Me.MainLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 635.0!))
         Me.MainLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250.0!))
         Me.MainLayoutPanel.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 8.0!))
-        Me.MainLayoutPanel.Controls.Add(Me.Version, 2, 0)
-        Me.MainLayoutPanel.Controls.Add(Me.ApplicationTitle, 1, 0)
         Me.MainLayoutPanel.Controls.Add(Me.Panel1, 0, 0)
-        Me.MainLayoutPanel.Controls.Add(Me.Panel2, 0, 1)
         Me.MainLayoutPanel.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize
         Me.MainLayoutPanel.ImeMode = System.Windows.Forms.ImeMode.[On]
         Me.MainLayoutPanel.Location = New System.Drawing.Point(0, 0)
         Me.MainLayoutPanel.Name = "MainLayoutPanel"
-        Me.MainLayoutPanel.RowCount = 2
+        Me.MainLayoutPanel.RowCount = 1
         Me.MainLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 334.0!))
         Me.MainLayoutPanel.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8.0!))
         Me.MainLayoutPanel.Size = New System.Drawing.Size(970, 386)
@@ -73,9 +68,9 @@ Partial Class Preload
         Me.Version.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Version.BackColor = System.Drawing.Color.Transparent
         Me.Version.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Version.Location = New System.Drawing.Point(891, 1)
+        Me.Version.Location = New System.Drawing.Point(882, 357)
         Me.Version.Name = "Version"
-        Me.Version.Size = New System.Drawing.Size(75, 334)
+        Me.Version.Size = New System.Drawing.Size(75, 15)
         Me.Version.TabIndex = 1
         Me.Version.Text = "v. {0}.{1:00}"
         Me.Version.TextAlign = System.Drawing.ContentAlignment.BottomLeft
@@ -85,116 +80,111 @@ Partial Class Preload
         Me.ApplicationTitle.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.ApplicationTitle.BackColor = System.Drawing.Color.Transparent
         Me.ApplicationTitle.Font = New System.Drawing.Font("Impact", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ApplicationTitle.Location = New System.Drawing.Point(640, 1)
+        Me.ApplicationTitle.Location = New System.Drawing.Point(709, 248)
         Me.ApplicationTitle.Name = "ApplicationTitle"
-        Me.ApplicationTitle.Size = New System.Drawing.Size(244, 334)
+        Me.ApplicationTitle.Size = New System.Drawing.Size(244, 61)
         Me.ApplicationTitle.TabIndex = 0
         Me.ApplicationTitle.Text = "EdiTool"
         Me.ApplicationTitle.TextAlign = System.Drawing.ContentAlignment.BottomRight
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.version_label)
-        Me.Panel1.Controls.Add(Me.path_label)
+        Me.Panel1.Controls.Add(Me.Label4)
+        Me.Panel1.Controls.Add(Me.Version)
+        Me.Panel1.Controls.Add(Me.toolCountLabel)
+        Me.Panel1.Controls.Add(Me.ApplicationTitle)
         Me.Panel1.Controls.Add(Me.output)
-        Me.Panel1.Location = New System.Drawing.Point(4, 4)
+        Me.Panel1.Controls.Add(Me.Label3)
+        Me.Panel1.Controls.Add(Me.path_label)
+        Me.Panel1.Location = New System.Drawing.Point(5, 5)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(629, 328)
+        Me.Panel1.Size = New System.Drawing.Size(960, 376)
         Me.Panel1.TabIndex = 3
-        '
-        'version_label
-        '
-        Me.version_label.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.version_label.BackColor = System.Drawing.Color.Transparent
-        Me.version_label.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.version_label.Location = New System.Drawing.Point(9, 256)
-        Me.version_label.Name = "version_label"
-        Me.version_label.Size = New System.Drawing.Size(623, 41)
-        Me.version_label.TabIndex = 4
-        Me.version_label.Text = "version"
-        Me.version_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'path_label
-        '
-        Me.path_label.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.path_label.BackColor = System.Drawing.Color.Transparent
-        Me.path_label.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.path_label.Location = New System.Drawing.Point(9, 219)
-        Me.path_label.Name = "path_label"
-        Me.path_label.Size = New System.Drawing.Size(620, 37)
-        Me.path_label.TabIndex = 3
-        Me.path_label.Text = "path"
-        Me.path_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'output
-        '
-        Me.output.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.output.BackColor = System.Drawing.Color.Transparent
-        Me.output.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.output.Location = New System.Drawing.Point(208, 130)
-        Me.output.Name = "output"
-        Me.output.Size = New System.Drawing.Size(163, 40)
-        Me.output.TabIndex = 2
-        Me.output.Text = "searching"
-        Me.output.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.toolCountLabel)
-        Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Controls.Add(Me.Label2)
-        Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Location = New System.Drawing.Point(4, 339)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(629, 43)
-        Me.Panel2.TabIndex = 60
         '
         'toolCountLabel
         '
         Me.toolCountLabel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.toolCountLabel.AutoSize = True
         Me.toolCountLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.toolCountLabel.Location = New System.Drawing.Point(80, 11)
+        Me.toolCountLabel.Location = New System.Drawing.Point(178, 311)
         Me.toolCountLabel.Name = "toolCountLabel"
         Me.toolCountLabel.Size = New System.Drawing.Size(24, 25)
         Me.toolCountLabel.TabIndex = 60
         Me.toolCountLabel.Text = "0"
         '
-        'Label1
+        'output
         '
-        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(9, 113)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(623, 41)
-        Me.Label1.TabIndex = 4
-        Me.Label1.Text = "version"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label2
-        '
-        Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(9, 76)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(620, 37)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "path"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.output.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.output.BackColor = System.Drawing.Color.Transparent
+        Me.output.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.output.Location = New System.Drawing.Point(7, 318)
+        Me.output.Name = "output"
+        Me.output.Size = New System.Drawing.Size(94, 16)
+        Me.output.TabIndex = 2
+        Me.output.Text = "searching"
+        Me.output.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label3
         '
         Me.Label3.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label3.BackColor = System.Drawing.Color.Transparent
         Me.Label3.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(9, 4)
+        Me.Label3.Location = New System.Drawing.Point(107, 306)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(65, 40)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "tools"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label5
+        '
+        Me.Label5.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Label5.BackColor = System.Drawing.Color.Transparent
+        Me.Label5.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(124, 351)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(313, 21)
+        Me.Label5.TabIndex = 62
+        Me.Label5.Text = "@ path :"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'version_label
+        '
+        Me.version_label.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.version_label.BackColor = System.Drawing.Color.Transparent
+        Me.version_label.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.version_label.Location = New System.Drawing.Point(32, 351)
+        Me.version_label.Name = "version_label"
+        Me.version_label.Size = New System.Drawing.Size(323, 21)
+        Me.version_label.TabIndex = 4
+        Me.version_label.Text = "not found"
+        Me.version_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label4
+        '
+        Me.Label4.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Label4.BackColor = System.Drawing.Color.Transparent
+        Me.Label4.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(7, 351)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(263, 21)
+        Me.Label4.TabIndex = 61
+        Me.Label4.Text = "v. "
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'path_label
+        '
+        Me.path_label.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.path_label.BackColor = System.Drawing.Color.Transparent
+        Me.path_label.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.path_label.Location = New System.Drawing.Point(206, 351)
+        Me.path_label.Name = "path_label"
+        Me.path_label.Size = New System.Drawing.Size(647, 21)
+        Me.path_label.TabIndex = 3
+        Me.path_label.Text = "not found"
+        Me.path_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Preload
         '
@@ -211,8 +201,7 @@ Partial Class Preload
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.MainLayoutPanel.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -223,9 +212,8 @@ Partial Class Preload
     Friend WithEvents Panel1 As Panel
     Friend WithEvents path_label As Label
     Friend WithEvents version_label As Label
-    Friend WithEvents Panel2 As Panel
     Friend WithEvents toolCountLabel As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
 End Class

@@ -214,10 +214,9 @@ Module ts
         End If
     End Function
 
-    Public Function GetTopSolidPath() As String
+    Public Function GetTopSolidPath()
 
         Dim topSolidVersion As String = GetVersion()
-
 
         'Get TS installation path
         If Not String.IsNullOrEmpty(topSolidVersion) Then

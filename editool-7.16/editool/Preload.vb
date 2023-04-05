@@ -30,6 +30,21 @@
         'Informations de copyright
         'Copyright.Text = My.Application.Info.Copyright
 
+        ' Load TopSolid information
+        Dim topSolidVersion As String = GetVersion()
+        Dim topSolidPath As String = GetTopSolidPath()
+
+        If Not String.IsNullOrEmpty(topSolidPath) Then
+            path_label.Text = topSolidPath
+            version_label.Text = topSolidVersion
+            output.Text = "libs loaded"
+            output.Visible = True
+        Else
+            path_label.Text = "TS path not found"
+        End If
+
+
+
     End Sub
     Public Sub ToolCount()
         If toolCountLabel.InvokeRequired Then
@@ -60,4 +75,5 @@
         'FileImports.GetOrderTools()
         'ToolCount()
     End Sub
+
 End Class

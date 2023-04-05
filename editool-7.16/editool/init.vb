@@ -386,17 +386,7 @@ Module Init
         Dim splashForm As New Preload()
         splashForm.output.Visible = True
 
-        ' Load TopSolid information
-        Dim topSolidVersion As String = GetVersion()
 
-        If Not String.IsNullOrEmpty(topSolidVersion) Then
-            splashForm.path_label.Text = GetTopSolidPath(topSolidVersion)
-            splashForm.version_label.Text = topSolidVersion
-            splashForm.output.Text = "libs loaded"
-            splashForm.output.Visible = True
-        Else
-            splashForm.path_label.Text = "TS path not found"
-        End If
 
         ' Add event handler for click on splash screen
         AddHandler splashForm.Click, Sub(sender, e)

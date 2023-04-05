@@ -210,7 +210,7 @@ Module FileImports
 
         Dim openFileDialog1 As New OpenFileDialog With {
             .InitialDirectory = startPath,
-            .Filter = "XML files (*.xml)|*.xml;*.XML|Txt files (*.txt)|*.txt|CSV files (*.csv)|*.csv|Excel Files|*.xls;*.xlsx|All files (*.*)|*.*",
+            .Filter = "XML files (*.xml)|*.xml;*.XML|TXT files (*.txt)|*.txt|CSV files (*.csv)|*.csv|Excel Files|*.xls;*.xlsx|All files (*.*)|*.*",
             .FilterIndex = 1,
             .RestoreDirectory = True
         }
