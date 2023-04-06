@@ -1,6 +1,9 @@
 ﻿
 Option Explicit On
 Imports System.Text.RegularExpressions
+Imports System.Windows.Media.Media3D
+Imports System.Windows.Controls
+
 
 Public Class Main
 
@@ -20,12 +23,15 @@ Public Class Main
     ReadOnly api As New TopSolidAPI()
 
 
+
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Init.Preload()
+        'Debug **************************************************************
         'Clean settings
         'My.Settings.destinationLibrary = ""
         'My.Settings.Save()
+
 
 
         'First time load - check tool lib to save new tools
@@ -128,11 +134,10 @@ Public Class Main
         FillUI(sender.text)
     End Sub
 
-
-
     Private Sub DefineName_Bt_Click(sender As Object, e As EventArgs) Handles DefineName_Bt.Click
         ToolName_config.Show()
     End Sub
+
     Public Sub HandleToolButtonClick(sender As Object, e As EventArgs)
         Dim button As Button = DirectCast(sender, Button)
         Dim toolType As String = button.Tag
@@ -174,12 +179,7 @@ Public Class Main
         End If
     End Sub
 
-
-
-
-
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles XML_ToolStripButton.Click
-
         OpenXmlFile()
     End Sub
 
@@ -188,28 +188,33 @@ Public Class Main
     End Sub
 
     Private Sub A_TextBox_LostFocus(sender As Object, e As EventArgs) Handles A_TextBox.LostFocus
-
         Refresh_outil(newTool)
     End Sub
 
     Private Sub D_textbox_LostFocus(sender As Object, e As EventArgs)
         Refresh_outil(newTool)
     End Sub
+
     Private Sub L_textbox_LostFocus(sender As Object, e As EventArgs)
         Refresh_outil(newTool)
     End Sub
+
     Private Sub CTS_AL_textbox_LostFocus(sender As Object, e As EventArgs)
         Refresh_outil(newTool)
     End Sub
+
     Private Sub CTS_AD_textbox_LostFocus(sender As Object, e As EventArgs)
         Refresh_outil(newTool)
     End Sub
+
     Private Sub SD_textbox_LostFocus(sender As Object, e As EventArgs)
         Refresh_outil(newTool)
     End Sub
+
     Private Sub OL_textbox_LostFocus(sender As Object, e As EventArgs)
         Refresh_outil(newTool)
     End Sub
+
     Private Sub NoTT_LostFocus(sender As Object, e As EventArgs) Handles NoTT.LostFocus
         Refresh_outil(newTool)
     End Sub
@@ -218,12 +223,9 @@ Public Class Main
         Refresh_outil(newTool)
     End Sub
 
-
-
     Private Sub ORDERTOOLS_ToolStripButton_Click(sender As Object, e As EventArgs) Handles OrderTools_ToolStripButton.Click
         GetOrderTools()
     End Sub
-
 
     Private Sub NewToolDataGridView_MouseDown(sender As Object, e As MouseEventArgs) Handles NewToolDataGridView.MouseDown
         If e.Button = MouseButtons.Right Then
@@ -237,10 +239,7 @@ Public Class Main
         End If
     End Sub
 
-
-
     '**********************************
-
 
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
 
@@ -258,7 +257,6 @@ Public Class Main
         OL_textbox.Text = toolsList.Tool(i).L3
 
     End Sub
-
 
     'Private Sub NewToolDataGridView_CurrentCellChanged(sender As Object, e As EventArgs) Handles NewToolDataGridView.CurrentCellChanged
     '    Dim ds() As Windows.Forms.TextBox = {D_textbox, SD_textbox, CTS_AD_textbox, OL_textbox, L_textbox, CTS_AL_textbox, alpha, NoTT}
@@ -307,7 +305,6 @@ Public Class Main
                         OL_textbox.Text = toolsList.Tool(i).L3
                     End If
 
-
                     Refresh_outil(toolsList.Tool(i))
                 Catch ex As Exception
                     MsgBox("tool data error") 'TODO
@@ -322,7 +319,6 @@ Public Class Main
         OpenV6File()
     End Sub
 
-
     Private Sub Manuf_TextBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles manuf_comboBox.SelectedIndexChanged
         Set_filter()
     End Sub
@@ -330,8 +326,6 @@ Public Class Main
     Private Sub ManRef_TextBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles manref_TextBox.SelectedIndexChanged
         Set_filter()
     End Sub
-
-
 
     Public Sub Filters_ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles filterMat_ComboBox.SelectedIndexChanged, filterL1_ComboBox.SelectedIndexChanged, filterD1_Combobox.SelectedIndexChanged
         ' Get the selected item from the ComboBox
@@ -413,8 +407,6 @@ Public Class Main
         End If
     End Sub
 
-
-
     Function SetFilters(sender As Object)
         ' Get selected filter values
         Dim selD1 As Decimal = GetFilterValues(filterD1_Combobox)
@@ -490,8 +482,6 @@ Public Class Main
         End With
     End Sub
 
-
-
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         timer_label.Text += 1
     End Sub
@@ -514,5 +504,7 @@ Public Class Main
         Console.Write(sender)
     End Sub
 
+    Private Sub ToolStrip2_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStrip2.ItemClicked
 
+    End Sub
 End Class

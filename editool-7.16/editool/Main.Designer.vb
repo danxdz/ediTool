@@ -678,7 +678,7 @@ Partial Class Main
         Me.NewToolDataGridView.MultiSelect = False
         Me.NewToolDataGridView.Name = "NewToolDataGridView"
         Me.NewToolDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.NewToolDataGridView.Size = New System.Drawing.Size(992, 299)
+        Me.NewToolDataGridView.Size = New System.Drawing.Size(608, 299)
         Me.NewToolDataGridView.TabIndex = 61
         '
         'newToolMenu
