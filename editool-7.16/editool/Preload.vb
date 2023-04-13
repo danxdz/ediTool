@@ -72,8 +72,11 @@
     End Sub
 
     Private Sub Preload_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        'FileImports.GetOrderTools()
+        FileImports.GetOrderTools()
         'ToolCount()
     End Sub
 
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
 End Class

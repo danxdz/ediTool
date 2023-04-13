@@ -92,7 +92,7 @@ Partial Class Main
         Me.AutoCheckIn_checkBox = New System.Windows.Forms.CheckBox()
         Me.toolRef_checkBox = New System.Windows.Forms.CheckBox()
         Me.toolDiam_checkBox = New System.Windows.Forms.CheckBox()
-        Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
+        Me.toolIcons = New System.Windows.Forms.ToolStrip()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.newToolMenu.SuspendLayout()
@@ -125,7 +125,7 @@ Partial Class Main
         Me.SD_textbox.BackColor = System.Drawing.Color.LightGray
         Me.SD_textbox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.SD_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SD_textbox.Location = New System.Drawing.Point(924, 80)
+        Me.SD_textbox.Location = New System.Drawing.Point(892, 80)
         Me.SD_textbox.Name = "SD_textbox"
         Me.SD_textbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.SD_textbox.Size = New System.Drawing.Size(71, 22)
@@ -152,7 +152,7 @@ Partial Class Main
         Me.OL_textbox.BackColor = System.Drawing.Color.LightGray
         Me.OL_textbox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.OL_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OL_textbox.Location = New System.Drawing.Point(924, 208)
+        Me.OL_textbox.Location = New System.Drawing.Point(892, 208)
         Me.OL_textbox.Name = "OL_textbox"
         Me.OL_textbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.OL_textbox.Size = New System.Drawing.Size(71, 22)
@@ -250,7 +250,7 @@ Partial Class Main
         '
         Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.BackColor = System.Drawing.Color.Gainsboro
-        Me.PictureBox1.Location = New System.Drawing.Point(478, 110)
+        Me.PictureBox1.Location = New System.Drawing.Point(480, 111)
         Me.PictureBox1.Margin = New System.Windows.Forms.Padding(0)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(517, 80)
@@ -261,7 +261,7 @@ Partial Class Main
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(901, 85)
+        Me.Label2.Location = New System.Drawing.Point(869, 85)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(22, 13)
         Me.Label2.TabIndex = 12
@@ -281,7 +281,7 @@ Partial Class Main
         '
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(901, 213)
+        Me.Label4.Location = New System.Drawing.Point(869, 213)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(21, 13)
         Me.Label4.TabIndex = 14
@@ -349,7 +349,7 @@ Partial Class Main
         '
         Me.menu_7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.menu_7.AutoSize = True
-        Me.menu_7.Location = New System.Drawing.Point(924, 66)
+        Me.menu_7.Location = New System.Drawing.Point(892, 66)
         Me.menu_7.Name = "menu_7"
         Me.menu_7.Size = New System.Drawing.Size(35, 13)
         Me.menu_7.TabIndex = 21
@@ -414,7 +414,7 @@ Partial Class Main
         '
         Me.menu_10.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.menu_10.AutoSize = True
-        Me.menu_10.Location = New System.Drawing.Point(924, 193)
+        Me.menu_10.Location = New System.Drawing.Point(892, 193)
         Me.menu_10.Name = "menu_10"
         Me.menu_10.Size = New System.Drawing.Size(35, 13)
         Me.menu_10.TabIndex = 32
@@ -678,7 +678,7 @@ Partial Class Main
         Me.NewToolDataGridView.MultiSelect = False
         Me.NewToolDataGridView.Name = "NewToolDataGridView"
         Me.NewToolDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.NewToolDataGridView.Size = New System.Drawing.Size(608, 299)
+        Me.NewToolDataGridView.Size = New System.Drawing.Size(992, 299)
         Me.NewToolDataGridView.TabIndex = 61
         '
         'newToolMenu
@@ -802,13 +802,13 @@ Partial Class Main
         Me.toolDiam_checkBox.TabIndex = 75
         Me.toolDiam_checkBox.Text = "empty"
         '
-        'ToolStrip2
+        'toolIcons
         '
-        Me.ToolStrip2.Location = New System.Drawing.Point(5, 29)
-        Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolStrip2.Size = New System.Drawing.Size(998, 25)
-        Me.ToolStrip2.TabIndex = 77
-        Me.ToolStrip2.Text = "ToolStrip2"
+        Me.toolIcons.Location = New System.Drawing.Point(5, 29)
+        Me.toolIcons.Name = "toolIcons"
+        Me.toolIcons.Size = New System.Drawing.Size(998, 25)
+        Me.toolIcons.TabIndex = 77
+        Me.toolIcons.Text = "ToolStrip2"
         '
         'Main
         '
@@ -816,7 +816,7 @@ Partial Class Main
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1008, 601)
-        Me.Controls.Add(Me.ToolStrip2)
+        Me.Controls.Add(Me.toolIcons)
         Me.Controls.Add(Me.Lang_pt)
         Me.Controls.Add(Me.toolDiam_checkBox)
         Me.Controls.Add(Me.toolRef_checkBox)
@@ -949,5 +949,5 @@ Partial Class Main
     Friend WithEvents toolRef_checkBox As CheckBox
     Friend WithEvents toolDiam_checkBox As CheckBox
     Friend WithEvents Lang_pt As Button
-    Friend WithEvents ToolStrip2 As ToolStrip
+    Friend WithEvents toolIcons As ToolStrip
 End Class

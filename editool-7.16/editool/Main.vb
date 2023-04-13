@@ -107,7 +107,7 @@ Public Class Main
             Dim i As Integer = NewToolDataGridView.CurrentRow().Index
 
             Dim newTool As NewTool
-            If filteredTools Is Nothing Then
+            If filteredTools IsNot Nothing Then
 
                 If filteredTools.count > 0 Then
                     newTool = filteredTools(i)
@@ -504,7 +504,7 @@ Public Class Main
         Console.Write(sender)
     End Sub
 
-    Private Sub ToolStrip2_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles ToolStrip2.ItemClicked
+    Private Sub ToolStrip2_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles toolIcons.ItemClicked
 
     End Sub
 End Class

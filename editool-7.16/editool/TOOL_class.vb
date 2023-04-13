@@ -44,27 +44,26 @@ Module Tools
             Dim topSolidKernel As Assembly = api.GetTsAssembly()
 
             Dim smartTextType As Type = topSolidKernel.GetType("TopSolid.Kernel.Automating.SmartText")
+
+
             Dim constructor = smartTextType.GetConstructor({GetType(String)})
 
 
             api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.ManufacturerPartNumber"), ManufRef)
             api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Manufacturer"), Manuf)
             api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Code"), CodeBar)
-            ' api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Author"), "Editool")
             api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.PartNumber"), Code)
-
             api.TopSolidExt.Parameters.SetBooleanValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.VirtualDocument"), False)
-            Dim smartTextTypeInstance = constructor.Invoke({"Designation_outil1"})
+            ' api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Author"), "Editool")
 
-            'smartTextType = api.TopSolidExt.Parameters.GetDescriptionParameter(DocId)
+
+            Dim smartTextTypeInstance = constructor.Invoke({"Designation_outil"})
             api.TopSolidExt.Parameters.PublishText(DocId, "Designation_outil", smartTextTypeInstance)
-            'smartTextType = api.TopSolidExt.Parameters.GetCodeParameter(DocId)
+
             smartTextTypeInstance = constructor.Invoke({"codeBar"})
-
             api.TopSolidExt.Parameters.PublishText(DocId, "codeBar", smartTextTypeInstance)
-            'smartTextType = api.TopSolidExt.Parameters.GetPartNumberParameter(DocId)
-            smartTextTypeInstance = constructor.Invoke({"id"})
 
+            smartTextTypeInstance = constructor.Invoke({"id"})
             api.TopSolidExt.Parameters.PublishText(DocId, "id", smartTextTypeInstance)
 
             'Debug -> get elements param list

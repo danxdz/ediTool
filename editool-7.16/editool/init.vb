@@ -252,9 +252,9 @@ Module Init
         Dim langIndex As Integer
 
         Select Case language
-            Case "pt" : langIndex = 3
+            Case "en" : langIndex = 3
             Case "fr" : langIndex = 4
-            Case "en" : langIndex = 5
+            Case "pt" : langIndex = 5
         End Select
 
         Dim dictMenus As New Dictionary(Of Integer, ToolStripMenuItem)

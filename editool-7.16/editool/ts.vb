@@ -6,18 +6,13 @@ Imports System.Reflection
 Imports TopSolid.Kernel.Automating
 Imports Microsoft.Office.Interop.Excel
 Imports System.Security.Cryptography
+Imports Microsoft.Office
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports System.Windows
 
 Module ts
     Public ReadOnly api As New TopSolidAPI()
 
-    Private Sub InitializeApi()
-        Try
-            api.Initialize()
-            ' Do something with the API here
-        Catch ex As Exception
-            ' Handle any errors that occur during initialization
-        End Try
-    End Sub
 
     Public Class TopSolidAPI
 
@@ -50,10 +45,7 @@ Module ts
             Return CopyFileFromDefaultLib(model, libModel)
 
         End Function
-        Friend Sub Initialize()
-            GetTsPdmObjectId()
 
-        End Sub
         Friend Function GetTsAssembly()
             Return GetTsDLL()
 
@@ -153,7 +145,7 @@ Module ts
                 End If
             End If
 
-                Return PdmObjectIdType
+            Return PdmObjectIdType
 
         End Function
         Private Function GetTsDLL() As Assembly
@@ -242,7 +234,7 @@ Module ts
 
         Select Case toolType
             Case "FR2T"
-                model_name = "Side Mill D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
+                model_name = "Side Mill"' D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
             Case "FRTO"
                 model_name = "Fraise hémisphérique D8 L30 SD8"
             Case "FRHE"
@@ -354,7 +346,32 @@ Module ts
 
     Private Sub Set_parametre_outil(newTool_docId, newTool)
 
-        Dim ToolType = My.Settings.ToolType
+        Dim ToolType = newTool.Type
+
+        Dim topSolidKernel As Assembly = api.GetTsAssembly()
+
+        Dim elementIdType As Type = topSolidKernel.GetType("TopSolid.Kernel.Automating.ElementId")
+
+        Dim constructor = elementIdType.GetConstructor({GetType(String)})
+
+        Dim sys_pard = api.TopSolidExt.Elements.GetElements(newTool_docId)
+
+
+
+        '***************
+        'Debug -> get elements param list
+        ' Dim sys_pard As List(Of Object) = api.TopSolidExt.Elements.GetElements(newTool_docId)
+        Dim tmp As String
+        Dim lst As String() = New String(sys_pard.Count - 1) {}
+
+        For i As Integer = 0 To sys_pard.Count - 1
+            tmp = api.TopSolidExt.Elements.GetName(sys_pard(i))
+            lst(i) = tmp
+        Next
+
+        Debug.Write(lst)
+        '***************
+        Dim tmps = TopSolidHost.Documents.GetReferencedDocuments(newTool_docId, True)
 
         'Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")
         Dim Name = api.TopSolidExt.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")
@@ -422,17 +439,7 @@ Module ts
 
         End If
 
-        '***************
-        'Debug -> get elements param list
-        'Dim sys_pard As List(Of ElementId) = TopSolidHost.Elements.GetElements(newTool_docId)
-        'Dim tmp As String
-        'Dim lst As String() = New String(sys_pard.Count - 1) {}
 
-        'For i As Integer = 0 To sys_pard.Count - 1
-        'tmp = TopSolidHost.Elements.GetName(sys_pard(i))
-        'lst(i) = tmp
-        'Next
-        '***************
 
         newTool.PublishParameters(newTool_docId)
 

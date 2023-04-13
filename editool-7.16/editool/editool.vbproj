@@ -100,6 +100,9 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="TopSolid.Kernel.Automating">
+      <HintPath>..\..\..\..\..\..\..\Program Files\TOPSOLID\TopSolid 7.17\bin\TopSolid.Kernel.Automating.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
