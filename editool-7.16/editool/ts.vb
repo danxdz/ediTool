@@ -74,10 +74,11 @@ Module ts
                     Dim outputProject = If(TopSolidExt.Pdm.SearchProjectByName(customToolsProjectName)(0), TopSolidExt.Pdm.CreateProject(customToolsProjectName, True))
 
                     ' Open the first object in the list
-                    TopSolidExt.Pdm.OpenProject(lib_models(0))
+                    'TopSolidExt.Pdm.OpenProject(lib_models(0))
                     model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models(0), model)
                     model_fr_id.RemoveRange(1, model_fr_id.Count - 1)
                     'Call CopySeveral so we can copy read only files
+
                     temp_model = TopSolidExt.Pdm.CopySeveral(model_fr_id, outputProject)
                     ' Return the temporary model document ID
                     Return temp_model
@@ -235,7 +236,7 @@ Module ts
 
         Select Case toolType
             Case "FR2T"
-                model_name = "Side Mill"' D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
+                model_name = "Side Mill D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
             Case "FRTO"
                 model_name = "Fraise hémisphérique D8 L30 SD8"
             Case "FRHE"
@@ -372,8 +373,8 @@ Module ts
 
         Debug.Write(lst)
         '***************
-        IAssemblies.DerivePartForModification(TopSolid.Kernel.Automating.ElementId, Boolean) As TopSolid.Kernel.Automating.DocumentId
-        TopSolidDesignHost.HostInstance.Assemblies.get
+        'IAssemblies.DerivePartForModification(TopSolid.Kernel.Automating.ElementId, Boolean) As TopSolid.Kernel.Automating.DocumentId
+        'TopSolidDesignHost.HostInstance.Assemblies.get
         Dim tmps = api.TopSolidExt.Documents.GetDocuments(newTool_docId, True)
 
         'Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")

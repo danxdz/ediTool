@@ -93,9 +93,12 @@ Partial Class Main
         Me.toolRef_checkBox = New System.Windows.Forms.CheckBox()
         Me.toolDiam_checkBox = New System.Windows.Forms.CheckBox()
         Me.toolIcons = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.newToolMenu.SuspendLayout()
+        Me.toolIcons.SuspendLayout()
         Me.SuspendLayout()
         '
         'OpenFileDialog1
@@ -804,11 +807,30 @@ Partial Class Main
         '
         'toolIcons
         '
+        Me.toolIcons.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2})
         Me.toolIcons.Location = New System.Drawing.Point(5, 29)
         Me.toolIcons.Name = "toolIcons"
         Me.toolIcons.Size = New System.Drawing.Size(998, 25)
         Me.toolIcons.TabIndex = 77
         Me.toolIcons.Text = "ToolStrip2"
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton1.Text = "FR2T"
+        '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton2.Image = CType(resources.GetObject("ToolStripButton2.Image"), System.Drawing.Image)
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton2.Text = "FOCA"
         '
         'Main
         '
@@ -877,6 +899,8 @@ Partial Class Main
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.newToolMenu.ResumeLayout(False)
+        Me.toolIcons.ResumeLayout(False)
+        Me.toolIcons.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -950,4 +974,6 @@ Partial Class Main
     Friend WithEvents toolDiam_checkBox As CheckBox
     Friend WithEvents Lang_pt As Button
     Friend WithEvents toolIcons As ToolStrip
+    Friend WithEvents ToolStripButton1 As ToolStripButton
+    Friend WithEvents ToolStripButton2 As ToolStripButton
 End Class

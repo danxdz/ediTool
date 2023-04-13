@@ -8,11 +8,9 @@ Module Init
     Public Sub Set_filter()
         'Dim dv As New DataView(DataTable_buffer)
         'Dim str_tmp As String
-
         'If Main.Diam_filter_TextBox.Text = "" Then
         '    str_tmp = "Reference LIKE '%" + Main.Ref_filter_TextBox.Text + "%'"
         'ElseIf Main.Ref_filter_TextBox.Text = "" Then
-
         '    str_tmp = "D LIKE '%" + Main.Diam_filter_TextBox.Text + "%'"
         'Else
         '    str_tmp = "Reference LIKE '%" + Main.Ref_filter_TextBox.Text + "%' AND D like '%" + Main.Diam_filter_TextBox.Text + "%'"
@@ -23,13 +21,11 @@ Module Init
         ''Dim tmp_string As String = value
         ''tmp_string = Replace(tmp_string, ".", ",") ' replace , -> .
         ''Dim result As Double = tmp_string
-
         If param = "CTS_AL" And value = 0 Then
             Return Main.L_textbox.Text
         Else
             Return value
         End If
-
         If param = "CTS_AD" And value = 0 Then
             Return Main.D_textbox.Text
         Else
@@ -43,12 +39,13 @@ Module Init
             Case "OL" : Return Main.OL_textbox.Text
             Case "SD" : Return Main.SD_textbox.Text
             Case "CTS_AL" : Return Check_zero(param, Main.CTS_AL_textbox.Text)
+            Case "CTS_EL" : Return Check_zero(param, Main.CTS_AL_textbox.Text) ' TODO
             Case "CTS_AD" : Return Check_zero(param, Main.CTS_AD_textbox.Text)
             Case "NoTT" : Return Main.NoTT.Text
             Case "A" : Return Main.A_TextBox.Text
             Case "r" : Return Main.Chf_textbox.Text
             Case Else
-                MsgBox("no param found, check outil name mask config")
+                MsgBox("param < " + param + " > not found, check outil name mask config")
         End Select
     End Function
 
@@ -92,9 +89,7 @@ Module Init
 
                         End If
                     End If
-
                 Next
-
                 'If L2.Text = "" Or L2.Text = "0" Then
                 ''Main.Name_textbox.Text = "FR Ø" + Main.D_textbox.Text + " " + Main.NoTT.Text + "z" ' nome =  FR Ø + diamètre de coupe + numero d dents
                 Main.Name_textbox.Text = formated
@@ -107,14 +102,11 @@ Module Init
                 'ToolPreview()
             Catch ex As Exception
                 MsgBox("Name Mask Error - " + ex.ToString)
-
             End Try
         End If
-
     End Sub
 
     Public Function SetDataGridColumnsTitle(columns() As String, dt As DataTable)
-
         For Each col As String In columns
             dt.Columns.Add(col, GetType(String))
         Next
@@ -123,7 +115,6 @@ Module Init
     End Function
 
     Private Sub ToolTypeButton_Click(sender As Object, e As EventArgs)
-
         Console.Write(sender)
         Console.Write(e.ToString)
     End Sub
@@ -131,7 +122,6 @@ Module Init
     Public Sub Get_prefs(data As String)
         Dim splitLine() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
         Dim pref_lang As String = Right(splitLine(0), 2)
-
     End Sub
     Public Sub FillUI(language As String)
         Dim labels() As Label = {
@@ -150,7 +140,6 @@ Module Init
                     Dim splitLine2() As String = lines(i).Split(";")
                     labels(i - 1).Text = splitLine2(languageIndex)
                 Next
-
                 Main.ForceName_checkBox.Text = lines(labels.Length + 1).Split(";")(languageIndex)
                 Main.AutoOpen_checkBox.Text = lines(labels.Length + 2).Split(";")(languageIndex)
                 Main.ValidateBt.Text = lines(labels.Length + 3).Split(";")(languageIndex)
@@ -164,9 +153,7 @@ Module Init
         End Try
     End Sub
 
-
     Function AddFiltersCombobox(tmp As Decimal, filter As List(Of Decimal))
-
         If filter.Count > 0 Then
             If filter.Contains(tmp) = False Then
                 filter.Add(tmp)
@@ -176,10 +163,9 @@ Module Init
             filter.Add(tmp)
         End If
         Return filter
-
     End Function
-    Function AddFiltersStringCombobox(str As String, filter As List(Of String))
 
+    Function AddFiltersStringCombobox(str As String, filter As List(Of String))
         If str <> "" Then
             If filter.Count > 0 Then
                 If filter.Contains(str) = False Then
@@ -191,7 +177,6 @@ Module Init
             End If
         End If
         Return filter
-
     End Function
 
     Public Sub GetDefaultTools(data As String, filter As String)
@@ -228,9 +213,7 @@ Module Init
         'if we want to filter/order data
         'DataTable_buffer.DefaultView.Sort = "d ASC"
         'Main.NewToolDataGridView.DataSource = DataTable_buffer.DefaultView.ToTable
-
         'Main.NewToolDataGridView.DataSource = DataTable_buffer
-
     End Sub
     Public Sub PopulateFilters(ByVal filterList As List(Of Decimal), ByVal comboBox As ComboBox)
         filterList = filterList.OrderBy(Function(x) x).ToList()
@@ -238,8 +221,6 @@ Module Init
             .DataSource = filterList
         End With
     End Sub
-
-
 
     Public Sub FillMainMenu(language As String)
 
@@ -295,7 +276,6 @@ Module Init
                 ' Replace the parameter with its value in the menu text
                 text = text.Replace(match.Value, paramValue)
             Next
-
             If parent = index And text <> "" Then
                 currentMenu = New ToolStripMenuItem(text)
                 currentMenu.Name = name
@@ -323,32 +303,22 @@ Module Init
                         End If
                     End If
                     AddHandler currentSubMenu.Click, Sub(sender, e) MenuItemCheckedItem(parentName, sender, e)
-
                 ElseIf isFunction And text <> "" Then
                     currentSubMenu.Name = name
                     AddHandler currentSubMenu.Click, AddressOf MenuItemFunction
-
                 End If
                 dictMenus(parent).DropDownItems.Add(currentSubMenu)
                 dictMenus.Add(index, currentSubMenu)
             End If
-
         Next
-
-
-
-
     End Sub
 
     Private Sub MenuItemFunction(sender As Object, e As EventArgs)
         Console.WriteLine(sender)
         Console.WriteLine(e)
-
-
         Select Case sender.Name
             Case "exit"
                 Main.Close()
-
             Case "xml"
                 OpenXmlFile()
             Case "OtherFunction"
@@ -356,13 +326,10 @@ Module Init
             Case Else
                 ' Handle unknown function here
         End Select
-
     End Sub
     Private Sub MenuItemCheckedItem(name As String, sender As Object, e As EventArgs)
         Dim clickedItem As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
-
         Console.WriteLine(clickedItem.Text, " - ", clickedItem.Name)
-
         ' Uncheck all other items in the same sub-menu
         If TypeOf clickedItem.OwnerItem Is ToolStripMenuItem Then
             For Each item As ToolStripMenuItem In CType(clickedItem.OwnerItem, ToolStripMenuItem).DropDownItems
@@ -371,38 +338,24 @@ Module Init
                 End If
             Next
         End If
-
         ' Check the clicked item
         clickedItem.Checked = True
         My.Settings(name) = clickedItem.Name
         My.Settings.Save()
-
     End Sub
-
-
 
     Public Sub Preload()
         ' Show splash screen
         Dim splashForm As New Preload()
         splashForm.output.Visible = True
-
-
-
         ' Add event handler for click on splash screen
         AddHandler splashForm.Click, Sub(sender, e)
                                          ' Close splash screen and show main form
                                          splashForm.Close()
                                          Main.Show()
                                      End Sub
-
         ' Show splash screen
         splashForm.ShowDialog()
         splashForm.Close()
-
-
     End Sub
-
-
-
-
 End Module

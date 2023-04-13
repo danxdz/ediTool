@@ -507,4 +507,10 @@ Public Class Main
     Private Sub ToolStrip2_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles toolIcons.ItemClicked
 
     End Sub
+
+    Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton1.Click, ToolStripButton2.Click
+        My.Settings.ToolType = sender.ToString
+        My.Settings.Save()
+
+    End Sub
 End Class

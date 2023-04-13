@@ -427,10 +427,10 @@ Module FileImports
                     End If
 
                     'Get all tools
-                    If tblcols.Item(1).InnerHtml = toolTypeFilter Then   ' Or 1 = 1 Then
-                        'ListBox1.Items.Add(tblcols.Item(2).InnerHtml & " - " & tblcols.Item(3).InnerHtml & " - " & tblcols.Item(4).InnerHtml & " - " & tblcols.Item(8).InnerHtml)
+                    'If tblcols.Item(1).InnerHtml = toolTypeFilter Then   ' Or 1 = 1 Then
+                    'ListBox1.Items.Add(tblcols.Item(2).InnerHtml & " - " & tblcols.Item(3).InnerHtml & " - " & tblcols.Item(4).InnerHtml & " - " & tblcols.Item(8).InnerHtml)
 
-                        Preload.ToolCount()
+                    Preload.ToolCount()
 
                         With newTool
                             .Type = tblcols.Item(1).InnerHtml
@@ -490,8 +490,8 @@ Module FileImports
                         filterL1 = AddFiltersCombobox(newTool.l1, filterL1)
                         filterMat = AddFiltersStringCombobox(newTool.GroupeMat, filterMat)
                         .toolsList.Tool.Add(newTool)
-                        'FileImports.FillDataGrid(newTool, NewToolDataGridView)
-                    End If
+                    'FileImports.FillDataGrid(newTool, NewToolDataGridView)
+                    ' End If
 
                 Catch ex As Exception
                     'MsgBox("cant read tool")
