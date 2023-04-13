@@ -9,6 +9,7 @@ Imports System.Security.Cryptography
 Imports Microsoft.Office
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports System.Windows
+Imports TopSolid.Cad.Design.Automating
 
 Module ts
     Public ReadOnly api As New TopSolidAPI()
@@ -371,7 +372,9 @@ Module ts
 
         Debug.Write(lst)
         '***************
-        Dim tmps = TopSolidHost.Documents.GetReferencedDocuments(newTool_docId, True)
+        IAssemblies.DerivePartForModification(TopSolid.Kernel.Automating.ElementId, Boolean) As TopSolid.Kernel.Automating.DocumentId
+        TopSolidDesignHost.HostInstance.Assemblies.get
+        Dim tmps = api.TopSolidExt.Documents.GetDocuments(newTool_docId, True)
 
         'Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")
         Dim Name = api.TopSolidExt.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")
