@@ -348,7 +348,7 @@ Module FileImports
 
         name = line(2)
 
-        newTool.GSName = name
+        newTool.Name = name
 
         Main.Name_textbox.Text = name
 

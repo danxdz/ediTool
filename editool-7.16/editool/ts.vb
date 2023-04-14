@@ -85,7 +85,7 @@ Module ts
 
                 Catch ex As Exception
                     ' If the model was not found, display an error message
-                    MsgBox("cant find tool model")
+                    MsgBox(ex.ToString)
                 End Try
 
                 '  TopSolidExt.Pdm.OpenProject(lib_models)
@@ -238,12 +238,12 @@ Module ts
             Case "FR2T"
                 model_name = "Side Mill D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
             Case "FRTO"
-                model_name = "Fraise hémisphérique D8 L30 SD8"
+                model_name = "Radiused Mill D16 L40 r3 SD16"'"Fraise torique D16 L40 r3 SD16"
             Case "FRHE"
                 model_name = "Ball Nose Mill D8 L30 SD8"'"Fraise hémisphérique D8 L30 SD8"
             Case "FOP9"
                 model_name = "Spotting Drill D10 SD10"
-            Case "FOCA"
+            Case "FOCA", "FOHS"
                 model_name = "Twisted Drill D10 L35 SD10"
             Case "ALFI"
                 model_name = "Constant Reamer D10 L20 SD9"
@@ -374,8 +374,8 @@ Module ts
         Debug.Write(lst)
         '***************
         'IAssemblies.DerivePartForModification(TopSolid.Kernel.Automating.ElementId, Boolean) As TopSolid.Kernel.Automating.DocumentId
-        'TopSolidDesignHost.HostInstance.Assemblies.get
-        Dim tmps = api.TopSolidExt.Documents.GetDocuments(newTool_docId, True)
+        'TopSolidHost.Documents.GetDocuments()
+        'Dim tmps = api.TopSolidExt.Documents.GetDocuments()
 
         'Dim Name As ElementId = TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")
         Dim Name = api.TopSolidExt.Elements.SearchByName(newTool_docId, "$TopSolid.Kernel.TX.Properties.Name")
@@ -393,20 +393,29 @@ Module ts
         SetReal(newTool_docId, "L", L1)
 
 
+        'TopSolidHost.Parameters.SetIntegerValue()
+        api.TopSolidExt.Parameters.SetIntegerValue(api.TopSolidExt.Elements.SearchByName(newTool_docId, "NoTT"), newTool.NoTT)
+
+
         If ToolType = "FOC9" Or ToolType = "FOCA" Then
             'Dim tmpAngleRad = Main.A_TextBox.Text * Math.PI / 180
-            Dim tmpAngleRad = newTool.AngleDeg
+            Dim tmpAngleRad = newTool.Chanfrein * Math.PI / 180
             SetReal(newTool_docId, "A", tmpAngleRad)
 
             Select Case ToolType
                 Case "FOC9"
-                    api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOP9)
+
+                    'api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOP9)
+                    newTool.Name = My.Settings.MaskTT_FOP9
                 Case "FOCA"
-                    api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOCA)
+                    'api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOCA)
+                    newTool.Name = My.Settings.MaskTT_FOCA
+
             End Select
 
         ElseIf ToolType = "ALFI" Then
-            api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_ALFI)
+            'api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_ALFI)
+            newTool.Name = My.Settings.MaskTT_ALFI
         Else
 
             SetReal(newTool_docId, "CTS_AD", D2)
@@ -432,18 +441,26 @@ Module ts
             End If
 
             If ToolType = "FRTO" Then
-                Dim r As Double = Strip_doubles(Main.Chf_textbox.Text)
+                'Dim r As Double = Strip_doubles(Main.Chf_textbox.Text)
+                Dim r As Double = newTool.RayonBout / 1000
                 SetReal(newTool_docId, "r", r) 'TODO
-                api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FT)
+                'api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FT)
+                newTool.Name = My.Settings.MaskTT_FT
+
             ElseIf ToolType = "FRHE" Then
-                api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FB)
+                'api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FB)
+                newTool.Name = My.Settings.MaskTT_FB
+
             Else
-                api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FR)
+                'api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FR)
+                newTool.Name = My.Settings.MaskTT_FR
+
             End If
 
         End If
 
 
+        api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, newTool.Name)
 
         newTool.PublishParameters(newTool_docId)
 

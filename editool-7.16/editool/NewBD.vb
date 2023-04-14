@@ -92,7 +92,6 @@ Public Class NewBD
             .Code = DataGridView1.Rows(index).Cells(21).Value
             .CodeBar = DataGridView1.Rows(index).Cells(22).Value
 
-            .GSName = DataGridView1.Rows(index).Cells(2).Value
             .Type = DataGridView1.Rows(index).Cells(1).Value
 
         End With
