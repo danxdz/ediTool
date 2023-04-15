@@ -70,6 +70,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à NSM;Numéro standard Caractéristique
+        '''BLD;Classification par image
+        '''A1;Diamètre de coupe 1 (diamètre nominal);mm
+        '''A5;Diamètre extension;mm
+        '''A11;Diamètre de coupe min. ou nominal
+        '''B2;Longueur d&apos;arête de coupe, max.;mm
+        '''B3;Longueur de porte-à-faux;mm
+        '''B5;Longueur totale;mm
+        '''B6;Longueur de la goujure
+        '''B9;Longueur util;mm
+        '''B71;Longueur fonctionnelle;mm
+        '''C3;Diamètre d&apos;attachement du côté de la machine;mm
+        '''C4;Longueur de queue;mm
+        '''C11;Type d&apos;attachement de base, du côté de machine
+        '''C11;ZYL;Attachement cylindrique        ''' [le reste de la chaîne a été tronqué]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property DIN400_tool_params() As String
+            Get
+                Return ResourceManager.GetString("DIN400_tool_params", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à 15232120;1.5;6;0;38;3;0;11.5;3
         '''15232140;2;6;0;38;3;0;11;3
         '''15232160;2.5;6;0;38;3;0;10;3

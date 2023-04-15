@@ -46,6 +46,7 @@ Public Class ToolName_config
             MaskTT_FO.Text = My.Settings.MaskTT_FOCA
             MaskTT_AL.Text = My.Settings.MaskTT_ALFI
         End If
+        My.Settings.Save()
     End Sub
     Public Sub Set_default_toolname_masks(data As String)
         Dim splitLine() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
@@ -59,20 +60,26 @@ Public Class ToolName_config
     End Sub
     Private Sub ResetBt_Click(sender As Object, e As EventArgs) Handles FR_ResetBt.Click
         Me.MaskTT_FR.Text = "FR Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]"
+        My.Settings.Save()
     End Sub
     Private Sub FT_ResetBt_Click(sender As Object, e As EventArgs) Handles FT_ResetBt.Click
         Me.MaskTT_FT.Text = "FT Ø[D] r[r] [NoTT]z Lc[L] Lu[CTS_AL]"
+        My.Settings.Save()
     End Sub
     Private Sub FB_ResetBt_Click(sender As Object, e As EventArgs) Handles FB_ResetBt.Click
         Me.MaskTT_FB.Text = "FB Ø[D] [NoTT]z Lc[L] Lu[CTS_AL]"
+        My.Settings.Save()
     End Sub
     Private Sub FAP_ResetBt_Click(sender As Object, e As EventArgs) Handles FAP_ResetBt.Click
         Me.MaskTT_FOC9.Text = "FP Ø[D] A[A]"
+        My.Settings.Save()
     End Sub
     Private Sub FO_ResetBt_Click(sender As Object, e As EventArgs) Handles FO_ResetBt.Click
         Me.MaskTT_FO.Text = "FO Ø[D] [NoTT]z A[A] Lc[L]"
+        My.Settings.Save()
     End Sub
     Private Sub AL_ResetBt_Click(sender As Object, e As EventArgs) Handles AL_ResetBt.Click
         Me.MaskTT_AL.Text = "AL Ø[D] Lc[L]"
+        My.Settings.Save()
     End Sub
 End Class

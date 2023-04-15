@@ -1,0 +1,68 @@
+﻿NSM;Numéro standard Caractéristique
+BLD;Classification par image
+A1;D1;Diamètre de coupe 1 (diamètre nominal):mm
+A2;D1;Diamètre de coupe 2
+A5;D2;Diamètre extension:mm
+A11;D1;Diamètre de coupe min. ou nominal
+B2;L1;Longueur d'arête de coupe, max.:mm
+B3;L2;Longueur de porte-à-faux:mm
+B5;L3;Longueur totale:mm
+B6;L2;Longueur de la goujure
+B9;L2;Longueur util:mm
+B71;L2;Longueur fonctionnelle:mm
+C2;D3;Taille d'attachement de base du côté de machine:mm
+C3;D3;Diamètre d'attachement du côté de la machine:mm
+C4;Longueur de queue:mm
+C11;Type d'attachement de base, du côté de machine
+ZYL;Attachement cylindrique
+FDA;Attachement à arbre porte-fraise
+SAI;Attachement à visser ISCAR
+MKG;Cône Morse
+SAC;Attachement à visser SANDVIK Coromant
+C11;Type d'attachement de base, du côté de machine
+C12;Forme d'attachement, du côté de la machine
+C14;Version d'attachement, du côté de la machine
+C15;Genre d'attachement, du côté de la machine
+C31;Tolérance ISO du diamètre d'attachement du côté de la machine
+C51;Type d'attachement de base, du côté de la pièce à usiner
+D6;Le tour par minute, max.:1/min
+D7;Masse (poids)
+D11;ISO Type de fraiseuse
+D31;Genre de filet
+D32;Pas du filet
+D33;Nombre de filets par pouce
+D34;Diamètre nominal de filet métrique
+D35;Diamètre nominal de filet impérial	
+E1;AngleDeg;Angle d'attaque
+E2;Angle de coupe vers le côté (radial)
+E3;l'angle de coupe vers l'arrière
+E4;Angle de plongée maximale
+F1;Direction de coupe
+L:Gauche
+N:Neutre
+R:Droite
+F3;Forme du foret à centrer
+F4;Angle de torsion (Angle de coupe vers le côté (radial))
+F21;NoTT;Nombre d'arêtes de coupe périphériques effectives
+F22;NoTT;Nombre d'arêtes de coupe frontales effectives
+G1;Rayon de coin:mm
+G5;Angle de profil
+G7;Front radius:mm
+H3:Désignation du matériau de coupe du fabricant
+H4;Version de l'outil (code du matériau du corps de l'outil)
+H5;Revêtement/surface
+H11;Désignation normée du matériau de coupe, application principale
+H12;Désignation normée du matériau de coupe 2ème priorité de l'application
+H13;Désignation normée du matériau de coupe 3ème priorité de l'application
+H21;ArrCentre;Entrée du fluide de refroidissement
+H22;ArrCentre;Sortie du fluide de refroidissement
+0;sans sortie de refroidissement interne
+1;avec sortie de fluide de refroidissement axiale concentrique
+2;avec sortie de fluide de refroidissement radiale
+3;avec sortie de fluide de refroidissement axiale inclinée 
+J1;Norme
+J3;Manuf;Identifiant de l'entreprise
+J7;Puce
+J20;Numéro de commande 2
+J21;ManufRef;Identification du numéro de commande
+W1;GroupeMat;Groupe de matériaux de la pièce à usiner

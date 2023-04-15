@@ -504,13 +504,16 @@ Public Class Main
         Console.Write(sender)
     End Sub
 
-    Private Sub ToolStrip2_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles toolIcons.ItemClicked
-
-    End Sub
 
     Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton1.Click, ToolStripButton2.Click
         My.Settings.ToolType = sender.ToString
         My.Settings.Save()
 
+    End Sub
+
+    Private Sub Button1_ClickAsync(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim service As New FirestoreService()
+        Dim i As Integer = NewToolDataGridView.CurrentRow().Index
+        service.AddToolAsync(filteredTools(i))
     End Sub
 End Class

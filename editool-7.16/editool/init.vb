@@ -1,7 +1,11 @@
 ﻿Option Explicit On
 Imports System.IO
+Imports System.Net
+Imports System.Reflection
 Imports System.Text.RegularExpressions
-Imports editool.My
+Imports System.Xml
+Imports EdiTool.My
+
 Module Init
 
     Dim DataTable_buffer As DataTable
@@ -321,12 +325,89 @@ Module Init
                 Main.Close()
             Case "xml"
                 OpenXmlFile()
+            Case "FRAISA"
+                AddFraisaTool("15520501")
+                ' Call other function here
             Case "OtherFunction"
                 ' Call other function here
             Case Else
                 ' Handle unknown function here
         End Select
     End Sub
+
+    Private Sub AddFraisaTool(itemCode As String)
+
+
+
+        Dim url As String = "https://fsa.salessupportserver.com/CIMDataService_3S-FSA/DownloadService.svc/web/GetExport?OrderCode=" + itemCode + "&ExportType=din4000xml2016"
+        Dim nomeArquivo As String = itemCode + ".xml"
+
+        Dim cliente As New WebClient()
+        cliente.DownloadFile(url, nomeArquivo)
+
+        'MessageBox.Show("Arquivo baixado com sucesso!")
+
+
+        ' Dicionário que mapeia o nome do parâmetro XML para a propriedade correspondente na classe NewTool
+        'Dim paramToPropDict As New Dictionary(Of String, String) From {
+        '        {"J21", "ManufRef"},
+        '        {"NSM", "StandardNumber"},
+        '        {"J3", "Manuf"},
+        '        {"A1", "D1"},
+        '        {"A5", "D2"},
+        '        {"B2", "L1"},
+        '        {"B5", "L3"},
+        '        {"B71", "L2"}
+        '}
+        Dim splitLine() As String = My.Resources.DIN400_tool_params.Split(New String() {Environment.NewLine}, StringSplitOptions.None).ToArray
+
+        Dim paramToPropDict As New Dictionary(Of String, String)
+        For Each line As String In splitLine
+            Dim fields() As String = line.Split(";"c)
+            If fields.Count > 2 Then
+                paramToPropDict.Add(fields(0), fields(1))
+
+            End If
+        Next
+
+
+
+        Dim documentoXml As New XmlDocument()
+        documentoXml.Load(nomeArquivo)
+
+        Dim xmlDoc As XmlElement = documentoXml.DocumentElement
+
+        Dim toolNode As XmlNode = xmlDoc.SelectSingleNode("//Tool")
+
+        ' Cria uma nova instância da classe NewTool
+        Dim newTool As New NewTool()
+
+        For Each node As XmlNode In toolNode.ChildNodes
+            ' Aqui você pode percorrer todos os parâmetros de cada toolNode
+            For Each paramNode As XmlNode In node.SelectNodes("Property-Data")
+                Dim paramName As String = paramNode.SelectSingleNode("PropertyName").InnerText.Trim()
+                Dim paramValue As String = paramNode.SelectSingleNode("Value").InnerText.Trim()
+
+                ' Verifica se o nome do parâmetro existe no dicionário
+                If paramToPropDict.ContainsKey(paramName) Then
+                    Dim propName As String = paramToPropDict(paramName)
+
+                    ' Usa reflection para definir o valor da propriedade correspondente na classe NewTool
+                    Dim prop As PropertyInfo = GetType(NewTool).GetProperty(propName)
+                    'Correcting name
+                    If IsNumeric(paramValue) Then
+                        paramValue = paramValue.Replace(",", ".")
+                    End If
+                    If (paramValue = "FSA") Then paramValue = "FRAISA" 'TODO check list to show right name
+                    prop.SetValue(newTool, Convert.ChangeType(paramValue, prop.PropertyType), Nothing)
+                End If
+            Next
+        Next
+        FillDataGrid(newTool, Main.NewToolDataGridView)
+
+        Debug.WriteLine(newTool)
+    End Sub
+
     Private Sub MenuItemCheckedItem(name As String, sender As Object, e As EventArgs)
         Dim clickedItem As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
         Console.WriteLine(clickedItem.Text, " - ", clickedItem.Name)
