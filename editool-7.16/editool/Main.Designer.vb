@@ -37,7 +37,7 @@ Partial Class Main
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Lang_fr = New System.Windows.Forms.Button()
         Me.Lang_pt = New System.Windows.Forms.Button()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.ToolPreview_PictureBox = New System.Windows.Forms.PictureBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.CTS_AD_label = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -45,18 +45,18 @@ Partial Class Main
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.menu_5 = New System.Windows.Forms.Label()
-        Me.menu_6 = New System.Windows.Forms.Label()
-        Me.menu_7 = New System.Windows.Forms.Label()
+        Me.menu_D1 = New System.Windows.Forms.Label()
+        Me.menu_D2 = New System.Windows.Forms.Label()
+        Me.menu_D3 = New System.Windows.Forms.Label()
         Me.Name_textbox = New System.Windows.Forms.TextBox()
         Me.Chf_textbox = New System.Windows.Forms.TextBox()
         Me.menu_2 = New System.Windows.Forms.Label()
-        Me.menu_8 = New System.Windows.Forms.Label()
-        Me.menu_9 = New System.Windows.Forms.Label()
-        Me.menu_10 = New System.Windows.Forms.Label()
+        Me.menu_L1 = New System.Windows.Forms.Label()
+        Me.menu_L2 = New System.Windows.Forms.Label()
+        Me.menu_L3 = New System.Windows.Forms.Label()
         Me.menu_3 = New System.Windows.Forms.Label()
         Me.menu_4 = New System.Windows.Forms.Label()
-        Me.menu_1 = New System.Windows.Forms.Label()
+        Me.dg = New System.Windows.Forms.Label()
         Me.manref_TextBox = New System.Windows.Forms.ComboBox()
         Me.manuf_comboBox = New System.Windows.Forms.ComboBox()
         Me.ForceName_checkBox = New System.Windows.Forms.CheckBox()
@@ -96,7 +96,7 @@ Partial Class Main
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.Button1 = New System.Windows.Forms.Button()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ToolPreview_PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.newToolMenu.SuspendLayout()
         Me.toolIcons.SuspendLayout()
@@ -250,16 +250,16 @@ Partial Class Main
         Me.ToolTip1.SetToolTip(Me.Lang_pt, "portuguese")
         Me.Lang_pt.UseVisualStyleBackColor = True
         '
-        'PictureBox1
+        'ToolPreview_PictureBox
         '
-        Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox1.BackColor = System.Drawing.Color.Gainsboro
-        Me.PictureBox1.Location = New System.Drawing.Point(480, 111)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(0)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(517, 80)
-        Me.PictureBox1.TabIndex = 11
-        Me.PictureBox1.TabStop = False
+        Me.ToolPreview_PictureBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ToolPreview_PictureBox.BackColor = System.Drawing.Color.Gainsboro
+        Me.ToolPreview_PictureBox.Location = New System.Drawing.Point(480, 111)
+        Me.ToolPreview_PictureBox.Margin = New System.Windows.Forms.Padding(0)
+        Me.ToolPreview_PictureBox.Name = "ToolPreview_PictureBox"
+        Me.ToolPreview_PictureBox.Size = New System.Drawing.Size(517, 80)
+        Me.ToolPreview_PictureBox.TabIndex = 11
+        Me.ToolPreview_PictureBox.TabStop = False
         '
         'Label2
         '
@@ -329,35 +329,35 @@ Partial Class Main
         Me.Label8.TabIndex = 18
         Me.Label8.Text = "z"
         '
-        'menu_5
+        'menu_D1
         '
-        Me.menu_5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.menu_5.AutoSize = True
-        Me.menu_5.Location = New System.Drawing.Point(499, 66)
-        Me.menu_5.Name = "menu_5"
-        Me.menu_5.Size = New System.Drawing.Size(35, 13)
-        Me.menu_5.TabIndex = 19
-        Me.menu_5.Text = "empty"
+        Me.menu_D1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.menu_D1.AutoSize = True
+        Me.menu_D1.Location = New System.Drawing.Point(499, 66)
+        Me.menu_D1.Name = "menu_D1"
+        Me.menu_D1.Size = New System.Drawing.Size(35, 13)
+        Me.menu_D1.TabIndex = 19
+        Me.menu_D1.Text = "empty"
         '
-        'menu_6
+        'menu_D2
         '
-        Me.menu_6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.menu_6.AutoSize = True
-        Me.menu_6.Location = New System.Drawing.Point(694, 66)
-        Me.menu_6.Name = "menu_6"
-        Me.menu_6.Size = New System.Drawing.Size(35, 13)
-        Me.menu_6.TabIndex = 20
-        Me.menu_6.Text = "empty"
+        Me.menu_D2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.menu_D2.AutoSize = True
+        Me.menu_D2.Location = New System.Drawing.Point(694, 66)
+        Me.menu_D2.Name = "menu_D2"
+        Me.menu_D2.Size = New System.Drawing.Size(35, 13)
+        Me.menu_D2.TabIndex = 20
+        Me.menu_D2.Text = "empty"
         '
-        'menu_7
+        'menu_D3
         '
-        Me.menu_7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.menu_7.AutoSize = True
-        Me.menu_7.Location = New System.Drawing.Point(892, 66)
-        Me.menu_7.Name = "menu_7"
-        Me.menu_7.Size = New System.Drawing.Size(35, 13)
-        Me.menu_7.TabIndex = 21
-        Me.menu_7.Text = "empty"
+        Me.menu_D3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.menu_D3.AutoSize = True
+        Me.menu_D3.Location = New System.Drawing.Point(892, 66)
+        Me.menu_D3.Name = "menu_D3"
+        Me.menu_D3.Size = New System.Drawing.Size(35, 13)
+        Me.menu_D3.TabIndex = 21
+        Me.menu_D3.Text = "empty"
         '
         'Name_textbox
         '
@@ -394,35 +394,35 @@ Partial Class Main
         Me.menu_2.TabIndex = 29
         Me.menu_2.Text = "empty"
         '
-        'menu_8
+        'menu_L1
         '
-        Me.menu_8.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.menu_8.AutoSize = True
-        Me.menu_8.Location = New System.Drawing.Point(494, 193)
-        Me.menu_8.Name = "menu_8"
-        Me.menu_8.Size = New System.Drawing.Size(35, 13)
-        Me.menu_8.TabIndex = 30
-        Me.menu_8.Text = "empty"
+        Me.menu_L1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.menu_L1.AutoSize = True
+        Me.menu_L1.Location = New System.Drawing.Point(494, 193)
+        Me.menu_L1.Name = "menu_L1"
+        Me.menu_L1.Size = New System.Drawing.Size(35, 13)
+        Me.menu_L1.TabIndex = 30
+        Me.menu_L1.Text = "empty"
         '
-        'menu_9
+        'menu_L2
         '
-        Me.menu_9.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.menu_9.AutoSize = True
-        Me.menu_9.Location = New System.Drawing.Point(694, 193)
-        Me.menu_9.Name = "menu_9"
-        Me.menu_9.Size = New System.Drawing.Size(35, 13)
-        Me.menu_9.TabIndex = 31
-        Me.menu_9.Text = "empty"
+        Me.menu_L2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.menu_L2.AutoSize = True
+        Me.menu_L2.Location = New System.Drawing.Point(694, 193)
+        Me.menu_L2.Name = "menu_L2"
+        Me.menu_L2.Size = New System.Drawing.Size(35, 13)
+        Me.menu_L2.TabIndex = 31
+        Me.menu_L2.Text = "empty"
         '
-        'menu_10
+        'menu_L3
         '
-        Me.menu_10.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.menu_10.AutoSize = True
-        Me.menu_10.Location = New System.Drawing.Point(892, 193)
-        Me.menu_10.Name = "menu_10"
-        Me.menu_10.Size = New System.Drawing.Size(35, 13)
-        Me.menu_10.TabIndex = 32
-        Me.menu_10.Text = "empty"
+        Me.menu_L3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.menu_L3.AutoSize = True
+        Me.menu_L3.Location = New System.Drawing.Point(892, 193)
+        Me.menu_L3.Name = "menu_L3"
+        Me.menu_L3.Size = New System.Drawing.Size(35, 13)
+        Me.menu_L3.TabIndex = 32
+        Me.menu_L3.Text = "empty"
         '
         'menu_3
         '
@@ -442,14 +442,14 @@ Partial Class Main
         Me.menu_4.TabIndex = 34
         Me.menu_4.Text = "empty"
         '
-        'menu_1
+        'dg
         '
-        Me.menu_1.AutoSize = True
-        Me.menu_1.Location = New System.Drawing.Point(8, 72)
-        Me.menu_1.Name = "menu_1"
-        Me.menu_1.Size = New System.Drawing.Size(35, 13)
-        Me.menu_1.TabIndex = 35
-        Me.menu_1.Text = "empty"
+        Me.dg.AutoSize = True
+        Me.dg.Location = New System.Drawing.Point(8, 72)
+        Me.dg.Name = "dg"
+        Me.dg.Size = New System.Drawing.Size(35, 13)
+        Me.dg.TabIndex = 35
+        Me.dg.Text = "empty"
         '
         'manref_TextBox
         '
@@ -864,12 +864,12 @@ Partial Class Main
         Me.Controls.Add(Me.filterL1_ComboBox)
         Me.Controls.Add(Me.timer_label)
         Me.Controls.Add(Me.Lang_en)
-        Me.Controls.Add(Me.menu_10)
-        Me.Controls.Add(Me.menu_9)
-        Me.Controls.Add(Me.menu_8)
-        Me.Controls.Add(Me.menu_7)
-        Me.Controls.Add(Me.menu_6)
-        Me.Controls.Add(Me.menu_5)
+        Me.Controls.Add(Me.menu_L3)
+        Me.Controls.Add(Me.menu_L2)
+        Me.Controls.Add(Me.menu_L1)
+        Me.Controls.Add(Me.menu_D3)
+        Me.Controls.Add(Me.menu_D2)
+        Me.Controls.Add(Me.menu_D1)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
@@ -882,7 +882,7 @@ Partial Class Main
         Me.Controls.Add(Me.CTS_AD_textbox)
         Me.Controls.Add(Me.SD_textbox)
         Me.Controls.Add(Me.D_textbox)
-        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.ToolPreview_PictureBox)
         Me.Controls.Add(Me.NewToolDataGridView)
         Me.Controls.Add(Me.filterD1_Combobox)
         Me.Controls.Add(Me.CheckBox1)
@@ -893,7 +893,7 @@ Partial Class Main
         Me.Controls.Add(Me.ForceName_checkBox)
         Me.Controls.Add(Me.manuf_comboBox)
         Me.Controls.Add(Me.manref_TextBox)
-        Me.Controls.Add(Me.menu_1)
+        Me.Controls.Add(Me.dg)
         Me.Controls.Add(Me.menu_4)
         Me.Controls.Add(Me.menu_3)
         Me.Controls.Add(Me.menu_2)
@@ -910,7 +910,7 @@ Partial Class Main
         Me.Padding = New System.Windows.Forms.Padding(5)
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ediTool"
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ToolPreview_PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.newToolMenu.ResumeLayout(False)
         Me.toolIcons.ResumeLayout(False)
@@ -930,7 +930,7 @@ Partial Class Main
     Friend WithEvents NoTT As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents ToolTip1 As ToolTip
-    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents ToolPreview_PictureBox As PictureBox
     Friend WithEvents Label2 As Label
     Friend WithEvents CTS_AD_label As Label
     Friend WithEvents Label4 As Label
@@ -938,18 +938,18 @@ Partial Class Main
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
-    Friend WithEvents menu_5 As Label
-    Friend WithEvents menu_6 As Label
-    Friend WithEvents menu_7 As Label
+    Friend WithEvents menu_D1 As Label
+    Friend WithEvents menu_D2 As Label
+    Friend WithEvents menu_D3 As Label
     Friend WithEvents Name_textbox As TextBox
     Friend WithEvents Chf_textbox As TextBox
     Friend WithEvents menu_2 As Label
-    Friend WithEvents menu_8 As Label
-    Friend WithEvents menu_9 As Label
-    Friend WithEvents menu_10 As Label
+    Friend WithEvents menu_L1 As Label
+    Friend WithEvents menu_L2 As Label
+    Friend WithEvents menu_L3 As Label
     Friend WithEvents menu_3 As Label
     Friend WithEvents menu_4 As Label
-    Friend WithEvents menu_1 As Label
+    Friend WithEvents dg As Label
     Friend WithEvents manref_TextBox As ComboBox
     Friend WithEvents manuf_comboBox As ComboBox
     Friend WithEvents ForceName_checkBox As CheckBox

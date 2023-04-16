@@ -2,17 +2,17 @@
 Module graphics
 
 
-    Public Sub Refresh_outil(newTool As NewTool)
+    Public Sub Refresh_outil(newTool As NewTool, ToolPreview_PictureBox As PictureBox)
 
         If Main.started Then
 
             Try
 
-                Dim w As Integer = Main.PictureBox1.Width
-                Dim StartY As Integer = Main.PictureBox1.Height
+                Dim w As Integer = Main.ToolPreview_PictureBox.Width
+                Dim StartY As Integer = Main.ToolPreview_PictureBox.Height
                 Dim myPen = New Pen(Brushes.Black, 1)
                 Dim myPenRED = New Pen(Brushes.Red, 1)
-                Dim myOutil As Drawing.Graphics = Main.PictureBox1.CreateGraphics
+                Dim myOutil As Drawing.Graphics = Main.ToolPreview_PictureBox.CreateGraphics
                 Dim BG_color As Drawing.Color = Drawing.Color.Gainsboro
 
                 Dim CUT_color As New SolidBrush(Drawing.Color.Orange)
@@ -79,18 +79,20 @@ Module graphics
                 'half revolved preview tool 
                 'CUT
                 'FR 2T et Alesoir *************************
-                If My.Settings.ToolType = "FR2T" Or My.Settings.ToolType = "ALFI" Then
+                'If My.Settings.ToolType = "FR2T" Or My.Settings.ToolType = "ALFI" Then
+                '
+                If newTool.Type = "FR2T" Or newTool.Type = "ALFI" Then
                     myOutil.FillRectangle(Brushes.Orange, 0, D_tmp, L_tmp, StartY - D_tmp)
                     'contour
                     myOutil.DrawLine(myPen, 0, StartY, 0, D_tmp)
                     myOutil.DrawLine(myPen, 0, D_tmp, L_tmp, D_tmp)
-                ElseIf My.Settings.ToolType = "FRHE" Then
+                ElseIf newtool.Type = "FRHE" Then
                     'FR Spherique ***********************
                     myOutil.FillEllipse(Brushes.Black, 0, D_tmp, (StartY - D_tmp) * 2, (StartY - D_tmp) * 2)
                     myOutil.FillEllipse(Brushes.Orange, 1, D_tmp + 1, ((StartY - D_tmp) * 2), (StartY - D_tmp) * 2)
                     myOutil.FillRectangle(Brushes.Orange, (StartY - D_tmp), D_tmp, L_tmp - (StartY - D_tmp), StartY - D_tmp)
                     myOutil.DrawLine(myPen, (StartY - D_tmp), D_tmp, L_tmp, D_tmp)
-                ElseIf My.Settings.ToolType = "FRTO" Then
+                ElseIf newtool.Type = "FRTO" Then
                     'FR Torique ***********************
                     myOutil.FillEllipse(Brushes.Black, 0, D_tmp, (StartY - R_tmp) * 2, (StartY - R_tmp) * 2)
                     myOutil.FillEllipse(Brushes.Orange, 1, D_tmp + 1, ((StartY - R_tmp) * 2), (StartY - R_tmp) * 2)
@@ -102,7 +104,7 @@ Module graphics
 
 
 
-                If My.Settings.ToolType = "FOCA" Or My.Settings.ToolType = "FOP9" Then
+                If newTool.Type = "FOCA" Or newTool.Type = "FOP9" Or newTool.Type = "FOCE" Then
                     'Forets et Forets a pointer ***********************
                     'CUT
                     Dim pnts() As Point = {
@@ -164,7 +166,7 @@ Module graphics
                     space = space + axe_big + 10
                 Next
 
-                Set_Name_auto()
+                Set_Name_auto(newTool)
 
 
             Catch ex As Exception

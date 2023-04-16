@@ -175,7 +175,7 @@ Public Class Main
         ' Update the tool list based on the selected tool type
         Dim filteredTools As List(Of NewTool) = toolsList.Tools.Where(Function(x) x.Type = toolType).ToList()
         If filteredTools.Count > 0 Then
-            Refresh_outil(filteredTools(0))
+            Refresh_outil(filteredTools(0), ToolPreview_PictureBox)
         End If
     End Sub
 
@@ -187,40 +187,12 @@ Public Class Main
         OpenV6File()
     End Sub
 
-    Private Sub A_TextBox_LostFocus(sender As Object, e As EventArgs) Handles A_TextBox.LostFocus
-        Refresh_outil(newTool)
-    End Sub
 
-    Private Sub D_textbox_LostFocus(sender As Object, e As EventArgs)
-        Refresh_outil(newTool)
-    End Sub
+    Private Sub Chf_textbox_LostFocus(sender As Object, e As EventArgs) Handles A_TextBox.LostFocus, D_textbox.LostFocus, L_textbox.LostFocus, CTS_AL_textbox.LostFocus, Chf_textbox.LostFocus, NoTT.LostFocus, OL_textbox.LostFocus, SD_textbox.LostFocus, CTS_AD_textbox.LostFocus
 
-    Private Sub L_textbox_LostFocus(sender As Object, e As EventArgs)
-        Refresh_outil(newTool)
-    End Sub
+        Dim i As Integer = NewToolDataGridView.CurrentRow().Index
 
-    Private Sub CTS_AL_textbox_LostFocus(sender As Object, e As EventArgs)
-        Refresh_outil(newTool)
-    End Sub
-
-    Private Sub CTS_AD_textbox_LostFocus(sender As Object, e As EventArgs)
-        Refresh_outil(newTool)
-    End Sub
-
-    Private Sub SD_textbox_LostFocus(sender As Object, e As EventArgs)
-        Refresh_outil(newTool)
-    End Sub
-
-    Private Sub OL_textbox_LostFocus(sender As Object, e As EventArgs)
-        Refresh_outil(newTool)
-    End Sub
-
-    Private Sub NoTT_LostFocus(sender As Object, e As EventArgs) Handles NoTT.LostFocus
-        Refresh_outil(newTool)
-    End Sub
-
-    Private Sub Chf_textbox_LostFocus(sender As Object, e As EventArgs) Handles Chf_textbox.LostFocus
-        Refresh_outil(newTool)
+        Refresh_outil(filteredTools(i), ToolPreview_PictureBox)
     End Sub
 
     Private Sub ORDERTOOLS_ToolStripButton_Click(sender As Object, e As EventArgs) Handles OrderTools_ToolStripButton.Click
@@ -305,7 +277,7 @@ Public Class Main
                         OL_textbox.Text = toolsList.Tool(i).L3
                     End If
 
-                    Refresh_outil(toolsList.Tool(i))
+                    Refresh_outil(toolsList.Tool(i), ToolPreview_PictureBox)
                 Catch ex As Exception
                     MsgBox("tool data error") 'TODO
                 End Try

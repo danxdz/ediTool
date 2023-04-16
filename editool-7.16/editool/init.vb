@@ -53,7 +53,7 @@ Module Init
         End Select
     End Function
 
-    Public Sub Set_Name_auto()
+    Public Sub Set_Name_auto(newTool As NewTool)
 
         If Main.ForceName_checkBox.Checked = False Then
             Try
@@ -129,9 +129,9 @@ Module Init
     End Sub
     Public Sub FillUI(language As String)
         Dim labels() As Label = {
-        Main.menu_1, Main.menu_2, Main.menu_3, Main.menu_4,
-        Main.menu_5, Main.menu_6, Main.menu_7, Main.menu_8,
-        Main.menu_9, Main.menu_10}
+        Main.dg, Main.menu_2, Main.menu_3, Main.menu_4,
+        Main.menu_D1, Main.menu_D2, Main.menu_D3, Main.menu_L1,
+        Main.menu_L2, Main.menu_L3}
 
         Try
             Dim lines() As String = My.Resources.textUI.Split(Environment.NewLine)
@@ -236,7 +236,7 @@ Module Init
 
         Dim langIndex As Integer
 
-        Select Case language
+        Select Case language 'TODO read avaliable languages from txt file
             Case "en" : langIndex = 3
             Case "fr" : langIndex = 4
             Case "pt" : langIndex = 5
@@ -326,7 +326,7 @@ Module Init
             Case "xml"
                 OpenXmlFile()
             Case "FRAISA"
-                AddFraisaTool("15520501")
+                ImportFraisa()
                 ' Call other function here
             Case "OtherFunction"
                 ' Call other function here
@@ -335,77 +335,10 @@ Module Init
         End Select
     End Sub
 
-    Private Sub AddFraisaTool(itemCode As String)
+    Private Sub ImportFraisa()
+        ImportTool.Show()
 
-
-
-        Dim url As String = "https://fsa.salessupportserver.com/CIMDataService_3S-FSA/DownloadService.svc/web/GetExport?OrderCode=" + itemCode + "&ExportType=din4000xml2016"
-        Dim nomeArquivo As String = itemCode + ".xml"
-
-        Dim cliente As New WebClient()
-        cliente.DownloadFile(url, nomeArquivo)
-
-        'MessageBox.Show("Arquivo baixado com sucesso!")
-
-
-        ' Dicionário que mapeia o nome do parâmetro XML para a propriedade correspondente na classe NewTool
-        'Dim paramToPropDict As New Dictionary(Of String, String) From {
-        '        {"J21", "ManufRef"},
-        '        {"NSM", "StandardNumber"},
-        '        {"J3", "Manuf"},
-        '        {"A1", "D1"},
-        '        {"A5", "D2"},
-        '        {"B2", "L1"},
-        '        {"B5", "L3"},
-        '        {"B71", "L2"}
-        '}
-        Dim splitLine() As String = My.Resources.DIN400_tool_params.Split(New String() {Environment.NewLine}, StringSplitOptions.None).ToArray
-
-        Dim paramToPropDict As New Dictionary(Of String, String)
-        For Each line As String In splitLine
-            Dim fields() As String = line.Split(";"c)
-            If fields.Count > 2 Then
-                paramToPropDict.Add(fields(0), fields(1))
-
-            End If
-        Next
-
-
-
-        Dim documentoXml As New XmlDocument()
-        documentoXml.Load(nomeArquivo)
-
-        Dim xmlDoc As XmlElement = documentoXml.DocumentElement
-
-        Dim toolNode As XmlNode = xmlDoc.SelectSingleNode("//Tool")
-
-        ' Cria uma nova instância da classe NewTool
-        Dim newTool As New NewTool()
-
-        For Each node As XmlNode In toolNode.ChildNodes
-            ' Aqui você pode percorrer todos os parâmetros de cada toolNode
-            For Each paramNode As XmlNode In node.SelectNodes("Property-Data")
-                Dim paramName As String = paramNode.SelectSingleNode("PropertyName").InnerText.Trim()
-                Dim paramValue As String = paramNode.SelectSingleNode("Value").InnerText.Trim()
-
-                ' Verifica se o nome do parâmetro existe no dicionário
-                If paramToPropDict.ContainsKey(paramName) Then
-                    Dim propName As String = paramToPropDict(paramName)
-
-                    ' Usa reflection para definir o valor da propriedade correspondente na classe NewTool
-                    Dim prop As PropertyInfo = GetType(NewTool).GetProperty(propName)
-                    'Correcting name
-                    If IsNumeric(paramValue) Then
-                        paramValue = paramValue.Replace(",", ".")
-                    End If
-                    If (paramValue = "FSA") Then paramValue = "FRAISA" 'TODO check list to show right name
-                    prop.SetValue(newTool, Convert.ChangeType(paramValue, prop.PropertyType), Nothing)
-                End If
-            Next
-        Next
-        FillDataGrid(newTool, Main.NewToolDataGridView)
-
-        Debug.WriteLine(newTool)
+        'AddFraisaTool("15520501")
     End Sub
 
     Private Sub MenuItemCheckedItem(name As String, sender As Object, e As EventArgs)

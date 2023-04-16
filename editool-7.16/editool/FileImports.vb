@@ -156,12 +156,12 @@ Module FileImports
 
                 'Dim sas As List(Of NewTool) = Main.toolsList.Tool
 
-                Main.toolsList.Tool.Add(newTool)
+                Main.toolsList.Tool.Add(newTool, Main.NewToolDataGridView)
 
             End If
         End While
 
-        Refresh_outil(newTool)
+        Refresh_outil(newTool, Main.ToolPreview_PictureBox)
 
     End Sub
 
@@ -174,12 +174,13 @@ Module FileImports
 
         ' End If
 
-        Dim objList() As String = {"ref", "D", "SD", "CTS_AD", "OL", "L", "CTS_AL", "AngDeg", "NoTT", "chf", "manuf"}
+        Dim objList() As String = {"Name", "ref", "D", "SD", "CTS_AD", "OL", "L", "CTS_AL", "AngDeg", "NoTT", "chf", "manuf"}
 
         tmpData = SetDataGridColumnsTitle(objList, tmpData)
 
         With NewTool
             Dim row As New List(Of String) From {
+            .Name,
             .ManufRef,
             .D1,
             .D3,
@@ -195,8 +196,9 @@ Module FileImports
 
             tmpData.Rows.add(row.ToArray())
         End With
-        Main.NewToolDataGridView.DataSource = tmpData
-        Refresh_outil(NewTool)
+
+        DGV.DataSource = tmpData
+        Refresh_outil(NewTool, Main.ToolPreview_PictureBox)
     End Sub
 
     Public Sub OpenXmlFile()

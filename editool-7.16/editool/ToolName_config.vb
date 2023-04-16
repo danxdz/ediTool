@@ -11,28 +11,40 @@ Public Class ToolName_config
         My.Settings.MaskTT_ALFI = MaskTT_AL.Text
         My.Settings.Save()
         Me.Hide()
-        Set_Name_auto()
+        ' Set_Name_auto(filtered) 'TODO
     End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles CancelBt.Click
         Me.Hide()
     End Sub
     Private Sub MaskTT_FR_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_FR.TextChanged
         My.Settings.MaskTT_FR = Me.MaskTT_FR.Text
+        My.Settings.Save()
+
     End Sub
     Private Sub MaskTT_FT_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_FT.TextChanged
         My.Settings.MaskTT_FT = Me.MaskTT_FT.Text
+        My.Settings.Save()
+
     End Sub
     Private Sub MaskTT_FB_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_FB.TextChanged
         My.Settings.MaskTT_FB = Me.MaskTT_FB.Text
+        My.Settings.Save()
+
     End Sub
     Private Sub MaskTT_FP_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_FOC9.TextChanged
         My.Settings.MaskTT_FOP9 = Me.MaskTT_FOC9.Text
+        My.Settings.Save()
+
     End Sub
     Private Sub MaskTT_FO_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_FO.TextChanged
         My.Settings.MaskTT_FOCA = Me.MaskTT_FO.Text
+        My.Settings.Save()
+
     End Sub
     Private Sub MaskTT_AL_TextChanged(sender As Object, e As EventArgs) Handles MaskTT_AL.TextChanged
         My.Settings.MaskTT_ALFI = Me.MaskTT_AL.Text
+        My.Settings.Save()
+
     End Sub
 
     Private Sub ToolName_config_Load(sender As Object, e As EventArgs) Handles MyBase.Load
