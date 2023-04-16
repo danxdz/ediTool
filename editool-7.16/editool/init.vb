@@ -36,7 +36,7 @@ Module Init
             Return value
         End If
     End Function
-    Function Pick_param(param As String)
+    Function Pick_param_old(param As String)
         Select Case param
             Case "D" : Return Main.D_textbox.Text
             Case "L" : Return Main.L_textbox.Text
@@ -52,15 +52,28 @@ Module Init
                 MsgBox("param < " + param + " > not found, check outil name mask config")
         End Select
     End Function
-
+    Function Pick_param(param As String, newTool As NewTool)
+        Select Case param
+            Case "D" : Return newTool.D1
+            Case "L" : Return newTool.L1
+            Case "OL" : Return newTool.L3
+            Case "SD" : Return newTool.D3
+            Case "CTS_AL" : Return Check_zero(param, newTool.L2)
+            Case "CTS_EL" : Return Check_zero(param, newTool.L2) ' TODO
+            Case "CTS_AD" : Return Check_zero(param, newTool.D2)
+            Case "NoTT" : Return newTool.NoTT
+            Case "A" : Return newTool.Chanfrein
+            Case "r" : Return newTool.RayonBout
+            Case Else
+                MsgBox("param < " + param + " > not found, check outil name mask config")
+        End Select
+    End Function
     Public Sub Set_Name_auto(newTool As NewTool)
 
         If Main.ForceName_checkBox.Checked = False Then
             Try
                 Dim Namemask As String = ToolName_config.Namemask_textbox.Text
-                Dim ToolType = My.Settings.NameMask
 
-                ''Dim temp As String = ToolType + " " + Namemask
                 Dim temp As String = Namemask
                 Dim formated As String = ""
                 Dim tempL, res, code_temp As String
@@ -77,7 +90,7 @@ Module Init
                             If Left(code_temp, 1) = "]" Then
                                 Dim parameter_temp As String = Left(temp, j)
                                 res = Right(parameter_temp, parameter_temp.Length - 1)
-                                formated += Pick_param(res)
+                                formated += Pick_param(res, newTool).ToString
                                 j = temp.Length
                             End If
                             code_temp = Right(code_temp, code_temp.Length - 1)

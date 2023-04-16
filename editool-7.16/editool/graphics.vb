@@ -1,18 +1,15 @@
 ﻿Option Explicit On
 Module graphics
-
-
     Public Sub Refresh_outil(newTool As NewTool, ToolPreview_PictureBox As PictureBox)
 
-        If Main.started Then
+        'If Main.started Then
 
-            Try
-
-                Dim w As Integer = Main.ToolPreview_PictureBox.Width
-                Dim StartY As Integer = Main.ToolPreview_PictureBox.Height
+        Try
+                Dim w As Integer = ToolPreview_PictureBox.Width
+                Dim StartY As Integer = ToolPreview_PictureBox.Height
                 Dim myPen = New Pen(Brushes.Black, 1)
                 Dim myPenRED = New Pen(Brushes.Red, 1)
-                Dim myOutil As Drawing.Graphics = Main.ToolPreview_PictureBox.CreateGraphics
+                Dim myOutil As Drawing.Graphics = ToolPreview_PictureBox.CreateGraphics
                 Dim BG_color As Drawing.Color = Drawing.Color.Gainsboro
 
                 Dim CUT_color As New SolidBrush(Drawing.Color.Orange)
@@ -24,24 +21,23 @@ Module graphics
 
                 Dim half_h As Integer = StartY / 2
 
-                Dim D As Decimal = newTool.D1 'Replace(Main.D_textbox.Text, ".", ",")
-                Dim CTS_AD As Double = newTool.D2 'Replace(Main.CTS_AD_textbox.Text, ".", ",")
-                Dim SD As Double = newTool.D3 'Replace(Main.SD_textbox.Text, ".", ",")
-                Dim L As Double = newTool.L1 'Replace(Main.L_textbox.Text, ".", ",")
-                Dim CTS_AL As Double = newTool.L2 'Replace(Main.CTS_AL_textbox.Text, ".", ",")
-                Dim OL As Double = newTool.L3 'Replace(Main.OL_textbox.Text, ".", ",")
-                Dim Alpha As Double = newTool.AngleDeg 'Replace(Main.alpha.Text, ".", ",")
-                Dim r As Double = newTool.RayonBout 'Replace(Main.Chf_textbox.Text, ".", ",")
-                Dim A_point = Replace(Main.A_TextBox.Text, ".", ",")
-                A_point /= 2
+                Dim D As Decimal = newTool.D1
+                Dim CTS_AD As Double = newTool.D2
+                Dim SD As Double = newTool.D3
+                Dim L As Double = newTool.L1
+                Dim CTS_AL As Double = newTool.L2
+                Dim OL As Double = newTool.L3
+                Dim Alpha As Double = newTool.AngleDeg
+                Dim r As Double = newTool.RayonBout
+            Dim A_point As Double = newTool.Chanfrein
+            A_point /= 2
 
-                Dim scale As Double = (w - 1) / OL
+            Dim scale As Double = (w - 1) / OL
                 Dim drawFont As New Font("Arial", 8)
                 Dim drawBrush As New SolidBrush(Drawing.Color.Black)
                 Dim drawFormat As New StringFormat With {
                     .Alignment = StringAlignment.Center
                 }
-
 
                 Dim D_tmp As Decimal = StartY - ((D / 2) * scale)
                 Dim SD_tmp As Decimal = StartY - ((SD / 2) * scale)
@@ -50,12 +46,15 @@ Module graphics
                 Dim L_tmp As Decimal = L * scale
                 Dim CTS_AL_tmp As Decimal = CTS_AL * scale
 
-                Dim R_tmp As Decimal = StartY - (r * scale)
+            Dim R_tmp As Decimal = StartY - (r * scale)
+            Dim A_tmp As Decimal
+            Try
+                A_tmp = ((D / 2) / (Math.Tan((A_point * Math.PI) / 180)) * scale)
+            Catch ex As Exception
+                A_tmp = 0
+            End Try
 
-
-                Dim A_tmp As Decimal = ((D / 2) / (Math.Tan((A_point * Math.PI) / 180)) * scale)
-
-                Dim CTS_ED_tmp As Decimal
+            Dim CTS_ED_tmp As Decimal
                 If CTS_AD > 0 Then
                     CTS_ED_tmp = CTS_AD_tmp
                 Else
@@ -79,20 +78,19 @@ Module graphics
                 'half revolved preview tool 
                 'CUT
                 'FR 2T et Alesoir *************************
-                'If My.Settings.ToolType = "FR2T" Or My.Settings.ToolType = "ALFI" Then
                 '
                 If newTool.Type = "FR2T" Or newTool.Type = "ALFI" Then
                     myOutil.FillRectangle(Brushes.Orange, 0, D_tmp, L_tmp, StartY - D_tmp)
                     'contour
                     myOutil.DrawLine(myPen, 0, StartY, 0, D_tmp)
                     myOutil.DrawLine(myPen, 0, D_tmp, L_tmp, D_tmp)
-                ElseIf newtool.Type = "FRHE" Then
+                ElseIf newTool.Type = "FRHE" Then
                     'FR Spherique ***********************
                     myOutil.FillEllipse(Brushes.Black, 0, D_tmp, (StartY - D_tmp) * 2, (StartY - D_tmp) * 2)
                     myOutil.FillEllipse(Brushes.Orange, 1, D_tmp + 1, ((StartY - D_tmp) * 2), (StartY - D_tmp) * 2)
                     myOutil.FillRectangle(Brushes.Orange, (StartY - D_tmp), D_tmp, L_tmp - (StartY - D_tmp), StartY - D_tmp)
                     myOutil.DrawLine(myPen, (StartY - D_tmp), D_tmp, L_tmp, D_tmp)
-                ElseIf newtool.Type = "FRTO" Then
+                ElseIf newTool.Type = "FRTO" Then
                     'FR Torique ***********************
                     myOutil.FillEllipse(Brushes.Black, 0, D_tmp, (StartY - R_tmp) * 2, (StartY - R_tmp) * 2)
                     myOutil.FillEllipse(Brushes.Orange, 1, D_tmp + 1, ((StartY - R_tmp) * 2), (StartY - R_tmp) * 2)
@@ -153,11 +151,12 @@ Module graphics
                     myOutil.DrawLine(myPen, CTS_EL_tmp, SD_tmp, OL_tmp, SD_tmp)
                     myOutil.DrawLine(myPen, OL_tmp, SD_tmp, OL_tmp, StartY)
                 End If
+
+
+                'Red axe at tool center
                 Dim axe_big As Integer = w / 20
                 Dim axe_petite As Integer = axe_big / 8
                 Dim space As Integer = 0
-
-
 
                 For x As Integer = 1 To 10
                     myOutil.DrawLine(myPenRED, space, StartY - 1, axe_petite + space, StartY - 1)
@@ -166,14 +165,14 @@ Module graphics
                     space = space + axe_big + 10
                 Next
 
-                Set_Name_auto(newTool)
+            'Set_Name_auto(newTool)
 
 
-            Catch ex As Exception
+        Catch ex As Exception
                 '      MsgBox("GRAPHICS - design - " + ex.ToString)
             End Try
 
-        End If
+        ' End If
 
     End Sub
 

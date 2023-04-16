@@ -44,7 +44,15 @@ Public Class ImportTool
             End If
         Next
 
-        Dim xmlFile As String = GetFile()
+
+
+        Dim xmlFile As String
+
+        If Main.debugMode = True Then
+            xmlFile = "15520501.xml" '"15520260.xml"
+        Else
+            xmlFile = GetFile()
+        End If
 
         Dim documentoXml As New XmlDocument()
 
@@ -82,7 +90,7 @@ Public Class ImportTool
         newTool.Name = Main.Name_textbox.Text
 
         FillDataGrid(newTool, DataGridView1)
-
+        Refresh_outil(newTool, ToolPreview_PictureBox)
         Debug.WriteLine(newTool)
     End Sub
 
@@ -103,7 +111,7 @@ Public Class ImportTool
             Try
                 Dim cliente As New WebClient()
                 Dim resposta As String = cliente.DownloadString(url)
-                If resposta = "Exception occurred - please contact support" Then
+                If resposta = "Exception occured - please contact support" Then
                     outputLabel.Text = "Tool not found"
                     Return ""
                 End If

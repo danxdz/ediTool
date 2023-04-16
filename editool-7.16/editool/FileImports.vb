@@ -166,9 +166,40 @@ Module FileImports
     End Sub
 
     Public Sub FillDataGrid(NewTool As NewTool, DGV As DataGridView)
+        Dim objProperties() As String = {"Name", "ManufRef", "D1", "D3", "D2", "L3", "L1", "L2", "AngleDeg", "NoTT", "Chanfrein", "Manuf"}
+        Dim tmpData As Data.DataTable = If(DGV.DataSource, New Data.DataTable())
 
-        Dim tmpData = New System.Data.DataTable
+        If tmpData.Columns.Count = 0 Then
+            For Each prop As String In objProperties
+                Dim propInfo = GetType(NewTool).GetProperty(prop)
+                Dim value = propInfo.GetValue(NewTool)
+                If Not String.IsNullOrEmpty(value) Then
+                    tmpData.Columns.Add(prop)
+                End If
+            Next
+        End If
 
+        Dim row As New List(Of String)
+        For Each prop As String In objProperties
+            Dim propInfo = GetType(NewTool).GetProperty(prop)
+            Dim value = propInfo.GetValue(NewTool)
+            If Not String.IsNullOrEmpty(value) Then
+                row.Add(value)
+            End If
+        Next
+
+        tmpData.Rows.Add(row.ToArray())
+        DGV.DataSource = tmpData
+        'Refresh_outil(NewTool, ToolPreview_PictureBox)
+    End Sub
+
+
+
+    Public Sub FillDataGrid_old(NewTool As NewTool, DGV As DataGridView)
+
+        Dim tmpData = New Data.DataTable
+
+        tmpData = ImportTool.DataGridView1.DataSource
         'If Main.toolsList.items.Count > 0 Then
         'tmpData = Main.toolsList.items
 
@@ -433,35 +464,34 @@ Module FileImports
                     'ListBox1.Items.Add(tblcols.Item(2).InnerHtml & " - " & tblcols.Item(3).InnerHtml & " - " & tblcols.Item(4).InnerHtml & " - " & tblcols.Item(8).InnerHtml)
 
                     Preload.ToolCount()
+                    With newTool
+                        .Type = tblcols.Item(1).InnerHtml
+                        .GroupeMat = tblcols.Item(2).InnerHtml
+                        .d1 = tblcols.Item(3).InnerHtml
+                        .d2 = tblcols.Item(3).InnerHtml - 0.2
+                        .l1 = tblcols.Item(4).InnerHtml
+                        If tblcols.Item(5).InnerHtml > 0 Then
+                            .L2 = tblcols.Item(5).InnerHtml
+                        Else
+                            .L2 = newTool.L1
+                        End If
+                        .l3 = tblcols.Item(6).InnerHtml
+                        .d3 = tblcols.Item(7).InnerHtml
+                        .nott = tblcols.Item(8).InnerHtml
+                        .RayonBout = tblcols.Item(9).InnerHtml
+                        .Chanfrein = tblcols.Item(10).InnerHtml
+                        .CoupeCentre = tblcols.Item(11).InnerHtml
+                        .ArrCentre = tblcols.Item(12).InnerHtml
+                        .TypeTar = tblcols.Item(13).InnerHtml
+                        .PasTar = tblcols.Item(14).InnerHtml
+                        .Manuf = tblcols.Item(15).InnerHtml
+                        .ManufRef = tblcols.Item(16).InnerHtml
+                        .ManufRefSec = Replace(tblcols.Item(17).InnerHtml, "    ", "")
+                        '.Link = tblcols.Item(18).InnerHtml
+                        .Code = tblcols.Item(21).InnerHtml
+                        .CodeBar = tblcols.Item(22).InnerHtml
 
-                        With newTool
-                            .Type = tblcols.Item(1).InnerHtml
-                            .GroupeMat = tblcols.Item(2).InnerHtml
-                            .d1 = tblcols.Item(3).InnerHtml
-                            .d2 = tblcols.Item(3).InnerHtml - 0.2
-                            .l1 = tblcols.Item(4).InnerHtml
-                            If tblcols.Item(5).InnerHtml > 0 Then
-                                .L2 = tblcols.Item(5).InnerHtml
-                            Else
-                                .L2 = newTool.L1
-                            End If
-                            .l3 = tblcols.Item(6).InnerHtml
-                            .d3 = tblcols.Item(7).InnerHtml
-                            .nott = tblcols.Item(8).InnerHtml
-                            .RayonBout = tblcols.Item(9).InnerHtml
-                            .Chanfrein = tblcols.Item(10).InnerHtml
-                            .CoupeCentre = tblcols.Item(11).InnerHtml
-                            .ArrCentre = tblcols.Item(12).InnerHtml
-                            .TypeTar = tblcols.Item(13).InnerHtml
-                            .PasTar = tblcols.Item(14).InnerHtml
-                            .Manuf = tblcols.Item(15).InnerHtml
-                            .ManufRef = tblcols.Item(16).InnerHtml
-                            .ManufRefSec = Replace(tblcols.Item(17).InnerHtml, "    ", "")
-                            '.Link = tblcols.Item(18).InnerHtml
-                            .Code = tblcols.Item(21).InnerHtml
-                            .CodeBar = tblcols.Item(22).InnerHtml
-
-                            Dim rowTmp() As String = {
+                        Dim rowTmp() As String = {
                                 stockVal,
                                 .Type,
                                 .GroupeMat,
@@ -477,21 +507,18 @@ Module FileImports
                                 .ArrCentre,
                                 .TypeTar,
                                 .PasTar,
-                                .Manuf,
-                                .ManufRef,
-                                .ManufRefSec,
-                                .Code,
-                                .CodeBar
-                            }
-
-                            DataTableOrderTools.Rows.Add(rowTmp)
-
-                        End With
-
-                        filterD1 = AddFiltersCombobox(newTool.d1, filterD1)
-                        filterL1 = AddFiltersCombobox(newTool.l1, filterL1)
-                        filterMat = AddFiltersStringCombobox(newTool.GroupeMat, filterMat)
-                        .toolsList.Tool.Add(newTool)
+.Manuf,
+.ManufRef,
+.ManufRefSec,
+.Code,
+.CodeBar
+}
+                        DataTableOrderTools.Rows.Add(rowTmp)
+                    End With
+                    filterD1 = AddFiltersCombobox(newTool.d1, filterD1)
+                    filterL1 = AddFiltersCombobox(newTool.l1, filterL1)
+                    filterMat = AddFiltersStringCombobox(newTool.GroupeMat, filterMat)
+                    .toolsList.Tool.Add(newTool)
                     'FileImports.FillDataGrid(newTool, NewToolDataGridView)
                     ' End If
 
@@ -515,12 +542,9 @@ Module FileImports
             With .filterMat_ComboBox
                 .DataSource = filterMat
             End With
-
             EndLoadTimer = Now().ToUniversalTime
-
             .timer_label.Text = DateDiff(DateInterval.Second, StartLoadTimer, EndLoadTimer)
         End With
-
     End Sub
 
     Private Sub OrderAndSetComboBoxDataSource(list As List(Of String), combobox As ComboBox)

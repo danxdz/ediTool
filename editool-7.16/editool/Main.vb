@@ -7,6 +7,8 @@ Imports System.Windows.Controls
 
 Public Class Main
 
+    Public ReadOnly debugMode As Boolean = True
+
     Public ReadOnly toolsList = New ToolList
 
     Public filteredTools = New ToolList
@@ -188,11 +190,16 @@ Public Class Main
     End Sub
 
 
-    Private Sub Chf_textbox_LostFocus(sender As Object, e As EventArgs) Handles A_TextBox.LostFocus, D_textbox.LostFocus, L_textbox.LostFocus, CTS_AL_textbox.LostFocus, Chf_textbox.LostFocus, NoTT.LostFocus, OL_textbox.LostFocus, SD_textbox.LostFocus, CTS_AD_textbox.LostFocus
+    Private Sub inputBoxes_LostFocus(sender As Object, e As EventArgs) Handles A_TextBox.LostFocus, D_textbox.LostFocus, L_textbox.LostFocus, CTS_AL_textbox.LostFocus, Chf_textbox.LostFocus, NoTT.LostFocus, OL_textbox.LostFocus, SD_textbox.LostFocus, CTS_AD_textbox.LostFocus
+        Try
+            If NewToolDataGridView.Rows.Count > 0 Then
+                Dim i As Integer = NewToolDataGridView.CurrentRow().Index
+                Refresh_outil(filteredTools(0), ToolPreview_PictureBox)
+            End If
+        Catch ex As Exception
 
-        Dim i As Integer = NewToolDataGridView.CurrentRow().Index
+        End Try
 
-        Refresh_outil(filteredTools(i), ToolPreview_PictureBox)
     End Sub
 
     Private Sub ORDERTOOLS_ToolStripButton_Click(sender As Object, e As EventArgs) Handles OrderTools_ToolStripButton.Click

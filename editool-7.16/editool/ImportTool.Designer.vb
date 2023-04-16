@@ -54,9 +54,9 @@ Partial Class ImportTool
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 181)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 107)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(682, 64)
+        Me.DataGridView1.Size = New System.Drawing.Size(682, 138)
         Me.DataGridView1.TabIndex = 2
         '
         'outputLabel
