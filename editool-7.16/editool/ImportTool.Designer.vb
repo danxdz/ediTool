@@ -26,15 +26,17 @@ Partial Class ImportTool
         Me.ToolPreview_PictureBox = New System.Windows.Forms.PictureBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.outputLabel = New System.Windows.Forms.Label()
-        Me.find_Bt = New System.Windows.Forms.Button()
+        Me.findBt = New System.Windows.Forms.Button()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
+        Me.createBt = New System.Windows.Forms.Button()
+        Me.saveBt = New System.Windows.Forms.Button()
         CType(Me.ToolPreview_PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RefTextBox
         '
-        Me.RefTextBox.Location = New System.Drawing.Point(12, 24)
+        Me.RefTextBox.Location = New System.Drawing.Point(12, 35)
         Me.RefTextBox.Name = "RefTextBox"
         Me.RefTextBox.Size = New System.Drawing.Size(199, 20)
         Me.RefTextBox.TabIndex = 0
@@ -63,28 +65,48 @@ Partial Class ImportTool
         '
         Me.outputLabel.AutoSize = True
         Me.outputLabel.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.outputLabel.Location = New System.Drawing.Point(12, 58)
+        Me.outputLabel.Location = New System.Drawing.Point(12, 9)
         Me.outputLabel.Name = "outputLabel"
         Me.outputLabel.Size = New System.Drawing.Size(56, 18)
         Me.outputLabel.TabIndex = 3
         Me.outputLabel.Text = "Label1"
         Me.outputLabel.Visible = False
         '
-        'find_Bt
+        'findBt
         '
-        Me.find_Bt.Location = New System.Drawing.Point(225, 24)
-        Me.find_Bt.Name = "find_Bt"
-        Me.find_Bt.Size = New System.Drawing.Size(75, 23)
-        Me.find_Bt.TabIndex = 4
-        Me.find_Bt.Text = "Find"
-        Me.find_Bt.UseVisualStyleBackColor = True
+        Me.findBt.Location = New System.Drawing.Point(217, 33)
+        Me.findBt.Name = "findBt"
+        Me.findBt.Size = New System.Drawing.Size(75, 23)
+        Me.findBt.TabIndex = 4
+        Me.findBt.Text = "Find"
+        Me.findBt.UseVisualStyleBackColor = True
+        '
+        'createBt
+        '
+        Me.createBt.Location = New System.Drawing.Point(619, 54)
+        Me.createBt.Name = "createBt"
+        Me.createBt.Size = New System.Drawing.Size(75, 47)
+        Me.createBt.TabIndex = 5
+        Me.createBt.Text = "create"
+        Me.createBt.UseVisualStyleBackColor = True
+        '
+        'saveBt
+        '
+        Me.saveBt.Location = New System.Drawing.Point(538, 54)
+        Me.saveBt.Name = "saveBt"
+        Me.saveBt.Size = New System.Drawing.Size(75, 47)
+        Me.saveBt.TabIndex = 6
+        Me.saveBt.Text = "save"
+        Me.saveBt.UseVisualStyleBackColor = True
         '
         'ImportTool
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(706, 395)
-        Me.Controls.Add(Me.find_Bt)
+        Me.Controls.Add(Me.saveBt)
+        Me.Controls.Add(Me.createBt)
+        Me.Controls.Add(Me.findBt)
         Me.Controls.Add(Me.outputLabel)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.ToolPreview_PictureBox)
@@ -102,6 +124,8 @@ Partial Class ImportTool
     Friend WithEvents ToolPreview_PictureBox As PictureBox
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents outputLabel As Label
-    Friend WithEvents find_Bt As Button
+    Friend WithEvents findBt As Button
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents createBt As Button
+    Friend WithEvents saveBt As Button
 End Class

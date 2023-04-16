@@ -5,6 +5,7 @@ Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports System.Xml
 
 Public Class ImportTool
+    ReadOnly newTool As New NewTool()
 
 
     Private Sub ImportTool_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -49,7 +50,7 @@ Public Class ImportTool
         Dim xmlFile As String
 
         If Main.debugMode = True Then
-            xmlFile = "15520501.xml" '"15520260.xml"
+            xmlFile = Me.RefTextBox.Text + ".xml" '  "15520501.xml" '"15520260.xml"
         Else
             xmlFile = GetFile()
         End If
@@ -63,7 +64,6 @@ Public Class ImportTool
         Dim toolNode As XmlNode = xmlDoc.SelectSingleNode("//Tool")
 
         ' Cria uma nova instância da classe NewTool
-        Dim newTool As New NewTool()
 
         For Each node As XmlNode In toolNode.ChildNodes
             ' Aqui você pode percorrer todos os parâmetros de cada toolNode
@@ -94,7 +94,7 @@ Public Class ImportTool
         Debug.WriteLine(newTool)
     End Sub
 
-    Private Sub find_Bt_Click(sender As Object, e As EventArgs) Handles find_Bt.Click
+    Private Sub find_Bt_Click(sender As Object, e As EventArgs) Handles findBt.Click
         AddFraisaTool()
     End Sub
 
@@ -129,6 +129,8 @@ Public Class ImportTool
         outputLabel.Visible = True
     End Function
 
-
-
+    Private Sub saveBt_Click(sender As Object, e As EventArgs) Handles saveBt.Click
+        Dim service As New FirestoreService
+        service.AddToolAsync(newTool)
+    End Sub
 End Class

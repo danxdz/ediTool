@@ -192,20 +192,22 @@ Module ts
 
     End Class
 
-
-
     ReadOnly keyPath As String = "SOFTWARE\TOPSOLID\TopSolid'Cam"
 
     'Function to get the last subkey of a given key from registry
     Public Function GetVersion()
+        Try
+            Dim subKeys() As String = Registry.LocalMachine.OpenSubKey(keyPath).GetSubKeyNames()
 
-        Dim subKeys() As String = Registry.LocalMachine.OpenSubKey(keyPath).GetSubKeyNames()
+            If subKeys.Length > 0 Then
+                Return subKeys(subKeys.Length - 1)
+            Else
+                Return ""
+            End If
+        Catch ex As Exception
+            Return "not found" ' TODO
+        End Try
 
-        If subKeys.Length > 0 Then
-            Return subKeys(subKeys.Length - 1)
-        Else
-            Return ""
-        End If
     End Function
 
     Public Function GetTopSolidPath()

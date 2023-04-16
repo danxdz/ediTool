@@ -57,6 +57,14 @@ Public Class Main
         FillMainMenu(language)
         FillUI(language)
 
+        Dim service = New FirestoreService()
+        Dim tools = service.GetTools("FR2T")
+        For Each tool As NewTool In tools
+            toolsList.Tool.add(tool)
+            filteredTools.Tool.add(tool)
+
+            FillDataGrid(tool, NewToolDataGridView)
+        Next
 
         'Dim type As String = My.Settings.ToolType
 
@@ -102,7 +110,7 @@ Public Class Main
             ''Set_Name_auto()
         End If
     End Sub
-    Private Sub ValidateBt_Click_1(sender As Object, e As EventArgs) Handles ValidateBt.Click
+    Private Sub ValidateBt_Click_1(sender As Object, e As EventArgs) Handles createBt.Click
         If NewToolDataGridView.CurrentRow Is Nothing Then
 
         Else
@@ -111,8 +119,8 @@ Public Class Main
             Dim newTool As NewTool
             If filteredTools IsNot Nothing Then
 
-                If filteredTools.count > 0 Then
-                    newTool = filteredTools(i)
+                If filteredTools.Tool.count > 0 Then
+                    newTool = filteredTools.Tool(i)
                 Else
                     newTool = toolsList.Tool(i)
                 End If
@@ -264,15 +272,15 @@ Public Class Main
                 'End If
                 'indexLabel.Text = i
                 Try
-                    If filteredTools.Count > 0 Then
-                        D_textbox.Text = filteredTools(i).D1
-                        L_textbox.Text = filteredTools(i).L1
+                    If filteredTools.Tool.Count > 0 Then
+                        D_textbox.Text = filteredTools.Tool(i).D1
+                        L_textbox.Text = filteredTools.Tool(i).L1
 
-                        CTS_AD_textbox.Text = filteredTools(i).D2
-                        CTS_AL_textbox.Text = filteredTools(i).L2
+                        CTS_AD_textbox.Text = filteredTools.Tool(i).D2
+                        CTS_AL_textbox.Text = filteredTools.Tool(i).L2
 
-                        SD_textbox.Text = filteredTools(i).D3
-                        OL_textbox.Text = filteredTools(i).L3
+                        SD_textbox.Text = filteredTools.Tool(i).D3
+                        OL_textbox.Text = filteredTools.Tool(i).L3
                     Else
                         D_textbox.Text = toolsList.Tool(i).D1
                         L_textbox.Text = toolsList.Tool(i).L1
@@ -285,6 +293,7 @@ Public Class Main
                     End If
 
                     Refresh_outil(toolsList.Tool(i), ToolPreview_PictureBox)
+                    Init.Set_Name_auto(toolsList.Tool(i))
                 Catch ex As Exception
                     MsgBox("tool data error") 'TODO
                 End Try
@@ -469,7 +478,7 @@ Public Class Main
         ToolTip1.Show("groupe matiere", filterMat_ComboBox)
     End Sub
 
-    Private Sub FR2T_Click(sender As Object, e As EventArgs) Handles FR2T.Click, FRTO.Click, FRBO.Click
+    Private Sub toolType_Click(sender As Object, e As EventArgs) Handles FR2T.Click, FRTO.Click, FRBO.Click
         ToolTypeButton_Click(sender, e)
         Console.Write(e.ToString)
     End Sub

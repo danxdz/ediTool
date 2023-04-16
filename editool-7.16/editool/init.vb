@@ -159,7 +159,7 @@ Module Init
                 Next
                 Main.ForceName_checkBox.Text = lines(labels.Length + 1).Split(";")(languageIndex)
                 Main.AutoOpen_checkBox.Text = lines(labels.Length + 2).Split(";")(languageIndex)
-                Main.ValidateBt.Text = lines(labels.Length + 3).Split(";")(languageIndex)
+                Main.createBt.Text = lines(labels.Length + 3).Split(";")(languageIndex)
                 Main.DefineName_Bt.Text = lines(labels.Length + 4).Split(";")(languageIndex)
                 Main.toolRef_checkBox.Text = lines(labels.Length + 5).Split(";")(languageIndex)
                 Main.toolDiam_checkBox.Text = lines(5).Split(";")(languageIndex)

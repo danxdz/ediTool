@@ -62,7 +62,7 @@ Partial Class Main
         Me.ForceName_checkBox = New System.Windows.Forms.CheckBox()
         Me.DefineName_Bt = New System.Windows.Forms.Button()
         Me.Lang_en = New System.Windows.Forms.Button()
-        Me.ValidateBt = New System.Windows.Forms.Button()
+        Me.createBt = New System.Windows.Forms.Button()
         Me.AutoOpen_checkBox = New System.Windows.Forms.CheckBox()
         Me.FR2T = New System.Windows.Forms.ToolStripButton()
         Me.FRTO = New System.Windows.Forms.ToolStripButton()
@@ -497,17 +497,17 @@ Partial Class Main
         Me.Lang_en.Text = "en"
         Me.Lang_en.UseVisualStyleBackColor = True
         '
-        'ValidateBt
+        'createBt
         '
-        Me.ValidateBt.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ValidateBt.Font = New System.Drawing.Font("Microsoft YaHei", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ValidateBt.Location = New System.Drawing.Point(873, 550)
-        Me.ValidateBt.Name = "ValidateBt"
-        Me.ValidateBt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ValidateBt.Size = New System.Drawing.Size(130, 46)
-        Me.ValidateBt.TabIndex = 50
-        Me.ValidateBt.Text = "creer outil"
-        Me.ValidateBt.UseVisualStyleBackColor = True
+        Me.createBt.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.createBt.Font = New System.Drawing.Font("Microsoft YaHei", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.createBt.Location = New System.Drawing.Point(873, 550)
+        Me.createBt.Name = "createBt"
+        Me.createBt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.createBt.Size = New System.Drawing.Size(130, 46)
+        Me.createBt.TabIndex = 50
+        Me.createBt.Text = "creer outil"
+        Me.createBt.UseVisualStyleBackColor = True
         '
         'AutoOpen_checkBox
         '
@@ -887,7 +887,7 @@ Partial Class Main
         Me.Controls.Add(Me.filterD1_Combobox)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.A_TextBox)
-        Me.Controls.Add(Me.ValidateBt)
+        Me.Controls.Add(Me.createBt)
         Me.Controls.Add(Me.AutoOpen_checkBox)
         Me.Controls.Add(Me.DefineName_Bt)
         Me.Controls.Add(Me.ForceName_checkBox)
@@ -955,7 +955,7 @@ Partial Class Main
     Friend WithEvents ForceName_checkBox As CheckBox
     Friend WithEvents DefineName_Bt As Button
     Friend WithEvents Lang_en As Button
-    Friend WithEvents ValidateBt As Button
+    Friend WithEvents createBt As Button
     Friend WithEvents AutoOpen_checkBox As CheckBox
     Friend WithEvents FR2T As ToolStripButton
     Friend WithEvents FRTO As ToolStripButton
