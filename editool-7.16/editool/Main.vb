@@ -7,7 +7,7 @@ Imports System.Windows.Controls
 
 Public Class Main
 
-    Public ReadOnly debugMode As Boolean = True
+    Public ReadOnly debugMode As Boolean = False 'True
 
     Public ReadOnly toolsList = New ToolList
 
@@ -214,7 +214,7 @@ Public Class Main
         GetOrderTools()
     End Sub
 
-    Private Sub NewToolDataGridView_MouseDown(sender As Object, e As MouseEventArgs) Handles NewToolDataGridView.MouseDown
+    Private Sub NewToolDataGridView_MouseDown(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Right Then
             Try
                 '  DataGridView1.CurrentCell = DataGridView1(e.ColumnIndex, e.RowIndex)
@@ -258,7 +258,7 @@ Public Class Main
     '    End Try
     'End Sub
 
-    Private Sub NewToolDataGridView_MouseUp(sender As Object, e As MouseEventArgs) Handles NewToolDataGridView.MouseUp
+    Private Sub NewToolDataGridView_MouseUp(sender As Object, e As MouseEventArgs)
         If e.Button = MouseButtons.Left Then
             started = True
             Dim num As Integer = NewToolDataGridView.SelectedRows().Count
@@ -499,7 +499,7 @@ Public Class Main
 
     End Sub
 
-    Private Sub Button1_ClickAsync(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_ClickAsync(sender As Object, e As EventArgs) Handles saveBt.Click
         Dim service As New FirestoreService()
         Dim i As Integer = NewToolDataGridView.CurrentRow().Index
         service.AddToolAsync(filteredTools(i))

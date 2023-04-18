@@ -341,6 +341,9 @@ Module Init
             Case "FRAISA"
                 ImportFraisa()
                 ' Call other function here
+            Case "topsolid"
+                OpenV6File()
+                ' Call other function here
             Case "OtherFunction"
                 ' Call other function here
             Case Else

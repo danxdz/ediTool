@@ -77,7 +77,6 @@ Partial Class Main
         Me.A_TextBox = New System.Windows.Forms.TextBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.filterD1_Combobox = New System.Windows.Forms.ComboBox()
-        Me.NewToolDataGridView = New System.Windows.Forms.DataGridView()
         Me.newToolMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
@@ -95,11 +94,18 @@ Partial Class Main
         Me.toolIcons = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.saveBt = New System.Windows.Forms.Button()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
         CType(Me.ToolPreview_PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.newToolMenu.SuspendLayout()
         Me.toolIcons.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'OpenFileDialog1
@@ -253,7 +259,7 @@ Partial Class Main
         'ToolPreview_PictureBox
         '
         Me.ToolPreview_PictureBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ToolPreview_PictureBox.BackColor = System.Drawing.Color.Gainsboro
+        Me.ToolPreview_PictureBox.BackColor = System.Drawing.Color.Transparent
         Me.ToolPreview_PictureBox.Location = New System.Drawing.Point(480, 111)
         Me.ToolPreview_PictureBox.Margin = New System.Windows.Forms.Padding(0)
         Me.ToolPreview_PictureBox.Name = "ToolPreview_PictureBox"
@@ -501,10 +507,10 @@ Partial Class Main
         '
         Me.createBt.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.createBt.Font = New System.Drawing.Font("Microsoft YaHei", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.createBt.Location = New System.Drawing.Point(873, 550)
+        Me.createBt.Location = New System.Drawing.Point(863, 550)
         Me.createBt.Name = "createBt"
         Me.createBt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.createBt.Size = New System.Drawing.Size(130, 46)
+        Me.createBt.Size = New System.Drawing.Size(130, 37)
         Me.createBt.TabIndex = 50
         Me.createBt.Text = "creer outil"
         Me.createBt.UseVisualStyleBackColor = True
@@ -673,18 +679,6 @@ Partial Class Main
         Me.filterD1_Combobox.TabIndex = 59
         Me.filterD1_Combobox.Text = " "
         '
-        'NewToolDataGridView
-        '
-        Me.NewToolDataGridView.AllowUserToOrderColumns = True
-        Me.NewToolDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader
-        Me.NewToolDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.NewToolDataGridView.Location = New System.Drawing.Point(8, 245)
-        Me.NewToolDataGridView.MultiSelect = False
-        Me.NewToolDataGridView.Name = "NewToolDataGridView"
-        Me.NewToolDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.NewToolDataGridView.Size = New System.Drawing.Size(992, 299)
-        Me.NewToolDataGridView.TabIndex = 61
-        '
         'newToolMenu
         '
         Me.newToolMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.ToolStripMenuItem3})
@@ -833,17 +827,70 @@ Partial Class Main
         Me.ToolStripButton2.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton2.Text = "FOCA"
         '
-        'Button1
+        'saveBt
         '
-        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.Font = New System.Drawing.Font("Microsoft YaHei", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(635, 548)
-        Me.Button1.Name = "Button1"
-        Me.Button1.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.Button1.Size = New System.Drawing.Size(130, 46)
-        Me.Button1.TabIndex = 78
-        Me.Button1.Text = "creer outil"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.saveBt.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.saveBt.Font = New System.Drawing.Font("Microsoft YaHei", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.saveBt.Location = New System.Drawing.Point(854, 249)
+        Me.saveBt.Name = "saveBt"
+        Me.saveBt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.saveBt.Size = New System.Drawing.Size(130, 28)
+        Me.saveBt.TabIndex = 78
+        Me.saveBt.Text = "partager outil"
+        Me.saveBt.UseVisualStyleBackColor = True
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Location = New System.Drawing.Point(5, 235)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(998, 309)
+        Me.TabControl1.TabIndex = 79
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.DataGridView1)
+        Me.TabPage1.Controls.Add(Me.saveBt)
+        Me.TabPage1.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(990, 283)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "local"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(990, 283)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "cloud"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(3, 6)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(981, 237)
+        Me.DataGridView1.TabIndex = 79
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(990, 283)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "import"
+        Me.TabPage3.UseVisualStyleBackColor = True
         '
         'Main
         '
@@ -851,7 +898,7 @@ Partial Class Main
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1008, 601)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.toolIcons)
         Me.Controls.Add(Me.Lang_pt)
         Me.Controls.Add(Me.toolDiam_checkBox)
@@ -883,7 +930,6 @@ Partial Class Main
         Me.Controls.Add(Me.SD_textbox)
         Me.Controls.Add(Me.D_textbox)
         Me.Controls.Add(Me.ToolPreview_PictureBox)
-        Me.Controls.Add(Me.NewToolDataGridView)
         Me.Controls.Add(Me.filterD1_Combobox)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.A_TextBox)
@@ -911,10 +957,12 @@ Partial Class Main
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ediTool"
         CType(Me.ToolPreview_PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.newToolMenu.ResumeLayout(False)
         Me.toolIcons.ResumeLayout(False)
         Me.toolIcons.PerformLayout()
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -968,7 +1016,6 @@ Partial Class Main
     Friend WithEvents XML_ToolStripButton As ToolStripButton
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents filterD1_Combobox As ComboBox
-    Friend WithEvents NewToolDataGridView As DataGridView
     Friend WithEvents Top6_ToolStripButton As ToolStripButton
     Friend WithEvents OrderTools_ToolStripButton As ToolStripButton
     Friend WithEvents newToolMenu As ContextMenuStrip
@@ -990,5 +1037,10 @@ Partial Class Main
     Friend WithEvents toolIcons As ToolStrip
     Friend WithEvents ToolStripButton1 As ToolStripButton
     Friend WithEvents ToolStripButton2 As ToolStripButton
-    Friend WithEvents Button1 As Button
+    Friend WithEvents saveBt As Button
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents TabPage3 As TabPage
 End Class
