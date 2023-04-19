@@ -97,15 +97,15 @@ Partial Class Main
         Me.saveBt = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.NewToolDataGridView = New System.Windows.Forms.DataGridView()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         CType(Me.ToolPreview_PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.newToolMenu.SuspendLayout()
         Me.toolIcons.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'OpenFileDialog1
@@ -852,7 +852,7 @@ Partial Class Main
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.DataGridView1)
+        Me.TabPage1.Controls.Add(Me.NewToolDataGridView)
         Me.TabPage1.Controls.Add(Me.saveBt)
         Me.TabPage1.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
@@ -862,6 +862,14 @@ Partial Class Main
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "local"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'NewToolDataGridView
+        '
+        Me.NewToolDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.NewToolDataGridView.Location = New System.Drawing.Point(3, 6)
+        Me.NewToolDataGridView.Name = "NewToolDataGridView"
+        Me.NewToolDataGridView.Size = New System.Drawing.Size(981, 237)
+        Me.NewToolDataGridView.TabIndex = 79
         '
         'TabPage2
         '
@@ -873,14 +881,6 @@ Partial Class Main
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "cloud"
         Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(3, 6)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(981, 237)
-        Me.DataGridView1.TabIndex = 79
         '
         'TabPage3
         '
@@ -962,7 +962,7 @@ Partial Class Main
         Me.toolIcons.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1041,6 +1041,6 @@ Partial Class Main
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents NewToolDataGridView As DataGridView
     Friend WithEvents TabPage3 As TabPage
 End Class

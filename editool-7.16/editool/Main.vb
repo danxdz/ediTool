@@ -59,12 +59,14 @@ Public Class Main
 
         Dim service = New FirestoreService()
         Dim tools = service.GetTools("FR2T")
-        For Each tool As NewTool In tools
-            toolsList.Tool.add(tool)
-            filteredTools.Tool.add(tool)
+        If tools IsNot Nothing Then
+            For Each tool As NewTool In tools
+                toolsList.Tool.add(tool)
+                filteredTools.Tool.add(tool)
 
-            FillDataGrid(tool, NewToolDataGridView)
-        Next
+                FillDataGrid(tool, NewToolDataGridView)
+            Next
+        End If
 
         'Dim type As String = My.Settings.ToolType
 

@@ -9,7 +9,7 @@
 8;tools;8;Tool;Outils;Ferramentas
 9;mills;8;Mills;Fraises;Fresas
 10;endMill;9;End Mill;Fraise 2 tailles;Fresa de topo@
-11;toroidalMill;9;Toroidal Mill;Fraise toroïdale;Fresa toroidal
+11;toroidalMill;9;Toroidal Mill;Fraise torique;Fresa torica
 12;ballNoseMill;9;Ball Nose Mill;Fraise sphérique;Fresa esférica
 13;drilling;8;Drilling;Perçage;Furação
 14;spottingDrill;13;Spotting Drill;Foret à pointer;Broca de centragem

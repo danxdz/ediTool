@@ -230,9 +230,10 @@ Module ts
 
         Dim model_name As String
 
-        Dim toolType = newTool.Type
-        If toolType <> "" And My.Settings.ToolType <> toolType Then
-            My.Settings.ToolType = toolType
+        Dim toolType = If(newTool.Type, My.Settings.ToolType)
+
+        If toolType Is Nothing Then
+            My.Settings.ToolType = "FR2T" 'TODO
             My.Settings.Save()
         End If
 

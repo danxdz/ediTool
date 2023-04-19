@@ -54,10 +54,11 @@ Module Firebase_IO
         Public Function GetTools(type As String) As List(Of NewTool)
             Dim collection = db.Collection(type)
             Dim query = collection.OrderBy("Name")
+            Try
+                Dim querySnapshot = query.GetSnapshotAsync().GetAwaiter().GetResult()
 
-            Dim querySnapshot = query.GetSnapshotAsync().GetAwaiter().GetResult()
 
-            Dim tools = New List(Of NewTool)()
+                Dim tools = New List(Of NewTool)()
 
             For Each docSnapshot As DocumentSnapshot In querySnapshot.Documents
                 If docSnapshot.Exists Then
@@ -90,7 +91,13 @@ Module Firebase_IO
                 End If
             Next
 
-            Return tools
+                Return tools
+
+
+            Catch ex As Exception
+
+            End Try
+
         End Function
 
     End Class
