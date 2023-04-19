@@ -6,6 +6,8 @@ Imports Google.Apis.Services
 Imports System.Threading
 Imports System.IO
 Imports Google.Apis.Auth
+Imports Google.Apis.Auth.OAuth2.Flows
+Imports Google.Apis.Util.Store
 
 Public Class Main
 
@@ -509,16 +511,8 @@ Public Class Main
     End Sub
 
     Private Sub loginBt_Click(sender As Object, e As EventArgs) Handles loginBt.Click
-        ' Abrir o navegador padrão do sistema
-        Dim url As String = "https://accounts.google.com/login"
-        Process.Start(url)
 
-        ' Aguardar o login ser concluído
-        MessageBox.Show("Faça login na sua conta do Google e clique em OK para continuar.")
 
-        ' Redirecionar para a página após o login
-        Dim redirectUrl As String = "https://www.google.com"
-        Process.Start(redirectUrl)
     End Sub
 
 
