@@ -133,4 +133,8 @@ Public Class ImportTool
         Dim service As New FirestoreService
         service.AddToolAsync(newTool)
     End Sub
+
+    Private Sub ToolPreview_PictureBox_Click(sender As Object, e As EventArgs) Handles ToolPreview_PictureBox.Click
+
+    End Sub
 End Class

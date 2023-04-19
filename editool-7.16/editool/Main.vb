@@ -1,9 +1,11 @@
 ﻿
 Option Explicit On
 Imports System.Text.RegularExpressions
-Imports System.Windows.Media.Media3D
-Imports System.Windows.Controls
-
+Imports Google.Apis.Auth.OAuth2
+Imports Google.Apis.Services
+Imports System.Threading
+Imports System.IO
+Imports Google.Apis.Auth
 
 Public Class Main
 
@@ -23,7 +25,6 @@ Public Class Main
 
 
     ReadOnly api As New TopSolidAPI()
-
 
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -506,4 +507,20 @@ Public Class Main
         Dim i As Integer = NewToolDataGridView.CurrentRow().Index
         service.AddToolAsync(filteredTools(i))
     End Sub
+
+    Private Sub loginBt_Click(sender As Object, e As EventArgs) Handles loginBt.Click
+        ' Abrir o navegador padrão do sistema
+        Dim url As String = "https://accounts.google.com/login"
+        Process.Start(url)
+
+        ' Aguardar o login ser concluído
+        MessageBox.Show("Faça login na sua conta do Google e clique em OK para continuar.")
+
+        ' Redirecionar para a página após o login
+        Dim redirectUrl As String = "https://www.google.com"
+        Process.Start(redirectUrl)
+    End Sub
+
+
+
 End Class

@@ -100,6 +100,7 @@ Partial Class Main
         Me.NewToolDataGridView = New System.Windows.Forms.DataGridView()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.loginBt = New System.Windows.Forms.Button()
         CType(Me.ToolPreview_PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.newToolMenu.SuspendLayout()
         Me.toolIcons.SuspendLayout()
@@ -892,12 +893,23 @@ Partial Class Main
         Me.TabPage3.Text = "import"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
+        'loginBt
+        '
+        Me.loginBt.Location = New System.Drawing.Point(714, 5)
+        Me.loginBt.Name = "loginBt"
+        Me.loginBt.Size = New System.Drawing.Size(118, 29)
+        Me.loginBt.TabIndex = 80
+        Me.loginBt.Tag = "english"
+        Me.loginBt.Text = "login"
+        Me.loginBt.UseVisualStyleBackColor = True
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1008, 601)
+        Me.Controls.Add(Me.loginBt)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.toolIcons)
         Me.Controls.Add(Me.Lang_pt)
@@ -1043,4 +1055,5 @@ Partial Class Main
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents NewToolDataGridView As DataGridView
     Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents loginBt As Button
 End Class
