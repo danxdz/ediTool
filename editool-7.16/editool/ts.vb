@@ -225,7 +225,7 @@ Module ts
     End Function
 
 
-    Public Sub Create_outil(newTool As NewTool)
+    Public Sub Create_outil(newTool As Tool)
         Dim modelLib = api.StartModif()
 
         Dim model_name As String

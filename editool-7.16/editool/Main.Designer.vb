@@ -866,9 +866,11 @@ Partial Class Main
         '
         'NewToolDataGridView
         '
+        Me.NewToolDataGridView.AllowUserToOrderColumns = True
         Me.NewToolDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.NewToolDataGridView.Location = New System.Drawing.Point(3, 6)
         Me.NewToolDataGridView.Name = "NewToolDataGridView"
+        Me.NewToolDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.NewToolDataGridView.Size = New System.Drawing.Size(981, 237)
         Me.NewToolDataGridView.TabIndex = 79
         '

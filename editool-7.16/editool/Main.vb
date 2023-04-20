@@ -1,23 +1,20 @@
 ﻿
 Option Explicit On
+Imports System.Globalization
 Imports System.Text.RegularExpressions
-Imports Google.Apis.Auth.OAuth2
-Imports Google.Apis.Services
-Imports System.Threading
-Imports System.IO
-Imports Google.Apis.Auth
-Imports Google.Apis.Auth.OAuth2.Flows
-Imports Google.Apis.Util.Store
+
+
+
 
 Public Class Main
 
     Public ReadOnly debugMode As Boolean = False 'True
 
-    Public ReadOnly toolsList = New ToolList
+    Public ReadOnly toolsList = New List(Of Tool)
 
-    Public filteredTools = New ToolList
+    Public filteredTools = New List(Of Tool)
 
-    Private ReadOnly newTool As NewTool
+    Private ReadOnly newTool As Tool
 
     Public started As Boolean = False
 
@@ -35,6 +32,7 @@ Public Class Main
         'Debug **************************************************************
         'Clean settings
         'My.Settings.destinationLibrary = ""
+        'My.Settings.PrefLang = ""
         'My.Settings.Save()
 
 
@@ -54,22 +52,29 @@ Public Class Main
         Dim language As String = My.Settings.PrefLang
 
         If language = "" Then
-            language = "en"
+            Dim culture As CultureInfo = CultureInfo.CurrentCulture
+            language = culture.TwoLetterISOLanguageName
+            My.Settings.PrefLang = language
+            My.Settings.Save()
         End If
 
         FillMainMenu(language)
         FillUI(language)
 
         Dim service = New FirestoreService()
+
+
+        ' If service.db IsNot Nothing Then ' TODO
         Dim tools = service.GetTools("FR2T")
         If tools IsNot Nothing Then
-            For Each tool As NewTool In tools
-                toolsList.Tool.add(tool)
-                filteredTools.Tool.add(tool)
-
+            For Each tool As Tool In tools
+                toolsList.add(tool)
+                filteredTools.add(tool)
                 FillDataGrid(tool, NewToolDataGridView)
             Next
+            '   End If
         End If
+
 
         'Dim type As String = My.Settings.ToolType
 
@@ -121,11 +126,11 @@ Public Class Main
         Else
             Dim i As Integer = NewToolDataGridView.CurrentRow().Index
 
-            Dim newTool As NewTool
+            Dim newTool As Tool
             If filteredTools IsNot Nothing Then
 
-                If filteredTools.Tool.count > 0 Then
-                    newTool = filteredTools.Tool(i)
+                If filteredTools.count > 0 Then
+                    newTool = filteredTools(i)
                 Else
                     newTool = toolsList.Tool(i)
                 End If
@@ -153,7 +158,7 @@ Public Class Main
         ToolName_config.Show()
     End Sub
 
-    Public Sub HandleToolButtonClick(sender As Object, e As EventArgs)
+    Public Sub HandleToolTypeButtonClick(sender As Object, e As EventArgs)
         Dim button As Button = DirectCast(sender, Button)
         Dim toolType As String = button.Tag
         Dim toolName As String = ""
@@ -188,7 +193,7 @@ Public Class Main
         ToolName_config.Namemask_textbox.Text = toolName
 
         ' Update the tool list based on the selected tool type
-        Dim filteredTools As List(Of NewTool) = toolsList.Tools.Where(Function(x) x.Type = toolType).ToList()
+        Dim filteredTools As List(Of Tool) = toolsList.Tools.Where(Function(x) x.Type = toolType).ToList()
         If filteredTools.Count > 0 Then
             Refresh_outil(filteredTools(0), ToolPreview_PictureBox)
         End If
@@ -219,7 +224,7 @@ Public Class Main
         GetOrderTools()
     End Sub
 
-    Private Sub NewToolDataGridView_MouseDown(sender As Object, e As MouseEventArgs)
+    Private Sub NewToolDataGridView_MouseDown(sender As Object, e As MouseEventArgs) Handles NewToolDataGridView.MouseDown
         If e.Button = MouseButtons.Right Then
             Try
                 '  DataGridView1.CurrentCell = DataGridView1(e.ColumnIndex, e.RowIndex)
@@ -263,42 +268,44 @@ Public Class Main
     '    End Try
     'End Sub
 
-    Private Sub NewToolDataGridView_MouseUp(sender As Object, e As MouseEventArgs)
+    Private Sub NewToolDataGridView_MouseUp(sender As Object, e As MouseEventArgs) Handles NewToolDataGridView.MouseUp
         If e.Button = MouseButtons.Left Then
             started = True
             Dim num As Integer = NewToolDataGridView.SelectedRows().Count
             Dim i As Integer = NewToolDataGridView.CurrentRow().Index '+ 1
-            Dim tmp = toolsList.Tool.Count
+            Dim tmp = toolsList.Count
 
             If num = 1 Then
-
                 'If My.Settings.DefManuf <> "FRAISA" Then
                 '    i = tmp - i
                 'End If
                 'indexLabel.Text = i
                 Try
-                    If filteredTools.Tool.Count > 0 Then
-                        D_textbox.Text = filteredTools.Tool(i).D1
-                        L_textbox.Text = filteredTools.Tool(i).L1
+                    If filteredTools.Count > 0 Then
+                        D_textbox.Text = filteredTools(i).D1
+                        L_textbox.Text = filteredTools(i).L1
 
-                        CTS_AD_textbox.Text = filteredTools.Tool(i).D2
-                        CTS_AL_textbox.Text = filteredTools.Tool(i).L2
+                        CTS_AD_textbox.Text = filteredTools(i).D2
+                        CTS_AL_textbox.Text = filteredTools(i).L2
 
-                        SD_textbox.Text = filteredTools.Tool(i).D3
-                        OL_textbox.Text = filteredTools.Tool(i).L3
+                        SD_textbox.Text = filteredTools(i).D3
+                        OL_textbox.Text = filteredTools(i).L3
+                        Refresh_outil(filteredTools(i), ToolPreview_PictureBox)
+                        Init.Set_Name_auto(filteredTools(i))
+
                     Else
-                        D_textbox.Text = toolsList.Tool(i).D1
-                        L_textbox.Text = toolsList.Tool(i).L1
+                        D_textbox.Text = toolsList(i).D1
+                        L_textbox.Text = toolsList(i).L1
 
-                        CTS_AD_textbox.Text = toolsList.Tool(i).D2
-                        CTS_AL_textbox.Text = toolsList.Tool(i).L2
+                        CTS_AD_textbox.Text = toolsList(i).D2
+                        CTS_AL_textbox.Text = toolsList(i).L2
 
-                        SD_textbox.Text = toolsList.Tool(i).D3
-                        OL_textbox.Text = toolsList.Tool(i).L3
+                        SD_textbox.Text = toolsList(i).D3
+                        OL_textbox.Text = toolsList(i).L3
+                        Refresh_outil(toolsList(i), ToolPreview_PictureBox)
+                        Init.Set_Name_auto(toolsList(i))
+
                     End If
-
-                    Refresh_outil(toolsList.Tool(i), ToolPreview_PictureBox)
-                    Init.Set_Name_auto(toolsList.Tool(i))
                 Catch ex As Exception
                     MsgBox("tool data error") 'TODO
                 End Try
@@ -337,7 +344,7 @@ Public Class Main
                 Dim filterD1 As New List(Of Decimal)
 
                 ' Iterate through the filtered tools to find unique D1 values
-                For Each tool As NewTool In filteredTools
+                For Each tool As Tool In filteredTools
                     filterD1 = AddFiltersCombobox(tool.D1, filterD1)
                 Next
 
@@ -410,7 +417,7 @@ Public Class Main
         Dim selMat As String = GetFilterValues(filterMat_ComboBox)
 
         ' Filter the tools based on the selected values
-        Dim filteredTools As List(Of NewTool) = FilterTools(selD1, selL1, selMat)
+        Dim filteredTools As List(Of Tool) = FilterTools(selD1, selL1, selMat)
 
         ' If L1 filter is not selected, populate the L1 combobox based on filtered tools
         If selL1 = 0 Then
@@ -434,10 +441,10 @@ Public Class Main
         End If
     End Function
 
-    Private Function FilterTools(selD1 As Decimal, selL1 As Decimal, selMat As String) As List(Of NewTool)
-        Dim toolList As New List(Of NewTool)
+    Private Function FilterTools(selD1 As Decimal, selL1 As Decimal, selMat As String) As List(Of Tool)
+        Dim toolList As New List(Of Tool)
 
-        For Each tool As NewTool In filteredTools
+        For Each tool As Tool In filteredTools
             Dim add As Boolean = True
 
             If selD1 <> 0 AndAlso selD1 <> tool.D1 Then
@@ -460,10 +467,10 @@ Public Class Main
         Return toolList
     End Function
 
-    Private Sub PopulateL1ComboBox(filteredTools As List(Of NewTool))
+    Private Sub PopulateL1ComboBox(filteredTools As List(Of Tool))
         Dim filterL1 As New List(Of Decimal)
 
-        For Each tool As NewTool In filteredTools
+        For Each tool As Tool In filteredTools
             filterL1 = AddFiltersCombobox(tool.L1, filterL1)
         Next
 
@@ -511,10 +518,11 @@ Public Class Main
     End Sub
 
     Private Sub loginBt_Click(sender As Object, e As EventArgs) Handles loginBt.Click
-
+        ImportTool.GetUrl()
 
     End Sub
 
+    Private Sub NewToolDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles NewToolDataGridView.CellContentClick
 
-
+    End Sub
 End Class

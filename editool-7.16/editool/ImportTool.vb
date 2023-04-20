@@ -1,12 +1,15 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Reflection
+Imports System.Runtime.InteropServices
+Imports System.Text.RegularExpressions
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports System.Windows.Media.Media3D
 Imports System.Xml
 
 Public Class ImportTool
-    ReadOnly newTool As New NewTool()
-
+    ReadOnly newTool As New Tool()
+    Private filter As DataTable
 
     Private Sub ImportTool_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ''Dim dataGridView1 As New DataGridView()
@@ -27,6 +30,9 @@ Public Class ImportTool
         'DataGridView1.Rows.Add("Valor 1", "Opção 1")
         'DataGridView1.Rows.Add("Valor 2", "Opção 2")
         'DataGridView1.Rows.Add("Valor 3", "Opção 3")
+
+        filter = GetUrl()
+
 
 
     End Sub
@@ -76,7 +82,7 @@ Public Class ImportTool
                     Dim propName As String = paramToPropDict(paramName)
 
                     ' Usa reflection para definir o valor da propriedade correspondente na classe NewTool
-                    Dim prop As PropertyInfo = GetType(NewTool).GetProperty(propName)
+                    Dim prop As PropertyInfo = GetType(Tool).GetProperty(propName)
                     'Correcting name
                     If IsNumeric(paramValue) Then
                         paramValue = paramValue.Replace(",", ".")
@@ -134,7 +140,93 @@ Public Class ImportTool
         service.AddToolAsync(newTool)
     End Sub
 
-    Private Sub ToolPreview_PictureBox_Click(sender As Object, e As EventArgs) Handles ToolPreview_PictureBox.Click
+    Public Function GetUrl()
+
+        Dim dt As New DataTable()
+        dt.Columns.Add("Code", GetType(String))
+        dt.Columns.Add("ManufRef", GetType(String))
+        dt.Columns.Add("GroupeMat", GetType(String))
+        dt.Columns.Add("D1", GetType(Double))
+
+
+        Dim url As String = "https://webshop.fraisa.ch/index.php/fraeswerkzeuge?lng=fr"
+
+        Try
+            Dim request As HttpWebRequest = WebRequest.Create(url)
+            request.Method = "GET"
+            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+
+            Using response As HttpWebResponse = request.GetResponse()
+                Using reader As StreamReader = New StreamReader(response.GetResponseStream())
+                    Dim html As String = reader.ReadToEnd()
+
+                    ' procurar o início e o fim da seção tbody
+                    Dim tbodyStart As Integer = html.IndexOf("<tbody>")
+                    Dim tbodyEnd As Integer = html.IndexOf("</tbody>") + "</tbody>".Length
+
+                    ' extrair o conteúdo da seção tbody
+                    Dim tbodyContent As String = html.Substring(tbodyStart, tbodyEnd - tbodyStart)
+
+
+                    Dim lines As String() = tbodyContent.Split({"<tr class="}, StringSplitOptions.RemoveEmptyEntries)
+
+                    Dim results As New List(Of String)
+
+                    For Each line As String In lines
+                        If line.Contains("</tr>") Then
+                            results.Add("<tr class>" & line.Split({"</tr>"}, StringSplitOptions.None)(0) & "</tr>")
+                        End If
+                    Next
+                    For Each result As String In results
+                        Dim columns As String() = result.Split({"<td>", "</td>"}, StringSplitOptions.RemoveEmptyEntries)
+
+                        If columns.Length = 10 Then ' verificar se a linha contém todas as colunas esperadas
+                            Dim row As DataRow = dt.NewRow()
+
+                            row("Code") = columns(1).Trim().Replace("<td style=""text-align: left;"">", "")
+                            row("ManufRef") = columns(2).Trim().Replace("<td style=""text-align: left;"">", "")
+                            row("GroupeMat") = columns(3).Trim().Replace("<td style="""">", "")
+                            row("D1") = Double.Parse(columns(4).Trim().Replace("<td style="""">", ""))
+
+                            dt.Rows.Add(row)
+
+                        End If
+                    Next
+
+                End Using
+            End Using
+
+            Return dt
+
+        Catch ex As Exception
+            Console.WriteLine("Error: " + ex.Message)
+            Return Nothing
+        End Try
+    End Function
+
+
+    Private Sub RefTextBox_TextChanged(sender As Object, e As EventArgs) Handles RefTextBox.TextChanged
+
+        If filter IsNot Nothing Then
+
+            ' Filtra as linhas do DataTable com base no texto inserido no TextBox
+            Dim filteredRows As DataRow() = filter.Select("Code LIKE '" & RefTextBox.Text & "%'")
+
+            ' Cria uma nova tabela com as linhas filtradas
+            Dim filteredTable As DataTable = filter.Clone()
+            For Each row As DataRow In filteredRows
+                filteredTable.ImportRow(row)
+            Next
+
+            ' Atualiza o conteúdo do ListBox com os itens filtrados
+            ListBox1.DataSource = filteredTable
+            ListBox1.DisplayMember = "Code" ' Define a coluna que será exibida no ListBox
+
+        End If
 
     End Sub
+
+
 End Class
+
+

@@ -3,7 +3,7 @@ Imports System.Reflection
 Imports Microsoft.Office.Interop.Excel
 
 Module Tools
-    Public Class NewTool
+    Public Class Tool
         Public Property Name As String
         Public Property Type As String
         Public Property D1 As Double
@@ -91,7 +91,7 @@ Module Tools
         Public Property RoomDescription As String
         Public Property ValidExists As New List(Of String)
         Public Property Objects As New List(Of String)
-        Public Property Tool As New List(Of NewTool)
+        Public Property Tool As New List(Of Tool)
 
 
         Public Shared Function GetToolsTypes(tools As ToolList) As List(Of String)
@@ -101,7 +101,7 @@ Module Tools
 
             'For Each tool As NewTool In tools.Tool.Where(Function(t) t.Type.Contains(Filter))
 
-            For Each tool As NewTool In tools.Tool
+            For Each tool As Tool In tools.Tool
                 If Not toolTypes.Contains(tool.Type) Then
                     toolTypes.Add(tool.Type)
                     Dim btn As New ToolStripButton With {

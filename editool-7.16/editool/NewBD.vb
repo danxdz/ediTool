@@ -66,7 +66,7 @@ Public Class NewBD
 
     Private Sub NewTool_Click(sender As Object, e As EventArgs) Handles new_tool.Click
 
-        Dim NewTool As New NewTool
+        Dim NewTool As New Tool
 
         Dim num As Integer = DataGridView1.SelectedRows().Count
         Dim index As Integer = DataGridView1.CurrentRow().Index

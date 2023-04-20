@@ -119,9 +119,6 @@
     <Reference Include="Google.Cloud.Firestore, Version=3.2.0.0, Culture=neutral, PublicKeyToken=185c282632e132a0, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Cloud.Firestore.3.2.0\lib\net462\Google.Cloud.Firestore.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Cloud.Firestore.V1, Version=3.2.0.0, Culture=neutral, PublicKeyToken=185c282632e132a0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Cloud.Firestore.V1.3.2.0\lib\net462\Google.Cloud.Firestore.V1.dll</HintPath>
-    </Reference>
     <Reference Include="Google.Cloud.Location, Version=2.0.0.0, Culture=neutral, PublicKeyToken=185c282632e132a0, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Cloud.Location.2.0.0\lib\net462\Google.Cloud.Location.dll</HintPath>
     </Reference>

@@ -52,7 +52,7 @@ Module Init
                 MsgBox("param < " + param + " > not found, check outil name mask config")
         End Select
     End Function
-    Function Pick_param(param As String, newTool As NewTool)
+    Function Pick_param(param As String, newTool As Tool)
         Select Case param
             Case "D" : Return newTool.D1
             Case "L" : Return newTool.L1
@@ -68,7 +68,7 @@ Module Init
                 MsgBox("param < " + param + " > not found, check outil name mask config")
         End Select
     End Function
-    Public Sub Set_Name_auto(newTool As NewTool)
+    Public Sub Set_Name_auto(newTool As Tool)
 
         If Main.ForceName_checkBox.Checked = False Then
             Try
@@ -128,6 +128,7 @@ Module Init
             dt.Columns.Add(col, GetType(String))
         Next
         'dt.Columns.Add("index", GetType(String))            ' --------> option to add index to DataGridView1
+
         Return dt
     End Function
 
@@ -217,7 +218,7 @@ Module Init
             DataTable_buffer.Rows.Add(line)
             Dim tmp_line() As String = line.ToArray
 
-            Dim newtool As NewTool = FileImports.Fill_newTool(line(1), line(3), line(2), line(5), line(6), line(4), line(8), "FR2T", "0", "0", "0", "0", "0", "0", "0", "FRAISA", line(0), "0", "0", "0")
+            Dim newtool As Tool = FileImports.Fill_newTool(line(1), line(3), line(2), line(5), line(6), line(4), line(8), "FR2T", "0", "0", "0", "0", "0", "0", "0", "FRAISA", line(0), "0", "0", "0")
             Main.toolsList.Tool.add(newtool)
 
             filterD1 = AddFiltersCombobox(line(1), filterD1)

@@ -30,6 +30,7 @@ Partial Class ImportTool
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.createBt = New System.Windows.Forms.Button()
         Me.saveBt = New System.Windows.Forms.Button()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
         CType(Me.ToolPreview_PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -44,9 +45,9 @@ Partial Class ImportTool
         '
         'ToolPreview_PictureBox
         '
-        Me.ToolPreview_PictureBox.Location = New System.Drawing.Point(12, 251)
+        Me.ToolPreview_PictureBox.Location = New System.Drawing.Point(298, 107)
         Me.ToolPreview_PictureBox.Name = "ToolPreview_PictureBox"
-        Me.ToolPreview_PictureBox.Size = New System.Drawing.Size(682, 132)
+        Me.ToolPreview_PictureBox.Size = New System.Drawing.Size(396, 132)
         Me.ToolPreview_PictureBox.TabIndex = 1
         Me.ToolPreview_PictureBox.TabStop = False
         '
@@ -56,7 +57,7 @@ Partial Class ImportTool
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 107)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 245)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(682, 138)
         Me.DataGridView1.TabIndex = 2
@@ -99,11 +100,20 @@ Partial Class ImportTool
         Me.saveBt.Text = "save"
         Me.saveBt.UseVisualStyleBackColor = True
         '
+        'ListBox1
+        '
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.Location = New System.Drawing.Point(12, 106)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.Size = New System.Drawing.Size(280, 134)
+        Me.ListBox1.TabIndex = 7
+        '
         'ImportTool
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(706, 395)
+        Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.saveBt)
         Me.Controls.Add(Me.createBt)
         Me.Controls.Add(Me.findBt)
@@ -128,4 +138,5 @@ Partial Class ImportTool
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents createBt As Button
     Friend WithEvents saveBt As Button
+    Friend WithEvents ListBox1 As ListBox
 End Class

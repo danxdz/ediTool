@@ -19,7 +19,7 @@ Module FileImports
     Public Function Fill_newTool(d1 As String, d2 As String, d3 As String, l1 As String, l2 As String, l3 As String, nott As String, type As String, groupeMat As String,
                             Rbout As String, chanfrein As String, coupeCentre As String, arrCentre As String, typeTar As String, pasTar As String, manuf As String,
                             manufRef As String, manufRefSec As String, code As String, codeBar As String)
-        Dim newtool As New NewTool
+        Dim newtool As New Tool
 
         With newtool
             .D1 = d1
@@ -87,7 +87,7 @@ Module FileImports
     End Function
     Private Sub LoadXML(path As String)
 
-        Dim newTool As New NewTool
+        Dim newTool As New Tool
 
         Main.NewToolDataGridView.DataSource = ""
         Main.NewToolDataGridView.Columns.Clear()
@@ -165,13 +165,13 @@ Module FileImports
 
     End Sub
 
-    Public Sub FillDataGrid(NewTool As NewTool, DGV As DataGridView)
+    Public Sub FillDataGrid(NewTool As Tool, DGV As DataGridView)
         Dim objProperties() As String = {"Name", "ManufRef", "D1", "D3", "D2", "L3", "L1", "L2", "AngleDeg", "NoTT", "Chanfrein", "Manuf"}
-        Dim tmpData As Data.DataTable = If(DGV.DataSource, New Data.DataTable())
+        Dim tmpData As Data.DataTable = If(DGV.DataSource, New Data.DataTable()) 'New Data.DataTable '=
 
         If tmpData.Columns.Count = 0 Then
             For Each prop As String In objProperties
-                Dim propInfo = GetType(NewTool).GetProperty(prop)
+                Dim propInfo = GetType(Tool).GetProperty(prop)
                 Dim value = propInfo.GetValue(NewTool)
                 If Not String.IsNullOrEmpty(value) Then
                     tmpData.Columns.Add(prop)
@@ -181,7 +181,7 @@ Module FileImports
 
         Dim row As New List(Of String)
         For Each prop As String In objProperties
-            Dim propInfo = GetType(NewTool).GetProperty(prop)
+            Dim propInfo = GetType(Tool).GetProperty(prop)
             Dim value = propInfo.GetValue(NewTool)
             If Not String.IsNullOrEmpty(value) Then
                 row.Add(value)
@@ -190,12 +190,12 @@ Module FileImports
 
         tmpData.Rows.Add(row.ToArray())
         DGV.DataSource = tmpData
-        'Refresh_outil(NewTool, ToolPreview_PictureBox)
+        Refresh_outil(NewTool, Main.ToolPreview_PictureBox)
     End Sub
 
 
 
-    Public Sub FillDataGrid_old(NewTool As NewTool, DGV As DataGridView)
+    Public Sub FillDataGrid_old(NewTool As Tool, DGV As DataGridView)
 
         Dim tmpData = New Data.DataTable
 
@@ -375,8 +375,8 @@ Module FileImports
         My.Settings.ToolType = type
 
         My.Settings.Save()
-        Dim newTool As New NewTool With {
-            .Type = type
+        Dim newTool As New Tool With {
+            .type = type
         }
 
         name = line(2)
@@ -449,7 +449,7 @@ Module FileImports
 
                 Dim stock As HtmlElementCollection
 
-                Dim newTool = New NewTool
+                Dim newTool = New Tool
                 Try
                     stock = tblcols.Item(0).GetElementsByTagName("strong")
                     Dim stockVal As Integer

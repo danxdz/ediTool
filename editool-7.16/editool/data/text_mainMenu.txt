@@ -31,3 +31,4 @@
 30;addDestinationLibrary;28;Add;Ajouter;Adicionar@
 31;importManuf;31;Import tools;Importer outils;Importar ferramentas
 32;FRAISA;31;FRAISA;FRAISA;FRAISA@
+33;ORDERTOOLS;31;OrderTools;OrderTools;OrderTools@

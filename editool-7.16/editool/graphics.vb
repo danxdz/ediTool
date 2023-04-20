@@ -1,14 +1,14 @@
 ﻿Option Explicit On
 Module graphics
-    Public Sub Refresh_outil(newTool As NewTool, ToolPreview_PictureBox As PictureBox)
+    Public Sub Refresh_outil(newTool As Tool, ToolPreview_PictureBox As PictureBox)
 
         'If Main.started Then
 
         Try
-                Dim w As Integer = ToolPreview_PictureBox.Width
-                Dim StartY As Integer = ToolPreview_PictureBox.Height
-                Dim myPen = New Pen(Brushes.Black, 1)
-                Dim myPenRED = New Pen(Brushes.Red, 1)
+            Dim w As Integer = ToolPreview_PictureBox.Width
+            Dim StartY As Integer = ToolPreview_PictureBox.Height
+            Dim myPen = New Pen(Brushes.Black, 1)
+            Dim myPenRED = New Pen(Brushes.Red, 1)
             Dim toolPic As Drawing.Graphics = ToolPreview_PictureBox.CreateGraphics
             Dim BG_color As Drawing.Color = Drawing.Color.Gainsboro
 
@@ -163,14 +163,14 @@ Module graphics
                 space = space + axe_petite + 10
                 toolPic.DrawLine(myPenRED, space, StartY - 1, axe_big + space, StartY - 1)
                 space = space + axe_big + 10
-                Next
+            Next
 
             'Set_Name_auto(newTool)
 
 
         Catch ex As Exception
-                '      MsgBox("GRAPHICS - design - " + ex.ToString)
-            End Try
+            '      MsgBox("GRAPHICS - design - " + ex.ToString)
+        End Try
 
         ' End If
 
