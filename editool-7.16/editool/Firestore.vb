@@ -1,8 +1,8 @@
-﻿Imports FirebaseAdmin
+﻿Imports System.Net
+Imports FirebaseAdmin
 Imports FirebaseAdmin.Auth
 Imports Google.Apis.Auth.OAuth2
 Imports Google.Cloud.Firestore
-Imports Google.Cloud.Firestore.V1
 Imports Grpc.Auth
 Imports Grpc.Core
 
@@ -11,10 +11,17 @@ Module Firebase_IO
     Public Class FirestoreService
         Private ReadOnly db As FirestoreDb
 
-        Public Sub New()
-            Dim projectId = "editools-000"
-            Me.db = FirestoreDb.Create(projectId)
+        Public Sub New(firestoreDbBuilder As FirestoreDb)
+            Try
+                'Dim value = Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS")
 
+                Dim projectId = "editools-000"
+                Dim Credential = GoogleCredential.GetApplicationDefault()
+                Me.db = firestoreDbBuilder
+
+            Catch ex As Exception
+
+            End Try
         End Sub
 
         Public Sub AddToolAsync(tool As NewTool)
@@ -58,9 +65,11 @@ Module Firebase_IO
             Debug.WriteLine(res)
         End Sub
         Public Function GetTools(type As String) As List(Of NewTool)
-            Dim collection = db.Collection(type)
-            Dim query = collection.OrderBy("Name")
+
             Try
+
+                Dim collection = db.Collection(type)
+                Dim query = collection.OrderBy("Name")
                 Dim querySnapshot = query.GetSnapshotAsync().GetAwaiter().GetResult()
 
                 Dim tools = New List(Of NewTool)()

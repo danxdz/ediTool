@@ -8,6 +8,7 @@ Imports System.IO
 Imports Google.Apis.Auth
 Imports Google.Apis.Auth.OAuth2.Flows
 Imports Google.Apis.Util.Store
+Imports Google.Apis.Util
 
 Public Class Main
 
@@ -60,16 +61,19 @@ Public Class Main
         FillMainMenu(language)
         FillUI(language)
 
-        Dim service = New FirestoreService()
+        Dim service = New FirestoreService(FirestoreDbBuilder
+)
+        ' If service.db IsNot Nothing Then ' TODO
         Dim tools = service.GetTools("FR2T")
         If tools IsNot Nothing Then
             For Each tool As NewTool In tools
                 toolsList.Tool.add(tool)
                 filteredTools.Tool.add(tool)
-
                 FillDataGrid(tool, NewToolDataGridView)
             Next
+            '   End If
         End If
+
 
         'Dim type As String = My.Settings.ToolType
 
@@ -124,8 +128,8 @@ Public Class Main
             Dim newTool As NewTool
             If filteredTools IsNot Nothing Then
 
-                If filteredTools.Tool.count > 0 Then
-                    newTool = filteredTools.Tool(i)
+                If filteredTools.count > 0 Then
+                    newTool = filteredTools(i)
                 Else
                     newTool = toolsList.Tool(i)
                 End If
@@ -505,7 +509,8 @@ Public Class Main
     End Sub
 
     Private Sub Button1_ClickAsync(sender As Object, e As EventArgs) Handles saveBt.Click
-        Dim service As New FirestoreService()
+        Dim service As New FirestoreService(FirestoreDbBuilder
+)
         Dim i As Integer = NewToolDataGridView.CurrentRow().Index
         service.AddToolAsync(filteredTools(i))
     End Sub

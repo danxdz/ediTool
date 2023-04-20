@@ -72,7 +72,7 @@
     End Sub
 
     Private Sub Preload_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        'FileImports.GetOrderTools() 'TODO
+        FileImports.GetOrderTools() 'TODO
         'ToolCount()
     End Sub
 
