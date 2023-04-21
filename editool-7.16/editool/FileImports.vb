@@ -507,12 +507,12 @@ Module FileImports
                                 .ArrCentre,
                                 .TypeTar,
                                 .PasTar,
-.Manuf,
-.ManufRef,
-.ManufRefSec,
-.Code,
-.CodeBar
-}
+                                .Manuf,
+                                .ManufRef,
+                                .ManufRefSec,
+                                .Code,
+                                .CodeBar
+                                }
                         DataTableOrderTools.Rows.Add(rowTmp)
                     End With
                     filterD1 = AddFiltersCombobox(newTool.d1, filterD1)
