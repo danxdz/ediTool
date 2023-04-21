@@ -1,4 +1,5 @@
-﻿
+﻿Imports FirebaseAdmin
+Imports FirebaseAdmin.Auth
 Imports Google.Apis.Auth.OAuth2
 Imports Google.Cloud.Firestore
 
@@ -7,21 +8,11 @@ Module Firebase_IO
     Public Class FirestoreService
         Private ReadOnly db As FirestoreDb
 
-
         Public Sub New()
-            Try
-                Dim value As String = Environment.GetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS")
-
-                Me.db = New FirestoreDbBuilder With {
-                    .ProjectId = "editools-000",
-                    .Credential = GoogleCredential.GetApplicationDefault()
-                }.Build()
-
-            Catch ex As Exception
+            Dim projectId = "editools-000"
+            Me.db = FirestoreDb.Create(projectId)
 
             End Try
-
-
         End Sub
 
         Public Sub AddToolAsync(tool As Tool)
@@ -64,12 +55,10 @@ Module Firebase_IO
             Dim res = docRef.SetAsync(data)
             Debug.WriteLine(res)
         End Sub
-        Public Function GetTools(type As String) As List(Of Tool)
-
+        Public Function GetTools(type As String) As List(Of NewTool)
+            Dim collection = db.Collection(type)
+            Dim query = collection.OrderBy("Name")
             Try
-
-                Dim collection = db.Collection(type)
-                Dim query = collection.OrderBy("Name")
                 Dim querySnapshot = query.GetSnapshotAsync().GetAwaiter().GetResult()
 
                 Dim tools = New List(Of Tool)()
