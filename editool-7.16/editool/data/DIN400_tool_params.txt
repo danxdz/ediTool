@@ -69,6 +69,7 @@ H22;ArrCentre;Sortie du fluide de refroidissement
 3;avec sortie de fluide de refroidissement axiale inclinée 
 J1;Norme
 J3;Manuf;Identifiant de l'entreprise
+J6;
 J7;Puce
 J20;Numéro de commande 2
 J21;ManufRef;Identification du numéro de commande

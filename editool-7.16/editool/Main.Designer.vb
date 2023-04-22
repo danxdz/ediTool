@@ -35,8 +35,6 @@ Partial Class Main
         Me.NoTT = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Lang_fr = New System.Windows.Forms.Button()
-        Me.Lang_pt = New System.Windows.Forms.Button()
         Me.ToolPreview_PictureBox = New System.Windows.Forms.PictureBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.CTS_AD_label = New System.Windows.Forms.Label()
@@ -61,7 +59,6 @@ Partial Class Main
         Me.manuf_comboBox = New System.Windows.Forms.ComboBox()
         Me.ForceName_checkBox = New System.Windows.Forms.CheckBox()
         Me.DefineName_Bt = New System.Windows.Forms.Button()
-        Me.Lang_en = New System.Windows.Forms.Button()
         Me.createBt = New System.Windows.Forms.Button()
         Me.AutoOpen_checkBox = New System.Windows.Forms.CheckBox()
         Me.FR2T = New System.Windows.Forms.ToolStripButton()
@@ -94,7 +91,6 @@ Partial Class Main
         Me.toolIcons = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.saveBt = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.NewToolDataGridView = New System.Windows.Forms.DataGridView()
@@ -122,7 +118,7 @@ Partial Class Main
         Me.D_textbox.BackColor = System.Drawing.Color.LightGray
         Me.D_textbox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.D_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.D_textbox.Location = New System.Drawing.Point(494, 80)
+        Me.D_textbox.Location = New System.Drawing.Point(705, 80)
         Me.D_textbox.Name = "D_textbox"
         Me.D_textbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.D_textbox.Size = New System.Drawing.Size(71, 22)
@@ -136,7 +132,7 @@ Partial Class Main
         Me.SD_textbox.BackColor = System.Drawing.Color.LightGray
         Me.SD_textbox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.SD_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SD_textbox.Location = New System.Drawing.Point(892, 80)
+        Me.SD_textbox.Location = New System.Drawing.Point(1103, 80)
         Me.SD_textbox.Name = "SD_textbox"
         Me.SD_textbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.SD_textbox.Size = New System.Drawing.Size(71, 22)
@@ -149,7 +145,7 @@ Partial Class Main
         Me.CTS_AD_textbox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CTS_AD_textbox.BackColor = System.Drawing.Color.LightGray
         Me.CTS_AD_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CTS_AD_textbox.Location = New System.Drawing.Point(694, 80)
+        Me.CTS_AD_textbox.Location = New System.Drawing.Point(905, 80)
         Me.CTS_AD_textbox.Name = "CTS_AD_textbox"
         Me.CTS_AD_textbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.CTS_AD_textbox.Size = New System.Drawing.Size(71, 29)
@@ -163,7 +159,7 @@ Partial Class Main
         Me.OL_textbox.BackColor = System.Drawing.Color.LightGray
         Me.OL_textbox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.OL_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OL_textbox.Location = New System.Drawing.Point(892, 208)
+        Me.OL_textbox.Location = New System.Drawing.Point(1103, 208)
         Me.OL_textbox.Name = "OL_textbox"
         Me.OL_textbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.OL_textbox.Size = New System.Drawing.Size(71, 22)
@@ -177,7 +173,7 @@ Partial Class Main
         Me.L_textbox.BackColor = System.Drawing.Color.LightGray
         Me.L_textbox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.L_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.L_textbox.Location = New System.Drawing.Point(494, 208)
+        Me.L_textbox.Location = New System.Drawing.Point(705, 208)
         Me.L_textbox.Name = "L_textbox"
         Me.L_textbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.L_textbox.Size = New System.Drawing.Size(71, 22)
@@ -191,7 +187,7 @@ Partial Class Main
         Me.CTS_AL_textbox.BackColor = System.Drawing.Color.LightGray
         Me.CTS_AL_textbox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.CTS_AL_textbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CTS_AL_textbox.Location = New System.Drawing.Point(694, 208)
+        Me.CTS_AL_textbox.Location = New System.Drawing.Point(905, 208)
         Me.CTS_AL_textbox.Name = "CTS_AL_textbox"
         Me.CTS_AL_textbox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.CTS_AL_textbox.Size = New System.Drawing.Size(71, 22)
@@ -231,37 +227,17 @@ Partial Class Main
         '
         Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(479, 85)
+        Me.Label1.Location = New System.Drawing.Point(690, 85)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(15, 13)
         Me.Label1.TabIndex = 9
         Me.Label1.Text = "D"
         '
-        'Lang_fr
-        '
-        Me.Lang_fr.Location = New System.Drawing.Point(932, 5)
-        Me.Lang_fr.Name = "Lang_fr"
-        Me.Lang_fr.Size = New System.Drawing.Size(31, 29)
-        Me.Lang_fr.TabIndex = 73
-        Me.Lang_fr.Text = "fr"
-        Me.ToolTip1.SetToolTip(Me.Lang_fr, "francais")
-        Me.Lang_fr.UseVisualStyleBackColor = True
-        '
-        'Lang_pt
-        '
-        Me.Lang_pt.Location = New System.Drawing.Point(969, 5)
-        Me.Lang_pt.Name = "Lang_pt"
-        Me.Lang_pt.Size = New System.Drawing.Size(31, 29)
-        Me.Lang_pt.TabIndex = 76
-        Me.Lang_pt.Text = "pt"
-        Me.ToolTip1.SetToolTip(Me.Lang_pt, "portuguese")
-        Me.Lang_pt.UseVisualStyleBackColor = True
-        '
         'ToolPreview_PictureBox
         '
         Me.ToolPreview_PictureBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ToolPreview_PictureBox.BackColor = System.Drawing.Color.Transparent
-        Me.ToolPreview_PictureBox.Location = New System.Drawing.Point(480, 111)
+        Me.ToolPreview_PictureBox.Location = New System.Drawing.Point(691, 111)
         Me.ToolPreview_PictureBox.Margin = New System.Windows.Forms.Padding(0)
         Me.ToolPreview_PictureBox.Name = "ToolPreview_PictureBox"
         Me.ToolPreview_PictureBox.Size = New System.Drawing.Size(517, 80)
@@ -272,7 +248,7 @@ Partial Class Main
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(869, 85)
+        Me.Label2.Location = New System.Drawing.Point(1080, 85)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(22, 13)
         Me.Label2.TabIndex = 12
@@ -282,7 +258,7 @@ Partial Class Main
         '
         Me.CTS_AD_label.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CTS_AD_label.AutoSize = True
-        Me.CTS_AD_label.Location = New System.Drawing.Point(639, 85)
+        Me.CTS_AD_label.Location = New System.Drawing.Point(850, 85)
         Me.CTS_AD_label.Name = "CTS_AD_label"
         Me.CTS_AD_label.Size = New System.Drawing.Size(49, 13)
         Me.CTS_AD_label.TabIndex = 13
@@ -292,7 +268,7 @@ Partial Class Main
         '
         Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(869, 213)
+        Me.Label4.Location = New System.Drawing.Point(1080, 213)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(21, 13)
         Me.Label4.TabIndex = 14
@@ -302,7 +278,7 @@ Partial Class Main
         '
         Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(479, 213)
+        Me.Label5.Location = New System.Drawing.Point(690, 213)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(13, 13)
         Me.Label5.TabIndex = 15
@@ -312,7 +288,7 @@ Partial Class Main
         '
         Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(641, 213)
+        Me.Label6.Location = New System.Drawing.Point(852, 213)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(47, 13)
         Me.Label6.TabIndex = 16
@@ -340,7 +316,7 @@ Partial Class Main
         '
         Me.menu_D1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.menu_D1.AutoSize = True
-        Me.menu_D1.Location = New System.Drawing.Point(499, 66)
+        Me.menu_D1.Location = New System.Drawing.Point(710, 66)
         Me.menu_D1.Name = "menu_D1"
         Me.menu_D1.Size = New System.Drawing.Size(35, 13)
         Me.menu_D1.TabIndex = 19
@@ -350,7 +326,7 @@ Partial Class Main
         '
         Me.menu_D2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.menu_D2.AutoSize = True
-        Me.menu_D2.Location = New System.Drawing.Point(694, 66)
+        Me.menu_D2.Location = New System.Drawing.Point(905, 66)
         Me.menu_D2.Name = "menu_D2"
         Me.menu_D2.Size = New System.Drawing.Size(35, 13)
         Me.menu_D2.TabIndex = 20
@@ -360,7 +336,7 @@ Partial Class Main
         '
         Me.menu_D3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.menu_D3.AutoSize = True
-        Me.menu_D3.Location = New System.Drawing.Point(892, 66)
+        Me.menu_D3.Location = New System.Drawing.Point(1103, 66)
         Me.menu_D3.Name = "menu_D3"
         Me.menu_D3.Size = New System.Drawing.Size(35, 13)
         Me.menu_D3.TabIndex = 21
@@ -405,7 +381,7 @@ Partial Class Main
         '
         Me.menu_L1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.menu_L1.AutoSize = True
-        Me.menu_L1.Location = New System.Drawing.Point(494, 193)
+        Me.menu_L1.Location = New System.Drawing.Point(705, 193)
         Me.menu_L1.Name = "menu_L1"
         Me.menu_L1.Size = New System.Drawing.Size(35, 13)
         Me.menu_L1.TabIndex = 30
@@ -415,7 +391,7 @@ Partial Class Main
         '
         Me.menu_L2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.menu_L2.AutoSize = True
-        Me.menu_L2.Location = New System.Drawing.Point(694, 193)
+        Me.menu_L2.Location = New System.Drawing.Point(905, 193)
         Me.menu_L2.Name = "menu_L2"
         Me.menu_L2.Size = New System.Drawing.Size(35, 13)
         Me.menu_L2.TabIndex = 31
@@ -425,7 +401,7 @@ Partial Class Main
         '
         Me.menu_L3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.menu_L3.AutoSize = True
-        Me.menu_L3.Location = New System.Drawing.Point(892, 193)
+        Me.menu_L3.Location = New System.Drawing.Point(1103, 193)
         Me.menu_L3.Name = "menu_L3"
         Me.menu_L3.Size = New System.Drawing.Size(35, 13)
         Me.menu_L3.TabIndex = 32
@@ -461,7 +437,7 @@ Partial Class Main
         'manref_TextBox
         '
         Me.manref_TextBox.FormattingEnabled = True
-        Me.manref_TextBox.Location = New System.Drawing.Point(278, 566)
+        Me.manref_TextBox.Location = New System.Drawing.Point(196, 567)
         Me.manref_TextBox.Name = "manref_TextBox"
         Me.manref_TextBox.Size = New System.Drawing.Size(181, 21)
         Me.manref_TextBox.TabIndex = 36
@@ -494,21 +470,11 @@ Partial Class Main
         Me.DefineName_Bt.Text = "empty"
         Me.DefineName_Bt.UseVisualStyleBackColor = True
         '
-        'Lang_en
-        '
-        Me.Lang_en.Location = New System.Drawing.Point(895, 5)
-        Me.Lang_en.Name = "Lang_en"
-        Me.Lang_en.Size = New System.Drawing.Size(31, 29)
-        Me.Lang_en.TabIndex = 47
-        Me.Lang_en.Tag = "english"
-        Me.Lang_en.Text = "en"
-        Me.Lang_en.UseVisualStyleBackColor = True
-        '
         'createBt
         '
         Me.createBt.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.createBt.Font = New System.Drawing.Font("Microsoft YaHei", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.createBt.Location = New System.Drawing.Point(863, 550)
+        Me.createBt.Location = New System.Drawing.Point(1074, 550)
         Me.createBt.Name = "createBt"
         Me.createBt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.createBt.Size = New System.Drawing.Size(130, 37)
@@ -522,7 +488,7 @@ Partial Class Main
         Me.AutoOpen_checkBox.AutoSize = True
         Me.AutoOpen_checkBox.Checked = True
         Me.AutoOpen_checkBox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.AutoOpen_checkBox.Location = New System.Drawing.Point(801, 550)
+        Me.AutoOpen_checkBox.Location = New System.Drawing.Point(1012, 550)
         Me.AutoOpen_checkBox.Name = "AutoOpen_checkBox"
         Me.AutoOpen_checkBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.AutoOpen_checkBox.Size = New System.Drawing.Size(54, 17)
@@ -712,7 +678,7 @@ Partial Class Main
         Me.timer_label.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.timer_label.AutoSize = True
         Me.timer_label.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.timer_label.Location = New System.Drawing.Point(510, 559)
+        Me.timer_label.Location = New System.Drawing.Point(597, 561)
         Me.timer_label.Name = "timer_label"
         Me.timer_label.Size = New System.Drawing.Size(24, 25)
         Me.timer_label.TabIndex = 63
@@ -741,7 +707,7 @@ Partial Class Main
         Me.readToolProgress_Label.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.readToolProgress_Label.AutoSize = True
         Me.readToolProgress_Label.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.readToolProgress_Label.Location = New System.Drawing.Point(582, 559)
+        Me.readToolProgress_Label.Location = New System.Drawing.Point(721, 561)
         Me.readToolProgress_Label.Name = "readToolProgress_Label"
         Me.readToolProgress_Label.Size = New System.Drawing.Size(24, 25)
         Me.readToolProgress_Label.TabIndex = 69
@@ -751,7 +717,7 @@ Partial Class Main
         '
         Me.MenuStrip1.Location = New System.Drawing.Point(5, 5)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(998, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1209, 24)
         Me.MenuStrip1.TabIndex = 70
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -770,7 +736,7 @@ Partial Class Main
         Me.AutoCheckIn_checkBox.AutoSize = True
         Me.AutoCheckIn_checkBox.Checked = True
         Me.AutoCheckIn_checkBox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.AutoCheckIn_checkBox.Location = New System.Drawing.Point(801, 577)
+        Me.AutoCheckIn_checkBox.Location = New System.Drawing.Point(1012, 577)
         Me.AutoCheckIn_checkBox.Name = "AutoCheckIn_checkBox"
         Me.AutoCheckIn_checkBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.AutoCheckIn_checkBox.Size = New System.Drawing.Size(54, 17)
@@ -783,7 +749,7 @@ Partial Class Main
         '
         Me.toolRef_checkBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.toolRef_checkBox.AutoSize = True
-        Me.toolRef_checkBox.Location = New System.Drawing.Point(218, 569)
+        Me.toolRef_checkBox.Location = New System.Drawing.Point(429, 569)
         Me.toolRef_checkBox.Name = "toolRef_checkBox"
         Me.toolRef_checkBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.toolRef_checkBox.Size = New System.Drawing.Size(54, 17)
@@ -806,7 +772,7 @@ Partial Class Main
         Me.toolIcons.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2})
         Me.toolIcons.Location = New System.Drawing.Point(5, 29)
         Me.toolIcons.Name = "toolIcons"
-        Me.toolIcons.Size = New System.Drawing.Size(998, 25)
+        Me.toolIcons.Size = New System.Drawing.Size(1209, 25)
         Me.toolIcons.TabIndex = 77
         Me.toolIcons.Text = "ToolStrip2"
         '
@@ -828,18 +794,6 @@ Partial Class Main
         Me.ToolStripButton2.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton2.Text = "FOCA"
         '
-        'saveBt
-        '
-        Me.saveBt.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.saveBt.Font = New System.Drawing.Font("Microsoft YaHei", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.saveBt.Location = New System.Drawing.Point(854, 249)
-        Me.saveBt.Name = "saveBt"
-        Me.saveBt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.saveBt.Size = New System.Drawing.Size(130, 28)
-        Me.saveBt.TabIndex = 78
-        Me.saveBt.Text = "partager outil"
-        Me.saveBt.UseVisualStyleBackColor = True
-        '
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
@@ -848,18 +802,17 @@ Partial Class Main
         Me.TabControl1.Location = New System.Drawing.Point(5, 235)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(998, 309)
+        Me.TabControl1.Size = New System.Drawing.Size(1206, 309)
         Me.TabControl1.TabIndex = 79
         '
         'TabPage1
         '
         Me.TabPage1.Controls.Add(Me.NewToolDataGridView)
-        Me.TabPage1.Controls.Add(Me.saveBt)
         Me.TabPage1.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(990, 283)
+        Me.TabPage1.Size = New System.Drawing.Size(1198, 283)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "local"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -867,11 +820,13 @@ Partial Class Main
         'NewToolDataGridView
         '
         Me.NewToolDataGridView.AllowUserToOrderColumns = True
+        Me.NewToolDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
+        Me.NewToolDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.NewToolDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.NewToolDataGridView.Location = New System.Drawing.Point(3, 6)
         Me.NewToolDataGridView.Name = "NewToolDataGridView"
         Me.NewToolDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.NewToolDataGridView.Size = New System.Drawing.Size(981, 237)
+        Me.NewToolDataGridView.Size = New System.Drawing.Size(1189, 237)
         Me.NewToolDataGridView.TabIndex = 79
         '
         'TabPage2
@@ -880,7 +835,7 @@ Partial Class Main
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(990, 283)
+        Me.TabPage2.Size = New System.Drawing.Size(1198, 283)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "cloud"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -890,14 +845,14 @@ Partial Class Main
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(990, 283)
+        Me.TabPage3.Size = New System.Drawing.Size(1198, 283)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "import"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
         'loginBt
         '
-        Me.loginBt.Location = New System.Drawing.Point(714, 5)
+        Me.loginBt.Location = New System.Drawing.Point(1096, 25)
         Me.loginBt.Name = "loginBt"
         Me.loginBt.Size = New System.Drawing.Size(118, 29)
         Me.loginBt.TabIndex = 80
@@ -910,21 +865,18 @@ Partial Class Main
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.ClientSize = New System.Drawing.Size(1008, 601)
+        Me.ClientSize = New System.Drawing.Size(1219, 601)
         Me.Controls.Add(Me.loginBt)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.toolIcons)
-        Me.Controls.Add(Me.Lang_pt)
         Me.Controls.Add(Me.toolDiam_checkBox)
         Me.Controls.Add(Me.toolRef_checkBox)
-        Me.Controls.Add(Me.Lang_fr)
         Me.Controls.Add(Me.AutoCheckIn_checkBox)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.readToolProgress_Label)
         Me.Controls.Add(Me.filterMat_ComboBox)
         Me.Controls.Add(Me.filterL1_ComboBox)
         Me.Controls.Add(Me.timer_label)
-        Me.Controls.Add(Me.Lang_en)
         Me.Controls.Add(Me.menu_L3)
         Me.Controls.Add(Me.menu_L2)
         Me.Controls.Add(Me.menu_L1)
@@ -1016,7 +968,6 @@ Partial Class Main
     Friend WithEvents manuf_comboBox As ComboBox
     Friend WithEvents ForceName_checkBox As CheckBox
     Friend WithEvents DefineName_Bt As Button
-    Friend WithEvents Lang_en As Button
     Friend WithEvents createBt As Button
     Friend WithEvents AutoOpen_checkBox As CheckBox
     Friend WithEvents FR2T As ToolStripButton
@@ -1044,14 +995,11 @@ Partial Class Main
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents AutoCheckIn_checkBox As CheckBox
-    Friend WithEvents Lang_fr As Button
     Friend WithEvents toolRef_checkBox As CheckBox
     Friend WithEvents toolDiam_checkBox As CheckBox
-    Friend WithEvents Lang_pt As Button
     Friend WithEvents toolIcons As ToolStrip
     Friend WithEvents ToolStripButton1 As ToolStripButton
     Friend WithEvents ToolStripButton2 As ToolStripButton
-    Friend WithEvents saveBt As Button
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage

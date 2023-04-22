@@ -2,7 +2,7 @@
 Imports System.IO
 Imports System.Net
 Imports System.Xml
-Imports editool.Tools
+Imports EdiTool.Tools
 Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Excel
 
@@ -151,12 +151,12 @@ Module FileImports
             ElseIf (reader.Name = "tecsets") Then
                 reader.Close()
                 FillDataGrid(newTool, Main.NewToolDataGridView)
-                Main.toolsList.Tool.Clear()
+                Main.fullToolsList.Tool.Clear()
                 Main.filteredTools.Clear()
 
                 'Dim sas As List(Of NewTool) = Main.toolsList.Tool
 
-                Main.toolsList.Tool.Add(newTool, Main.NewToolDataGridView)
+                Main.fullToolsList.Tool.Add(newTool, Main.NewToolDataGridView)
 
             End If
         End While
@@ -167,7 +167,14 @@ Module FileImports
 
     Public Sub FillDataGrid(NewTool As Tool, DGV As DataGridView)
         Dim objProperties() As String = {"Name", "ManufRef", "D1", "D3", "D2", "L3", "L1", "L2", "AngleDeg", "NoTT", "Chanfrein", "Manuf"}
-        Dim tmpData As Data.DataTable = If(DGV.DataSource, New Data.DataTable()) 'New Data.DataTable '=
+        Dim tmpData As Data.DataTable
+
+        If (DGV.DataSource IsNot Nothing) Then
+
+            tmpData = DGV.DataSource
+        Else
+            tmpData = New Data.DataTable()
+        End If
 
         If tmpData.Columns.Count = 0 Then
             For Each prop As String In objProperties
@@ -376,7 +383,7 @@ Module FileImports
 
         My.Settings.Save()
         Dim newTool As New Tool With {
-            .type = type
+            .Type = type
         }
 
         name = line(2)
@@ -518,7 +525,7 @@ Module FileImports
                     filterD1 = AddFiltersCombobox(newTool.d1, filterD1)
                     filterL1 = AddFiltersCombobox(newTool.l1, filterL1)
                     filterMat = AddFiltersStringCombobox(newTool.GroupeMat, filterMat)
-                    .toolsList.Tool.Add(newTool)
+                    .fullToolsList.Tool.Add(newTool)
                     'FileImports.FillDataGrid(newTool, NewToolDataGridView)
                     ' End If
 
@@ -527,23 +534,23 @@ Module FileImports
                 End Try
             Next
 
-            Dim toolTypes As List(Of String) = ToolList.GetToolsTypes(.toolsList)
-            .NewToolDataGridView.DataSource = DataTableOrderTools
+            '    Dim toolTypes As List(Of String) = ToolList.GetToolsTypes(.toolsList)
+            '    .NewToolDataGridView.DataSource = DataTableOrderTools
 
-            filterD1 = filterD1.OrderBy(Function(x) x).ToList()
-            With .filterD1_Combobox
-                .DataSource = filterD1
-            End With
-            filterL1 = filterL1.OrderBy(Function(x) x).ToList()
-            With .filterL1_ComboBox
-                .DataSource = filterL1
-            End With
-            filterMat = filterMat.OrderBy(Function(x) x).ToList()
-            With .filterMat_ComboBox
-                .DataSource = filterMat
-            End With
-            EndLoadTimer = Now().ToUniversalTime
-            .timer_label.Text = DateDiff(DateInterval.Second, StartLoadTimer, EndLoadTimer)
+            '    filterD1 = filterD1.OrderBy(Function(x) x).ToList()
+            '    With .filterD1_Combobox
+            '        .DataSource = filterD1
+            '    End With
+            '    filterL1 = filterL1.OrderBy(Function(x) x).ToList()
+            '    With .filterL1_ComboBox
+            '        .DataSource = filterL1
+            '    End With
+            '    filterMat = filterMat.OrderBy(Function(x) x).ToList()
+            '    With .filterMat_ComboBox
+            '        .DataSource = filterMat
+            '    End With
+            '    EndLoadTimer = Now().ToUniversalTime
+            '    .timer_label.Text = DateDiff(DateInterval.Second, StartLoadTimer, EndLoadTimer)
         End With
     End Sub
 

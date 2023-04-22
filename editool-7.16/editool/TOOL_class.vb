@@ -4,6 +4,7 @@ Imports Microsoft.Office.Interop.Excel
 
 Module Tools
     Public Class Tool
+        Public Property id As String
         Public Property Name As String
         Public Property Type As String
         Public Property D1 As Double

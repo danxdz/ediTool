@@ -10,7 +10,7 @@ Public Class Main
 
     Public ReadOnly debugMode As Boolean = False 'True
 
-    Public ReadOnly toolsList = New List(Of Tool)
+    Public ReadOnly fullToolsList = New List(Of Tool)
 
     Public filteredTools = New List(Of Tool)
 
@@ -34,7 +34,6 @@ Public Class Main
         'My.Settings.destinationLibrary = ""
         'My.Settings.PrefLang = ""
         'My.Settings.Save()
-
 
 
         'First time load - check tool lib to save new tools
@@ -61,15 +60,16 @@ Public Class Main
         FillMainMenu(language)
         FillUI(language)
 
+
         Dim service = New FirestoreService()
 
 
         ' If service.db IsNot Nothing Then ' TODO
-        Dim tools = service.GetTools("FR2T")
-        If tools IsNot Nothing Then
-            For Each tool As Tool In tools
-                toolsList.add(tool)
-                filteredTools.add(tool)
+        Dim remoteTools = service.GetTools("FR2T")
+
+        If remoteTools IsNot Nothing Then
+            For Each tool As Tool In remoteTools
+                fullToolsList.add(tool)
                 FillDataGrid(tool, NewToolDataGridView)
             Next
             '   End If
@@ -108,10 +108,7 @@ Public Class Main
         sender.Text = digitsOnly.Replace(sender.Text, "")
         ' Refresh_outil(toolsList(NewToolDataGridView.CurrentRow().Index))
     End Sub
-    Private Sub Set_pref_lang(lang As String)
-        My.Settings.PrefLang = lang
-        My.Settings.Save()
-    End Sub
+
     Private Sub ForceName_checkBox_CheckedChanged(sender As Object, e As EventArgs) Handles ForceName_checkBox.CheckedChanged
         If ForceName_checkBox.Checked = True Then
             Name_textbox.Enabled = True
@@ -132,7 +129,7 @@ Public Class Main
                 If filteredTools.count > 0 Then
                     newTool = filteredTools(i)
                 Else
-                    newTool = toolsList.Tool(i)
+                    newTool = fullToolsList(i)
                 End If
 
                 Create_outil(newTool)
@@ -146,12 +143,6 @@ Public Class Main
         'Dim file_reader As IO.StreamReader
         'file_reader = Open_data_file("reg.txt")
         'Outil_exists(file_reader, Name_textbox.Text)
-    End Sub
-
-    Private Sub LanguageButton_Click(sender As Object, e As EventArgs) Handles Lang_en.Click, Lang_fr.Click, Lang_pt.Click
-        Set_pref_lang(sender.text)
-        FillMainMenu(sender.text)
-        FillUI(sender.text)
     End Sub
 
     Private Sub DefineName_Bt_Click(sender As Object, e As EventArgs) Handles DefineName_Bt.Click
@@ -193,7 +184,7 @@ Public Class Main
         ToolName_config.Namemask_textbox.Text = toolName
 
         ' Update the tool list based on the selected tool type
-        Dim filteredTools As List(Of Tool) = toolsList.Tools.Where(Function(x) x.Type = toolType).ToList()
+        Dim filteredTools As List(Of Tool) = fullToolsList.Tools.Where(Function(x) x.Type = toolType).ToList()
         If filteredTools.Count > 0 Then
             Refresh_outil(filteredTools(0), ToolPreview_PictureBox)
         End If
@@ -244,14 +235,14 @@ Public Class Main
 
         Dim i As Integer = NewToolDataGridView.CurrentRow().Index + 1
 
-        D_textbox.Text = toolsList.Tool(i).D1
-        L_textbox.Text = toolsList.Tool(i).L1
+        D_textbox.Text = fullToolsList.Tool(i).D1
+        L_textbox.Text = fullToolsList.Tool(i).L1
 
-        CTS_AD_textbox.Text = toolsList.Tool(i).D2
-        CTS_AL_textbox.Text = toolsList.Tool(i).L2
+        CTS_AD_textbox.Text = fullToolsList.Tool(i).D2
+        CTS_AL_textbox.Text = fullToolsList.Tool(i).L2
 
-        SD_textbox.Text = toolsList.Tool(i).D3
-        OL_textbox.Text = toolsList.Tool(i).L3
+        SD_textbox.Text = fullToolsList.Tool(i).D3
+        OL_textbox.Text = fullToolsList.Tool(i).L3
 
     End Sub
 
@@ -273,7 +264,7 @@ Public Class Main
             started = True
             Dim num As Integer = NewToolDataGridView.SelectedRows().Count
             Dim i As Integer = NewToolDataGridView.CurrentRow().Index '+ 1
-            Dim tmp = toolsList.Count
+            Dim tmp = fullToolsList.Count
 
             If num = 1 Then
                 'If My.Settings.DefManuf <> "FRAISA" Then
@@ -294,20 +285,20 @@ Public Class Main
                         Init.Set_Name_auto(filteredTools(i))
 
                     Else
-                        D_textbox.Text = toolsList(i).D1
-                        L_textbox.Text = toolsList(i).L1
+                        D_textbox.Text = fullToolsList(i).D1
+                        L_textbox.Text = fullToolsList(i).L1
 
-                        CTS_AD_textbox.Text = toolsList(i).D2
-                        CTS_AL_textbox.Text = toolsList(i).L2
+                        CTS_AD_textbox.Text = fullToolsList(i).D2
+                        CTS_AL_textbox.Text = fullToolsList(i).L2
 
-                        SD_textbox.Text = toolsList(i).D3
-                        OL_textbox.Text = toolsList(i).L3
-                        Refresh_outil(toolsList(i), ToolPreview_PictureBox)
-                        Init.Set_Name_auto(toolsList(i))
+                        SD_textbox.Text = fullToolsList(i).D3
+                        OL_textbox.Text = fullToolsList(i).L3
+                        Refresh_outil(fullToolsList(i), ToolPreview_PictureBox)
+                        Init.Set_Name_auto(fullToolsList(i))
 
                     End If
                 Catch ex As Exception
-                    MsgBox("tool data error") 'TODO
+                    'MsgBox("tool data error") 'TODO
                 End Try
 
             End If
@@ -364,7 +355,7 @@ Public Class Main
 
             ' Clear the filtered tools list and reset it to the original list
             filteredTools.Clear()
-            filteredTools = toolsList.Tool
+            filteredTools = fullToolsList.Tool
 
             ' Apply the filters and update the DataGridView
             filteredTools = SetFilters(sender)
@@ -377,7 +368,7 @@ Public Class Main
             ' If the sender was the material ComboBox
             If sender.name = "filterMat_ComboBox" Then
                 ' Reset the filtered tools list and apply the filters
-                filteredTools = toolsList.Tool
+                filteredTools = fullToolsList.Tool
                 filteredTools = SetFilters(sender)
 
                 ' Update the DataGridView
@@ -388,7 +379,7 @@ Public Class Main
             ' If the sender was the D1 ComboBox
             If sender.name = "filterD1_Combobox" Then
                 ' Reset the filtered tools list and apply the filters
-                filteredTools = toolsList.Tool
+                filteredTools = fullToolsList.Tool
                 filteredTools = SetFilters(sender)
 
                 ' Update the DataGridView
@@ -397,7 +388,7 @@ Public Class Main
             End If
             If sender.name = "filterL1_ComboBox" Then
                 ' Reset the filtered tools list and apply the filters
-                filteredTools = toolsList.Tool
+                filteredTools = fullToolsList.Tool
                 filteredTools = SetFilters(sender)
 
                 ' Update the DataGridView
@@ -511,18 +502,16 @@ Public Class Main
 
     End Sub
 
-    Private Sub Button1_ClickAsync(sender As Object, e As EventArgs) Handles saveBt.Click
-        Dim service As New FirestoreService()
-        Dim i As Integer = NewToolDataGridView.CurrentRow().Index
-        service.AddToolAsync(filteredTools(i))
-    End Sub
+
 
     Private Sub loginBt_Click(sender As Object, e As EventArgs) Handles loginBt.Click
-        ImportTool.GetUrl()
+        ' ImportTool.GetUrl() 'TODO
 
     End Sub
 
     Private Sub NewToolDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles NewToolDataGridView.CellContentClick
 
     End Sub
+
+
 End Class

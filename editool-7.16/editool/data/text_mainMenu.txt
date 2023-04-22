@@ -29,6 +29,10 @@
 28;destinationLibrary;23;Destination library;Bibliothèque de destination;Biblioteca de destino
 29;{destinationLibrary};28;{destinationLibrary};{destinationLibrary};{destinationLibrary}#
 30;addDestinationLibrary;28;Add;Ajouter;Adicionar@
+100;language;23;Language;Langage;Lingua
+101;en;100;English;Anglais;Ingles@
+102;fr;100;French;Français;Frances@
+103;pt;100;Portuguese;Portuguese;Português@
 31;importManuf;31;Import tools;Importer outils;Importar ferramentas
 32;FRAISA;31;FRAISA;FRAISA;FRAISA@
 33;ORDERTOOLS;31;OrderTools;OrderTools;OrderTools@

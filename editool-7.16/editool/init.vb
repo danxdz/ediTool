@@ -219,7 +219,7 @@ Module Init
             Dim tmp_line() As String = line.ToArray
 
             Dim newtool As Tool = FileImports.Fill_newTool(line(1), line(3), line(2), line(5), line(6), line(4), line(8), "FR2T", "0", "0", "0", "0", "0", "0", "0", "FRAISA", line(0), "0", "0", "0")
-            Main.toolsList.Tool.add(newtool)
+            Main.fullToolsList.Tool.add(newtool)
 
             filterD1 = AddFiltersCombobox(line(1), filterD1)
             filterL1 = AddFiltersCombobox(line(5), filterL1)
@@ -334,6 +334,13 @@ Module Init
     Private Sub MenuItemFunction(sender As Object, e As EventArgs)
         Console.WriteLine(sender)
         Console.WriteLine(e)
+
+        Dim tmp As String = sender.Name
+        If (tmp.Length = 2) Then
+            ChangeLanguage(tmp)
+            Exit Sub
+        End If
+
         Select Case sender.Name
             Case "exit"
                 Main.Close()
@@ -341,15 +348,24 @@ Module Init
                 OpenXmlFile()
             Case "FRAISA"
                 ImportFraisa()
-                ' Call other function here
             Case "topsolid"
                 OpenV6File()
-                ' Call other function here
+            Case "language"
+                ChangeLanguage(sender.ToString)
             Case "OtherFunction"
                 ' Call other function here
             Case Else
                 ' Handle unknown function here
         End Select
+    End Sub
+
+    Private Sub ChangeLanguage(toString As String)
+
+        My.Settings.PrefLang = toString
+        My.Settings.Save()
+
+        FillMainMenu(toString)
+        FillUI(toString)
     End Sub
 
     Private Sub ImportFraisa()

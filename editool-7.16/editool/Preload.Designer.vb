@@ -86,7 +86,7 @@ Partial Class Preload
         Me.Label5.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.Location = New System.Drawing.Point(124, 351)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(313, 21)
+        Me.Label5.Size = New System.Drawing.Size(68, 21)
         Me.Label5.TabIndex = 62
         Me.Label5.Text = "@ path :"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -98,7 +98,7 @@ Partial Class Preload
         Me.version_label.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.version_label.Location = New System.Drawing.Point(32, 351)
         Me.version_label.Name = "version_label"
-        Me.version_label.Size = New System.Drawing.Size(323, 21)
+        Me.version_label.Size = New System.Drawing.Size(86, 21)
         Me.version_label.TabIndex = 4
         Me.version_label.Text = "not found"
         Me.version_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -110,7 +110,7 @@ Partial Class Preload
         Me.Label4.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.Location = New System.Drawing.Point(7, 351)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(263, 21)
+        Me.Label4.Size = New System.Drawing.Size(19, 21)
         Me.Label4.TabIndex = 61
         Me.Label4.Text = "v. "
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -179,7 +179,7 @@ Partial Class Preload
         Me.path_label.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.path_label.BackColor = System.Drawing.Color.Transparent
         Me.path_label.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.path_label.Location = New System.Drawing.Point(206, 351)
+        Me.path_label.Location = New System.Drawing.Point(198, 351)
         Me.path_label.Name = "path_label"
         Me.path_label.Size = New System.Drawing.Size(647, 21)
         Me.path_label.TabIndex = 3
