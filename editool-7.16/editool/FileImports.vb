@@ -2,7 +2,6 @@
 Imports System.IO
 Imports System.Net
 Imports System.Xml
-Imports EdiTool.Tools
 Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Excel
 
@@ -166,11 +165,10 @@ Module FileImports
     End Sub
 
     Public Sub FillDataGrid(NewTool As Tool, DGV As DataGridView)
-        Dim objProperties() As String = {"Name", "ManufRef", "D1", "D3", "D2", "L3", "L1", "L2", "AngleDeg", "NoTT", "Chanfrein", "Manuf"}
+        Dim objProperties() As String = {"Name", "ManufRef", "D1", "D3", "D2", "L3", "L1", "L2", "AngleDeg", "NoTT", "Chanfrein", "Manuf"} 'TODO
         Dim tmpData As Data.DataTable
 
         If (DGV.DataSource IsNot Nothing) Then
-
             tmpData = DGV.DataSource
         Else
             tmpData = New Data.DataTable()
@@ -178,11 +176,7 @@ Module FileImports
 
         If tmpData.Columns.Count = 0 Then
             For Each prop As String In objProperties
-                Dim propInfo = GetType(Tool).GetProperty(prop)
-                Dim value = propInfo.GetValue(NewTool)
-                If Not String.IsNullOrEmpty(value) Then
-                    tmpData.Columns.Add(prop)
-                End If
+                tmpData.Columns.Add(prop)
             Next
         End If
 

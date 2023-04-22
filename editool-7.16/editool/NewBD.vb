@@ -105,4 +105,8 @@ Public Class NewBD
     Private Sub valider_bt_Click(sender As Object, e As EventArgs) Handles valider_bt.Click
 
     End Sub
+
+    Private Sub NewBD_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

@@ -61,6 +61,21 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à id;code;en;fr;pt;unite;
+        '''1;APMXS;Depth of cut maximum in feed direction side;Profondeur de coupe maximale en direction de l&apos;avance radiale;Profundidade de corte máxima em direção lateral ao avanço;mm;
+        '''2;Code barre;Product barcode;Code barre;Código de barras;str;
+        '''3;CCC;Center cutting capability;Coupe au centre;Corte ao centro;bool;
+        '''4;CGT;Cutting geometry type;Géométrie de coupe;Tipo da geometria de corte;str;
+        '''5;CHW;Corner chamfer width;Largeur du chanfrein de coin;Larg. do chanfro do canto;mm;
+        '''6;Cmax;He [le reste de la chaîne a été tronqué]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property _13399() As String
+            Get
+                Return ResourceManager.GetString("13399", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à .
         '''</summary>
         Friend ReadOnly Property customLibraryData() As String
@@ -72,19 +87,20 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une chaîne localisée semblable à NSM;Numéro standard Caractéristique
         '''BLD;Classification par image
-        '''A1;Diamètre de coupe 1 (diamètre nominal);mm
-        '''A5;Diamètre extension;mm
-        '''A11;Diamètre de coupe min. ou nominal
-        '''B2;Longueur d&apos;arête de coupe, max.;mm
-        '''B3;Longueur de porte-à-faux;mm
-        '''B5;Longueur totale;mm
-        '''B6;Longueur de la goujure
-        '''B9;Longueur util;mm
-        '''B71;Longueur fonctionnelle;mm
-        '''C3;Diamètre d&apos;attachement du côté de la machine;mm
-        '''C4;Longueur de queue;mm
-        '''C11;Type d&apos;attachement de base, du côté de machine
-        '''C11;ZYL;Attachement cylindrique        ''' [le reste de la chaîne a été tronqué]&quot;;.
+        '''A1;D1;Diamètre de coupe 1 (diamètre nominal):mm
+        '''A2;D1;Diamètre de coupe 2
+        '''A5;D2;Diamètre extension:mm
+        '''A9;D2;Diamètre du col
+        '''A11;D1;Diamètre de coupe min. ou nominal
+        '''A61;Diamètre du corps 1
+        '''B2;L1;Longueur d&apos;arête de coupe, max.:mm
+        '''B3;L2;Longueur de porte-à-faux:mm
+        '''B4;L2;Longueur utile
+        '''B5;L3;Longueur totale:mm
+        '''B6;L2;Longueur de la goujure
+        '''B7:Distance coin de coupe par rapport à la pointe de coupe
+        '''B9;L2;Longueur util:mm
+        '''B71;L2;Long [le reste de la chaîne a été tronqué]&quot;;.
         '''</summary>
         Friend ReadOnly Property DIN400_tool_params() As String
             Get
@@ -143,8 +159,8 @@ Namespace My.Resources
         '''8;tools;8;Tool;Outils;Ferramentas
         '''9;mills;8;Mills;Fraises;Fresas
         '''10;endMill;9;End Mill;Fraise 2 tailles;Fresa de topo@
-        '''11;toroidalMill;9;Toroidal Mill;Fraise toroïdale;Fresa toroidal
-        '''12;ballNoseMill;9;Ball Nose Mill;Fraise  [le reste de la chaîne a été tronqué]&quot;;.
+        '''11;toroidalMill;9;Toroidal Mill;Fraise torique;Fresa torica
+        '''12;ballNoseMill;9;Ball Nose Mill;Fraise sphé [le reste de la chaîne a été tronqué]&quot;;.
         '''</summary>
         Friend ReadOnly Property textMainMenu() As String
             Get

@@ -65,15 +65,9 @@ Public Class Main
 
 
         ' If service.db IsNot Nothing Then ' TODO
-        Dim remoteTools = service.GetTools("FR2T")
+        Dim remoteTools = service.GetTools("endMill")
 
-        If remoteTools IsNot Nothing Then
-            For Each tool As Tool In remoteTools
-                fullToolsList.add(tool)
-                FillDataGrid(tool, NewToolDataGridView)
-            Next
-            '   End If
-        End If
+
 
 
         'Dim type As String = My.Settings.ToolType

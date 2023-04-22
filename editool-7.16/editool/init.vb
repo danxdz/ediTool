@@ -1,10 +1,5 @@
 ﻿Option Explicit On
-Imports System.IO
-Imports System.Net
-Imports System.Reflection
 Imports System.Text.RegularExpressions
-Imports System.Xml
-Imports EdiTool.My
 
 Module Init
 
@@ -274,6 +269,9 @@ Module Init
             End If
 
             Dim data() As String = line.Split(";")
+            If data(0) = "" Then
+                Exit For
+            End If
             Dim index As Integer = Integer.Parse(data(0))
             Dim name As String = data(1)
             Dim parent As Integer = Integer.Parse(data(2))
@@ -348,6 +346,10 @@ Module Init
                 OpenXmlFile()
             Case "FRAISA"
                 ImportFraisa()
+            Case "ORDERTOOLS"
+                ImportOrderTools()
+            Case "text"
+                ImportText()
             Case "topsolid"
                 OpenV6File()
             Case "language"
@@ -357,6 +359,10 @@ Module Init
             Case Else
                 ' Handle unknown function here
         End Select
+    End Sub
+
+    Private Sub ImportOrderTools()
+        Throw New NotImplementedException()
     End Sub
 
     Private Sub ChangeLanguage(toString As String)
@@ -370,8 +376,10 @@ Module Init
 
     Private Sub ImportFraisa()
         ImportTool.Show()
+    End Sub
+    Private Sub ImportText()
 
-        'AddFraisaTool("15520501")
+
     End Sub
 
     Private Sub MenuItemCheckedItem(name As String, sender As Object, e As EventArgs)

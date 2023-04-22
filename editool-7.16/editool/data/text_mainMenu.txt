@@ -21,6 +21,10 @@
 20;thread Milling Cutter;18;Thread Milling Cutter;Fraise à fileter;Fresa para roscas
 21;alesoirs;8;Reaming;Alésage;Alesagem
 22;constantReamer;21;Constant Reamer;Alésoir fixe;Alesador de mandril fixo
+31;importManuf;31;Import tools;Importer outils;Importar ferramentas
+32;FRAISA;31;FRAISA;FRAISA;FRAISA@
+33;ORDERTOOLS;31;OrderTools;OrderTools;OrderTools@
+34;text;31;From text;Coler texte;Colar texto@
 23;setup;23;Setup;Configuration;Configuração
 24;sourceLibrary;23;Library source;Source de bibliothèque;Fonte da biblioteca
 25;default;24;Default;Défaut;Predefinido#
@@ -33,6 +37,3 @@
 101;en;100;English;Anglais;Ingles@
 102;fr;100;French;Français;Frances@
 103;pt;100;Portuguese;Portuguese;Português@
-31;importManuf;31;Import tools;Importer outils;Importar ferramentas
-32;FRAISA;31;FRAISA;FRAISA;FRAISA@
-33;ORDERTOOLS;31;OrderTools;OrderTools;OrderTools@

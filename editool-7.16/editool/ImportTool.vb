@@ -3,10 +3,6 @@
 Imports System.IO
 Imports System.Net
 Imports System.Reflection
-Imports System.Runtime.InteropServices
-Imports System.Text.RegularExpressions
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement
-Imports System.Windows.Media.Media3D
 Imports System.Xml
 
 
@@ -56,6 +52,11 @@ Public Class ImportTool
         Dim coolants() = {"1 'External coolant'", "2: 'Internal coolant'", "3: 'External air'", "4: 'Internal air'", "5: 'Minimum Quantity Lubrication', 0: 'Unkown'"}
         Dim coolantsType() = {"1 'external'", "2: 'internal'", "3: 'externalAir'", "4: 'externalAir'", "5: 'mql', 0: 'Unkown'"}
 
+        If Char.IsLetter(id, 0) Then
+            id = id.Substring(1)
+        End If
+
+
         If radiusMill.Any(Function(textID) id.StartsWith(textID)) Then Return "radiusMill"
         If ballMill.Any(Function(textID) id.StartsWith(textID)) Then Return "ballMill"
         If endMill.Any(Function(textID) id.StartsWith(textID)) Then Return "endMill"
@@ -84,7 +85,7 @@ Public Class ImportTool
 
         Dim xmlFile As String
 
-        If Main.debugMode <> True Then
+        If Main.debugMode = True Then
             xmlFile = Me.RefTextBox.Text + ".xml" '  "15520501.xml" '"15520260.xml"
         Else
             xmlFile = GetFile()

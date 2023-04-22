@@ -1,6 +1,5 @@
 ﻿Option Explicit On
 Imports System.Reflection
-Imports Microsoft.Office.Interop.Excel
 
 Module Tools
     Public Class Tool

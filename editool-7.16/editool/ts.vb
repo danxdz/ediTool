@@ -1,15 +1,8 @@
 ﻿Option Explicit On
 
 Imports System.IO
-Imports Microsoft.Win32
 Imports System.Reflection
-Imports TopSolid.Kernel.Automating
-Imports Microsoft.Office.Interop.Excel
-Imports System.Security.Cryptography
-Imports Microsoft.Office
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement
-Imports System.Windows
-Imports TopSolid.Cad.Design.Automating
+Imports Microsoft.Win32
 
 Module ts
     Public ReadOnly api As New TopSolidAPI()

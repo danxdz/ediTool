@@ -27,7 +27,7 @@ Module Firebase_IO
 
             Dim type = tool.Type
             If type = "" Then 'TODO
-                type = "FR2T"
+                type = "endMill"
             End If
             Dim collection = db.Collection(type)
 
@@ -63,10 +63,9 @@ Module Firebase_IO
             Dim res = docRef.SetAsync(data)
             Debug.WriteLine(res)
         End Sub
-        Public Function GetTools(type As String) As List(Of Tool)
 
+        Public Sub GetTools(type As String)
             Try
-
                 Dim collection = db.Collection(type)
                 Dim query = collection.OrderBy("Name")
                 Dim querySnapshot = query.GetSnapshotAsync().GetAwaiter().GetResult()
@@ -104,14 +103,17 @@ Module Firebase_IO
                     End If
                 Next
 
-                Return tools
-
+                If tools IsNot Nothing Then
+                    For Each tool As Tool In tools
+                        Main.fullToolsList.add(tool)
+                        FillDataGrid(tool, Main.NewToolDataGridView)
+                    Next
+                    '   End If
+                End If
 
             Catch ex As Exception
-
+                Debug.WriteLine("error: ", ex)
             End Try
-
-        End Function
-
+        End Sub
     End Class
 End Module
