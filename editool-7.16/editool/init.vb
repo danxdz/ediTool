@@ -308,6 +308,8 @@ Module Init
                     If paramName <> "" Then
                         currentSubMenu.Checked = True
                     Else
+                        Dim v = My.Settings.sourceLibrary
+
                         Dim savedDefaultLib = My.Settings(parentName)
                         If savedDefaultLib = "" Then
                             savedDefaultLib = "Default"
@@ -399,18 +401,4 @@ Module Init
         My.Settings.Save()
     End Sub
 
-    Public Sub Preload()
-        ' Show splash screen
-        Dim splashForm As New Preload()
-        splashForm.output.Visible = True
-        ' Add event handler for click on splash screen
-        AddHandler splashForm.Click, Sub(sender, e)
-                                         ' Close splash screen and show main form
-                                         splashForm.Close()
-                                         Main.Show()
-                                     End Sub
-        ' Show splash screen
-        splashForm.ShowDialog()
-        splashForm.Close()
-    End Sub
 End Module

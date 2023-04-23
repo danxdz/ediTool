@@ -6,6 +6,5 @@ Namespace My
     ' L'événement PropertyChanged est déclenché après la modification d'une valeur de paramètre.
     ' L'événement SettingsLoaded est déclenché après le chargement des valeurs de paramètre.
     ' L'événement SettingsSaving est déclenché avant l'enregistrement des valeurs de paramètre.
-    Partial Friend NotInheritable Class MySettings
-    End Class
+
 End Namespace

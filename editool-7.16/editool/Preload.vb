@@ -46,15 +46,7 @@
 
 
     End Sub
-    Public Sub ToolCount()
-        If toolCountLabel.InvokeRequired Then
-            toolCountLabel.BeginInvoke(Sub() ToolCount())
-            Return
-        End If
 
-        toolCountLabel.Text = 10
-        toolCountLabel.Refresh()
-    End Sub
 
     Private Sub Preload_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If Me.DialogResult = DialogResult.None Then
@@ -76,7 +68,20 @@
         'ToolCount()
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
+    Public Sub Preload(count As Integer)
+        ' Show splash screen
+        Dim splashForm As New Preload()
+        splashForm.output.Visible = True
+        splashForm.toolCountLabel.Text = count
+        ' Add event handler for click on splash screen
+        AddHandler splashForm.Click, Sub(sender, e)
+                                         ' Close splash screen and show main form
+                                         splashForm.Close()
+                                         Main.Show()
+                                     End Sub
+        ' Show splash screen
+        splashForm.ShowDialog()
+        splashForm.Close()
     End Sub
 End Class

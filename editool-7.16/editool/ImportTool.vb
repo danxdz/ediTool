@@ -77,9 +77,8 @@ Public Class ImportTool
         Dim paramToPropDict As New Dictionary(Of String, String)
         For Each line As String In splitLine
             Dim fields() As String = line.Split(";"c)
-            If fields.Count > 2 Then
+            If (fields.Count > 2) Then
                 paramToPropDict.Add(fields(0), fields(1))
-
             End If
         Next
 
@@ -98,9 +97,22 @@ Public Class ImportTool
 
         Dim toolNode As XmlNode = xmlDoc.SelectSingleNode("//Tool")
 
-        ' Cria uma nova instância da classe NewTool
+        For Each categoryNode As XmlNode In toolNode.SelectNodes("//Category-Data")
+            Dim categoryName As String = categoryNode.SelectSingleNode("PropertyName").InnerText.Trim()
+            If categoryName = "NSM" Then
+                Dim nsmValue As String = categoryNode.SelectSingleNode("Value").InnerText.Trim()
+                If paramToPropDict.ContainsKey(nsmValue) Then
+                    Dim propName As String = paramToPropDict(nsmValue)
+                    newTool.Type = propName
+                End If
+
+                ' aqui você pode verificar o valor de nsmValue e tomar a ação desejada
+                Exit For ' sair do loop quando encontrar a categoria NSM
+                End If
+        Next
 
         For Each node As XmlNode In toolNode.ChildNodes
+
             ' Aqui você pode percorrer todos os parâmetros de cada toolNode
             For Each paramNode As XmlNode In node.SelectNodes("Property-Data")
                 Dim paramName As String = paramNode.SelectSingleNode("PropertyName").InnerText.Trim()
@@ -116,6 +128,7 @@ Public Class ImportTool
                     If IsNumeric(paramValue) Then
                         paramValue = paramValue.Replace(",", ".")
                     End If
+
                     If (paramValue = "FSA") Then paramValue = "FRAISA" 'TODO check list to show right name
                     prop.SetValue(newTool, Convert.ChangeType(paramValue, prop.PropertyType), Nothing)
                 End If
@@ -123,7 +136,7 @@ Public Class ImportTool
         Next
         Set_Name_auto(newTool)
         newTool.Name = Main.Name_textbox.Text
-        newTool.Type = CheckFraisaTypes(Me.RefTextBox.Text)
+        'newTool.Type = CheckFraisaTypes(Me.RefTextBox.Text)
         FillDataGrid(newTool, DataGridView1)
         Refresh_outil(newTool, ToolPreview_PictureBox)
         Debug.WriteLine(newTool)
@@ -167,8 +180,14 @@ Public Class ImportTool
     End Function
 
     Private Sub saveBt_Click(sender As Object, e As EventArgs) Handles saveBt.Click
-        Dim service As New FirestoreService
-        service.AddToolAsync(newTool)
+        'Dim service As New FirestoreService
+        'service.AddToolAsync(newTool)
+        Dim localTools As New SQLiteToolDatabase("endMill") 'TODO
+
+        localTools.AddTool(newTool)
+        graphics.Refresh_outil(newTool, Main.ToolPreview_PictureBox)
+        FillDataGrid(newTool, Main.NewToolDataGridView)
+
     End Sub
 
     Public Function GetUrl()

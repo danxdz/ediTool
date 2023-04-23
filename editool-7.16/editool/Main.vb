@@ -2,13 +2,11 @@
 Option Explicit On
 Imports System.Globalization
 Imports System.Text.RegularExpressions
-
-
-
+Imports EdiTool.My
 
 Public Class Main
 
-    Public ReadOnly debugMode As Boolean = False 'True
+    Public ReadOnly debugMode As Boolean = True 'True
 
     Public ReadOnly fullToolsList = New List(Of Tool)
 
@@ -27,13 +25,33 @@ Public Class Main
 
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        Init.Preload()
         'Debug **************************************************************
-        'Clean settings
-        'My.Settings.destinationLibrary = ""
-        'My.Settings.PrefLang = ""
-        'My.Settings.Save()
+        'Clean settings - change to 'false' to persistent settings or true to clear user settings
+        If My.Settings.userSettings = False Then
+            My.Settings.destinationLibrary = ""
+            My.Settings.PrefLang = ""
+            My.Settings.ToolType = ""
+            My.Settings.userSettings = True
+            My.Settings.Save()
+
+        End If
+
+
+
+        Dim toolType As String = If(My.Settings.ToolType = "", "endMill", My.Settings.ToolType)
+        Dim db As New SQLiteToolDatabase(toolType)
+
+        Dim localtools As List(Of Tool) = db.GetAllTools()
+
+        If localtools IsNot Nothing Or localtools.Count > 0 Then
+            For Each tool As Tool In localtools
+                fullToolsList.add(tool)
+                FillDataGrid(tool, NewToolDataGridView)
+            Next
+        End If
+
+        Preload.Preload(localtools.Count)
+
 
 
         'First time load - check tool lib to save new tools
@@ -61,12 +79,9 @@ Public Class Main
         FillUI(language)
 
 
-        Dim service = New FirestoreService()
-
-
+        'Dim service = New FirestoreService()
         ' If service.db IsNot Nothing Then ' TODO
-        Dim remoteTools = service.GetTools("endMill")
-
+        ' Dim remoteTools = service.GetTools("endMill") ' TODO FIRESTORE
 
 
 
@@ -475,7 +490,7 @@ Public Class Main
         ToolTip1.Show("groupe matiere", filterMat_ComboBox)
     End Sub
 
-    Private Sub toolType_Click(sender As Object, e As EventArgs) Handles FR2T.Click, FRTO.Click, FRBO.Click
+    Private Sub ToolType_Click(sender As Object, e As EventArgs) Handles FR2T.Click, FRTO.Click, FRBO.Click
         ToolTypeButton_Click(sender, e)
         Console.Write(e.ToString)
     End Sub
@@ -498,7 +513,7 @@ Public Class Main
 
 
 
-    Private Sub loginBt_Click(sender As Object, e As EventArgs) Handles loginBt.Click
+    Private Sub LoginBt_Click(sender As Object, e As EventArgs) Handles loginBt.Click
         ' ImportTool.GetUrl() 'TODO
 
     End Sub
@@ -507,5 +522,10 @@ Public Class Main
 
     End Sub
 
+    Private Sub DbBt_Click(sender As Object, e As EventArgs) Handles dbBt.Click
 
+        Dim db As New SQLiteToolDatabase(newTool.Type)
+
+        db.GetAllTools()
+    End Sub
 End Class

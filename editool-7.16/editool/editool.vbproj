@@ -86,7 +86,6 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -134,7 +133,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Import_TopV6.vb" />
-    <Compile Include="Firestore.vb" />
+    <None Include="Firestore.vbDisabled" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -153,6 +152,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Settings.vb" />
+    <Compile Include="sqlite_init.vb" />
     <Compile Include="TOOL_class.vb" />
     <Compile Include="ToolName_config.Designer.vb">
       <DependentUpon>ToolName_config.vb</DependentUpon>
@@ -287,62 +287,11 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Google.Cloud.Firestore">
-      <Version>3.2.0</Version>
-    </PackageReference>
-    <PackageReference Include="Google.Protobuf">
-      <Version>3.22.3</Version>
-    </PackageReference>
-    <PackageReference Include="Grpc.Auth">
-      <Version>2.52.0</Version>
-    </PackageReference>
-    <PackageReference Include="Grpc.Core">
-      <Version>2.46.6</Version>
-    </PackageReference>
-    <PackageReference Include="Grpc.Core.Api">
-      <Version>2.52.0</Version>
-    </PackageReference>
-    <PackageReference Include="Grpc.Net.Client">
-      <Version>2.52.0</Version>
-    </PackageReference>
-    <PackageReference Include="Grpc.Net.Common">
-      <Version>2.52.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces">
-      <Version>7.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
-      <Version>7.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions">
-      <Version>7.0.0</Version>
-    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
     </PackageReference>
-    <PackageReference Include="System.Buffers">
-      <Version>4.5.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Collections.Immutable">
-      <Version>7.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Diagnostics.DiagnosticSource">
-      <Version>7.0.2</Version>
-    </PackageReference>
-    <PackageReference Include="System.Linq.Async">
-      <Version>6.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Memory">
-      <Version>4.5.5</Version>
-    </PackageReference>
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
-      <Version>6.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="System.Threading.Tasks.Extensions">
-      <Version>4.5.4</Version>
-    </PackageReference>
-    <PackageReference Include="System.ValueTuple">
-      <Version>4.5.0</Version>
+    <PackageReference Include="System.Data.SQLite">
+      <Version>1.0.117</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

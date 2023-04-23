@@ -21,11 +21,11 @@ Module graphics
 
             Dim half_h As Integer = StartY / 2
 
-            Dim D As Decimal = newTool.D1
-            Dim CTS_AD As Double = newTool.D2
+            Dim D As Double = newTool.D1
+            Dim CTS_AD As Double = If(newTool.D2 = 0, newTool.D1 - 0.2, newTool.D2)
             Dim SD As Double = newTool.D3
             Dim L As Double = newTool.L1
-            Dim CTS_AL As Double = newTool.L2
+            Dim CTS_AL As Double = If(newTool.L2 = 0, newTool.L1, newTool.L2)
             Dim OL As Double = newTool.L3
             Dim Alpha As Double = newTool.AngleDeg
             Dim r As Double = newTool.RayonBout

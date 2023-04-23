@@ -1,4 +1,5 @@
 ﻿Option Explicit On
+Imports System.Data.Entity.Core.Common.EntitySql
 Imports System.IO
 Imports System.Net
 Imports System.Xml
@@ -165,7 +166,7 @@ Module FileImports
     End Sub
 
     Public Sub FillDataGrid(NewTool As Tool, DGV As DataGridView)
-        Dim objProperties() As String = {"Name", "ManufRef", "D1", "D3", "D2", "L3", "L1", "L2", "AngleDeg", "NoTT", "Chanfrein", "Manuf"} 'TODO
+        Dim objProperties() As String = {"GroupeMat", "ManufRef", "D1", "L1", "NoTT"}
         Dim tmpData As Data.DataTable
 
         If (DGV.DataSource IsNot Nothing) Then
@@ -180,58 +181,19 @@ Module FileImports
             Next
         End If
 
-        Dim row As New List(Of String)
-        For Each prop As String In objProperties
-            Dim propInfo = GetType(Tool).GetProperty(prop)
-            Dim value = propInfo.GetValue(NewTool)
-            If Not String.IsNullOrEmpty(value) Then
-                row.Add(value)
-            End If
-        Next
-
-        tmpData.Rows.Add(row.ToArray())
-        DGV.DataSource = tmpData
-        Refresh_outil(NewTool, Main.ToolPreview_PictureBox)
-    End Sub
-
-
-
-    Public Sub FillDataGrid_old(NewTool As Tool, DGV As DataGridView)
-
-        Dim tmpData = New Data.DataTable
-
-        tmpData = ImportTool.DataGridView1.DataSource
-        'If Main.toolsList.items.Count > 0 Then
-        'tmpData = Main.toolsList.items
-
-        ' End If
-
-        Dim objList() As String = {"Name", "ref", "D", "SD", "CTS_AD", "OL", "L", "CTS_AL", "AngDeg", "NoTT", "chf", "manuf"}
-
-        tmpData = SetDataGridColumnsTitle(objList, tmpData)
-
-        With NewTool
-            Dim row As New List(Of String) From {
-            .Name,
-            .ManufRef,
-            .D1,
-            .D3,
-            .D2,
-            .L3,
-            .L1,
-            .L2,
-            .AngleDeg,
-            .NoTT,
-            .Chanfrein,
-            .Manuf
-        }
-
-            tmpData.Rows.add(row.ToArray())
-        End With
+        Dim row As DataRow = tmpData.NewRow()
+        row("GroupeMat") = NewTool.GroupeMat
+        row("ManufRef") = NewTool.ManufRef
+        row("D1") = Double.Parse(NewTool.D1)
+        row("L1") = Double.Parse(NewTool.L1)
+        row("NoTT") = Integer.Parse(NewTool.NoTT)
+        tmpData.Rows.Add(row)
 
         DGV.DataSource = tmpData
         Refresh_outil(NewTool, Main.ToolPreview_PictureBox)
     End Sub
+
+
 
     Public Sub OpenXmlFile()
         Dim startPath As String = ""
@@ -464,7 +426,6 @@ Module FileImports
                     'If tblcols.Item(1).InnerHtml = toolTypeFilter Then   ' Or 1 = 1 Then
                     'ListBox1.Items.Add(tblcols.Item(2).InnerHtml & " - " & tblcols.Item(3).InnerHtml & " - " & tblcols.Item(4).InnerHtml & " - " & tblcols.Item(8).InnerHtml)
 
-                    Preload.ToolCount()
                     With newTool
                         .Type = tblcols.Item(1).InnerHtml
                         .GroupeMat = tblcols.Item(2).InnerHtml

@@ -38,81 +38,13 @@
       "frameworks": {
         "net48": {
           "dependencies": {
-            "Google.Cloud.Firestore": {
-              "target": "Package",
-              "version": "[3.2.0, )"
-            },
-            "Google.Protobuf": {
-              "target": "Package",
-              "version": "[3.22.3, )"
-            },
-            "Grpc.Auth": {
-              "target": "Package",
-              "version": "[2.52.0, )"
-            },
-            "Grpc.Core": {
-              "target": "Package",
-              "version": "[2.46.6, )"
-            },
-            "Grpc.Core.Api": {
-              "target": "Package",
-              "version": "[2.52.0, )"
-            },
-            "Grpc.Net.Client": {
-              "target": "Package",
-              "version": "[2.52.0, )"
-            },
-            "Grpc.Net.Common": {
-              "target": "Package",
-              "version": "[2.52.0, )"
-            },
-            "Microsoft.Bcl.AsyncInterfaces": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "Microsoft.Extensions.DependencyInjection.Abstractions": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "Microsoft.Extensions.Logging.Abstractions": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
             },
-            "System.Buffers": {
+            "System.Data.SQLite": {
               "target": "Package",
-              "version": "[4.5.1, )"
-            },
-            "System.Collections.Immutable": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "System.Diagnostics.DiagnosticSource": {
-              "target": "Package",
-              "version": "[7.0.2, )"
-            },
-            "System.Linq.Async": {
-              "target": "Package",
-              "version": "[6.0.1, )"
-            },
-            "System.Memory": {
-              "target": "Package",
-              "version": "[4.5.5, )"
-            },
-            "System.Runtime.CompilerServices.Unsafe": {
-              "target": "Package",
-              "version": "[6.0.0, )"
-            },
-            "System.Threading.Tasks.Extensions": {
-              "target": "Package",
-              "version": "[4.5.4, )"
-            },
-            "System.ValueTuple": {
-              "target": "Package",
-              "version": "[4.5.0, )"
+              "version": "[1.0.117, )"
             }
           }
         }

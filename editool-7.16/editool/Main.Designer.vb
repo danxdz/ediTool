@@ -97,6 +97,7 @@ Partial Class Main
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.loginBt = New System.Windows.Forms.Button()
+        Me.dbBt = New System.Windows.Forms.Button()
         CType(Me.ToolPreview_PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.newToolMenu.SuspendLayout()
         Me.toolIcons.SuspendLayout()
@@ -860,12 +861,25 @@ Partial Class Main
         Me.loginBt.Text = "login"
         Me.loginBt.UseVisualStyleBackColor = True
         '
+        'dbBt
+        '
+        Me.dbBt.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dbBt.Font = New System.Drawing.Font("Microsoft YaHei", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dbBt.Location = New System.Drawing.Point(491, 50)
+        Me.dbBt.Name = "dbBt"
+        Me.dbBt.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.dbBt.Size = New System.Drawing.Size(130, 37)
+        Me.dbBt.TabIndex = 81
+        Me.dbBt.Text = "creer bd"
+        Me.dbBt.UseVisualStyleBackColor = True
+        '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1219, 601)
+        Me.Controls.Add(Me.dbBt)
         Me.Controls.Add(Me.loginBt)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.toolIcons)
@@ -1006,4 +1020,5 @@ Partial Class Main
     Friend WithEvents NewToolDataGridView As DataGridView
     Friend WithEvents TabPage3 As TabPage
     Friend WithEvents loginBt As Button
+    Friend WithEvents dbBt As Button
 End Class

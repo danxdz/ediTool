@@ -13,35 +13,35 @@ Option Explicit On
 
 
 Namespace My
-    
-    <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0"),  _
-     Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
+
+    <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0"),
+     Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
-        
-        Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()),MySettings)
-        
+
+        Private Shared defaultInstance As MySettings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New MySettings()), MySettings)
+
 #Region "Fonctionnalité Enregistrement automatique My.Settings"
 #If _MyType = "WindowsForms" Then
-    Private Shared addedHandler As Boolean
+        Private Shared addedHandler As Boolean
 
-    Private Shared addedHandlerLockObject As New Object
+        Private Shared addedHandlerLockObject As New Object
 
-    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)> _
-    Private Shared Sub AutoSaveSettings(sender As Global.System.Object, e As Global.System.EventArgs)
-        If My.Application.SaveMySettingsOnExit Then
-            My.Settings.Save()
-        End If
-    End Sub
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>
+        Private Shared Sub AutoSaveSettings(sender As Global.System.Object, e As Global.System.EventArgs)
+            If My.Application.SaveMySettingsOnExit Then
+                My.Settings.Save()
+            End If
+        End Sub
 #End If
 #End Region
-        
+
         Public Shared ReadOnly Property [Default]() As MySettings
             Get
-                
+
 #If _MyType = "WindowsForms" Then
-               If Not addedHandler Then
+                If Not addedHandler Then
                     SyncLock addedHandlerLockObject
                         If Not addedHandler Then
                             AddHandler My.Application.Shutdown, AddressOf AutoSaveSettings
@@ -53,185 +53,197 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("fr")>  _
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("fr")>
         Public Property PrefLang() As String
             Get
-                Return CType(Me("PrefLang"),String)
+                Return CType(Me("PrefLang"), String)
             End Get
             Set
-                Me("PrefLang") = value
+                Me("PrefLang") = Value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("FR2T")>  _
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("FR2T")>
         Public Property ToolType() As String
             Get
-                Return CType(Me("ToolType"),String)
+                Return CType(Me("ToolType"), String)
             End Get
             Set
-                Me("ToolType") = value
+                Me("ToolType") = Value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("FP Ø[D] [NoTT]z Lc[L]")>  _
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("FP Ø[D] [NoTT]z Lc[L]")>
         Public Property MaskTT_FOP9() As String
             Get
-                Return CType(Me("MaskTT_FOP9"),String)
+                Return CType(Me("MaskTT_FOP9"), String)
             End Get
             Set
-                Me("MaskTT_FOP9") = value
+                Me("MaskTT_FOP9") = Value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("FO Ø[D] [NoTT]z Lc[L]")>  _
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("FO Ø[D] [NoTT]z Lc[L]")>
         Public Property MaskTT_FOCA() As String
             Get
-                Return CType(Me("MaskTT_FOCA"),String)
+                Return CType(Me("MaskTT_FOCA"), String)
             End Get
             Set
-                Me("MaskTT_FOCA") = value
+                Me("MaskTT_FOCA") = Value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("")>
         Public Property MaskTT_ALFI() As String
             Get
-                Return CType(Me("MaskTT_ALFI"),String)
+                Return CType(Me("MaskTT_ALFI"), String)
             End Get
             Set
-                Me("MaskTT_ALFI") = value
+                Me("MaskTT_ALFI") = Value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("")>
         Public Property lastPath() As String
             Get
-                Return CType(Me("lastPath"),String)
+                Return CType(Me("lastPath"), String)
             End Get
             Set
-                Me("lastPath") = value
+                Me("lastPath") = Value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("c:/missler/config/database/tools/")>  _
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("c:/missler/config/database/tools/")>
         Public Property V6_default_path() As String
             Get
-                Return CType(Me("V6_default_path"),String)
+                Return CType(Me("V6_default_path"), String)
             End Get
             Set
-                Me("V6_default_path") = value
+                Me("V6_default_path") = Value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("FR Ø[D] [NoTT]z Lc[L] Lu[CTS_EL]")>  _
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("FR Ø[D] [NoTT]z Lc[L] Lu[CTS_EL]")>
         Public Property NameMask() As String
             Get
-                Return CType(Me("NameMask"),String)
+                Return CType(Me("NameMask"), String)
             End Get
             Set
-                Me("NameMask") = value
+                Me("NameMask") = Value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("FR Ø[D] [NoTT]z Lc[L] Lu[CTS_EL]")>  _
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("FR Ø[D] [NoTT]z Lc[L] Lu[CTS_EL]")>
         Public Property MaskTT_FR() As String
             Get
-                Return CType(Me("MaskTT_FR"),String)
+                Return CType(Me("MaskTT_FR"), String)
             End Get
             Set
-                Me("MaskTT_FR") = value
+                Me("MaskTT_FR") = Value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("FT Ø[D] r[r] [NoTT]z Lc[L] Lu[CTS_EL]")>  _
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("FT Ø[D] r[r] [NoTT]z Lc[L] Lu[CTS_EL]")>
         Public Property MaskTT_FT() As String
             Get
-                Return CType(Me("MaskTT_FT"),String)
+                Return CType(Me("MaskTT_FT"), String)
             End Get
             Set
-                Me("MaskTT_FT") = value
+                Me("MaskTT_FT") = Value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("FB Ø[D] [NoTT]z Lc[L] Lu[CTS_EL]")>  _
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("FB Ø[D] [NoTT]z Lc[L] Lu[CTS_EL]")>
         Public Property MaskTT_FB() As String
             Get
-                Return CType(Me("MaskTT_FB"),String)
+                Return CType(Me("MaskTT_FB"), String)
             End Get
             Set
-                Me("MaskTT_FB") = value
+                Me("MaskTT_FB") = Value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("")>
         Public Property toolLib() As String
             Get
-                Return CType(Me("toolLib"),String)
+                Return CType(Me("toolLib"), String)
             End Get
             Set
-                Me("toolLib") = value
+                Me("toolLib") = Value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("EdiTool")>  _
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("EdiTool")>
         Public Property destinationLibrary() As String
             Get
-                Return CType(Me("destinationLibrary"),String)
+                Return CType(Me("destinationLibrary"), String)
             End Get
             Set
-                Me("destinationLibrary") = value
+                Me("destinationLibrary") = Value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("")>
         Public Property sourceLibrary() As String
             Get
-                Return CType(Me("sourceLibrary"),String)
+                Return CType(Me("sourceLibrary"), String)
             End Get
             Set
-                Me("sourceLibrary") = value
+                Me("sourceLibrary") = Value
+            End Set
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(),
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>
+        Public Property userSettings() As Boolean
+            Get
+                Return CType(Me("userSettings"), Boolean)
+            End Get
+            Set
+                Me("userSettings") = Value
             End Set
         End Property
     End Class
 End Namespace
 
 Namespace My
-    
-    <Global.Microsoft.VisualBasic.HideModuleNameAttribute(),  _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-     Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
+
+    <Global.Microsoft.VisualBasic.HideModuleNameAttribute(),
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+     Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>
     Friend Module MySettingsProperty
-        
-        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
+
+        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>
         Friend ReadOnly Property Settings() As Global.EdiTool.My.MySettings
             Get
                 Return Global.EdiTool.My.MySettings.Default
