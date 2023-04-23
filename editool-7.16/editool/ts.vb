@@ -231,7 +231,7 @@ Module ts
         End If
 
         Select Case toolType
-            Case "FR2T"
+            Case "endMill"
                 model_name = "Side Mill D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
             Case "FRTO"
                 model_name = "Radiused Mill D16 L40 r3 SD16"'"Fraise torique D16 L40 r3 SD16"

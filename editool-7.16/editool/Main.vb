@@ -1,12 +1,14 @@
 ﻿
 Option Explicit On
 Imports System.Globalization
+Imports System.IO
 Imports System.Text.RegularExpressions
 Imports EdiTool.My
+Imports Newtonsoft.Json
 
 Public Class Main
 
-    Public ReadOnly debugMode As Boolean = True 'True
+    Public ReadOnly debugMode As Boolean = False 'True
 
     Public ReadOnly fullToolsList = New List(Of Tool)
 
@@ -276,38 +278,51 @@ Public Class Main
             Dim tmp = fullToolsList.Count
 
             If num = 1 Then
-                'If My.Settings.DefManuf <> "FRAISA" Then
-                '    i = tmp - i
-                'End If
-                'indexLabel.Text = i
                 Try
-                    If filteredTools.Count > 0 Then
-                        D_textbox.Text = filteredTools(i).D1
-                        L_textbox.Text = filteredTools(i).L1
 
-                        CTS_AD_textbox.Text = filteredTools(i).D2
-                        CTS_AL_textbox.Text = filteredTools(i).L2
+                    Dim filePath As String = "tools/" + fullToolsList(i).ManufRef + ".json"
+                    Dim json As String = File.ReadAllText(filePath)
+                    Dim tool As Tool = JsonConvert.DeserializeObject(Of Tool)(json)
+                    fullToolsList(i) = tool
+                    D_textbox.Text = tool.D1
+                    L_textbox.Text = tool.L1
 
-                        SD_textbox.Text = filteredTools(i).D3
-                        OL_textbox.Text = filteredTools(i).L3
-                        Refresh_outil(filteredTools(i), ToolPreview_PictureBox)
-                        Init.Set_Name_auto(filteredTools(i))
+                    CTS_AD_textbox.Text = tool.D2
+                    CTS_AL_textbox.Text = tool.L2
 
-                    Else
-                        D_textbox.Text = fullToolsList(i).D1
-                        L_textbox.Text = fullToolsList(i).L1
+                    SD_textbox.Text = tool.D3
+                    OL_textbox.Text = tool.L3
+                    Refresh_outil(tool, ToolPreview_PictureBox)
+                    Init.Set_Name_auto(tool)
 
-                        CTS_AD_textbox.Text = fullToolsList(i).D2
-                        CTS_AL_textbox.Text = fullToolsList(i).L2
 
-                        SD_textbox.Text = fullToolsList(i).D3
-                        OL_textbox.Text = fullToolsList(i).L3
-                        Refresh_outil(fullToolsList(i), ToolPreview_PictureBox)
-                        Init.Set_Name_auto(fullToolsList(i))
+                    'If filteredTools.Count > 0 Then
+                    '    D_textbox.Text = filteredTools(i).D1
+                    '    L_textbox.Text = filteredTools(i).L1
 
-                    End If
+                    '    CTS_AD_textbox.Text = filteredTools(i).D2
+                    '    CTS_AL_textbox.Text = filteredTools(i).L2
+
+                    '    SD_textbox.Text = filteredTools(i).D3
+                    '    OL_textbox.Text = filteredTools(i).L3
+                    '    Refresh_outil(filteredTools(i), ToolPreview_PictureBox)
+                    '    Init.Set_Name_auto(filteredTools(i))
+
+                    'Else
+                    '    D_textbox.Text = fullToolsList(i).D1
+                    '    L_textbox.Text = fullToolsList(i).L1
+
+                    '    CTS_AD_textbox.Text = fullToolsList(i).D2
+                    '    CTS_AL_textbox.Text = fullToolsList(i).L2
+
+                    '    SD_textbox.Text = fullToolsList(i).D3
+                    '    OL_textbox.Text = fullToolsList(i).L3
+                    '    Refresh_outil(fullToolsList(i), ToolPreview_PictureBox)
+                    '    Init.Set_Name_auto(fullToolsList(i))
+
+                    'End If
                 Catch ex As Exception
-                    'MsgBox("tool data error") 'TODO
+                    MsgBox("tool data error") 'TODO
                 End Try
 
             End If
@@ -508,17 +523,6 @@ Public Class Main
     Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton1.Click, ToolStripButton2.Click
         My.Settings.ToolType = sender.ToString
         My.Settings.Save()
-
-    End Sub
-
-
-
-    Private Sub LoginBt_Click(sender As Object, e As EventArgs) Handles loginBt.Click
-        ' ImportTool.GetUrl() 'TODO
-
-    End Sub
-
-    Private Sub NewToolDataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles NewToolDataGridView.CellContentClick
 
     End Sub
 

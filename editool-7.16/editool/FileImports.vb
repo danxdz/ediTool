@@ -176,10 +176,13 @@ Module FileImports
         End If
 
         If tmpData.Columns.Count = 0 Then
-            For Each prop As String In objProperties
-                tmpData.Columns.Add(prop)
-            Next
+            tmpData.Columns.Add("GroupeMat")
+            tmpData.Columns.Add("ManufRef")
+            tmpData.Columns.Add("D1", GetType(Double)) 'Definir coluna D1 como Double
+            tmpData.Columns.Add("L1", GetType(Double)) 'Definir coluna L1 como Double
+            tmpData.Columns.Add("NoTT", GetType(Integer)) 'Definir coluna NoTT como Integer
         End If
+
 
         Dim row As DataRow = tmpData.NewRow()
         row("GroupeMat") = NewTool.GroupeMat
