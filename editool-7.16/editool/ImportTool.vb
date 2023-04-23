@@ -91,55 +91,60 @@ Public Class ImportTool
         End If
 
         Dim documentoXml As New XmlDocument()
-        documentoXml.Load(xmlFile)
+        If xmlFile <> "" Then
+            documentoXml.Load(xmlFile)
 
-        Dim xmlDoc As XmlElement = documentoXml.DocumentElement
+            Dim xmlDoc As XmlElement = documentoXml.DocumentElement
 
-        Dim toolNode As XmlNode = xmlDoc.SelectSingleNode("//Tool")
+            Dim toolNode As XmlNode = xmlDoc.SelectSingleNode("//Tool")
 
-        For Each categoryNode As XmlNode In toolNode.SelectNodes("//Category-Data")
-            Dim categoryName As String = categoryNode.SelectSingleNode("PropertyName").InnerText.Trim()
-            If categoryName = "NSM" Then
-                Dim nsmValue As String = categoryNode.SelectSingleNode("Value").InnerText.Trim()
-                If paramToPropDict.ContainsKey(nsmValue) Then
-                    Dim propName As String = paramToPropDict(nsmValue)
-                    newTool.Type = propName
-                End If
-
-                ' aqui você pode verificar o valor de nsmValue e tomar a ação desejada
-                Exit For ' sair do loop quando encontrar a categoria NSM
-                End If
-        Next
-
-        For Each node As XmlNode In toolNode.ChildNodes
-
-            ' Aqui você pode percorrer todos os parâmetros de cada toolNode
-            For Each paramNode As XmlNode In node.SelectNodes("Property-Data")
-                Dim paramName As String = paramNode.SelectSingleNode("PropertyName").InnerText.Trim()
-                Dim paramValue As String = paramNode.SelectSingleNode("Value").InnerText.Trim()
-
-                ' Verifica se o nome do parâmetro existe no dicionário
-                If paramToPropDict.ContainsKey(paramName) Then
-                    Dim propName As String = paramToPropDict(paramName)
-
-                    ' Usa reflection para definir o valor da propriedade correspondente na classe NewTool
-                    Dim prop As PropertyInfo = GetType(Tool).GetProperty(propName)
-                    'Correcting name
-                    If IsNumeric(paramValue) Then
-                        paramValue = paramValue.Replace(",", ".")
+            For Each categoryNode As XmlNode In toolNode.SelectNodes("//Category-Data")
+                Dim categoryName As String = categoryNode.SelectSingleNode("PropertyName").InnerText.Trim()
+                If categoryName = "NSM" Then
+                    Dim nsmValue As String = categoryNode.SelectSingleNode("Value").InnerText.Trim()
+                    If paramToPropDict.ContainsKey(nsmValue) Then
+                        Dim propName As String = paramToPropDict(nsmValue)
+                        newTool.Type = propName
                     End If
 
-                    If (paramValue = "FSA") Then paramValue = "FRAISA" 'TODO check list to show right name
-                    prop.SetValue(newTool, Convert.ChangeType(paramValue, prop.PropertyType), Nothing)
+                    ' aqui você pode verificar o valor de nsmValue e tomar a ação desejada
+                    Exit For ' sair do loop quando encontrar a categoria NSM
                 End If
             Next
-        Next
-        Set_Name_auto(newTool)
-        newTool.Name = Main.Name_textbox.Text
-        'newTool.Type = CheckFraisaTypes(Me.RefTextBox.Text)
-        FillDataGrid(newTool, DataGridView1)
-        Refresh_outil(newTool, ToolPreview_PictureBox)
-        Debug.WriteLine(newTool)
+
+            For Each node As XmlNode In toolNode.ChildNodes
+
+                ' Aqui você pode percorrer todos os parâmetros de cada toolNode
+                For Each paramNode As XmlNode In node.SelectNodes("Property-Data")
+                    Dim paramName As String = paramNode.SelectSingleNode("PropertyName").InnerText.Trim()
+                    Dim paramValue As String = paramNode.SelectSingleNode("Value").InnerText.Trim()
+
+                    ' Verifica se o nome do parâmetro existe no dicionário
+                    If paramToPropDict.ContainsKey(paramName) Then
+                        Dim propName As String = paramToPropDict(paramName)
+
+                        ' Usa reflection para definir o valor da propriedade correspondente na classe NewTool
+                        Dim prop As PropertyInfo = GetType(Tool).GetProperty(propName)
+                        'Correcting name
+                        If IsNumeric(paramValue) Then
+                            paramValue = paramValue.Replace(",", ".")
+                        End If
+
+                        If (paramValue = "FSA") Then paramValue = "FRAISA" 'TODO check list to show right name
+                        prop.SetValue(newTool, Convert.ChangeType(paramValue, prop.PropertyType), Nothing)
+                    End If
+                Next
+            Next
+            Set_Name_auto(newTool)
+            newTool.Name = Main.Name_textbox.Text
+            'newTool.Type = CheckFraisaTypes(Me.RefTextBox.Text)
+            FillDataGrid(newTool, DataGridView1)
+            Refresh_outil(newTool, ToolPreview_PictureBox)
+            Debug.WriteLine(newTool)
+        Else
+            MsgBox("Tool not found")
+        End If
+
     End Sub
 
     Private Sub find_Bt_Click(sender As Object, e As EventArgs) Handles findBt.Click

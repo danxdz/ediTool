@@ -246,14 +246,14 @@ Public Class Main
 
         Dim i As Integer = NewToolDataGridView.CurrentRow().Index + 1
 
-        D_textbox.Text = fullToolsList.Tool(i).D1
-        L_textbox.Text = fullToolsList.Tool(i).L1
+        D_textbox.Text = fullToolsList(i).D1
+        L_textbox.Text = fullToolsList(i).L1
 
-        CTS_AD_textbox.Text = fullToolsList.Tool(i).D2
-        CTS_AL_textbox.Text = fullToolsList.Tool(i).L2
+        CTS_AD_textbox.Text = fullToolsList(i).D2
+        CTS_AL_textbox.Text = fullToolsList(i).L2
 
-        SD_textbox.Text = fullToolsList.Tool(i).D3
-        OL_textbox.Text = fullToolsList.Tool(i).L3
+        SD_textbox.Text = fullToolsList(i).D3
+        OL_textbox.Text = fullToolsList(i).L3
 
     End Sub
 
