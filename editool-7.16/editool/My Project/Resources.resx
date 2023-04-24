@@ -121,6 +121,9 @@
   <data name="13399" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\13399.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="13399_paste" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\13399_paste.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="customLibraryData" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\customlibrarydata.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

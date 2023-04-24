@@ -351,7 +351,7 @@ Module Init
             Case "ORDERTOOLS"
                 ImportOrderTools()
             Case "text"
-                ImportText()
+                ImportPaste.Show()
             Case "topsolid"
                 OpenV6File()
             Case "language"
@@ -379,10 +379,7 @@ Module Init
     Private Sub ImportFraisa()
         ImportTool.Show()
     End Sub
-    Private Sub ImportText()
 
-
-    End Sub
 
     Private Sub MenuItemCheckedItem(name As String, sender As Object, e As EventArgs)
         Dim clickedItem As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)

@@ -126,6 +126,12 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="check_outil.vb" />
     <Compile Include="FileImports.vb" />
+    <Compile Include="ImportPaste.Designer.vb">
+      <DependentUpon>ImportPaste.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ImportPaste.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ImportTool.Designer.vb">
       <DependentUpon>ImportTool.vb</DependentUpon>
     </Compile>
@@ -183,6 +189,9 @@
     <Compile Include="ts.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ImportPaste.resx">
+      <DependentUpon>ImportPaste.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImportTool.resx">
       <DependentUpon>ImportTool.vb</DependentUpon>
     </EmbeddedResource>
@@ -236,6 +245,7 @@
     <None Include="data\text_mainMenu.txt" />
     <None Include="data\config.txt" />
     <None Include="data\DIN400_tool_params.txt" />
+    <Content Include="data\13399_paste.txt" />
     <Content Include="data\customLibraryData.txt" />
     <Content Include="data\text_UI.txt" />
   </ItemGroup>

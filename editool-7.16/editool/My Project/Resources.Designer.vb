@@ -76,6 +76,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Recherche une chaîne localisée semblable à 1;APMXS;Depth of cut maximum in feed direction side
+        '''2;@Barcode;CodeBar;Product barcode
+        '''3;CA;Collision angle	0.0 deg
+        '''4;CCC;Center cutting capability
+        '''5;CGT;Cutting geometry type
+        '''6;@Chanfer;CHW;Corner chamfer width
+        '''7;Cmax;Helical interpolation hole diameter maximum
+        '''8;Cmin;Helical interpolation hole diameter minimum
+        '''9;COATING;Cutting item coating
+        '''10;@D1;DC;Cutting diameter
+        '''11;@D3;DMM;Shank diameter
+        '''12;@D2;Neck diameter
+        '''13;@NoTT;FCEDC;Face cutting edge count
+        '''14;FHA;Flute Helix Angle
+        '''15;@ArrCentre;I [le reste de la chaîne a été tronqué]&quot;;.
+        '''</summary>
+        Friend ReadOnly Property _13399_paste() As String
+            Get
+                Return ResourceManager.GetString("13399_paste", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Recherche une chaîne localisée semblable à .
         '''</summary>
         Friend ReadOnly Property customLibraryData() As String
@@ -85,22 +108,21 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à NSM;Numéro standard Caractéristique
+        '''  Recherche une chaîne localisée semblable à NSM;type;Numéro standard Caractéristique
+        '''DIN4000-82;endMill;types
         '''BLD;Classification par image
         '''A1;D1;Diamètre de coupe 1 (diamètre nominal):mm
         '''A2;D1;Diamètre de coupe 2
         '''A5;D2;Diamètre extension:mm
         '''A9;D2;Diamètre du col
-        '''A11;D1;Diamètre de coupe min. ou nominal
-        '''A61;Diamètre du corps 1
+        '''A11;D1;Diamètre de coupe min. ou nominal;Diameter - first stage
+        '''A61;Diamètre du corps 1;Diameter - last stage
+        '''B1;Step length
         '''B2;L1;Longueur d&apos;arête de coupe, max.:mm
         '''B3;L2;Longueur de porte-à-faux:mm
-        '''B4;L2;Longueur utile
-        '''B5;L3;Longueur totale:mm
-        '''B6;L2;Longueur de la goujure
-        '''B7:Distance coin de coupe par rapport à la pointe de coupe
-        '''B9;L2;Longueur util:mm
-        '''B71;L2;Long [le reste de la chaîne a été tronqué]&quot;;.
+        '''B4;L2;Longueur utile;Useful length:mm
+        '''B5;L3;Longueur totale;Total length:mm
+        '''B6; [le reste de la chaîne a été tronqué]&quot;;.
         '''</summary>
         Friend ReadOnly Property DIN400_tool_params() As String
             Get
