@@ -1,4 +1,4 @@
-﻿Index;File;Parent;EN;FR;PT
+﻿id;file;parent;en;fr;pt
 1;file;1;File;Fichier;Ficheiro
 2;open;1;Open;Ouvrir;Abrir
 3;xml;2;XML;XML;XML@

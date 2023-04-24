@@ -247,7 +247,6 @@
     <None Include="data\DIN400_tool_params.txt" />
     <Content Include="data\13399_paste.txt" />
     <Content Include="data\customLibraryData.txt" />
-    <Content Include="data\text_UI.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\outils.txt" />
@@ -256,6 +255,7 @@
     <None Include="data\reg.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="data\text_UI_backup.txt" />
     <Content Include="data\tooltypes.txt" />
   </ItemGroup>
   <ItemGroup>

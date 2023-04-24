@@ -114,14 +114,14 @@ Public Class Main
             e.Handled = True
         End If
     End Sub
-    Private Sub TextBox_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles D_textbox.KeyPress, SD_textbox.KeyPress, CTS_AD_textbox.KeyPress, OL_textbox.KeyPress, L_textbox.KeyPress, CTS_AL_textbox.KeyPress
+    Private Sub TextBox_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles D1textBox.KeyPress, D3textBox.KeyPress, D2textBox.KeyPress, L3textBox.KeyPress, L1textBox.KeyPress, L2textBox.KeyPress
         Dim digitsOnly As New Regex("[^\d]")
         sender.Text = digitsOnly.Replace(sender.Text, "")
         ' Refresh_outil(toolsList(NewToolDataGridView.CurrentRow().Index))
     End Sub
 
-    Private Sub ForceName_checkBox_CheckedChanged(sender As Object, e As EventArgs) Handles ForceName_checkBox.CheckedChanged
-        If ForceName_checkBox.Checked = True Then
+    Private Sub ForceName_checkBox_CheckedChanged(sender As Object, e As EventArgs) Handles forceName.CheckedChanged
+        If forceName.Checked = True Then
             Name_textbox.Enabled = True
         Else
             Name_textbox.Enabled = False
@@ -156,7 +156,7 @@ Public Class Main
         'Outil_exists(file_reader, Name_textbox.Text)
     End Sub
 
-    Private Sub DefineName_Bt_Click(sender As Object, e As EventArgs) Handles DefineName_Bt.Click
+    Private Sub DefineName_Bt_Click(sender As Object, e As EventArgs) Handles config.Click
         ToolName_config.Show()
     End Sub
 
@@ -210,7 +210,7 @@ Public Class Main
     End Sub
 
 
-    Private Sub inputBoxes_LostFocus(sender As Object, e As EventArgs) Handles A_TextBox.LostFocus, D_textbox.LostFocus, L_textbox.LostFocus, CTS_AL_textbox.LostFocus, Chf_textbox.LostFocus, NoTT.LostFocus, OL_textbox.LostFocus, SD_textbox.LostFocus, CTS_AD_textbox.LostFocus
+    Private Sub inputBoxes_LostFocus(sender As Object, e As EventArgs) Handles A_TextBox.LostFocus, D1textBox.LostFocus, L1textBox.LostFocus, L2textBox.LostFocus, Chf_textbox.LostFocus, NoTT.LostFocus, L3textBox.LostFocus, D3textBox.LostFocus
         Try
             If NewToolDataGridView.Rows.Count > 0 Then
                 Dim i As Integer = NewToolDataGridView.CurrentRow().Index
@@ -246,14 +246,14 @@ Public Class Main
 
         Dim i As Integer = NewToolDataGridView.CurrentRow().Index + 1
 
-        D_textbox.Text = fullToolsList(i).D1
-        L_textbox.Text = fullToolsList(i).L1
+        D1textBox.Text = fullToolsList(i).D1
+        L1textBox.Text = fullToolsList(i).L1
 
-        CTS_AD_textbox.Text = fullToolsList(i).D2
-        CTS_AL_textbox.Text = fullToolsList(i).L2
+        D2textBox.Text = fullToolsList(i).D2
+        L2textBox.Text = fullToolsList(i).L2
 
-        SD_textbox.Text = fullToolsList(i).D3
-        OL_textbox.Text = fullToolsList(i).L3
+        D3textBox.Text = fullToolsList(i).D3
+        L3textBox.Text = fullToolsList(i).L3
 
     End Sub
 
@@ -284,14 +284,14 @@ Public Class Main
                     Dim json As String = File.ReadAllText(filePath)
                     Dim tool As Tool = JsonConvert.DeserializeObject(Of Tool)(json)
                     fullToolsList(i) = tool
-                    D_textbox.Text = tool.D1
-                    L_textbox.Text = tool.L1
+                    D1textBox.Text = tool.D1
+                    L1textBox.Text = tool.L1
 
-                    CTS_AD_textbox.Text = tool.D2
-                    CTS_AL_textbox.Text = tool.L2
+                    D2textBox.Text = tool.D2
+                    L2textBox.Text = tool.L2
 
-                    SD_textbox.Text = tool.D3
-                    OL_textbox.Text = tool.L3
+                    D3textBox.Text = tool.D3
+                    L3textBox.Text = tool.L3
                     Refresh_outil(tool, ToolPreview_PictureBox)
                     Init.Set_Name_auto(tool)
 
@@ -497,9 +497,7 @@ Public Class Main
         End With
     End Sub
 
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        timer_label.Text += 1
-    End Sub
+
 
     Private Sub FilterMat_ComboBox_MouseHover(sender As Object, e As EventArgs) Handles filterMat_ComboBox.MouseHover
         ToolTip1.Show("groupe matiere", filterMat_ComboBox)
@@ -520,16 +518,13 @@ Public Class Main
     End Sub
 
 
-    Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs) Handles ToolStripButton1.Click, ToolStripButton2.Click
+    Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs)
         My.Settings.ToolType = sender.ToString
         My.Settings.Save()
 
     End Sub
 
-    Private Sub DbBt_Click(sender As Object, e As EventArgs) Handles dbBt.Click
+    Private Sub TextBox_TextChanged(sender As Object, e As KeyPressEventArgs) Handles D3textBox.KeyPress, L3textBox.KeyPress, L1textBox.KeyPress, D1textBox.KeyPress, L2textBox.KeyPress, D2textBox.KeyPress
 
-        Dim db As New SQLiteToolDatabase(newTool.Type)
-
-        db.GetAllTools()
     End Sub
 End Class

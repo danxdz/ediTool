@@ -58,22 +58,22 @@ Module FileImports
             Case "manufacturer"
                 Main.manuf_comboBox.Text = val
             Case "toolTotalLength"
-                Main.OL_textbox.Text = val
+                Main.L3textBox.Text = val
             Case "cuttingEdges"
                 Main.NoTT.Text = val
 
             Case "cuttingLength"
-                Main.L_textbox.Text = val
+                Main.L1textBox.Text = val
             Case "toolShaftDiameter"
-                Main.SD_textbox.Text = val
+                Main.D3textBox.Text = val
             Case "toolDiameter"
-                Main.D_textbox.Text = val
+                Main.D1textBox.Text = val
             Case "taperHeight"
-                Main.CTS_AL_textbox.Text = val
+                Main.L2textBox.Text = val
             Case "tipDiameter"
-                Main.CTS_AD_textbox.Text = val
+                Main.D2textBox.Text = val
             Case "toolTotalLength"
-                Main.OL_textbox.Text = val
+                Main.L3textBox.Text = val
         End Select
     End Sub
 
@@ -110,27 +110,27 @@ Module FileImports
                         Main.manuf_comboBox.Text = val
                         newTool.Manuf = val
                     Case "toolTotalLength"
-                        Main.OL_textbox.Text = val
+                        Main.L3textBox.Text = val
                         newTool.L3 = val
                     Case "cuttingEdges"
                         Main.NoTT.Text = val
                         newTool.NoTT = val
                     Case "cuttingLength"
-                        Main.L_textbox.Text = val
+                        Main.L1textBox.Text = val
                         newTool.L1 = val
 
                     Case "toolShaftDiameter"
-                        Main.SD_textbox.Text = val
+                        Main.D3textBox.Text = val
                         newTool.D3 = val
                     Case "toolDiameter"
-                        Main.D_textbox.Text = val
-                        Main.CTS_AD_textbox.Text = val - 0.2
+                        Main.D1textBox.Text = val
+                        Main.D2textBox.Text = val - 0.2
 
                         newTool.D1 = val
                         newTool.D2 = val - 0.2
 
                     Case "taperHeight"
-                        Main.CTS_AL_textbox.Text = val
+                        Main.L2textBox.Text = val
                         If val <> 0 Then
                             newTool.L2 = val '???? not sure
                         Else
@@ -361,7 +361,7 @@ Module FileImports
 
         If IsInt(d1) Then
             newTool.D1 = Int(d1)
-            Main.D_textbox.Text = Int(d1)
+            Main.D1textBox.Text = Int(d1)
         End If
         newTool.L1 = Replace(line(9), "Tool.UtilLength=", "")
         newTool.D2 = Replace(line(12), "Tool.DiamPoky=", "")
@@ -520,10 +520,6 @@ Module FileImports
     End Sub
 
     Public Sub GetOrderTools()
-        StartLoadTimer = Now().ToUniversalTime
-
-        'My.Settings.DefManuf = ""
-        'My.Settings.Save()
 
         With Main
             .filterD1_Combobox.DataSource = Nothing
@@ -533,9 +529,6 @@ Module FileImports
             .filterMat_ComboBox.DataSource = Nothing
             .filterMat_ComboBox.Items.Clear()
 
-            'toolsList.tool.clear()
-
-            .timer_label.Text = Now().ToUniversalTime
         End With
 
         Dim web As New WebBrowser

@@ -297,7 +297,7 @@ Module ts
             ''TopSolidHost.Documents.Close(newTool, False, False)
 
 
-            If Main.AutoCheckIn_checkBox.Checked = True Then
+            If Main.autoCheckIn.Checked = True Then
                 Dim customToolProject = My.Settings.destinationLibrary
                 api.TopSolidExt.Pdm.CheckIn(api.TopSolidExt.Pdm.SearchDocumentByName(
             api.TopSolidExt.Pdm.SearchProjectByName(customToolProject)(0),
@@ -423,7 +423,7 @@ Module ts
             If CTS_AD_tmp > 0 Then
                 SetReal(newTool_docId, "CTS_EBD", CTS_AD_tmp) 'TODO ****************
             Else
-                CTS_AD_tmp = Strip_doubles(Main.D_textbox.Text) ' if 0 gets from TextBox
+                CTS_AD_tmp = Strip_doubles(Main.D1textBox.Text) ' if 0 gets from TextBox
                 SetReal(newTool_docId, "CTS_EBD", CTS_AD_tmp)
             End If
 

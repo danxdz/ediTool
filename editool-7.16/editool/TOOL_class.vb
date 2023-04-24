@@ -111,7 +111,7 @@ Module Tools
                     ' .ToolTipText = tool.
 
                     AddHandler btn.Click, AddressOf Main.ToolTypeButton_Click
-                    Main.ToolStrip1.Items.Add(btn)
+                    ' Main.ToolStrip1.Items.Add(btn)
                 End If
             Next
 

@@ -1,7 +1,131 @@
 ﻿Option Explicit On
+Imports System.Diagnostics.Eventing
 Imports System.Text.RegularExpressions
 
 Module Init
+    ' Returns the index of the specified language
+    Private Function GetLanguageIndex(language As String, file As String) As Integer
+        ' Read the first line of the CSV file to get the list of available languages
+        Dim firstLine As String = file.Split(Environment.NewLine)(0)
+
+        Dim languages As String() = firstLine.Split(";").ToArray()
+
+        ' Check if the specified language is in the list of languages
+        Dim languageIndex As Integer = Array.IndexOf(languages, language)
+        If languageIndex < 0 Then
+            ' Language not found in the list, use the default language
+            languageIndex = 0
+        End If
+
+        Return languageIndex
+    End Function
+
+    ' Updates the text of UI controls based on the specified language
+    Public Sub FillUI(language As String)
+
+        Dim languageIndex As Integer = GetLanguageIndex(language, My.Resources.textUI)
+
+        ' Iterate over each line in the CSV file and update the text of the appropriate control
+        Dim lines As String() = My.Resources.textUI.Split(Environment.NewLine).Skip(1).ToArray()
+        For Each line As String In lines
+            Dim words() As String = line.Split(";")
+            Dim key As String = words(1)
+            Dim control As Control = Main.Controls.Find(key, True).FirstOrDefault()
+            If control IsNot Nothing Then
+                control.Text = words(languageIndex)
+            End If
+        Next
+    End Sub
+
+    Public Sub FillMainMenu(language As String)
+
+        Main.MenuStrip1.Items.Clear()
+        Dim splitLine() As String = My.Resources.textMainMenu.Split(New String() {Environment.NewLine}, StringSplitOptions.None).Skip(1).ToArray
+
+        Dim currentMenu As ToolStripMenuItem = Nothing
+        Dim currentSubMenu As ToolStripMenuItem = Nothing
+
+        Dim languageIndex As Integer = GetLanguageIndex(language, My.Resources.textMainMenu)
+
+        Dim dictMenus As New Dictionary(Of Integer, ToolStripMenuItem)
+
+        Dim CheckableItemsList As New List(Of String)
+
+        For Each line As String In splitLine
+            Dim isCheck As Boolean = False
+            Dim isFunction As Boolean = False
+
+            If line.EndsWith("#") Then
+                line = line.TrimEnd("#"c)
+                isCheck = True
+            End If
+            If line.EndsWith("@") Then
+                line = line.TrimEnd("@"c)
+                isFunction = True
+            End If
+
+            Dim data() As String = line.Split(";")
+            If data(0) = "" Then
+                Exit For
+            End If
+            Dim index As Integer = Integer.Parse(data(0))
+            Dim name As String = data(1)
+            Dim parent As Integer = Integer.Parse(data(2))
+            Dim lang As String = data(languageIndex)
+
+            ' Check for parameters in curly braces {}
+            Dim paramName As String = ""
+            Dim regex As New Regex("\{(.*?)\}")
+            Dim matches As MatchCollection = regex.Matches(lang)
+
+            For Each match As Match In matches
+                ' Get the parameter name without the curly braces
+                paramName = match.Value.Replace("{", "").Replace("}", "")
+
+                ' Get the value of the parameter from the My.Settings
+                Dim paramValue As String = My.Settings(paramName)
+
+                ' Replace the parameter with its value in the menu text
+                lang = lang.Replace(match.Value, paramValue)
+            Next
+            If parent = index And lang <> "" Then
+                currentMenu = New ToolStripMenuItem(lang)
+                currentMenu.Name = name
+
+                dictMenus.Add(index, currentMenu)
+                Main.MenuStrip1.Items.Add(currentMenu)
+            ElseIf parent <> index And lang <> "" Then
+                currentSubMenu = New ToolStripMenuItem(lang)
+                currentSubMenu.Name = name
+                If isCheck And lang <> "" Then
+                    currentSubMenu.CheckOnClick = False
+                    Dim parentName As String = dictMenus(parent).Name
+
+                    If paramName <> "" Then
+                        currentSubMenu.Checked = True
+                    Else
+                        Dim v = My.Settings.sourceLibrary
+
+                        Dim savedDefaultLib = My.Settings(parentName)
+                        If savedDefaultLib = "" Then
+                            savedDefaultLib = "Default"
+                            My.Settings(parentName) = savedDefaultLib
+                            My.Settings.Save()
+                        End If
+                        If currentSubMenu.Name = savedDefaultLib Then
+                            currentSubMenu.Checked = True
+                        End If
+                    End If
+                    AddHandler currentSubMenu.Click, Sub(sender, e) MenuItemCheckedItem(parentName, sender, e)
+                ElseIf isFunction And lang <> "" Then
+                    currentSubMenu.Name = name
+                    AddHandler currentSubMenu.Click, AddressOf MenuItemFunction
+                End If
+                dictMenus(parent).DropDownItems.Add(currentSubMenu)
+                dictMenus.Add(index, currentSubMenu)
+            End If
+        Next
+    End Sub
 
     Dim DataTable_buffer As DataTable
     Public Sub Set_filter()
@@ -21,25 +145,24 @@ Module Init
         ''tmp_string = Replace(tmp_string, ".", ",") ' replace , -> .
         ''Dim result As Double = tmp_string
         If param = "CTS_AL" And value = 0 Then
-            Return Main.L_textbox.Text
+            Return Main.L1textBox.Text
         Else
             Return value
         End If
         If param = "CTS_AD" And value = 0 Then
-            Return Main.D_textbox.Text
+            Return Main.D1textBox.Text
         Else
             Return value
         End If
     End Function
     Function Pick_param_old(param As String)
         Select Case param
-            Case "D" : Return Main.D_textbox.Text
-            Case "L" : Return Main.L_textbox.Text
-            Case "OL" : Return Main.OL_textbox.Text
-            Case "SD" : Return Main.SD_textbox.Text
-            Case "CTS_AL" : Return Check_zero(param, Main.CTS_AL_textbox.Text)
-            Case "CTS_EL" : Return Check_zero(param, Main.CTS_AL_textbox.Text) ' TODO
-            Case "CTS_AD" : Return Check_zero(param, Main.CTS_AD_textbox.Text)
+            Case "D" : Return Main.D1textBox.Text
+            Case "L" : Return Main.L1textBox.Text
+            Case "OL" : Return Main.L3textBox.Text
+            Case "SD" : Return Main.D3textBox.Text
+            Case "CTS_AL" : Return Check_zero(param, Main.L2textBox.Text)
+            Case "CTS_EL" : Return Check_zero(param, Main.L2textBox.Text) ' TODO
             Case "NoTT" : Return Main.NoTT.Text
             Case "A" : Return Main.A_TextBox.Text
             Case "r" : Return Main.Chf_textbox.Text
@@ -65,7 +188,7 @@ Module Init
     End Function
     Public Sub Set_Name_auto(newTool As Tool)
 
-        If Main.ForceName_checkBox.Checked = False Then
+        If Main.forceName.Checked = False Then
             Try
                 Dim Namemask As String = ToolName_config.Namemask_textbox.Text
 
@@ -135,35 +258,6 @@ Module Init
     Public Sub Get_prefs(data As String)
         Dim splitLine() As String = data.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
         Dim pref_lang As String = Right(splitLine(0), 2)
-    End Sub
-    Public Sub FillUI(language As String)
-        Dim labels() As Label = {
-        Main.dg, Main.menu_2, Main.menu_3, Main.menu_4,
-        Main.menu_D1, Main.menu_D2, Main.menu_D3, Main.menu_L1,
-        Main.menu_L2, Main.menu_L3}
-
-        Try
-            Dim lines() As String = My.Resources.textUI.Split(Environment.NewLine)
-            Dim languageIndex As Integer = Array.IndexOf(lines(0).Split(";"), language)
-
-            If languageIndex = -1 Then
-                MessageBox.Show("Language not found in UI_text.csv")
-            Else
-                For i As Integer = 1 To labels.Length
-                    Dim splitLine2() As String = lines(i).Split(";")
-                    labels(i - 1).Text = splitLine2(languageIndex)
-                Next
-                Main.ForceName_checkBox.Text = lines(labels.Length + 1).Split(";")(languageIndex)
-                Main.AutoOpen_checkBox.Text = lines(labels.Length + 2).Split(";")(languageIndex)
-                Main.createBt.Text = lines(labels.Length + 3).Split(";")(languageIndex)
-                Main.DefineName_Bt.Text = lines(labels.Length + 4).Split(";")(languageIndex)
-                Main.toolRef_checkBox.Text = lines(labels.Length + 5).Split(";")(languageIndex)
-                Main.toolDiam_checkBox.Text = lines(5).Split(";")(languageIndex)
-                Main.AutoCheckIn_checkBox.Text = lines(17).Split(";")(languageIndex)
-            End If
-        Catch ex As Exception
-            MessageBox.Show("Error loading UI_text.csv: " + ex.Message)
-        End Try
     End Sub
 
     Function AddFiltersCombobox(tmp As Decimal, filter As List(Of Decimal))
@@ -235,102 +329,6 @@ Module Init
         End With
     End Sub
 
-    Public Sub FillMainMenu(language As String)
-
-        Main.MenuStrip1.Items.Clear()
-        Dim splitLine() As String = My.Resources.textMainMenu.Split(New String() {Environment.NewLine}, StringSplitOptions.None).Skip(1).ToArray
-
-        Dim currentMenu As ToolStripMenuItem = Nothing
-        Dim currentSubMenu As ToolStripMenuItem = Nothing
-
-        Dim langIndex As Integer
-
-        Select Case language 'TODO read avaliable languages from txt file
-            Case "en" : langIndex = 3
-            Case "fr" : langIndex = 4
-            Case "pt" : langIndex = 5
-        End Select
-
-        Dim dictMenus As New Dictionary(Of Integer, ToolStripMenuItem)
-
-        Dim CheckableItemsList As New List(Of String)
-
-        For Each line As String In splitLine
-            Dim isCheck As Boolean = False
-            Dim isFunction As Boolean = False
-
-            If line.EndsWith("#") Then
-                line = line.TrimEnd("#"c)
-                isCheck = True
-            End If
-            If line.EndsWith("@") Then
-                line = line.TrimEnd("@"c)
-                isFunction = True
-            End If
-
-            Dim data() As String = line.Split(";")
-            If data(0) = "" Then
-                Exit For
-            End If
-            Dim index As Integer = Integer.Parse(data(0))
-            Dim name As String = data(1)
-            Dim parent As Integer = Integer.Parse(data(2))
-            Dim text As String = data(langIndex)
-
-            ' Check for parameters in curly braces {}
-            Dim paramName As String = ""
-            Dim regex As New Regex("\{(.*?)\}")
-            Dim matches As MatchCollection = regex.Matches(text)
-
-            For Each match As Match In matches
-                ' Get the parameter name without the curly braces
-                paramName = match.Value.Replace("{", "").Replace("}", "")
-
-                ' Get the value of the parameter from the My.Settings
-                Dim paramValue As String = My.Settings(paramName)
-
-                ' Replace the parameter with its value in the menu text
-                text = text.Replace(match.Value, paramValue)
-            Next
-            If parent = index And text <> "" Then
-                currentMenu = New ToolStripMenuItem(text)
-                currentMenu.Name = name
-
-                dictMenus.Add(index, currentMenu)
-                Main.MenuStrip1.Items.Add(currentMenu)
-            ElseIf parent <> index And text <> "" Then
-                currentSubMenu = New ToolStripMenuItem(text)
-                currentSubMenu.Name = name
-                If isCheck And text <> "" Then
-                    currentSubMenu.CheckOnClick = False
-                    Dim parentName As String = dictMenus(parent).Name
-
-                    If paramName <> "" Then
-                        currentSubMenu.Checked = True
-                    Else
-                        Dim v = My.Settings.sourceLibrary
-
-                        Dim savedDefaultLib = My.Settings(parentName)
-                        If savedDefaultLib = "" Then
-                            savedDefaultLib = "Default"
-                            My.Settings(parentName) = savedDefaultLib
-                            My.Settings.Save()
-                        End If
-                        If currentSubMenu.Name = savedDefaultLib Then
-                            currentSubMenu.Checked = True
-                        End If
-                    End If
-                    AddHandler currentSubMenu.Click, Sub(sender, e) MenuItemCheckedItem(parentName, sender, e)
-                ElseIf isFunction And text <> "" Then
-                    currentSubMenu.Name = name
-                    AddHandler currentSubMenu.Click, AddressOf MenuItemFunction
-                End If
-                dictMenus(parent).DropDownItems.Add(currentSubMenu)
-                dictMenus.Add(index, currentSubMenu)
-            End If
-        Next
-    End Sub
-
     Private Sub MenuItemFunction(sender As Object, e As EventArgs)
         Console.WriteLine(sender)
         Console.WriteLine(e)
@@ -379,7 +377,6 @@ Module Init
     Private Sub ImportFraisa()
         ImportTool.Show()
     End Sub
-
 
     Private Sub MenuItemCheckedItem(name As String, sender As Object, e As EventArgs)
         Dim clickedItem As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
