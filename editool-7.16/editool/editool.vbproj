@@ -123,23 +123,22 @@
     <Import Include="TopSolid.Pdm.Explorer.Automating.Generic" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="check_outil.vb" />
-    <Compile Include="FileImports.vb" />
+    <Compile Include="sys\obs\check_outil.vb" />
+    <Compile Include="sys\FileImports.vb" />
     <Compile Include="ImportPaste.Designer.vb">
       <DependentUpon>ImportPaste.vb</DependentUpon>
     </Compile>
     <Compile Include="ImportPaste.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImportTool.Designer.vb">
-      <DependentUpon>ImportTool.vb</DependentUpon>
+    <Compile Include="ImportFSA.Designer.vb">
+      <DependentUpon>ImportFSA.vb</DependentUpon>
     </Compile>
-    <Compile Include="ImportTool.vb">
+    <Compile Include="ImportFSA.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Import_TopV6.vb" />
-    <None Include="Firestore.vbDisabled" />
+    <Compile Include="sys\Import_TopV6.vb" />
+    <None Include="sys\obs\Firestore.vbDisabled" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -157,9 +156,8 @@
     <Compile Include="Preload.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings.vb" />
-    <Compile Include="sqlite_init.vb" />
-    <Compile Include="TOOL_class.vb" />
+    <Compile Include="sys\sqlite_init.vb" />
+    <Compile Include="sys\TOOL_class.vb" />
     <Compile Include="ToolName_config.Designer.vb">
       <DependentUpon>ToolName_config.vb</DependentUpon>
     </Compile>
@@ -173,8 +171,8 @@
       <DependentUpon>Main.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="init.vb" />
-    <Compile Include="graphics.vb" />
+    <Compile Include="sys\init.vb" />
+    <Compile Include="sys\graphics.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -186,14 +184,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ts.vb" />
+    <Compile Include="sys\ts.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ImportPaste.resx">
       <DependentUpon>ImportPaste.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ImportTool.resx">
-      <DependentUpon>ImportTool.vb</DependentUpon>
+    <EmbeddedResource Include="ImportFSA.resx">
+      <DependentUpon>ImportFSA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewBD.resx">
       <DependentUpon>NewBD.vb</DependentUpon>
@@ -255,6 +253,7 @@
     <None Include="data\reg.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="data\text_UI.txt" />
     <Content Include="data\text_UI_backup.txt" />
     <Content Include="data\tooltypes.txt" />
   </ItemGroup>

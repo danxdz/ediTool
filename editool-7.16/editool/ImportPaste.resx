@@ -145,4 +145,7 @@ Shanktype	Shanktype	Cylindrical
 TCDMM	Shank diameter tolerance class	h5
 Weight	Net weight	0.020 kg</value>
   </data>
+  <metadata name="MenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

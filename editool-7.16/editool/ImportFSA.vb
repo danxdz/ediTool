@@ -6,7 +6,7 @@ Imports System.Reflection
 Imports System.Xml
 
 
-Public Class ImportTool
+Public Class ImportFSA
     ReadOnly newTool As New Tool()
     Private filter As DataTable
 

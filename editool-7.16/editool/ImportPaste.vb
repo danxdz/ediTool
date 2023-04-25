@@ -1,80 +1,71 @@
-﻿Imports System.Text.RegularExpressions
-
+﻿Imports System.Globalization
+Imports System.Text.RegularExpressions
 Public Class ImportPaste
+    ' Criar uma nova instância da classe Tool
+    Dim tool As New Tool()
+
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-        Dim texto As String = TextBox1.Text
+        ' Limpar DataGridView
+        DataGridView1.DataSource = Nothing
+        DataGridView1.Columns.Clear()
+        DataGridView1.Rows.Clear()
 
-        Dim splitLine() As String = My.Resources._13399_paste.Split(New String() {Environment.NewLine}, StringSplitOptions.None).ToArray
-        Dim paramToPropDict As New Dictionary(Of String, String)
-        Dim toolParamsList As New List(Of String)
-
-        For Each line As String In splitLine
-            Dim fields() As String = line.Split(";"c)
-            If (fields.Count > 3) Then
-                paramToPropDict.Add(fields(1), fields(2).Replace("@", ""))
-                toolParamsList.Add(fields(2).Replace("@", ""))
+        ' Carregar configurações de tool em um Dictionary
+        Dim toolParamsDict As New Dictionary(Of String, String)
+        For Each line As String In My.Resources._13399_paste.Split(Environment.NewLine)
+            Dim fields = line.Split(";"c)
+            If fields.Length >= 3 AndAlso fields(2).Contains("@") Then
+                toolParamsDict.Add(fields(1), fields(2).Replace("@", ""))
             End If
         Next
 
-        'Criar uma nova instância da classe Tool
-        Dim tool As New Tool()
-
-
         ' Criar colunas da tabela
-        Dim colNome As New DataGridViewTextBoxColumn()
-        colNome.HeaderText = "Nome"
-        colNome.Name = "Nome"
-
-        Dim colDescricao As New DataGridViewTextBoxColumn()
-        colDescricao.HeaderText = "Descrição"
-        colDescricao.Name = "Descrição"
-
-        Dim colValor As New DataGridViewTextBoxColumn()
-        colValor.HeaderText = "Valor"
-        colValor.Name = "Valor"
-
-        Dim colTool As New DataGridViewComboBoxColumn()
-        colTool.HeaderText = "Tool"
-        colTool.Name = "Tool"
-        colTool.DataSource = toolParamsList
-
-
-        ' Adicionar colunas à tabela
-        DataGridView1.Columns.Add(colNome)
-        DataGridView1.Columns.Add(colDescricao)
-        DataGridView1.Columns.Add(colValor)
-        DataGridView1.Columns.Add(colTool)
-
+        DataGridView1.Columns.Add("Nome", "Nome")
+        DataGridView1.Columns.Add("Valor", "Valor")
 
         ' Permitir que o usuário mova as células ao redor da tabela
         DataGridView1.AllowUserToOrderColumns = True
 
 
 
-        Dim linhas() As String = texto.Split(vbCrLf)
-
-        For Each linha As String In linhas
-            If linha <> "" Then
-
-                linha = linha.Replace(vbLf, "").Replace(vbTab, ";")
-                Dim colunas() As String = linha.Split(";")
-
-                Dim value = colunas(2).Split(" ")
-
-                Dim comboCell As New DataGridViewComboBoxCell()
-
-                If paramToPropDict.ContainsKey(colunas(0)) Then
-                    Dim propInfo = GetType(Tool).GetProperty(paramToPropDict(colunas(0)))
+        ' Processar as linhas de entrada do usuário
+        For Each line As String In TextBox1.Lines
+            If Not String.IsNullOrWhiteSpace(line) Then
+                Dim fields = line.Split(vbTab)
+                If fields.Length >= 3 AndAlso toolParamsDict.ContainsKey(fields(0)) Then
+                    Dim propName = toolParamsDict(fields(0))
+                    Dim propInfo = GetType(Tool).GetProperty(propName)
+                    Dim value = fields(2).Trim().Split(" "c)
                     propInfo.SetValue(tool, Convert.ChangeType(value(0), propInfo.PropertyType), Nothing)
-
-                    comboCell.ValueMember = propInfo.GetValue(tool)
-
+                    DataGridView1.Rows.Add(propName, value(0))
                 End If
-
-                DataGridView1.Rows.Add(colunas(0), colunas(1), value(0))
             End If
         Next
+        Debug.WriteLine(tool)
+        Set_Name_auto(tool)
+
 
     End Sub
 
+
+
+
+
+    Private Sub TextBox1_MouseClick(sender As Object, e As MouseEventArgs) Handles TextBox1.MouseClick
+        TextBox1.Text = ""
+    End Sub
+
+    Private Sub MenuStrip1_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles MenuStrip1.ItemClicked
+
+    End Sub
+
+    Private Sub CreateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreateToolStripMenuItem.Click
+        'Dim service As New FirestoreService
+        'service.AddToolAsync(newTool)
+        Dim localTools As New SQLiteToolDatabase("endMill") 'TODO
+
+        localTools.AddTool(tool)
+        graphics.Refresh_outil(tool, Main.ToolPreview_PictureBox)
+        FillDataGrid(tool, Main.NewToolDataGridView)
+    End Sub
 End Class

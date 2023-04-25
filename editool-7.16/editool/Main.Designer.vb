@@ -44,7 +44,7 @@ Partial Class Main
         Me.forceName = New System.Windows.Forms.CheckBox()
         Me.config = New System.Windows.Forms.Button()
         Me.createBt = New System.Windows.Forms.Button()
-        Me.AutoOpen_checkBox = New System.Windows.Forms.CheckBox()
+        Me.autoOpen = New System.Windows.Forms.CheckBox()
         Me.FR2T = New System.Windows.Forms.ToolStripButton()
         Me.FRTO = New System.Windows.Forms.ToolStripButton()
         Me.FRBO = New System.Windows.Forms.ToolStripButton()
@@ -70,12 +70,12 @@ Partial Class Main
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.teethNum = New System.Windows.Forms.GroupBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.angleDeg = New System.Windows.Forms.GroupBox()
         Me.anglePoint = New System.Windows.Forms.GroupBox()
         Me.rayon = New System.Windows.Forms.GroupBox()
         Me.D2textBox = New System.Windows.Forms.TextBox()
         Me.toolPreviewBox = New System.Windows.Forms.GroupBox()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.filters = New System.Windows.Forms.GroupBox()
         Me.readToolProgress_Label = New System.Windows.Forms.Label()
         Me.autoCheckIn = New System.Windows.Forms.CheckBox()
         CType(Me.ToolPreview_PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,11 +84,11 @@ Partial Class Main
         Me.TabPage1.SuspendLayout()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.teethNum.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.angleDeg.SuspendLayout()
         Me.anglePoint.SuspendLayout()
         Me.rayon.SuspendLayout()
         Me.toolPreviewBox.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
+        Me.filters.SuspendLayout()
         Me.SuspendLayout()
         '
         'OpenFileDialog1
@@ -308,20 +308,20 @@ Partial Class Main
         Me.createBt.Text = "creer outil"
         Me.createBt.UseVisualStyleBackColor = True
         '
-        'AutoOpen_checkBox
+        'autoOpen
         '
-        Me.AutoOpen_checkBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.AutoOpen_checkBox.AutoSize = True
-        Me.AutoOpen_checkBox.Checked = True
-        Me.AutoOpen_checkBox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.AutoOpen_checkBox.Location = New System.Drawing.Point(458, 665)
-        Me.AutoOpen_checkBox.Name = "AutoOpen_checkBox"
-        Me.AutoOpen_checkBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.AutoOpen_checkBox.Size = New System.Drawing.Size(54, 17)
-        Me.AutoOpen_checkBox.TabIndex = 51
-        Me.AutoOpen_checkBox.Text = "empty"
-        Me.AutoOpen_checkBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.AutoOpen_checkBox.UseVisualStyleBackColor = True
+        Me.autoOpen.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.autoOpen.AutoSize = True
+        Me.autoOpen.Checked = True
+        Me.autoOpen.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.autoOpen.Location = New System.Drawing.Point(458, 665)
+        Me.autoOpen.Name = "autoOpen"
+        Me.autoOpen.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.autoOpen.Size = New System.Drawing.Size(54, 17)
+        Me.autoOpen.TabIndex = 51
+        Me.autoOpen.Text = "empty"
+        Me.autoOpen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.autoOpen.UseVisualStyleBackColor = True
         '
         'FR2T
         '
@@ -580,18 +580,18 @@ Partial Class Main
         Me.teethNum.TabStop = False
         Me.teethNum.Text = "NoTT"
         '
-        'GroupBox1
+        'angleDeg
         '
-        Me.GroupBox1.BackColor = System.Drawing.Color.LightGray
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.alpha)
-        Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.GroupBox1.Location = New System.Drawing.Point(579, 77)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(83, 51)
-        Me.GroupBox1.TabIndex = 81
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "a"
+        Me.angleDeg.BackColor = System.Drawing.Color.LightGray
+        Me.angleDeg.Controls.Add(Me.Label7)
+        Me.angleDeg.Controls.Add(Me.alpha)
+        Me.angleDeg.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.angleDeg.Location = New System.Drawing.Point(579, 77)
+        Me.angleDeg.Name = "angleDeg"
+        Me.angleDeg.Size = New System.Drawing.Size(83, 51)
+        Me.angleDeg.TabIndex = 81
+        Me.angleDeg.TabStop = False
+        Me.angleDeg.Text = "a"
         '
         'anglePoint
         '
@@ -613,7 +613,7 @@ Partial Class Main
         Me.rayon.Size = New System.Drawing.Size(61, 51)
         Me.rayon.TabIndex = 81
         Me.rayon.TabStop = False
-        Me.rayon.Text = "NoTT"
+        Me.rayon.Text = "r"
         '
         'D2textBox
         '
@@ -649,20 +649,20 @@ Partial Class Main
         Me.toolPreviewBox.TabStop = False
         Me.toolPreviewBox.Text = "tool preview"
         '
-        'GroupBox5
+        'filters
         '
-        Me.GroupBox5.BackColor = System.Drawing.Color.LightGray
-        Me.GroupBox5.Controls.Add(Me.manuf_comboBox)
-        Me.GroupBox5.Controls.Add(Me.manref_TextBox)
-        Me.GroupBox5.Controls.Add(Me.filterL1_ComboBox)
-        Me.GroupBox5.Controls.Add(Me.filterD1_Combobox)
-        Me.GroupBox5.Controls.Add(Me.filterMat_ComboBox)
-        Me.GroupBox5.Location = New System.Drawing.Point(11, 337)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(650, 49)
-        Me.GroupBox5.TabIndex = 86
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "filters"
+        Me.filters.BackColor = System.Drawing.Color.LightGray
+        Me.filters.Controls.Add(Me.manuf_comboBox)
+        Me.filters.Controls.Add(Me.manref_TextBox)
+        Me.filters.Controls.Add(Me.filterL1_ComboBox)
+        Me.filters.Controls.Add(Me.filterD1_Combobox)
+        Me.filters.Controls.Add(Me.filterMat_ComboBox)
+        Me.filters.Location = New System.Drawing.Point(11, 337)
+        Me.filters.Name = "filters"
+        Me.filters.Size = New System.Drawing.Size(650, 49)
+        Me.filters.TabIndex = 86
+        Me.filters.TabStop = False
+        Me.filters.Text = "filters"
         '
         'readToolProgress_Label
         '
@@ -696,15 +696,15 @@ Partial Class Main
         Me.ClientSize = New System.Drawing.Size(673, 701)
         Me.Controls.Add(Me.autoCheckIn)
         Me.Controls.Add(Me.readToolProgress_Label)
-        Me.Controls.Add(Me.GroupBox5)
+        Me.Controls.Add(Me.filters)
         Me.Controls.Add(Me.toolPreviewBox)
         Me.Controls.Add(Me.rayon)
         Me.Controls.Add(Me.anglePoint)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.angleDeg)
         Me.Controls.Add(Me.teethNum)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.createBt)
-        Me.Controls.Add(Me.AutoOpen_checkBox)
+        Me.Controls.Add(Me.autoOpen)
         Me.Controls.Add(Me.config)
         Me.Controls.Add(Me.forceName)
         Me.Controls.Add(Me.toolName)
@@ -723,15 +723,15 @@ Partial Class Main
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.teethNum.ResumeLayout(False)
         Me.teethNum.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.angleDeg.ResumeLayout(False)
+        Me.angleDeg.PerformLayout()
         Me.anglePoint.ResumeLayout(False)
         Me.anglePoint.PerformLayout()
         Me.rayon.ResumeLayout(False)
         Me.rayon.PerformLayout()
         Me.toolPreviewBox.ResumeLayout(False)
         Me.toolPreviewBox.PerformLayout()
-        Me.GroupBox5.ResumeLayout(False)
+        Me.filters.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -756,7 +756,7 @@ Partial Class Main
     Friend WithEvents forceName As CheckBox
     Friend WithEvents config As Button
     Friend WithEvents createBt As Button
-    Friend WithEvents AutoOpen_checkBox As CheckBox
+    Friend WithEvents autoOpen As CheckBox
     Friend WithEvents FR2T As ToolStripButton
     Friend WithEvents FRTO As ToolStripButton
     Friend WithEvents FRBO As ToolStripButton
@@ -782,12 +782,12 @@ Partial Class Main
     Friend WithEvents NewToolDataGridView As DataGridView
     Friend WithEvents TabPage3 As TabPage
     Friend WithEvents teethNum As GroupBox
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents angleDeg As GroupBox
     Friend WithEvents anglePoint As GroupBox
     Friend WithEvents rayon As GroupBox
     Friend WithEvents D2textBox As TextBox
     Friend WithEvents toolPreviewBox As GroupBox
-    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents filters As GroupBox
     Friend WithEvents readToolProgress_Label As Label
     Friend WithEvents autoCheckIn As CheckBox
 End Class

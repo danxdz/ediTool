@@ -1,5 +1,5 @@
 ﻿Option Explicit On
-Imports System.Data.Entity.Core.Common.EntitySql
+
 Imports System.IO
 Imports System.Net
 Imports System.Xml
@@ -8,8 +8,6 @@ Imports Microsoft.Office.Interop.Excel
 
 Module FileImports
 
-    Dim StartLoadTimer As Date
-    Dim EndLoadTimer As Date
 
     ' CREATE EXCEL OBJECTS.
     Dim xlApp As Excel.Application
