@@ -67,6 +67,7 @@ Public Class ImportPaste
         localTools.AddTool(tool)
         graphics.Refresh_outil(tool, Main.ToolPreview_PictureBox)
         FillDataGrid(tool, Main.NewToolDataGridView)
+        Main.fullToolsList.add(tool)
     End Sub
 
     Private Sub ClearToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearToolStripMenuItem.Click
