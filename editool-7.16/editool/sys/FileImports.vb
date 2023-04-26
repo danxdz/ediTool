@@ -33,8 +33,8 @@ Module FileImports
             .NoTT = nott
             .Type = type
             .GroupeMat = groupeMat
-            .RayonBout = Rbout
-            .Chanfrein = chanfrein
+            .CorRadius = Rbout
+            .CorChamfer = chanfrein
             .CoupeCentre = coupeCentre
             .ArrCentre = arrCentre
             .TypeTar = typeTar
@@ -149,12 +149,12 @@ Module FileImports
             ElseIf (reader.Name = "tecsets") Then
                 reader.Close()
                 FillDataGrid(newTool, Main.NewToolDataGridView)
-                Main.fullToolsList.Tool.Clear()
+                Main.fullToolsList.Clear()
                 Main.filteredTools.Clear()
 
                 'Dim sas As List(Of NewTool) = Main.toolsList.Tool
 
-                Main.fullToolsList.Tool.Add(newTool, Main.NewToolDataGridView)
+                Main.fullToolsList.Add(newTool) ', Main.NewToolDataGridView)
 
             End If
         End While
@@ -167,7 +167,7 @@ Module FileImports
         Dim objProperties() As String = {"GroupeMat", "ManufRef", "D1", "L1", "NoTT"}
         Dim tmpData As Data.DataTable
 
-        If (DGV.DataSource IsNot Nothing) Then
+        If DGV.Columns.Count <> 0 Then
             tmpData = DGV.DataSource
         Else
             tmpData = New Data.DataTable()
@@ -529,29 +529,6 @@ Module FileImports
 
         End With
 
-        Dim web As New WebBrowser
-        AddHandler web.DocumentCompleted, New WebBrowserDocumentCompletedEventHandler(AddressOf Webtocsv)
-
-        Dim url As String = "http://tools.semmip.loca/"
-        Dim request As HttpWebRequest = CType(WebRequest.Create(url), HttpWebRequest)
-        request.Method = "HEAD"
-        Try
-            Dim response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
-            MessageBox.Show("Connected to " & url)
-            response.Close()
-        Catch ex As WebException
-            'MessageBox.Show("Failed to connect to OrderTools") ' " & url)
-            Main.OrderTools_ToolStripButton.Enabled = False
-            If File.Exists("C:\Downloaded Web Sites\tools.semmip.local\index.php.html") Then
-                ' O arquivo existe, pode carregá-lo no controle WebBrowser
-                web.Navigate(New Uri("C:\Downloaded Web Sites\tools.semmip.local\index.php.html"))
-
-            Else
-                web.Navigate(New Uri("C:\Users\user\Downloads\tools.semmip.local\tools.semmip.local\index.php.html"))
-            End If
-
-            Console.WriteLine("web: ", web)
-        End Try
     End Sub
 
 End Module

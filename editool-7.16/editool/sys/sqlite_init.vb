@@ -29,7 +29,7 @@ Module SQLiteDB
 
         Public Sub AddTool(tool As Tool)
 
-            Dim tableName As String = tool.Type
+            Dim tableName As String = If(tool.Type <> "", tool.Type, "endMill")
 
             Using connection As New SQLiteConnection(connectionString)
                 connection.Open()

@@ -178,13 +178,13 @@ Module Init
             Case "CTS_EL" : Return Check_zero(param, newTool.L2) ' TODO
             Case "CTS_AD" : Return Check_zero(param, newTool.D2)
             Case "NoTT" : Return newTool.NoTT
-            Case "A" : Return newTool.Chanfrein
-            Case "r" : Return newTool.RayonBout
+            Case "A" : Return newTool.CorChamfer
+            Case "r" : Return newTool.CorRadius
             Case Else
                 MsgBox("param < " + param + " > not found, check outil name mask config")
         End Select
     End Function
-    Public Sub Set_Name_auto(newTool As Tool)
+    Public Function Set_Name_auto(newTool As Tool) As String
 
         If Main.forceName.Checked = False Then
             Try
@@ -226,6 +226,7 @@ Module Init
                 'If L2.Text = "" Or L2.Text = "0" Then
                 ''Main.Name_textbox.Text = "FR Ø" + Main.D_textbox.Text + " " + Main.NoTT.Text + "z" ' nome =  FR Ø + diamètre de coupe + numero d dents
                 Main.Name_textbox.Text = formated
+                Return formated
                 ''If Main.L_textbox.Text <> "" And Main.L_textbox.Text <> "0" Then
                 ''Main.Name_textbox.Text += " Lc" + Main.L_textbox.Text ' nome += Longueur de coupe
                 ''End If
@@ -237,7 +238,7 @@ Module Init
                 MsgBox("Name Mask Error - " + ex.ToString)
             End Try
         End If
-    End Sub
+    End Function
 
     Public Function SetDataGridColumnsTitle(columns() As String, dt As DataTable)
         For Each col As String In columns

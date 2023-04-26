@@ -28,9 +28,10 @@ Module graphics
             Dim CTS_AL As Double = If(newTool.L2 = 0, newTool.L1, newTool.L2)
             Dim OL As Double = newTool.L3
             Dim Alpha As Double = newTool.AngleDeg
-            Dim r As Double = newTool.RayonBout
-            Dim A_point As Double = newTool.Chanfrein
-            A_point /= 2
+            Dim r As Double = newTool.CorRadius
+            Dim A_point As Double = newTool.CorChamfer
+            If (A_point <> 0) Then A_point /= 2
+
 
             Dim scale As Double = (w - 1) / OL
             Dim drawFont As New Font("Arial", 8)

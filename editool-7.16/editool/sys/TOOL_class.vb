@@ -12,11 +12,12 @@ Module Tools
         Public Property L1 As Double
         Public Property L2 As Double
         Public Property L3 As Double
-        Public Property RayonBout As Double
-        Public Property Chanfrein As Double
+        Public Property CorRadius As Double
+        Public Property CorChamfer As Double
         Public Property AngleDeg As Double
         Public Property NoTT As Integer
         Public Property GroupeMat As String
+        Public Property ToolMaterial As String
         Public Property CoupeCentre As String 'Boolean
         Public Property ArrCentre As String ' Boolean
         Public Property TypeTar As String

@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "dZbwtV5621ySp93O6FXM+Lwol0AsEm7OsBtjZDUC+5uCDsx2aRWGIRdfSNYijszqdM//PYAiGc6cjAh3OGUsCg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\user\\source\\repos\\ediTool\\editool-7.16\\editool\\editool.vbproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\stub.system.data.sqlite.core.netframework\\1.0.117\\stub.system.data.sqlite.core.netframework.1.0.117.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\system.data.sqlite\\1.0.117\\system.data.sqlite.1.0.117.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\system.data.sqlite.core\\1.0.117\\system.data.sqlite.core.1.0.117.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\system.data.sqlite.ef6\\1.0.117\\system.data.sqlite.ef6.1.0.117.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\system.data.sqlite.linq\\1.0.117\\system.data.sqlite.linq.1.0.117.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -27,6 +27,7 @@ Partial Class ImportPaste
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.CreateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -52,7 +53,7 @@ Partial Class ImportPaste
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreateToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreateToolStripMenuItem, Me.ClearToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1291, 24)
@@ -64,6 +65,12 @@ Partial Class ImportPaste
         Me.CreateToolStripMenuItem.Name = "CreateToolStripMenuItem"
         Me.CreateToolStripMenuItem.Size = New System.Drawing.Size(51, 20)
         Me.CreateToolStripMenuItem.Text = "create"
+        '
+        'ClearToolStripMenuItem
+        '
+        Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.ClearToolStripMenuItem.Text = "clear"
         '
         'ImportPaste
         '
@@ -88,4 +95,5 @@ Partial Class ImportPaste
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents CreateToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ClearToolStripMenuItem As ToolStripMenuItem
 End Class

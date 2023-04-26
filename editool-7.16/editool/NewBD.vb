@@ -82,8 +82,8 @@ Public Class NewBD
 
             .NoTT = DataGridView1.Rows(index).Cells(8).Value
 
-            .RayonBout = DataGridView1.Rows(index).Cells(9).Value
-            .Chanfrein = DataGridView1.Rows(index).Cells(10).Value
+            .CorRadius = DataGridView1.Rows(index).Cells(9).Value
+            .CorChamfer = DataGridView1.Rows(index).Cells(10).Value
 
             .Manuf = DataGridView1.Rows(index).Cells(15).Value
             .ManufRef = DataGridView1.Rows(index).Cells(16).Value

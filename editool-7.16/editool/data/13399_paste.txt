@@ -1,9 +1,9 @@
 ﻿1;APMXS;@L1;Depth of cut maximum in feed direction side
 2;Barcode;@CodeBar;Product barcode
 3;CA;Collision angle
-4;CCC;Center cutting capability
+4;CCC;@CoupeCentre;Center cutting capability
 5;CGT;Cutting geometry type
-6;CHW;@Chanfrein;Corner chamfer width
+6;CHW;@CorChamfer;Corner chamfer width
 7;Cmax;Helical interpolation hole diameter maximum
 8;Cmin;Helical interpolation hole diameter minimum
 9;COATING;Cutting item coating
@@ -23,3 +23,4 @@
 23;Shanktype;Shanktype
 24;TCDMM;Shank diameter tolerance class
 25;Weight;Net weight
+26;RE;@CorRadius;Tip radius
