@@ -1,11 +1,11 @@
 ﻿
 Option Explicit On
-
+Imports System.Text.RegularExpressions
 
 Public Class NewBD
 
-    Private Sub Nom_cb_SelectedIndexChanged(sender As Object, e As EventArgs) Handles nom_cb.SelectedIndexChanged
-        Dim temp As String = nom_cb.SelectedItem.ToString
+    Private Sub CbSelectedIndexChanged(sender As Object, e As EventArgs)
+        Dim temp As String = ToolNameCb.SelectedItem.ToString
         'nom_cb.Items.Remove(temp)
     End Sub
 
@@ -33,8 +33,6 @@ Public Class NewBD
 
     End Sub
 
-
-
     Private Sub Del_tool_Click(sender As Object, e As EventArgs) Handles del_tool.Click
         Dim num As Integer = DataGridView1.SelectedRows().Count
         If num = 1 Then
@@ -59,8 +57,6 @@ Public Class NewBD
                     DataGridView1.Rows.RemoveAt(beginSel)
                 End If
             Next
-
-
         End If
     End Sub
 
@@ -102,18 +98,11 @@ Public Class NewBD
 
     End Sub
 
-    Private Sub valider_bt_Click(sender As Object, e As EventArgs) Handles valider_bt.Click
 
-    End Sub
 
-    Private Sub NewBD_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-    End Sub
-
-    Private Sub TypeFilterComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TypeFilterComboBox.SelectedIndexChanged
-
-    End Sub
     Function ExtractNumbers(line As String) As List(Of Double)
+
         Dim numbers As New List(Of Double)
         Dim currentNumber As String = ""
         For Each c As Char In line
@@ -134,7 +123,28 @@ Public Class NewBD
         Dim selectedRow As DataGridViewRow = DataGridView1.Rows(e.RowIndex)
         Dim selectedCell As DataGridViewCell = selectedRow.Cells(e.ColumnIndex)
         Dim cellValue As String = selectedCell.Value.ToString()
+
+
         Dim numbersList As List(Of Double) = ExtractNumbers(cellValue)
         ' faça algo com a lista de números extraída
+    End Sub
+
+    Private Sub Code_outil_cb_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolNameCb.SelectedIndexChanged, d3Cb.SelectedIndexChanged, d2Cb.SelectedIndexChanged, ManufRef.SelectedIndexChanged, MatCb.SelectedIndexChanged, d1Cb.SelectedIndexChanged
+        ComboBox1_SelectedIndexChanged(sender, e)
+
+    End Sub
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
+        ' Atualiza lista de itens disponíveis nas ComboBoxes
+        Dim headers As New List(Of String)
+
+        For Each col As DataGridViewColumn In DataGridView1.Columns
+            If (sender.SelectedItem <> col.HeaderText) Then headers.Add(col.HeaderText)
+        Next
+
+        For Each cb As ComboBox In Controls.OfType(Of ComboBox)()
+            cb.Items.Clear()
+            cb.Items.AddRange(headers.Except(ToolNameCb.Items.Cast(Of String)).ToArray())
+            cb.SelectedItem = sender.SelectedItem
+        Next
     End Sub
 End Class

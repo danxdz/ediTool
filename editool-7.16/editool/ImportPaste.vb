@@ -35,12 +35,24 @@ Public Class ImportPaste
         For Each line As String In TextBox1.Lines
             If Not String.IsNullOrWhiteSpace(line) Then
                 Dim fields = line.Split(vbTab)
-                If fields.Length >= 3 AndAlso toolParamsDict.ContainsKey(fields(0)) Then
+                If fields.length < 2 Then
+                    fields = line.Split(" ")
+                    fields = line.Split(";")
+                End If
+
+                If fields.Length >= 2 AndAlso toolParamsDict.ContainsKey(fields(0)) Then
                     Dim propName = toolParamsDict(fields(0))
                     Dim propInfo = GetType(Tool).GetProperty(propName)
-                    Dim value = fields(2).Trim().Split(" "c)
-                    propInfo.SetValue(tool, Convert.ChangeType(value(0), propInfo.PropertyType), Nothing)
-                    DataGridView1.Rows.Add(propName, value(0))
+                    Dim value = fields(fields.Length - 1).Trim().Split(" "c)
+                    If value(0) = "" Then
+                        fields(fields.Length - 2).Trim().Split(" "c)
+                    End If
+                    Try
+                        propInfo.SetValue(tool, Convert.ChangeType(value(0), propInfo.PropertyType), Nothing)
+                        DataGridView1.Rows.Add(propName, value(0))
+                    Catch ex As Exception
+
+                    End Try
                 End If
             End If
         Next

@@ -2,6 +2,7 @@
 
 Imports System.IO
 Imports System.Net
+Imports System.Text.RegularExpressions
 Imports System.Xml
 Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Excel
@@ -207,7 +208,7 @@ Module FileImports
 
         Dim openFileDialog1 As New OpenFileDialog With {
             .InitialDirectory = startPath,
-            .Filter = "XML files (*.xml)|*.xml;*.XML|TXT files (*.txt)|*.txt|CSV files (*.csv)|*.csv|Excel Files|*.xls;*.xlsx|All files (*.*)|*.*",
+            .Filter = "All files (*.*)|*.*|XML files (*.xml)|*.xml;*.XML|TXT files (*.txt)|*.txt|CSV files (*.csv)|*.csv|Excel Files|*.xls;*.xlsx",
             .FilterIndex = 1,
             .RestoreDirectory = True
         }
@@ -215,8 +216,6 @@ Module FileImports
         If openFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             Try
 
-                NewBD.DataGridView1.Columns.Clear()
-                NewBD.DataGridView1.Rows.Clear()
 
                 myStream = openFileDialog1.OpenFile()
                 Dim fpath As String = openFileDialog1.FileName
@@ -239,12 +238,139 @@ Module FileImports
         End If
     End Sub
 
+
+    Private Sub FillComboBoxes()
+        Dim headers As New List(Of String)
+
+        For Each col As DataGridViewColumn In NewBD.DataGridView1.Columns
+            headers.Add(col.HeaderText)
+        Next
+
+        For Each cb As ComboBox In NewBD.Controls.OfType(Of ComboBox)()
+            cb.Items.Clear()
+            cb.Items.AddRange(headers.ToArray())
+        Next
+    End Sub
+
+    Function Test1(input As String)
+        'Dim input As String = "Any	Bi-face	Cylindrical	16	EVC209	EVC209-016.000	VHM CHAMFERRING CUTTER 90° Ø16 Z4 L100x5x8 D10 COATED 	 235.19 € 	0.1030	82079071	120	FALCON TOOLS"
+
+        Dim pattern As String = "(?<Id>\w+)\s+(?<Name>.+)\s+(?<Type>.+)\s+(?<D1>\d*\.?\d+)\s+(?<ManufRef>\w+)\s+(?<ManufRefSec>\w+)\s+(?<NameDesc>.+)\s+(?<AngleDeg>\d*\.?\d+)\s+(?<NoTT>\d+)\s+(?<Manuf>.+)\s+(?<Price>.+)\s+(?<NoTT>\d+)\s+(?<GroupeMat>.+)"
+        Dim regex As New Regex(pattern)
+
+        Dim match As Match = regex.Match(input)
+
+        If match.Success Then
+            Dim tool As New Tool()
+            tool.Id = match.Groups("Id").Value
+            tool.Name = match.Groups("Name").Value
+            tool.Type = match.Groups("Type").Value
+            tool.D1 = Double.Parse(match.Groups("D1").Value)
+            tool.ManufRef = match.Groups("ManufRef").Value
+            tool.ManufRefSec = match.Groups("ManufRefSec").Value
+            'tool.NameDesc = match.Groups("NameDesc").Value
+            tool.AngleDeg = Double.Parse(match.Groups("AngleDeg").Value)
+            tool.NoTT = Integer.Parse(match.Groups("NoTT").Value)
+            tool.Manuf = match.Groups("Manuf").Value
+            'tool.Price = match.Groups("Price").Value
+            tool.NoTT = Integer.Parse(match.Groups("NoTT").Value)
+            tool.GroupeMat = match.Groups("GroupeMat").Value
+        End If
+
+
+    End Function
     Public Sub ReadExcel(fpath As String)
+
+
+        NewBD.DataGridView1.Columns.Clear()
+        NewBD.DataGridView1.Rows.Clear()
+
+        Dim xlApp As Excel.Application = Nothing
+        Dim xlWorkBook As Excel.Workbook = Nothing
+        Dim xlWorkSheet As Excel.Worksheet = Nothing
+
+        Try
+            ' Configurar aplicativo Excel
+            xlApp = New Excel.Application
+            xlApp.ScreenUpdating = False
+            xlApp.DisplayAlerts = False
+
+            ' Abrir o arquivo
+            xlWorkBook = xlApp.Workbooks.Open(fpath)
+
+            ' Selecionar a planilha desejada
+            xlWorkSheet = CType(xlWorkBook.Sheets(NewBD.Row_NumericUpDown.Value), Excel.Worksheet)
+
+            ' Ler os cabeçalhos
+            Dim headers As New List(Of String)()
+            Dim colCount As Integer = xlWorkSheet.UsedRange.Columns.Count
+            For i As Integer = 1 To colCount
+                Dim header As String = Trim(xlWorkSheet.Range(xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, i), xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, i)).Value)
+                If String.IsNullOrEmpty(header) Then
+                    Exit For
+                End If
+
+                headers.Add(header)
+
+                ' Adicionar nova coluna ao DataGridView
+                Dim column As New DataGridViewTextBoxColumn With {
+                .HeaderText = header,
+                .SortMode = DataGridViewColumnSortMode.NotSortable
+            }
+
+                NewBD.DataGridView1.Columns.Add(column)
+                NewBD.ToolNameCb.Items.Add(header)
+            Next
+
+            ' Ler os dados
+            Dim data As New List(Of List(Of String))()
+            Dim rowCount As Integer = xlWorkSheet.UsedRange.Rows.Count
+            For i As Integer = 1 To 10 'rowCount
+                Dim rowData As New List(Of String)()
+
+                For j As Integer = 1 To colCount
+                    Dim cellValue As Object = xlWorkSheet.Range(xlWorkSheet.Cells(i, j), xlWorkSheet.Cells(i, j)).Value
+
+                    Dim cellStringValue As String = ""
+                    If cellValue IsNot Nothing Then
+                        cellStringValue = cellValue.ToString()
+                    End If
+
+                    rowData.Add(cellStringValue)
+                Next
+
+                ' Adicionar a linha ao DataGridView
+                Test1(String.Join(" ", rowData))
+
+                NewBD.DataGridView1.Rows.Add(rowData.ToArray())
+
+            Next
+
+            FillComboBoxes()
+
+        Finally
+            ' Limpar recursos do Excel
+            If xlWorkSheet IsNot Nothing Then
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkSheet)
+            End If
+
+            If xlWorkBook IsNot Nothing Then
+                xlWorkBook.Close(SaveChanges:=False)
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkBook)
+            End If
+
+            If xlApp IsNot Nothing Then
+                xlApp.Quit()
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp)
+            End If
+        End Try
+    End Sub
+
+    Public Sub ReadExcel_old(fpath As String)
 
         xlApp = New Excel.Application
         xlWorkBook = xlApp.Workbooks.Open(fpath)            ' WORKBOOK TO OPEN THE EXCEL FILE.
-        xlWorkSheet = CType(xlApp.Sheets(NewBD.Row_NumericUpDown.Value + 2),
-                    Worksheet)
+        xlWorkSheet = CType(xlApp.Sheets(NewBD.Row_NumericUpDown.Value), Worksheet)
         Dim iCol As Integer
         Dim iColCount As Integer = 0
 
@@ -258,7 +384,7 @@ Module FileImports
                         .SortMode = DataGridViewColumnSortMode.NotSortable
                     }
                     Dim colIndex As Integer = NewBD.DataGridView1.Columns.Add(col)        ' ADD A NEW COLUMN.
-                    NewBD.nom_cb.Items.Add(xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, iCol).value)
+                    NewBD.ToolNameCb.Items.Add(xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, iCol).value)
 
                     iColCount += 1
 
@@ -272,7 +398,7 @@ Module FileImports
         Dim list As New List(Of String)()
         ' ADD ROWS TO THE GRID.
         Dim iRow As Integer
-        For iRow = 1 To xlWorkSheet.Rows.Count
+        For iRow = 1 To 10 ' xlWorkSheet.Rows.Count
             If Trim(xlWorkSheet.Cells(iRow, 1).value) = "" And Trim(xlWorkSheet.Cells(iRow, 2).value) = "" Then
                 Exit For        ' BAIL OUT IF REACHED THE LAST ROW.
             Else
@@ -280,9 +406,10 @@ Module FileImports
                 Preload.toolCountLabel.Text += 1
                 ' CREATE A STRING ARRAY USING THE VALUES IN EACH ROW OF THE SHEET.
                 For i As Integer = 1 To iColCount
-
-                    Dim tmp_string As String = Replace(xlWorkSheet.Cells(iRow, i).value, ".", ",")
-                    NewBD.DataGridView1.Rows(iRow - 1).Cells(i - 1).Value = tmp_string
+                    If (xlWorkSheet.Cells(iRow, i).value IsNot Nothing) Then
+                        Dim tmp_string As String = Replace(xlWorkSheet.Cells(iRow, i).value, ".", ",")
+                        NewBD.DataGridView1.Rows(iRow - 1).Cells(i - 1).Value = tmp_string
+                    End If
                     'End If
 
                     'list.Add(xlWorkSheet.Cells(iRow, i).value)

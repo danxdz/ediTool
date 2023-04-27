@@ -68,7 +68,7 @@ Module ts
 
                     ' Open the first object in the list
                     'TopSolidExt.Pdm.OpenProject(lib_models(0))
-                    model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models(0), model)
+                    model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models, model)
                     model_fr_id.RemoveRange(1, model_fr_id.Count - 1)
                     'Call CopySeveral so we can copy read only files
 
@@ -268,7 +268,7 @@ Module ts
         'uncomment to unblock TS
         'api.TopSolidExt.Application.EndModification(True, False)
 
-        If model_fr(0).isEmpty Then
+        If model_fr.isEmpty Then
             MsgBox("Can't find file ( " + model_name + " )")
             api.TopSolidExt.Application.EndModification(True, False)
 

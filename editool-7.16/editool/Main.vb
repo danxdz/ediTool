@@ -210,7 +210,7 @@ Public Class Main
     End Sub
 
 
-    Private Sub inputBoxes_LostFocus(sender As Object, e As EventArgs) Handles A_TextBox.LostFocus, D1textBox.LostFocus, L1textBox.LostFocus, L2textBox.LostFocus, Chf_textbox.LostFocus, NoTT.LostFocus, L3textBox.LostFocus, D3textBox.LostFocus
+    Private Sub InputBoxes_LostFocus(sender As Object, e As EventArgs) Handles A_TextBox.LostFocus, D1textBox.LostFocus, L1textBox.LostFocus, L2textBox.LostFocus, Chf_textbox.LostFocus, NoTT.LostFocus, L3textBox.LostFocus, D3textBox.LostFocus
         Try
             If NewToolDataGridView.Rows.Count > 0 Then
                 Dim i As Integer = NewToolDataGridView.CurrentRow().Index

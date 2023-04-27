@@ -24,18 +24,18 @@ Partial Class NewBD
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.valider_bt = New System.Windows.Forms.Button()
-        Me.nom_cb = New System.Windows.Forms.ComboBox()
-        Me.mat_cb = New System.Windows.Forms.ComboBox()
-        Me.code_outil_cb = New System.Windows.Forms.ComboBox()
+        Me.ToolNameCb = New System.Windows.Forms.ComboBox()
+        Me.MatCb = New System.Windows.Forms.ComboBox()
+        Me.ManufRef = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.diam_deta_cb = New System.Windows.Forms.ComboBox()
-        Me.diam_corps_cb = New System.Windows.Forms.ComboBox()
-        Me.diam_coupe_cb = New System.Windows.Forms.ComboBox()
+        Me.d2Cb = New System.Windows.Forms.ComboBox()
+        Me.d3Cb = New System.Windows.Forms.ComboBox()
+        Me.d1Cb = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -94,27 +94,27 @@ Partial Class NewBD
         '
         'nom_cb
         '
-        Me.nom_cb.FormattingEnabled = True
-        Me.nom_cb.Location = New System.Drawing.Point(15, 25)
-        Me.nom_cb.Name = "nom_cb"
-        Me.nom_cb.Size = New System.Drawing.Size(121, 21)
-        Me.nom_cb.TabIndex = 1
+        Me.ToolNameCb.FormattingEnabled = True
+        Me.ToolNameCb.Location = New System.Drawing.Point(15, 25)
+        Me.ToolNameCb.Name = "nom_cb"
+        Me.ToolNameCb.Size = New System.Drawing.Size(121, 21)
+        Me.ToolNameCb.TabIndex = 1
         '
         'mat_cb
         '
-        Me.mat_cb.FormattingEnabled = True
-        Me.mat_cb.Location = New System.Drawing.Point(269, 25)
-        Me.mat_cb.Name = "mat_cb"
-        Me.mat_cb.Size = New System.Drawing.Size(121, 21)
-        Me.mat_cb.TabIndex = 4
+        Me.MatCb.FormattingEnabled = True
+        Me.MatCb.Location = New System.Drawing.Point(269, 25)
+        Me.MatCb.Name = "mat_cb"
+        Me.MatCb.Size = New System.Drawing.Size(121, 21)
+        Me.MatCb.TabIndex = 4
         '
         'code_outil_cb
         '
-        Me.code_outil_cb.FormattingEnabled = True
-        Me.code_outil_cb.Location = New System.Drawing.Point(142, 25)
-        Me.code_outil_cb.Name = "code_outil_cb"
-        Me.code_outil_cb.Size = New System.Drawing.Size(121, 21)
-        Me.code_outil_cb.TabIndex = 5
+        Me.ManufRef.FormattingEnabled = True
+        Me.ManufRef.Location = New System.Drawing.Point(142, 25)
+        Me.ManufRef.Name = "code_outil_cb"
+        Me.ManufRef.Size = New System.Drawing.Size(121, 21)
+        Me.ManufRef.TabIndex = 5
         '
         'Label1
         '
@@ -172,27 +172,27 @@ Partial Class NewBD
         '
         'diam_deta_cb
         '
-        Me.diam_deta_cb.FormattingEnabled = True
-        Me.diam_deta_cb.Location = New System.Drawing.Point(142, 72)
-        Me.diam_deta_cb.Name = "diam_deta_cb"
-        Me.diam_deta_cb.Size = New System.Drawing.Size(121, 21)
-        Me.diam_deta_cb.TabIndex = 11
+        Me.d2Cb.FormattingEnabled = True
+        Me.d2Cb.Location = New System.Drawing.Point(142, 72)
+        Me.d2Cb.Name = "diam_deta_cb"
+        Me.d2Cb.Size = New System.Drawing.Size(121, 21)
+        Me.d2Cb.TabIndex = 11
         '
         'diam_corps_cb
         '
-        Me.diam_corps_cb.FormattingEnabled = True
-        Me.diam_corps_cb.Location = New System.Drawing.Point(269, 72)
-        Me.diam_corps_cb.Name = "diam_corps_cb"
-        Me.diam_corps_cb.Size = New System.Drawing.Size(121, 21)
-        Me.diam_corps_cb.TabIndex = 10
+        Me.d3Cb.FormattingEnabled = True
+        Me.d3Cb.Location = New System.Drawing.Point(269, 72)
+        Me.d3Cb.Name = "diam_corps_cb"
+        Me.d3Cb.Size = New System.Drawing.Size(121, 21)
+        Me.d3Cb.TabIndex = 10
         '
         'diam_coupe_cb
         '
-        Me.diam_coupe_cb.FormattingEnabled = True
-        Me.diam_coupe_cb.Location = New System.Drawing.Point(15, 72)
-        Me.diam_coupe_cb.Name = "diam_coupe_cb"
-        Me.diam_coupe_cb.Size = New System.Drawing.Size(121, 21)
-        Me.diam_coupe_cb.TabIndex = 9
+        Me.d1Cb.FormattingEnabled = True
+        Me.d1Cb.Location = New System.Drawing.Point(15, 72)
+        Me.d1Cb.Name = "diam_coupe_cb"
+        Me.d1Cb.Size = New System.Drawing.Size(121, 21)
+        Me.d1Cb.TabIndex = 9
         '
         'Label7
         '
@@ -599,15 +599,15 @@ Partial Class NewBD
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.diam_deta_cb)
-        Me.Controls.Add(Me.diam_corps_cb)
-        Me.Controls.Add(Me.diam_coupe_cb)
+        Me.Controls.Add(Me.d2Cb)
+        Me.Controls.Add(Me.d3Cb)
+        Me.Controls.Add(Me.d1Cb)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.code_outil_cb)
-        Me.Controls.Add(Me.mat_cb)
-        Me.Controls.Add(Me.nom_cb)
+        Me.Controls.Add(Me.ManufRef)
+        Me.Controls.Add(Me.MatCb)
+        Me.Controls.Add(Me.ToolNameCb)
         Me.Controls.Add(Me.valider_bt)
         Me.Name = "NewBD"
         Me.Text = "Form1"
@@ -620,18 +620,18 @@ Partial Class NewBD
     End Sub
 
     Friend WithEvents valider_bt As Button
-    Friend WithEvents nom_cb As ComboBox
-    Friend WithEvents mat_cb As ComboBox
-    Friend WithEvents code_outil_cb As ComboBox
+    Friend WithEvents ToolNameCb As ComboBox
+    Friend WithEvents MatCb As ComboBox
+    Friend WithEvents ManufRef As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
-    Friend WithEvents diam_deta_cb As ComboBox
-    Friend WithEvents diam_corps_cb As ComboBox
-    Friend WithEvents diam_coupe_cb As ComboBox
+    Friend WithEvents d2Cb As ComboBox
+    Friend WithEvents d3Cb As ComboBox
+    Friend WithEvents d1Cb As ComboBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
