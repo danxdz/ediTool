@@ -109,4 +109,32 @@ Public Class NewBD
     Private Sub NewBD_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
+    Private Sub TypeFilterComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TypeFilterComboBox.SelectedIndexChanged
+
+    End Sub
+    Function ExtractNumbers(line As String) As List(Of Double)
+        Dim numbers As New List(Of Double)
+        Dim currentNumber As String = ""
+        For Each c As Char In line
+            If Char.IsDigit(c) OrElse c = "."c Then
+                currentNumber &= c
+            ElseIf currentNumber.Length > 0 Then
+                numbers.Add(Double.Parse(currentNumber))
+                currentNumber = ""
+            End If
+        Next
+        If currentNumber.Length > 0 Then
+            numbers.Add(Double.Parse(currentNumber))
+        End If
+        Return numbers
+    End Function
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+        Dim selectedRow As DataGridViewRow = DataGridView1.Rows(e.RowIndex)
+        Dim selectedCell As DataGridViewCell = selectedRow.Cells(e.ColumnIndex)
+        Dim cellValue As String = selectedCell.Value.ToString()
+        Dim numbersList As List(Of Double) = ExtractNumbers(cellValue)
+        ' faça algo com a lista de números extraída
+    End Sub
 End Class

@@ -243,7 +243,7 @@ Module FileImports
 
         xlApp = New Excel.Application
         xlWorkBook = xlApp.Workbooks.Open(fpath)            ' WORKBOOK TO OPEN THE EXCEL FILE.
-        xlWorkSheet = CType(xlApp.Sheets(1),
+        xlWorkSheet = CType(xlApp.Sheets(NewBD.Row_NumericUpDown.Value + 2),
                     Worksheet)
         Dim iCol As Integer
         Dim iColCount As Integer = 0

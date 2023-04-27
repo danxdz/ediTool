@@ -64,7 +64,7 @@ Module ts
                 Try
                     'Check if custom tool lib exists, or create it
                     Dim customToolsProjectName = My.Settings.destinationLibrary
-                    Dim outputProject = If(TopSolidExt.Pdm.SearchProjectByName(customToolsProjectName)(0), TopSolidExt.Pdm.CreateProject(customToolsProjectName, True))
+                    Dim outputProject = If(TopSolidExt.Pdm.SearchProjectByName(customToolsProjectName), TopSolidExt.Pdm.CreateProject(customToolsProjectName))
 
                     ' Open the first object in the list
                     'TopSolidExt.Pdm.OpenProject(lib_models(0))
@@ -226,11 +226,14 @@ Module ts
         Dim toolType = If(newTool.Type, My.Settings.ToolType)
 
         If toolType Is Nothing Then
-            My.Settings.ToolType = "FR2T" 'TODO
+            My.Settings.ToolType = "endMill" 'TODO
             My.Settings.Save()
+            newTool.Type = "endMill"
         End If
 
         Select Case toolType
+            Case ""
+                model_name = "Side Mill D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
             Case "endMill"
                 model_name = "Side Mill D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
             Case "FRTO"
@@ -254,7 +257,7 @@ Module ts
 
         ' api.TopSolidExt.Connect()
 
-        Dim model_fr = api.CopyModelFile(model_name, modelLib)
+        Dim model_fr = api.CopyModelFile(model_name, modelLib(0))
         'Open_file(model_id, api.TopSolidExt.Pdm.SearchProjectByName("EdiTool"))
 
         '********
