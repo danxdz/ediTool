@@ -33,6 +33,7 @@ Public Class NewBD
 
     End Sub
 
+
     Private Sub Del_tool_Click(sender As Object, e As EventArgs) Handles del_tool.Click
         Dim num As Integer = DataGridView1.SelectedRows().Count
         If num = 1 Then
@@ -130,7 +131,7 @@ Public Class NewBD
     End Sub
 
     Private Sub Code_outil_cb_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolNameCb.SelectedIndexChanged, d3Cb.SelectedIndexChanged, d2Cb.SelectedIndexChanged, ManufRef.SelectedIndexChanged, MatCb.SelectedIndexChanged, d1Cb.SelectedIndexChanged
-        ComboBox1_SelectedIndexChanged(sender, e)
+        'ComboBox1_SelectedIndexChanged(sender, e)
 
     End Sub
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
@@ -146,5 +147,22 @@ Public Class NewBD
             cb.Items.AddRange(headers.Except(ToolNameCb.Items.Cast(Of String)).ToArray())
             cb.SelectedItem = sender.SelectedItem
         Next
+    End Sub
+
+    Private Sub NewBD_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub RC_Menu_NewDB_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles RC_Menu_NewDB.Opening
+
+    End Sub
+
+    Private Sub split_cell_Click(sender As Object, e As EventArgs) Handles split_cell.Click
+
+        Dim selectedRow As DataGridViewRow = DataGridView1.Rows(DataGridView1.CurrentRow.Index())
+        Dim selectedCell As DataGridViewCell = DataGridView1.CurrentCell()
+        Dim cellValue As String = selectedCell.Value.ToString()
+
+        Dim numbersList As List(Of Double) = ExtractNumbers(cellValue)
     End Sub
 End Class

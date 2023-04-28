@@ -77,6 +77,7 @@ Partial Class NewBD
         Me.new_tool = New System.Windows.Forms.ToolStripMenuItem()
         Me.copy_tool = New System.Windows.Forms.ToolStripMenuItem()
         Me.del_tool = New System.Windows.Forms.ToolStripMenuItem()
+        Me.split_cell = New System.Windows.Forms.ToolStripMenuItem()
         Me.TypeFilterComboBox = New System.Windows.Forms.ComboBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Row_NumericUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -92,27 +93,27 @@ Partial Class NewBD
         Me.valider_bt.Text = "validate"
         Me.valider_bt.UseVisualStyleBackColor = True
         '
-        'nom_cb
+        'ToolNameCb
         '
         Me.ToolNameCb.FormattingEnabled = True
         Me.ToolNameCb.Location = New System.Drawing.Point(15, 25)
-        Me.ToolNameCb.Name = "nom_cb"
+        Me.ToolNameCb.Name = "ToolNameCb"
         Me.ToolNameCb.Size = New System.Drawing.Size(121, 21)
         Me.ToolNameCb.TabIndex = 1
         '
-        'mat_cb
+        'MatCb
         '
         Me.MatCb.FormattingEnabled = True
         Me.MatCb.Location = New System.Drawing.Point(269, 25)
-        Me.MatCb.Name = "mat_cb"
+        Me.MatCb.Name = "MatCb"
         Me.MatCb.Size = New System.Drawing.Size(121, 21)
         Me.MatCb.TabIndex = 4
         '
-        'code_outil_cb
+        'ManufRef
         '
         Me.ManufRef.FormattingEnabled = True
         Me.ManufRef.Location = New System.Drawing.Point(142, 25)
-        Me.ManufRef.Name = "code_outil_cb"
+        Me.ManufRef.Name = "ManufRef"
         Me.ManufRef.Size = New System.Drawing.Size(121, 21)
         Me.ManufRef.TabIndex = 5
         '
@@ -170,27 +171,27 @@ Partial Class NewBD
         Me.Label6.TabIndex = 12
         Me.Label6.Text = "Diamètre de coupe *"
         '
-        'diam_deta_cb
+        'd2Cb
         '
         Me.d2Cb.FormattingEnabled = True
         Me.d2Cb.Location = New System.Drawing.Point(142, 72)
-        Me.d2Cb.Name = "diam_deta_cb"
+        Me.d2Cb.Name = "d2Cb"
         Me.d2Cb.Size = New System.Drawing.Size(121, 21)
         Me.d2Cb.TabIndex = 11
         '
-        'diam_corps_cb
+        'd3Cb
         '
         Me.d3Cb.FormattingEnabled = True
         Me.d3Cb.Location = New System.Drawing.Point(269, 72)
-        Me.d3Cb.Name = "diam_corps_cb"
+        Me.d3Cb.Name = "d3Cb"
         Me.d3Cb.Size = New System.Drawing.Size(121, 21)
         Me.d3Cb.TabIndex = 10
         '
-        'diam_coupe_cb
+        'd1Cb
         '
         Me.d1Cb.FormattingEnabled = True
         Me.d1Cb.Location = New System.Drawing.Point(15, 72)
-        Me.d1Cb.Name = "diam_coupe_cb"
+        Me.d1Cb.Name = "d1Cb"
         Me.d1Cb.Size = New System.Drawing.Size(121, 21)
         Me.d1Cb.TabIndex = 9
         '
@@ -522,27 +523,33 @@ Partial Class NewBD
         '
         'RC_Menu_NewDB
         '
-        Me.RC_Menu_NewDB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.new_tool, Me.copy_tool, Me.del_tool})
+        Me.RC_Menu_NewDB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.new_tool, Me.copy_tool, Me.del_tool, Me.split_cell})
         Me.RC_Menu_NewDB.Name = "ContextMenuStrip1"
-        Me.RC_Menu_NewDB.Size = New System.Drawing.Size(107, 70)
+        Me.RC_Menu_NewDB.Size = New System.Drawing.Size(181, 114)
         '
         'new_tool
         '
         Me.new_tool.Name = "new_tool"
-        Me.new_tool.Size = New System.Drawing.Size(106, 22)
+        Me.new_tool.Size = New System.Drawing.Size(180, 22)
         Me.new_tool.Text = "new"
         '
         'copy_tool
         '
         Me.copy_tool.Name = "copy_tool"
-        Me.copy_tool.Size = New System.Drawing.Size(106, 22)
+        Me.copy_tool.Size = New System.Drawing.Size(180, 22)
         Me.copy_tool.Text = "copy"
         '
         'del_tool
         '
         Me.del_tool.Name = "del_tool"
-        Me.del_tool.Size = New System.Drawing.Size(106, 22)
+        Me.del_tool.Size = New System.Drawing.Size(180, 22)
         Me.del_tool.Text = "delete"
+        '
+        'split_cell
+        '
+        Me.split_cell.Name = "split_cell"
+        Me.split_cell.Size = New System.Drawing.Size(180, 22)
+        Me.split_cell.Text = "split in rows"
         '
         'TypeFilterComboBox
         '
@@ -674,4 +681,5 @@ Partial Class NewBD
     Friend WithEvents copy_tool As ToolStripMenuItem
     Friend WithEvents del_tool As ToolStripMenuItem
     Friend WithEvents TypeFilterComboBox As ComboBox
+    Friend WithEvents split_cell As ToolStripMenuItem
 End Class
