@@ -597,24 +597,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\daniel.mendesdeamori\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {},
+    "d:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\daniel.mendesdeamori\\source\\repos\\ediTool\\editool-7.16\\editool\\editool.vbproj",
+      "projectUniqueName": "C:\\Users\\user\\source\\repos\\ediTool\\editool-7.16\\editool\\editool.vbproj",
       "projectName": "EdiTool",
-      "projectPath": "C:\\Users\\daniel.mendesdeamori\\source\\repos\\ediTool\\editool-7.16\\editool\\editool.vbproj",
-      "packagesPath": "C:\\Users\\daniel.mendesdeamori\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\daniel.mendesdeamori\\source\\repos\\ediTool\\editool-7.16\\editool\\obj\\",
+      "projectPath": "C:\\Users\\user\\source\\repos\\ediTool\\editool-7.16\\editool\\editool.vbproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\user\\source\\repos\\ediTool\\editool-7.16\\editool\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "d:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\daniel.mendesdeamori\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

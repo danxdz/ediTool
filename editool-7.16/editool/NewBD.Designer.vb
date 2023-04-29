@@ -701,8 +701,11 @@ Partial Class NewBD
     Friend WithEvents Row_NumericUpDown As NumericUpDown
     Friend WithEvents path_TextBox As TextBox
     Friend WithEvents RC_Menu_NewDB As ContextMenuStrip
+    Friend WithEvents SplitColumnToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents new_tool As ToolStripMenuItem
     Friend WithEvents copy_tool As ToolStripMenuItem
     Friend WithEvents del_tool As ToolStripMenuItem
+    Friend WithEvents split_cell As ToolStripMenuItem
     Friend WithEvents TypeFilterComboBox As ComboBox
+    Friend WithEvents headers As RadioButton
 End Class

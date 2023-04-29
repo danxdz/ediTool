@@ -67,7 +67,7 @@ Public Class ImportPaste
 
 
 
-    Public Function AddTool(tool)
+    Public Sub AddTool(tool)
 
         'Dim service As New FirestoreService
         'service.AddToolAsync(newTool)
@@ -79,7 +79,7 @@ Public Class ImportPaste
         Main.fullToolsList.add(tool)
 
 
-    End Function
+    End Sub
 
 
 
