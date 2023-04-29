@@ -34,6 +34,7 @@ Public Class NewBD
 
     End Sub
 
+
     Private Sub Del_tool_Click(sender As Object, e As EventArgs) Handles del_tool.Click
         Dim num As Integer = DataGridView1.SelectedRows().Count
         If num = 1 Then
@@ -248,13 +249,5 @@ Public Class NewBD
             cb.Items.Clear()
             cb.Items.AddRange(headers.ToArray())
         Next
-    End Sub
-
-    Private Sub NoTT_cb_SelectedValueChanged(sender As Object, e As EventArgs) Handles NoTT_cb.SelectedValueChanged
-        UpdateComboBoxes(sender.SelectedItem.ToString())
-    End Sub
-
-    Private Sub NewBD_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
     End Sub
 End Class

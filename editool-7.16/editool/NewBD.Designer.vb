@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class NewBD
     Inherits System.Windows.Forms.Form
 
     'Form remplace la méthode Dispose pour nettoyer la liste des composants.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class NewBD
     'REMARQUE : la procédure suivante est requise par le Concepteur Windows Form
     'Elle peut être modifiée à l'aide du Concepteur Windows Form.  
     'Ne la modifiez pas à l'aide de l'éditeur de code.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.valider_bt = New System.Windows.Forms.Button()
@@ -78,6 +78,7 @@ Partial Class NewBD
         Me.new_tool = New System.Windows.Forms.ToolStripMenuItem()
         Me.copy_tool = New System.Windows.Forms.ToolStripMenuItem()
         Me.del_tool = New System.Windows.Forms.ToolStripMenuItem()
+        Me.split_cell = New System.Windows.Forms.ToolStripMenuItem()
         Me.TypeFilterComboBox = New System.Windows.Forms.ComboBox()
         Me.headers = New System.Windows.Forms.RadioButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -533,33 +534,33 @@ Partial Class NewBD
         '
         'RC_Menu_NewDB
         '
-        Me.RC_Menu_NewDB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SplitColumnToolStripMenuItem, Me.new_tool, Me.copy_tool, Me.del_tool})
+        Me.RC_Menu_NewDB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.new_tool, Me.copy_tool, Me.del_tool})
         Me.RC_Menu_NewDB.Name = "ContextMenuStrip1"
-        Me.RC_Menu_NewDB.Size = New System.Drawing.Size(141, 92)
-        '
-        'SplitColumnToolStripMenuItem
-        '
-        Me.SplitColumnToolStripMenuItem.Name = "SplitColumnToolStripMenuItem"
-        Me.SplitColumnToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
-        Me.SplitColumnToolStripMenuItem.Text = "split column"
+        Me.RC_Menu_NewDB.Size = New System.Drawing.Size(107, 70)
         '
         'new_tool
         '
         Me.new_tool.Name = "new_tool"
-        Me.new_tool.Size = New System.Drawing.Size(140, 22)
+        Me.new_tool.Size = New System.Drawing.Size(106, 22)
         Me.new_tool.Text = "new"
         '
         'copy_tool
         '
         Me.copy_tool.Name = "copy_tool"
-        Me.copy_tool.Size = New System.Drawing.Size(140, 22)
+        Me.copy_tool.Size = New System.Drawing.Size(106, 22)
         Me.copy_tool.Text = "copy"
         '
         'del_tool
         '
         Me.del_tool.Name = "del_tool"
-        Me.del_tool.Size = New System.Drawing.Size(140, 22)
+        Me.del_tool.Size = New System.Drawing.Size(106, 22)
         Me.del_tool.Text = "delete"
+        '
+        'split_cell
+        '
+        Me.split_cell.Name = "split_cell"
+        Me.split_cell.Size = New System.Drawing.Size(180, 22)
+        Me.split_cell.Text = "split in rows"
         '
         'TypeFilterComboBox
         '
@@ -704,6 +705,4 @@ Partial Class NewBD
     Friend WithEvents copy_tool As ToolStripMenuItem
     Friend WithEvents del_tool As ToolStripMenuItem
     Friend WithEvents TypeFilterComboBox As ComboBox
-    Friend WithEvents headers As RadioButton
-    Friend WithEvents SplitColumnToolStripMenuItem As ToolStripMenuItem
 End Class

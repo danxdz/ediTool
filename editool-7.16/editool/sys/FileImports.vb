@@ -264,7 +264,7 @@ Module FileImports
             Dim headers As New List(Of String)()
             Dim colCount As Integer = xlWorkSheet.UsedRange.Columns.Count
             For i As Integer = 1 To colCount
-                Dim header As String = Trim(xlWorkSheet.Range(xlWorkSheet.Cells(1, i), xlWorkSheet.Cells(1, i)).Value)
+                Dim header As String = Trim(xlWorkSheet.Range(xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, i), xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, i)).Value)
                 If String.IsNullOrEmpty(header) Then
                     Exit For
                 End If
@@ -284,7 +284,7 @@ Module FileImports
             ' Ler os dados
             Dim data As New List(Of List(Of String))()
             Dim rowCount As Integer = xlWorkSheet.UsedRange.Rows.Count
-            For i As Integer = 2 To 11 'rowCount
+            For i As Integer = 1 To 10 'rowCount
                 Dim rowData As New List(Of String)()
 
                 For j As Integer = 1 To colCount
@@ -425,7 +425,7 @@ Module FileImports
 
         My.Settings.Save()
         Dim newTool As New Tool With {
-            .Type = type
+            .type = type
         }
 
         name = line(2)

@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\source\\repos\\ediTool\\editool-7.16\\editool\\editool.vbproj": {}
+    "C:\\Users\\daniel.mendesdeamori\\source\\repos\\ediTool\\editool-7.16\\editool\\editool.vbproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\source\\repos\\ediTool\\editool-7.16\\editool\\editool.vbproj": {
+    "C:\\Users\\daniel.mendesdeamori\\source\\repos\\ediTool\\editool-7.16\\editool\\editool.vbproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\source\\repos\\ediTool\\editool-7.16\\editool\\editool.vbproj",
+        "projectUniqueName": "C:\\Users\\daniel.mendesdeamori\\source\\repos\\ediTool\\editool-7.16\\editool\\editool.vbproj",
         "projectName": "EdiTool",
-        "projectPath": "C:\\Users\\user\\source\\repos\\ediTool\\editool-7.16\\editool\\editool.vbproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\source\\repos\\ediTool\\editool-7.16\\editool\\obj\\",
+        "projectPath": "C:\\Users\\daniel.mendesdeamori\\source\\repos\\ediTool\\editool-7.16\\editool\\editool.vbproj",
+        "packagesPath": "C:\\Users\\daniel.mendesdeamori\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\daniel.mendesdeamori\\source\\repos\\ediTool\\editool-7.16\\editool\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
-          "d:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\daniel.mendesdeamori\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
