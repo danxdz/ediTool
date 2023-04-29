@@ -425,7 +425,7 @@ Module FileImports
 
         My.Settings.Save()
         Dim newTool As New Tool With {
-            .type = type
+            .Type = type
         }
 
         name = line(2)
