@@ -65,10 +65,11 @@ Partial Class Main
         Me.filterMat_ComboBox = New System.Windows.Forms.ComboBox()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.LocalTabPage = New System.Windows.Forms.TabPage()
         Me.NewToolDataGridView = New System.Windows.Forms.DataGridView()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.CloudTabPage = New System.Windows.Forms.TabPage()
+        Me.ImportTabPage = New System.Windows.Forms.TabPage()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.teethNum = New System.Windows.Forms.GroupBox()
         Me.angleDeg = New System.Windows.Forms.GroupBox()
         Me.anglePoint = New System.Windows.Forms.GroupBox()
@@ -81,8 +82,10 @@ Partial Class Main
         CType(Me.ToolPreview_PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.newToolMenu.SuspendLayout()
         Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
+        Me.LocalTabPage.SuspendLayout()
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ImportTabPage.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.teethNum.SuspendLayout()
         Me.angleDeg.SuspendLayout()
         Me.anglePoint.SuspendLayout()
@@ -514,26 +517,26 @@ Partial Class Main
         '
         'TabControl1
         '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.LocalTabPage)
+        Me.TabControl1.Controls.Add(Me.CloudTabPage)
+        Me.TabControl1.Controls.Add(Me.ImportTabPage)
         Me.TabControl1.Location = New System.Drawing.Point(11, 404)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(651, 243)
         Me.TabControl1.TabIndex = 79
         '
-        'TabPage1
+        'LocalTabPage
         '
-        Me.TabPage1.Controls.Add(Me.NewToolDataGridView)
-        Me.TabPage1.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(643, 217)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "local"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.LocalTabPage.Controls.Add(Me.NewToolDataGridView)
+        Me.LocalTabPage.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LocalTabPage.Location = New System.Drawing.Point(4, 22)
+        Me.LocalTabPage.Name = "LocalTabPage"
+        Me.LocalTabPage.Padding = New System.Windows.Forms.Padding(3)
+        Me.LocalTabPage.Size = New System.Drawing.Size(643, 217)
+        Me.LocalTabPage.TabIndex = 0
+        Me.LocalTabPage.Text = "local"
+        Me.LocalTabPage.UseVisualStyleBackColor = True
         '
         'NewToolDataGridView
         '
@@ -547,26 +550,36 @@ Partial Class Main
         Me.NewToolDataGridView.Size = New System.Drawing.Size(626, 204)
         Me.NewToolDataGridView.TabIndex = 79
         '
-        'TabPage2
+        'CloudTabPage
         '
-        Me.TabPage2.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(643, 217)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "cloud"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.CloudTabPage.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CloudTabPage.Location = New System.Drawing.Point(4, 22)
+        Me.CloudTabPage.Name = "CloudTabPage"
+        Me.CloudTabPage.Padding = New System.Windows.Forms.Padding(3)
+        Me.CloudTabPage.Size = New System.Drawing.Size(643, 217)
+        Me.CloudTabPage.TabIndex = 1
+        Me.CloudTabPage.Text = "cloud"
+        Me.CloudTabPage.UseVisualStyleBackColor = True
         '
-        'TabPage3
+        'ImportTabPage
         '
-        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(643, 217)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "import"
-        Me.TabPage3.UseVisualStyleBackColor = True
+        Me.ImportTabPage.Controls.Add(Me.DataGridView1)
+        Me.ImportTabPage.Location = New System.Drawing.Point(4, 22)
+        Me.ImportTabPage.Name = "ImportTabPage"
+        Me.ImportTabPage.Padding = New System.Windows.Forms.Padding(3)
+        Me.ImportTabPage.Size = New System.Drawing.Size(643, 217)
+        Me.ImportTabPage.TabIndex = 2
+        Me.ImportTabPage.Text = "import"
+        Me.ImportTabPage.UseVisualStyleBackColor = True
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView1.Location = New System.Drawing.Point(3, 3)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(637, 211)
+        Me.DataGridView1.TabIndex = 0
         '
         'teethNum
         '
@@ -719,8 +732,10 @@ Partial Class Main
         CType(Me.ToolPreview_PictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.newToolMenu.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
+        Me.LocalTabPage.ResumeLayout(False)
         CType(Me.NewToolDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ImportTabPage.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.teethNum.ResumeLayout(False)
         Me.teethNum.PerformLayout()
         Me.angleDeg.ResumeLayout(False)
@@ -777,10 +792,10 @@ Partial Class Main
     Friend WithEvents filterMat_ComboBox As ComboBox
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents LocalTabPage As TabPage
+    Friend WithEvents CloudTabPage As TabPage
     Friend WithEvents NewToolDataGridView As DataGridView
-    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents ImportTabPage As TabPage
     Friend WithEvents teethNum As GroupBox
     Friend WithEvents angleDeg As GroupBox
     Friend WithEvents anglePoint As GroupBox
@@ -790,4 +805,5 @@ Partial Class Main
     Friend WithEvents filters As GroupBox
     Friend WithEvents readToolProgress_Label As Label
     Friend WithEvents autoCheckIn As CheckBox
+    Friend WithEvents DataGridView1 As DataGridView
 End Class

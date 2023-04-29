@@ -72,7 +72,7 @@ Module ts
                     model_fr_id.RemoveRange(1, model_fr_id.Count - 1)
                     'Call CopySeveral so we can copy read only files
 
-                    temp_model = TopSolidExt.Pdm.CopySeveral(model_fr_id, outputProject)
+                    temp_model = TopSolidExt.Pdm.CopySeveral(model_fr_id, outputProject(0))
                     ' Return the temporary model document ID
                     Return temp_model
 
@@ -268,7 +268,7 @@ Module ts
         'uncomment to unblock TS
         'api.TopSolidExt.Application.EndModification(True, False)
 
-        If model_fr.isEmpty Then
+        If model_fr(0).isEmpty Then
             MsgBox("Can't find file ( " + model_name + " )")
             api.TopSolidExt.Application.EndModification(True, False)
 
@@ -303,9 +303,8 @@ Module ts
             If Main.autoCheckIn.Checked = True Then
                 Dim customToolProject = My.Settings.destinationLibrary
                 api.TopSolidExt.Pdm.CheckIn(api.TopSolidExt.Pdm.SearchDocumentByName(
-            api.TopSolidExt.Pdm.SearchProjectByName(customToolProject)(0),
-            api.TopSolidExt.Documents.GetName(tmp))(0), True)
-
+                    api.TopSolidExt.Pdm.SearchProjectByName(customToolProject)(0),
+                    api.TopSolidExt.Documents.GetName(tmp))(0), True)
             End If
 
 

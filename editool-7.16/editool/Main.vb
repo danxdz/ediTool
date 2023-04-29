@@ -524,7 +524,5 @@ Public Class Main
 
     End Sub
 
-    Private Sub TextBox_TextChanged(sender As Object, e As KeyPressEventArgs) Handles D3textBox.KeyPress, L3textBox.KeyPress, L1textBox.KeyPress, D1textBox.KeyPress, L2textBox.KeyPress, D2textBox.KeyPress
 
-    End Sub
 End Class

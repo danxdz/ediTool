@@ -1,9 +1,10 @@
 ﻿
 Option Explicit On
+Imports System.Data.Entity.Core.Common.EntitySql
 Imports System.Text.RegularExpressions
 
 Public Class NewBD
-
+    Public headersState As Boolean
     Private Sub CbSelectedIndexChanged(sender As Object, e As EventArgs)
         Dim temp As String = ToolNameCb.SelectedItem.ToString
         'nom_cb.Items.Remove(temp)
@@ -120,31 +121,140 @@ Public Class NewBD
     End Function
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-        Dim selectedRow As DataGridViewRow = DataGridView1.Rows(e.RowIndex)
-        Dim selectedCell As DataGridViewCell = selectedRow.Cells(e.ColumnIndex)
-        Dim cellValue As String = selectedCell.Value.ToString()
+        Dim tempDataGridView As New DataGridView()
+
+        For Each column As DataGridViewColumn In DataGridView1.Columns
+            tempDataGridView.Columns.Add(column.Clone())
+        Next
+
+        ' Adicione as linhas selecionadas do DataGridView principal ao DataGridView temporário
+        For Each row As DataGridViewRow In DataGridView1.SelectedRows
+            tempDataGridView.Rows.Add(row.Clone())
+        Next
 
 
-        Dim numbersList As List(Of Double) = ExtractNumbers(cellValue)
-        ' faça algo com a lista de números extraída
+        If (e.RowIndex > 0) Then
+            Dim selectedRow As DataGridViewRow = DataGridView1.Rows(e.RowIndex)
+
+
+            'Dim selectedCell As DataGridViewCell = selectedRow.Cells(e.ColumnIndex)
+            For Each cell As DataGridViewCell In selectedRow.Cells
+
+
+                Dim cellValue As String = cell.Value.ToString()
+
+
+                Dim numbersList As List(Of Double) = ExtractNumbers(cellValue)
+                ' faça algo com a lista de números extraída
+
+
+                For i As Integer = 0 To numbersList.Count - 1
+                    tempDataGridView.Columns.Add("Number " & (i + 1), "Number " & (i + 1))
+                    ' tempDataGridView.Rows(e.RowIndex).Cells(DataGridView1.Columns.Count - 1).Value = numbersList(i)
+                Next
+            Next
+
+        End If
+
+        'DataGridView1.Rows.AddRange(tempDataGridView.Rows.Cast(Of DataGridViewRow).ToArray())
     End Sub
+
 
     Private Sub Code_outil_cb_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ToolNameCb.SelectedIndexChanged, d3Cb.SelectedIndexChanged, d2Cb.SelectedIndexChanged, ManufRef.SelectedIndexChanged, MatCb.SelectedIndexChanged, d1Cb.SelectedIndexChanged
-        ComboBox1_SelectedIndexChanged(sender, e)
+        'UpdateComboBoxes(sender.SelectedItem.ToString())
+
+        Dim cb As ComboBox = DirectCast(sender, ComboBox)
+        If cb.SelectedItem IsNot Nothing Then
+            Dim selectedItem As String = cb.SelectedItem.ToString()
+            selectedColumns.Add(selectedItem)
+            UpdateComboBoxes(selectedItem)
+        End If
 
     End Sub
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
-        ' Atualiza lista de itens disponíveis nas ComboBoxes
+
+    Private ReadOnly selectedColumns As New List(Of String)
+
+    Private Sub UpdateComboBoxes(selectedItem As String)
+
+        Dim selectedItems As New Dictionary(Of String, String) ' Lista para armazenar os valores selecionados
+        ' Armazena os valores selecionados em cada ComboBox
+        For Each cb As ComboBox In Controls.OfType(Of ComboBox)()
+            If cb.SelectedItem IsNot Nothing Then
+                If selectedItems.ContainsKey(cb.Name) Then
+                    selectedItems(cb.Name) = cb.SelectedItem.ToString()
+                Else
+                    selectedItems.Add(cb.Name, cb.SelectedItem.ToString())
+                End If
+
+
+            End If
+        Next
+
+        ' Atualiza as ComboBoxes
+        For Each cb As ComboBox In Controls.OfType(Of ComboBox)()
+
+            If selectedItems.ContainsKey(cb.Name) = False Then
+                cb.Items.Clear()
+                If cb.SelectedItem Is Nothing AndAlso cb.SelectedItem <> selectedItem Then ' Não atualize a ComboBox que disparou o evento
+                    For Each col As DataGridViewColumn In DataGridView1.Columns
+                        If col.HeaderText <> selectedItem AndAlso Not selectedItems.ContainsValue(col.HeaderText) Then ' Não adicione o item selecionado ou itens já selecionados em outras ComboBoxes
+                            cb.Items.Add(col.HeaderText)
+                        End If
+                    Next
+                End If
+            End If
+        Next
+
+        For Each kvp As KeyValuePair(Of String, String) In selectedItems
+            Dim tst As ComboBox
+            For Each cb As ComboBox In Controls.OfType(Of ComboBox)()
+                If cb.Name = kvp.Key Then
+                    tst = cb
+                    Exit For
+                End If
+            Next
+
+            If kvp.Value <> selectedItem AndAlso tst.Items.Contains(kvp.Value) Then ' Seleciona apenas se o valor ainda estiver disponível
+                tst.SelectedItem = kvp.Value
+            End If
+        Next
+        'selectedItems.Clear()
+
+    End Sub
+
+
+
+    Private Sub Headers_CheckedChanged(sender As Object, e As EventArgs) Handles headers.CheckedChanged
+        ' headers.Checked = False
+        ReadExcel(My.Settings.lastPath)
+    End Sub
+
+    Private Sub Headers_Click(sender As Object, e As EventArgs) Handles headers.Click
+        headers.Checked = Not headers.Checked
+    End Sub
+
+    Private Sub SplitColumnToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SplitColumnToolStripMenuItem.Click
+        FillComboBoxes()
+    End Sub
+
+    Public Sub FillComboBoxes()
         Dim headers As New List(Of String)
 
         For Each col As DataGridViewColumn In DataGridView1.Columns
-            If (sender.SelectedItem <> col.HeaderText) Then headers.Add(col.HeaderText)
+            headers.Add(col.HeaderText)
         Next
 
         For Each cb As ComboBox In Controls.OfType(Of ComboBox)()
             cb.Items.Clear()
-            cb.Items.AddRange(headers.Except(ToolNameCb.Items.Cast(Of String)).ToArray())
-            cb.SelectedItem = sender.SelectedItem
+            cb.Items.AddRange(headers.ToArray())
         Next
+    End Sub
+
+    Private Sub NoTT_cb_SelectedValueChanged(sender As Object, e As EventArgs) Handles NoTT_cb.SelectedValueChanged
+        UpdateComboBoxes(sender.SelectedItem.ToString())
+    End Sub
+
+    Private Sub NewBD_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class

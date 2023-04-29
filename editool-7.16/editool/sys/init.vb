@@ -1,6 +1,7 @@
 ﻿Option Explicit On
 Imports System.Diagnostics.Eventing
 Imports System.Text.RegularExpressions
+Imports System.Windows.Media.TextFormatting
 
 Module Init
     ' Returns the index of the specified language
@@ -349,6 +350,8 @@ Module Init
                 ImportOrderTools()
             Case "text"
                 ImportPaste.Show()
+            Case "string"
+                PasteString()
             Case "topsolid"
                 OpenV6File()
             Case "language"
@@ -359,6 +362,112 @@ Module Init
                 ' Handle unknown function here
         End Select
     End Sub
+
+    Function ExtractNumbers(line As String) As List(Of Double)
+
+        Dim numbers As New List(Of Double)
+        Dim currentNumber As String = ""
+        For Each c As Char In line
+            If Char.IsDigit(c) OrElse c = "."c Then
+                currentNumber &= c
+            ElseIf currentNumber.Length > 0 Then
+                numbers.Add(Double.Parse(currentNumber))
+                currentNumber = ""
+            End If
+        Next
+        If currentNumber.Length > 0 Then
+            numbers.Add(Double.Parse(currentNumber))
+        End If
+        Return numbers
+    End Function
+
+
+    Private Function PasteString()
+        Dim input As String = InputBox("Line input", "tab", "Micro-drill	Solid carbide	Without	Without	0.16	FOC501	FOC501-000.160	VHM MICRO-DRILL DIN1899A Ø0.16 Z2 L30x1 D1 	 23.43 € 	0.0020	82075050	14	FALCON TOOLS
+").Replace("& vbCrLf", "").Replace("  ", "").Replace(" & vbCrLf", "").Replace(vbCrLf, "")
+
+        Dim toolFields As List(Of String) = input.Split(vbTab).ToList()
+
+        If toolFields.Count <= 1 Then
+            Dim filter As String = InputBox("Nao foi possivel dividir a string, pls enter the caracter do divide", "ex: ;", ":")
+            toolFields = input.Split(filter).ToList()
+        End If
+        Dim toolFieldsTmp As New List(Of String)
+        For Each tF As String In toolFields
+            Dim tmp() As String = tF.Split(" ")
+            For Each t As String In tmp
+                If toolFields.Contains(t) = False Then
+                    toolFieldsTmp.Add(t)
+                End If
+            Next
+        Next
+        toolFields.AddRange(toolFieldsTmp)
+
+        Dim splitLine() As String = My.Resources.ToolParamsSins.Split(New String() {Environment.NewLine}, StringSplitOptions.None).ToArray
+
+        Dim paramDict As New Dictionary(Of String, String)
+
+
+        Dim numbersList As New List(Of Double)
+
+        For Each p As String In toolFields
+            Dim tmp As List(Of Double) = ExtractNumbers(p)
+            If tmp.Count > 0 Then
+                For t As Integer = 0 To tmp.Count - 1
+                    numbersList.Add(tmp(t))
+                Next
+            End If
+            Dim foundMatch As Boolean = False
+            For Each line As String In splitLine
+                Dim synonyms As String() = line.Split(";")
+                If synonyms.Contains(p) Then
+                    paramDict.Add(synonyms(0), p)
+                    ' Encontrou uma correspondência
+                    ' O primeiro campo da string de entrada corresponde a um dos sinônimos
+                    ' Você pode armazenar a correspondência e continuar a verificar os outros campos
+                    Exit For
+                End If
+            Next
+        Next
+
+        Dim types() As String
+        types = {"endMill", "radiusMill", "drill"}
+        Dim type As String = ""
+
+        Dim tool As New Tool
+
+        For Each t As String In types
+            'Gets Types
+            If paramDict.ContainsKey(t) Then tool.Type = t
+        Next
+
+        'Gets tool material
+        If paramDict.ContainsKey("material") Then tool.ToolMaterial = paramDict("material")
+
+        Dim regexPatternD1 As String = "Ø([\d.]+)"
+        Dim rmD1 As Match = Regex.Match(input, regexPatternD1)
+        If rmD1.Success Then tool.D1 = Double.Parse(rmD1.Groups(1).Value)
+
+
+        Dim regexPatternD3 As String = "D([\d.]+)"
+        Dim rmD3 As Match = Regex.Match(input, regexPatternD3)
+        If rmD3.Success Then tool.D3 = Double.Parse(rmD3.Groups(1).Value)
+
+        Dim regexPatternZ As String = "Z([\d]+)"
+        Dim rmZ As Match = Regex.Match(input, regexPatternZ)
+        If rmZ.Success Then tool.NoTT = Double.Parse(rmZ.Groups(1).Value)
+
+        'Gets L3 and L1 * TODO
+        Dim regexPattern As String = "L(\d+)x(\d+)"
+        Dim regexMatch As Match = Regex.Match(input, regexPattern)
+        If regexMatch.Success Then
+            tool.L3 = Double.Parse(regexMatch.Groups(1).Value)
+            tool.L1 = Double.Parse(regexMatch.Groups(2).Value)
+        End If
+
+        ImportPaste.AddTool(tool)
+
+    End Function
 
     Private Sub ImportOrderTools()
         Throw New NotImplementedException()

@@ -149,9 +149,10 @@ Module FileImports
                 End Select
             ElseIf (reader.Name = "tecsets") Then
                 reader.Close()
-                FillDataGrid(newTool, Main.NewToolDataGridView)
-                Main.fullToolsList.Clear()
-                Main.filteredTools.Clear()
+                Main.TabControl1.TabIndex = 3
+                FillDataGrid(newTool, Main.DataGridView1)
+                'Main.fullToolsList.Clear()
+                'Main.filteredTools.Clear()
 
                 'Dim sas As List(Of NewTool) = Main.toolsList.Tool
 
@@ -215,8 +216,6 @@ Module FileImports
 
         If openFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             Try
-
-
                 myStream = openFileDialog1.OpenFile()
                 Dim fpath As String = openFileDialog1.FileName
 
@@ -239,48 +238,8 @@ Module FileImports
     End Sub
 
 
-    Private Sub FillComboBoxes()
-        Dim headers As New List(Of String)
 
-        For Each col As DataGridViewColumn In NewBD.DataGridView1.Columns
-            headers.Add(col.HeaderText)
-        Next
-
-        For Each cb As ComboBox In NewBD.Controls.OfType(Of ComboBox)()
-            cb.Items.Clear()
-            cb.Items.AddRange(headers.ToArray())
-        Next
-    End Sub
-
-    Function Test1(input As String)
-        'Dim input As String = "Any	Bi-face	Cylindrical	16	EVC209	EVC209-016.000	VHM CHAMFERRING CUTTER 90° Ø16 Z4 L100x5x8 D10 COATED 	 235.19 € 	0.1030	82079071	120	FALCON TOOLS"
-
-        Dim pattern As String = "(?<Id>\w+)\s+(?<Name>.+)\s+(?<Type>.+)\s+(?<D1>\d*\.?\d+)\s+(?<ManufRef>\w+)\s+(?<ManufRefSec>\w+)\s+(?<NameDesc>.+)\s+(?<AngleDeg>\d*\.?\d+)\s+(?<NoTT>\d+)\s+(?<Manuf>.+)\s+(?<Price>.+)\s+(?<NoTT>\d+)\s+(?<GroupeMat>.+)"
-        Dim regex As New Regex(pattern)
-
-        Dim match As Match = regex.Match(input)
-
-        If match.Success Then
-            Dim tool As New Tool()
-            tool.Id = match.Groups("Id").Value
-            tool.Name = match.Groups("Name").Value
-            tool.Type = match.Groups("Type").Value
-            tool.D1 = Double.Parse(match.Groups("D1").Value)
-            tool.ManufRef = match.Groups("ManufRef").Value
-            tool.ManufRefSec = match.Groups("ManufRefSec").Value
-            'tool.NameDesc = match.Groups("NameDesc").Value
-            tool.AngleDeg = Double.Parse(match.Groups("AngleDeg").Value)
-            tool.NoTT = Integer.Parse(match.Groups("NoTT").Value)
-            tool.Manuf = match.Groups("Manuf").Value
-            'tool.Price = match.Groups("Price").Value
-            tool.NoTT = Integer.Parse(match.Groups("NoTT").Value)
-            tool.GroupeMat = match.Groups("GroupeMat").Value
-        End If
-
-
-    End Function
     Public Sub ReadExcel(fpath As String)
-
 
         NewBD.DataGridView1.Columns.Clear()
         NewBD.DataGridView1.Rows.Clear()
@@ -305,7 +264,7 @@ Module FileImports
             Dim headers As New List(Of String)()
             Dim colCount As Integer = xlWorkSheet.UsedRange.Columns.Count
             For i As Integer = 1 To colCount
-                Dim header As String = Trim(xlWorkSheet.Range(xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, i), xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, i)).Value)
+                Dim header As String = Trim(xlWorkSheet.Range(xlWorkSheet.Cells(1, i), xlWorkSheet.Cells(1, i)).Value)
                 If String.IsNullOrEmpty(header) Then
                     Exit For
                 End If
@@ -325,7 +284,7 @@ Module FileImports
             ' Ler os dados
             Dim data As New List(Of List(Of String))()
             Dim rowCount As Integer = xlWorkSheet.UsedRange.Rows.Count
-            For i As Integer = 1 To 10 'rowCount
+            For i As Integer = 2 To 11 'rowCount
                 Dim rowData As New List(Of String)()
 
                 For j As Integer = 1 To colCount
@@ -340,13 +299,12 @@ Module FileImports
                 Next
 
                 ' Adicionar a linha ao DataGridView
-                Test1(String.Join(" ", rowData))
 
                 NewBD.DataGridView1.Rows.Add(rowData.ToArray())
 
             Next
 
-            FillComboBoxes()
+            NewBD.FillComboBoxes()
 
         Finally
             ' Limpar recursos do Excel

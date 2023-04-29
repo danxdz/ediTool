@@ -27,7 +27,7 @@ Module graphics
             Dim L As Double = newTool.L1
             Dim CTS_AL As Double = If(newTool.L2 = 0, newTool.L1, newTool.L2)
             Dim OL As Double = newTool.L3
-            Dim Alpha As Double = newTool.AngleDeg
+            Dim Alpha As Double = newTool.AnglePoint
             Dim r As Double = newTool.CorRadius
             Dim A_point As Double = newTool.CorChamfer
             If (A_point <> 0) Then A_point /= 2

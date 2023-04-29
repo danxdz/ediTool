@@ -14,7 +14,8 @@ Module Tools
         Public Property L3 As Double
         Public Property CorRadius As Double
         Public Property CorChamfer As Double
-        Public Property AngleDeg As Double
+        Public Property AngleColl As Double
+        Public Property AnglePoint As Double
         Public Property NoTT As Integer
         Public Property GroupeMat As String
         Public Property ToolMaterial As String
@@ -30,6 +31,27 @@ Module Tools
         Public Property Code As String
         Public Property CodeBar As String
 
+        Public Sub New()
+
+            If (D1 > 0) Then D2 = D1 - 0.2
+            If (L1 > 0) Then L2 = L1
+
+            If Type = "drill" Then AnglePoint = 140
+            ValidateProperties()
+        End Sub
+        Private Sub ValidateProperties()
+            If Type = "drill" AndAlso AnglePoint <> 140 Then
+                Throw New InvalidOperationException("Invalid AnglePoint value for drill type.")
+            End If
+
+            If D2 > D1 Then
+                Throw New InvalidOperationException("Invalid D2 value. D2 should be less than D1.")
+            End If
+
+            If L2 > L1 Then
+                Throw New InvalidOperationException("Invalid L2 value. L2 should be less than or equal to L1.")
+            End If
+        End Sub
         Public Sub PublishParameters(DocId)
 
             Dim topSolidKernel As Assembly = api.GetTsAssembly()

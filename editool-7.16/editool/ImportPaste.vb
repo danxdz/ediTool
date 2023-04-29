@@ -67,19 +67,24 @@ Public Class ImportPaste
 
 
 
+    Public Function AddTool(tool)
 
-
-
-
-    Private Sub CreateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreateToolStripMenuItem.Click
         'Dim service As New FirestoreService
         'service.AddToolAsync(newTool)
-        Dim localTools As New SQLiteToolDatabase("endMill") 'TODO
+        Dim localTools As New SQLiteToolDatabase(tool.Type) 'TODO
 
         localTools.AddTool(tool)
         graphics.Refresh_outil(tool, Main.ToolPreview_PictureBox)
         FillDataGrid(tool, Main.NewToolDataGridView)
         Main.fullToolsList.add(tool)
+
+
+    End Function
+
+
+
+    Private Sub CreateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreateToolStripMenuItem.Click
+        AddTool(tool)
     End Sub
 
     Private Sub ClearToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearToolStripMenuItem.Click

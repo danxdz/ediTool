@@ -76,21 +76,21 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à 1;APMXS;Depth of cut maximum in feed direction side
-        '''2;@Barcode;CodeBar;Product barcode
-        '''3;CA;Collision angle	0.0 deg
-        '''4;CCC;Center cutting capability
+        '''  Recherche une chaîne localisée semblable à 1;APMXS;@L1;Depth of cut maximum in feed direction side
+        '''2;Barcode;@CodeBar;Product barcode
+        '''3;CA;Collision angle
+        '''4;CCC;@CoupeCentre;Center cutting capability
         '''5;CGT;Cutting geometry type
-        '''6;@Chanfer;CHW;Corner chamfer width
+        '''6;CHW;@CorChamfer;Corner chamfer width
         '''7;Cmax;Helical interpolation hole diameter maximum
         '''8;Cmin;Helical interpolation hole diameter minimum
         '''9;COATING;Cutting item coating
-        '''10;@D1;DC;Cutting diameter
-        '''11;@D3;DMM;Shank diameter
-        '''12;@D2;Neck diameter
-        '''13;@NoTT;FCEDC;Face cutting edge count
+        '''10;DC;@D1;Cutting diameter
+        '''11;DMM;@D3;Shank diameter
+        '''12;DN;@D2;Neck diameter
+        '''13;FCEDC;@NoTT;Face cutting edge count
         '''14;FHA;Flute Helix Angle
-        '''15;@ArrCentre;I [le reste de la chaîne a été tronqué]&quot;;.
+        ''' [le reste de la chaîne a été tronqué]&quot;;.
         '''</summary>
         Friend ReadOnly Property _13399_paste() As String
             Get
@@ -170,7 +170,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Recherche une chaîne localisée semblable à Index;File;Parent;EN;FR;PT
+        '''  Recherche une chaîne localisée semblable à id;file;parent;en;fr;pt
         '''1;file;1;File;Fichier;Ficheiro
         '''2;open;1;Open;Ouvrir;Abrir
         '''3;xml;2;XML;XML;XML@
@@ -182,7 +182,7 @@ Namespace My.Resources
         '''9;mills;8;Mills;Fraises;Fresas
         '''10;endMill;9;End Mill;Fraise 2 tailles;Fresa de topo@
         '''11;toroidalMill;9;Toroidal Mill;Fraise torique;Fresa torica
-        '''12;ballNoseMill;9;Ball Nose Mill;Fraise sphé [le reste de la chaîne a été tronqué]&quot;;.
+        '''12;ballNoseMill;9;Ball Nose Mill;Fraise sphériq [le reste de la chaîne a été tronqué]&quot;;.
         '''</summary>
         Friend ReadOnly Property textMainMenu() As String
             Get
@@ -193,18 +193,32 @@ Namespace My.Resources
         '''<summary>
         '''  Recherche une chaîne localisée semblable à ID;Key;en;fr;pt
         '''1;toolName;Tool Name;Nom de l&apos;outil;Nome da ferramenta
-        '''2;rayon;Radius;Rayon;Raio
-        '''3;angle;Angle;Angle;Ângulo
+        '''2;config;Configuration;Configuration;Configuração
+        '''3;forceName;Force Name;Forcé nom;Forçar nome
         '''4;teethNum;N. of teeth;Nb. de dents;N. de dentes
-        '''5;cuttingDiameter;Cutting Diameter;Diamètre de coupe;Diâmetro de corte
-        '''6;clearanceDiameter;Clearance Diameter;Diamètre de dégagement;Diâmetro de folga
-        '''7;bodyDiameter;Body Diameter;Diamètre du corps;Diâmetro do corpo
-        '''8;cuttingLength;Cutting Length;Longueur de coupe;Comprimento de corte
-        '''9;clearanceLength;Clearance Length;Longueur  [le reste de la chaîne a été tronqué]&quot;;.
+        '''5;rayon;Radius/Chf;Rayon/Chf;Raio/Chf
+        '''6;anglePoint;Point angle;Angle de point;Angulo de ponta
+        '''7;angleDeg;Angle deg.;Angle deg.;Ângulo deg.
+        '''8;toolPreviewBox;tool preview;Aperçu de l&apos;outil;pré-visualização da ferramenta 
+        '''9;cuttingDiameter;Cutting Diameter;Diamètre de coupe;Diâmetro de cort [le reste de la chaîne a été tronqué]&quot;;.
         '''</summary>
         Friend ReadOnly Property textUI() As String
             Get
                 Return ResourceManager.GetString("textUI", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Recherche une chaîne localisée semblable à drill;broca;micro-drill;foret
+        '''endMill;Fresa de topo;Fraise 2 tailles
+        '''radiusMill;Fresa raio;Fraise rayon
+        '''chamferMill;Fresa chanfro;Fraise chanfrein
+        '''threadMill;Fresa rosca;Fraise filetage
+        '''t-slotCutter;Fresa T;Fraise en T.
+        '''</summary>
+        Friend ReadOnly Property ToolParamsSins() As String
+            Get
+                Return ResourceManager.GetString("ToolParamsSins", resourceCulture)
             End Get
         End Property
         

@@ -74,10 +74,12 @@ Partial Class NewBD
         Me.Row_NumericUpDown = New System.Windows.Forms.NumericUpDown()
         Me.path_TextBox = New System.Windows.Forms.TextBox()
         Me.RC_Menu_NewDB = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.SplitColumnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.new_tool = New System.Windows.Forms.ToolStripMenuItem()
         Me.copy_tool = New System.Windows.Forms.ToolStripMenuItem()
         Me.del_tool = New System.Windows.Forms.ToolStripMenuItem()
         Me.TypeFilterComboBox = New System.Windows.Forms.ComboBox()
+        Me.headers = New System.Windows.Forms.RadioButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Row_NumericUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RC_Menu_NewDB.SuspendLayout()
@@ -85,34 +87,37 @@ Partial Class NewBD
         '
         'valider_bt
         '
-        Me.valider_bt.Location = New System.Drawing.Point(315, 380)
+        Me.valider_bt.Location = New System.Drawing.Point(1032, 454)
         Me.valider_bt.Name = "valider_bt"
         Me.valider_bt.Size = New System.Drawing.Size(75, 23)
         Me.valider_bt.TabIndex = 0
-        Me.valider_bt.Text = "validate"
+        Me.valider_bt.Text = "save"
         Me.valider_bt.UseVisualStyleBackColor = True
         '
-        'nom_cb
+        'ToolNameCb
         '
+        Me.ToolNameCb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ToolNameCb.FormattingEnabled = True
         Me.ToolNameCb.Location = New System.Drawing.Point(15, 25)
-        Me.ToolNameCb.Name = "nom_cb"
+        Me.ToolNameCb.Name = "ToolNameCb"
         Me.ToolNameCb.Size = New System.Drawing.Size(121, 21)
         Me.ToolNameCb.TabIndex = 1
         '
-        'mat_cb
+        'MatCb
         '
+        Me.MatCb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.MatCb.FormattingEnabled = True
         Me.MatCb.Location = New System.Drawing.Point(269, 25)
-        Me.MatCb.Name = "mat_cb"
+        Me.MatCb.Name = "MatCb"
         Me.MatCb.Size = New System.Drawing.Size(121, 21)
         Me.MatCb.TabIndex = 4
         '
-        'code_outil_cb
+        'ManufRef
         '
+        Me.ManufRef.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ManufRef.FormattingEnabled = True
         Me.ManufRef.Location = New System.Drawing.Point(142, 25)
-        Me.ManufRef.Name = "code_outil_cb"
+        Me.ManufRef.Name = "ManufRef"
         Me.ManufRef.Size = New System.Drawing.Size(121, 21)
         Me.ManufRef.TabIndex = 5
         '
@@ -170,27 +175,30 @@ Partial Class NewBD
         Me.Label6.TabIndex = 12
         Me.Label6.Text = "Diamètre de coupe *"
         '
-        'diam_deta_cb
+        'd2Cb
         '
+        Me.d2Cb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.d2Cb.FormattingEnabled = True
         Me.d2Cb.Location = New System.Drawing.Point(142, 72)
-        Me.d2Cb.Name = "diam_deta_cb"
+        Me.d2Cb.Name = "d2Cb"
         Me.d2Cb.Size = New System.Drawing.Size(121, 21)
         Me.d2Cb.TabIndex = 11
         '
-        'diam_corps_cb
+        'd3Cb
         '
+        Me.d3Cb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.d3Cb.FormattingEnabled = True
         Me.d3Cb.Location = New System.Drawing.Point(269, 72)
-        Me.d3Cb.Name = "diam_corps_cb"
+        Me.d3Cb.Name = "d3Cb"
         Me.d3Cb.Size = New System.Drawing.Size(121, 21)
         Me.d3Cb.TabIndex = 10
         '
-        'diam_coupe_cb
+        'd1Cb
         '
+        Me.d1Cb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.d1Cb.FormattingEnabled = True
         Me.d1Cb.Location = New System.Drawing.Point(15, 72)
-        Me.d1Cb.Name = "diam_coupe_cb"
+        Me.d1Cb.Name = "d1Cb"
         Me.d1Cb.Size = New System.Drawing.Size(121, 21)
         Me.d1Cb.TabIndex = 9
         '
@@ -223,6 +231,7 @@ Partial Class NewBD
         '
         'L_deta_cb
         '
+        Me.L_deta_cb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.L_deta_cb.FormattingEnabled = True
         Me.L_deta_cb.Location = New System.Drawing.Point(142, 112)
         Me.L_deta_cb.Name = "L_deta_cb"
@@ -231,6 +240,7 @@ Partial Class NewBD
         '
         'L_total_cb
         '
+        Me.L_total_cb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.L_total_cb.FormattingEnabled = True
         Me.L_total_cb.Location = New System.Drawing.Point(269, 112)
         Me.L_total_cb.Name = "L_total_cb"
@@ -239,6 +249,7 @@ Partial Class NewBD
         '
         'L_coupe_cb
         '
+        Me.L_coupe_cb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.L_coupe_cb.FormattingEnabled = True
         Me.L_coupe_cb.Location = New System.Drawing.Point(15, 112)
         Me.L_coupe_cb.Name = "L_coupe_cb"
@@ -468,20 +479,20 @@ Partial Class NewBD
         '
         'cancel_bt
         '
-        Me.cancel_bt.Location = New System.Drawing.Point(15, 380)
+        Me.cancel_bt.Location = New System.Drawing.Point(951, 454)
         Me.cancel_bt.Name = "cancel_bt"
         Me.cancel_bt.Size = New System.Drawing.Size(75, 23)
         Me.cancel_bt.TabIndex = 47
-        Me.cancel_bt.Text = "anuler"
+        Me.cancel_bt.Text = "cancel"
         Me.cancel_bt.UseVisualStyleBackColor = True
         '
         'open_file_bt
         '
-        Me.open_file_bt.Location = New System.Drawing.Point(212, 380)
+        Me.open_file_bt.Location = New System.Drawing.Point(846, 454)
         Me.open_file_bt.Name = "open_file_bt"
         Me.open_file_bt.Size = New System.Drawing.Size(75, 23)
         Me.open_file_bt.TabIndex = 48
-        Me.open_file_bt.Text = "fichier"
+        Me.open_file_bt.Text = "open file"
         Me.open_file_bt.UseVisualStyleBackColor = True
         '
         'DataGridView1
@@ -522,42 +533,61 @@ Partial Class NewBD
         '
         'RC_Menu_NewDB
         '
-        Me.RC_Menu_NewDB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.new_tool, Me.copy_tool, Me.del_tool})
+        Me.RC_Menu_NewDB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SplitColumnToolStripMenuItem, Me.new_tool, Me.copy_tool, Me.del_tool})
         Me.RC_Menu_NewDB.Name = "ContextMenuStrip1"
-        Me.RC_Menu_NewDB.Size = New System.Drawing.Size(107, 70)
+        Me.RC_Menu_NewDB.Size = New System.Drawing.Size(141, 92)
+        '
+        'SplitColumnToolStripMenuItem
+        '
+        Me.SplitColumnToolStripMenuItem.Name = "SplitColumnToolStripMenuItem"
+        Me.SplitColumnToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
+        Me.SplitColumnToolStripMenuItem.Text = "split column"
         '
         'new_tool
         '
         Me.new_tool.Name = "new_tool"
-        Me.new_tool.Size = New System.Drawing.Size(106, 22)
+        Me.new_tool.Size = New System.Drawing.Size(140, 22)
         Me.new_tool.Text = "new"
         '
         'copy_tool
         '
         Me.copy_tool.Name = "copy_tool"
-        Me.copy_tool.Size = New System.Drawing.Size(106, 22)
+        Me.copy_tool.Size = New System.Drawing.Size(140, 22)
         Me.copy_tool.Text = "copy"
         '
         'del_tool
         '
         Me.del_tool.Name = "del_tool"
-        Me.del_tool.Size = New System.Drawing.Size(106, 22)
+        Me.del_tool.Size = New System.Drawing.Size(140, 22)
         Me.del_tool.Text = "delete"
         '
         'TypeFilterComboBox
         '
         Me.TypeFilterComboBox.FormattingEnabled = True
-        Me.TypeFilterComboBox.Location = New System.Drawing.Point(495, 23)
+        Me.TypeFilterComboBox.Location = New System.Drawing.Point(428, 433)
         Me.TypeFilterComboBox.Name = "TypeFilterComboBox"
         Me.TypeFilterComboBox.Size = New System.Drawing.Size(121, 21)
         Me.TypeFilterComboBox.TabIndex = 52
         Me.TypeFilterComboBox.Text = "FOCA"
+        '
+        'headers
+        '
+        Me.headers.AutoCheck = False
+        Me.headers.AutoSize = True
+        Me.headers.Location = New System.Drawing.Point(508, 27)
+        Me.headers.Name = "headers"
+        Me.headers.Size = New System.Drawing.Size(63, 17)
+        Me.headers.TabIndex = 53
+        Me.headers.TabStop = True
+        Me.headers.Text = "headers"
+        Me.headers.UseVisualStyleBackColor = True
         '
         'NewBD
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1119, 489)
+        Me.Controls.Add(Me.headers)
         Me.Controls.Add(Me.TypeFilterComboBox)
         Me.Controls.Add(Me.path_TextBox)
         Me.Controls.Add(Me.Row_NumericUpDown)
@@ -674,4 +704,6 @@ Partial Class NewBD
     Friend WithEvents copy_tool As ToolStripMenuItem
     Friend WithEvents del_tool As ToolStripMenuItem
     Friend WithEvents TypeFilterComboBox As ComboBox
+    Friend WithEvents headers As RadioButton
+    Friend WithEvents SplitColumnToolStripMenuItem As ToolStripMenuItem
 End Class

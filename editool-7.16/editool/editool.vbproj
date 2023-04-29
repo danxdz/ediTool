@@ -255,6 +255,7 @@
   <ItemGroup>
     <Content Include="data\text_UI.txt" />
     <Content Include="data\text_UI_backup.txt" />
+    <Content Include="data\ToolParamsSins.txt" />
     <Content Include="data\tooltypes.txt" />
   </ItemGroup>
   <ItemGroup>
