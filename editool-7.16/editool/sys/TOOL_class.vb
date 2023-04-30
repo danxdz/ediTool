@@ -36,9 +36,25 @@ Module Tools
             If (D1 > 0) Then D2 = D1 - 0.2
             If (L1 > 0) Then L2 = L1
 
-            If Type = "drill" Then AnglePoint = 140
+            If Me.Type = "drill" Then AnglePoint = 140
             ValidateProperties()
         End Sub
+
+
+        Public Sub AddTool()
+
+            'Dim service As New FirestoreService
+            'service.AddToolAsync(newTool)
+            Dim localTools As New SQLiteToolDatabase(Type) 'TODO
+
+            localTools.AddTool(Me)
+            graphics.Refresh_outil(Me, Main.ToolPreview_PictureBox)
+            FillDataGrid(Me, Main.NewToolDataGridView)
+            Main.fullToolsList.add(Me)
+
+
+        End Sub
+
         Private Sub ValidateProperties()
             If Type = "drill" AndAlso AnglePoint <> 140 Then
                 Throw New InvalidOperationException("Invalid AnglePoint value for drill type.")

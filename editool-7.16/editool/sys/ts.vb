@@ -242,9 +242,9 @@ Module ts
                 model_name = "Ball Nose Mill D8 L30 SD8"'"Fraise hémisphérique D8 L30 SD8"
             Case "FOP9"
                 model_name = "Spotting Drill D10 SD10"
-            Case "FOCA", "FOHS"
+            Case "FOCA", "FOHS", "drill"
                 model_name = "Twisted Drill D10 L35 SD10"
-            Case "ALFI"
+            Case "ALFI", "reamer"
                 model_name = "Constant Reamer D10 L20 SD9"
         End Select
 
@@ -361,15 +361,15 @@ Module ts
         '***************
         'Debug -> get elements param list
         ' Dim sys_pard As List(Of Object) = api.TopSolidExt.Elements.GetElements(newTool_docId)
-        Dim tmp As String
-        Dim lst As String() = New String(sys_pard.Count - 1) {}
+        'Dim tmp As String
+        'Dim lst As String() = New String(sys_pard.Count - 1) {}
 
-        For i As Integer = 0 To sys_pard.Count - 1
-            tmp = api.TopSolidExt.Elements.GetName(sys_pard(i))
-            lst(i) = tmp
-        Next
+        'For i As Integer = 0 To sys_pard.Count - 1
+        'tmp = api.TopSolidExt.Elements.GetName(sys_pard(i))
+        'lst(i) = tmp
+        'Next
 
-        Debug.Write(lst)
+        'Debug.Write(lst)
         '***************
         'IAssemblies.DerivePartForModification(TopSolid.Kernel.Automating.ElementId, Boolean) As TopSolid.Kernel.Automating.DocumentId
         'TopSolidHost.Documents.GetDocuments()
@@ -395,9 +395,10 @@ Module ts
         api.TopSolidExt.Parameters.SetIntegerValue(api.TopSolidExt.Elements.SearchByName(newTool_docId, "NoTT"), newTool.NoTT)
 
 
-        If ToolType = "FOC9" Or ToolType = "FOCA" Then
+        If ToolType = "FOC9" Or ToolType = "drill" Then
             'Dim tmpAngleRad = Main.A_TextBox.Text * Math.PI / 180
-            Dim tmpAngleRad = newTool.Chanfrein * Math.PI / 180
+            If newTool.AnglePoint = 0 Then newTool.AnglePoint = 140
+            Dim tmpAngleRad = newTool.AnglePoint * Math.PI / 180
             SetReal(newTool_docId, "A", tmpAngleRad)
 
             Select Case ToolType
@@ -405,15 +406,16 @@ Module ts
 
                     'api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOP9)
                     newTool.Name = My.Settings.MaskTT_FOP9
-                Case "FOCA"
+                Case "FOCA", "drill"
                     'api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOCA)
                     newTool.Name = My.Settings.MaskTT_FOCA
 
             End Select
 
-        ElseIf ToolType = "ALFI" Then
+        ElseIf ToolType = "ALFI" Or ToolType = "reamer" Then
             'api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_ALFI)
             newTool.Name = My.Settings.MaskTT_ALFI
+            SetReal(newTool_docId, "L", L2)
         Else
 
             SetReal(newTool_docId, "CTS_AD", D2)

@@ -154,7 +154,7 @@ Module Init
             Return value
         End If
     End Function
-    Function Pick_param_old(param As String)
+    Function Pick_param_old(param As String) ' TODO
         Select Case param
             Case "D" : Return Main.D1textBox.Text
             Case "L" : Return Main.L1textBox.Text
@@ -359,8 +359,18 @@ Module Init
             Case "OtherFunction"
                 ' Call other function here
             Case Else
+                Dim checkMat As String = sender.Name.ToString.Substring(0, 1)
+                SetType(checkMat)
                 ' Handle unknown function here
         End Select
+    End Sub
+
+    Private Sub SetType(toolType As String)
+        Select Case toolType
+            Case "c", "f", "hss"
+                My.Settings.ToolType = "drill"
+        End Select
+
     End Sub
 
     Function ExtractNumbers(line As String) As List(Of Double)
@@ -420,18 +430,20 @@ Module Init
             Dim foundMatch As Boolean = False
             For Each line As String In splitLine
                 Dim synonyms As String() = line.Split(";")
-                If synonyms.Contains(p) Then
-                    paramDict.Add(synonyms(0), p)
-                    ' Encontrou uma correspondência
-                    ' O primeiro campo da string de entrada corresponde a um dos sinônimos
-                    ' Você pode armazenar a correspondência e continuar a verificar os outros campos
-                    Exit For
+                If p <> "" Then
+                    If synonyms.Contains(p) Then
+                        paramDict.Add(synonyms(0), p)
+                        ' Encontrou uma correspondência
+                        ' O primeiro campo da string de entrada corresponde a um dos sinônimos
+                        ' Você pode armazenar a correspondência e continuar a verificar os outros campos
+                        Exit For
+                    End If
                 End If
             Next
         Next
 
         Dim types() As String
-        types = {"endMill", "radiusMill", "drill"}
+        types = {"endMill", "radiusMill", "drill", "reamer"}
         Dim type As String = ""
 
         Dim tool As New Tool
@@ -458,14 +470,56 @@ Module Init
         If rmZ.Success Then tool.NoTT = Double.Parse(rmZ.Groups(1).Value)
 
         'Gets L3 and L1 * TODO
-        Dim regexPattern As String = "L(\d+)x(\d+)"
+        Dim regexPattern As String = "L(\d+)x(\d+)x(\d+)" ' "L(\d+)x(\d+)"
         Dim regexMatch As Match = Regex.Match(input, regexPattern)
         If regexMatch.Success Then
             tool.L3 = Double.Parse(regexMatch.Groups(1).Value)
+            tool.L2 = Double.Parse(regexMatch.Groups(3).Value)
             tool.L1 = Double.Parse(regexMatch.Groups(2).Value)
+        Else
+            Dim regexPattern2 As String = "L(\d+)x(\d+)"
+            Dim regexMatch2 As Match = Regex.Match(input, regexPattern2)
+            If regexMatch2.Success Then
+                tool.L3 = Double.Parse(regexMatch2.Groups(1).Value)
+                tool.L1 = Double.Parse(regexMatch2.Groups(2).Value)
+            End If
         End If
 
-        ImportPaste.AddTool(tool)
+        'Get ManufRef
+        Dim regexRefPattern As String = "\bFOC\d{3}-\d{3}\.\d{3}[A-Za-z]?\d?\b"
+        Dim refRegexMatch As Match = Regex.Match(input, regexRefPattern)
+        If refRegexMatch.Success Then
+            tool.ManufRef = refRegexMatch.Value
+        End If
+        'Get ManufRef2
+        Dim regexRefPattern2 As String = "\bALB\d{3}-\d{3}\.\d{3}[A-Za-z]?\d?\b"
+        Dim refRegexMatch2 As Match = Regex.Match(input, regexRefPattern2)
+        If refRegexMatch2.Success Then
+            tool.ManufRef = refRegexMatch2.Value
+        End If
+
+
+        Dim brand As String = ""
+
+        Dim brands() As String
+        brands = {"FALCON TOOLS", "SECO", "SANDVIK", "KENNAMETAL", "WALTER", "ISCAR", "GUHRING", "KOMET", "TUNGALOY", "DORMER", "OSG", "TITEX", "VARGUS", "MAFORD", "KYOCERA", "MITSUBISHI", "KORLOY", "CERATIZIT", "TAEGUTEC", "SUMITOMO", "YG1", "GARR TOOL", "CRALEY", "INGERSOLL", "GUEHRING", "HORN", "MAPAL", "MICRO 100", "NACHI", "NTK", "WIDIA", "EUROMAC", "HOFFMAN", "GARANT", "SPEED TOOLS"}
+
+        For Each b As String In brands
+            If input.ToUpper.Contains(b) Then
+                brand = b
+                Exit For
+            End If
+        Next
+
+        tool.Manuf = brand
+
+        If tool.D2 = 0 Then
+            tool.D2 = If(tool.D1 - 0.2 > 0, tool.D1 - 0.2, tool.D1)
+        End If
+        If tool.D3 = 0 Then tool.D3 = tool.D1
+        If tool.L2 = 0 Then tool.L2 = tool.L1
+
+        tool.AddTool()
 
     End Function
 

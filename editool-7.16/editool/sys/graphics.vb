@@ -80,7 +80,7 @@ Module graphics
             'CUT
             'FR 2T et Alesoir *************************
             '
-            If newTool.Type = "FR2T" Or newTool.Type = "ALFI" Or newTool.Type = "endMill" Or newTool.Type = "" Then
+            If newTool.Type = "FR2T" Or newTool.Type = "ALFI" Or newTool.Type = "endMill" Or newTool.Type = "" Or newTool.Type = "reamer" Then
                 toolPic.FillRectangle(Brushes.Orange, 0, D_tmp, L_tmp, StartY - D_tmp)
                 'contour
                 toolPic.DrawLine(myPen, 0, StartY, 0, D_tmp)

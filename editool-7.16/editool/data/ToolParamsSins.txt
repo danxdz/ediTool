@@ -1,7 +1,9 @@
-﻿drill;broca;micro-drill;foret;Micro-drill;Foret
-endMill;Fresa de topo;Fraise 2 tailles
+﻿endMill;Fresa de topo;Fraise 2 tailles
 radiusMill;Fresa raio;Fraise rayon
+ballMill;Fresa hemispherique;
+drill;broca;micro-drill;foret;Micro-drill;Foret;Drill
+reamer;Reamer;Mandril;Alesoir
 chamferMill;Fresa chanfro;Fraise chanfrein
 threadMill;Fresa rosca;Fraise filetage
 t-slotCutter;Fresa T;Fraise en T
-material;Solid carbide;solid carbide;ceramique;hss
+material;Solid carbide;solid carbide;Carbide tip;ceramique;hss;HSS;HSS-E

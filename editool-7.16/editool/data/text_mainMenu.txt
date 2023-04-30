@@ -13,14 +13,14 @@
 12;ballNoseMill;9;Ball Nose Mill;Fraise sphérique;Fresa esférica
 13;drilling;8;Drilling;Perçage;Furação
 14;spottingDrill;13;Spotting Drill;Foret à pointer;Broca de centragem
-15;twistDrill;13;Twist Drill;Foret hélicoïdal;Broca helicoidal
-16;carbideTwist_Drill;13;Carbide Twist Drill;Foret carbure;Broca helicoidal em metal duro
-17;flatDrill;13;Flat Drill;Foret plat;Broca chata
+15;hssDrill;13;Twist Drill;Foret hélicoïdal;Broca helicoidal
+16;cDrill;13;Carbide Twist Drill;Foret carbure;Broca helicoidal em carbure@
+17;fDrill;13;Flat Drill;Foret plat;Broca chata
 18;tarauds;8;Tapping;Taraudage;Roscas
 19;tap;18;Tap;Taraud;Macho
-20;thread Milling Cutter;18;Thread Milling Cutter;Fraise à fileter;Fresa para roscas
-21;alesoirs;8;Reaming;Alésage;Alesagem
-22;constantReamer;21;Constant Reamer;Alésoir fixe;Alesador de mandril fixo
+20;threadMillingCutter;18;Thread Milling Cutter;Fraise à fileter;Fresa para roscas
+21;reamers;8;Reaming;Alésage;Mandrilagem 
+22;constantReamer;21;Constant Reamer;Alésoir fixe;Mandril fixo
 31;importManuf;31;Import tools;Importer outils;Importar ferramentas
 32;FRAISA;31;FRAISA;FRAISA;FRAISA@
 33;ORDERTOOLS;31;OrderTools;OrderTools;OrderTools@
