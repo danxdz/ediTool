@@ -293,11 +293,12 @@ Module ts
 
             If Main.autoOpen.Checked = True Then
                 api.TopSolidExt.Documents.Open(tmp)
+            Else
+                api.TopSolidExt.Documents.Close(tmp, False, False)
             End If
 
             api.TopSolidExt.Documents.Save(tmp)
 
-            ''TopSolidHost.Documents.Close(newTool, False, False)
 
 
             If Main.autoCheckIn.Checked = True Then
@@ -309,7 +310,7 @@ Module ts
 
 
 
-            MsgBox("Outil " + Main.Name_textbox.Text + " crée")
+            'MsgBox("Outil " + Main.Name_textbox.Text + " crée")
         Catch ex As Exception
 
             MsgBox("Failed to edit copied ( new ) tool")

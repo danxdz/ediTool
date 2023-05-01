@@ -308,7 +308,7 @@ Module Init
             Dim tmp_line() As String = line.ToArray
 
             Dim newtool As Tool = FileImports.Fill_newTool(line(1), line(3), line(2), line(5), line(6), line(4), line(8), "FR2T", "0", "0", "0", "0", "0", "0", "0", "FRAISA", line(0), "0", "0", "0")
-            Main.fullToolsList.Tool.add(newtool)
+            Main.localtools.Tool.add(newtool)
 
             filterD1 = AddFiltersCombobox(line(1), filterD1)
             filterL1 = AddFiltersCombobox(line(5), filterL1)
@@ -332,6 +332,7 @@ Module Init
     Private Sub MenuItemFunction(sender As Object, e As EventArgs)
         Console.WriteLine(sender)
         Console.WriteLine(e)
+        Dim tool As New Tool
 
         Dim tmp As String = sender.Name
         If (tmp.Length = 2) Then
@@ -352,6 +353,8 @@ Module Init
                 ImportPaste.Show()
             Case "string"
                 PasteString()
+            Case "stringList"
+                PasteStringList()
             Case "topsolid"
                 OpenV6File()
             Case "language"
@@ -359,19 +362,55 @@ Module Init
             Case "OtherFunction"
                 ' Call other function here
             Case Else
-                Dim checkMat As String = sender.Name.ToString.Substring(0, 1)
-                SetType(checkMat)
+                Dim len As Integer = sender.Name.ToString.Length()
+
+                If sender.Name.ToString.Substring(1, len - 1).ToUpper() = "DRILL" Then
+                    Dim checkMat As String = sender.Name.ToString.Substring(0, 1)
+
+                    tool.SetType(checkMat)
+                Else
+                    tool.SetType(sender.Name)
+
+                End If
+
                 ' Handle unknown function here
         End Select
     End Sub
 
-    Private Sub SetType(toolType As String)
-        Select Case toolType
-            Case "c", "f", "hss"
-                My.Settings.ToolType = "drill"
-        End Select
+    Private Sub PasteStringList()
+        Dim userInput As String
+        Dim inputForm As New Form()
+        inputForm.Text = "Input"
+        inputForm.FormBorderStyle = FormBorderStyle.FixedDialog
+        inputForm.MaximizeBox = False
+        inputForm.MinimizeBox = False
+        ' Set width to two-thirds of screen width
+        inputForm.Width = CInt(Screen.PrimaryScreen.Bounds.Width * 2 / 3)
+        inputForm.StartPosition = FormStartPosition.CenterScreen
+        Dim inputBox As New TextBox()
+        inputBox.Multiline = True
+        inputBox.Dock = DockStyle.Fill
+        Dim okButton As New Button()
+        okButton.Text = "OK"
+        okButton.DialogResult = DialogResult.OK
+        okButton.Dock = DockStyle.Bottom
+        Dim cancelButton As New Button()
+        cancelButton.Text = "Cancel"
+        cancelButton.DialogResult = DialogResult.Cancel
+        cancelButton.Dock = DockStyle.Bottom
+        inputForm.Controls.Add(inputBox)
+        inputForm.Controls.Add(okButton)
+        inputForm.Controls.Add(cancelButton)
+        Dim result As DialogResult = inputForm.ShowDialog()
+        If result = DialogResult.OK Then
+            userInput = inputBox.Text
+            For Each line As String In userInput.Split(vbCrLf)
+                GetDataFromStringLine(line)
+            Next
+        End If
 
     End Sub
+
 
     Function ExtractNumbers(line As String) As List(Of Double)
 
@@ -392,10 +431,13 @@ Module Init
     End Function
 
 
-    Private Function PasteString()
+    Private Sub PasteString()
         Dim input As String = InputBox("Line input", "tab", "Micro-drill	Solid carbide	Without	Without	0.16	FOC501	FOC501-000.160	VHM MICRO-DRILL DIN1899A Ø0.16 Z2 L30x1 D1 	 23.43 € 	0.0020	82075050	14	FALCON TOOLS
 ").Replace("& vbCrLf", "").Replace("  ", "").Replace(" & vbCrLf", "").Replace(vbCrLf, "")
 
+        GetDataFromStringLine(input)
+    End Sub
+    Private Function GetDataFromStringLine(input As String)
         Dim toolFields As List(Of String) = input.Split(vbTab).ToList()
 
         If toolFields.Count <= 1 Then
@@ -432,7 +474,10 @@ Module Init
                 Dim synonyms As String() = line.Split(";")
                 If p <> "" Then
                     If synonyms.Contains(p) Then
-                        paramDict.Add(synonyms(0), p)
+                        Try
+                            paramDict.Add(synonyms(0), p)
+                        Catch ex As Exception
+                        End Try
                         ' Encontrou uma correspondência
                         ' O primeiro campo da string de entrada corresponde a um dos sinônimos
                         ' Você pode armazenar a correspondência e continuar a verificar os outros campos
@@ -498,6 +543,14 @@ Module Init
             tool.ManufRef = refRegexMatch2.Value
         End If
 
+        'Get Lub
+        Dim regexPatternLub As String = "\bINTERNAL LUB\b"
+        Dim regexMatchLub As Match = Regex.Match(input, regexPatternLub)
+        If regexMatchLub.Success Then
+            tool.ArrCentre = 1
+        End If
+
+
 
         Dim brand As String = ""
 
@@ -520,6 +573,7 @@ Module Init
         If tool.L2 = 0 Then tool.L2 = tool.L1
 
         tool.AddTool()
+        Create_outil(tool)
 
     End Function
 

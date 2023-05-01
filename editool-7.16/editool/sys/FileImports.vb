@@ -88,8 +88,8 @@ Module FileImports
 
         Dim newTool As New Tool
 
-        Main.NewToolDataGridView.DataSource = ""
-        Main.NewToolDataGridView.Columns.Clear()
+        'Main.NewToolDataGridView.DataSource = ""
+        ' Main.NewToolDataGridView.Columns.Clear()
 
         Dim reader As New XmlTextReader(path)
         FindTool(reader)
@@ -156,11 +156,11 @@ Module FileImports
 
                 'Dim sas As List(Of NewTool) = Main.toolsList.Tool
 
-                Main.fullToolsList.Add(newTool) ', Main.NewToolDataGridView)
+                Main.localtools.Add(newTool) ', Main.NewToolDataGridView)
 
             End If
         End While
-
+        Main.TabControl1.Show()
         Refresh_outil(newTool, Main.ToolPreview_PictureBox)
 
     End Sub
@@ -566,7 +566,7 @@ Module FileImports
                     filterD1 = AddFiltersCombobox(newTool.d1, filterD1)
                     filterL1 = AddFiltersCombobox(newTool.l1, filterL1)
                     filterMat = AddFiltersStringCombobox(newTool.GroupeMat, filterMat)
-                    .fullToolsList.Tool.Add(newTool)
+                    .localtools.Tool.Add(newTool)
                     'FileImports.FillDataGrid(newTool, NewToolDataGridView)
                     ' End If
 

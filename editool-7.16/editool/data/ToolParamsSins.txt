@@ -1,7 +1,7 @@
 ﻿endMill;Fresa de topo;Fraise 2 tailles
 radiusMill;Fresa raio;Fraise rayon
 ballMill;Fresa hemispherique;
-drill;broca;micro-drill;foret;Micro-drill;Foret;Drill
+drill;broca;micro-drill;foret;Micro-drill;Foret;Drill;DRILL
 reamer;Reamer;Mandril;Alesoir
 chamferMill;Fresa chanfro;Fraise chanfrein
 threadMill;Fresa rosca;Fraise filetage

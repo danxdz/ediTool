@@ -1,7 +1,11 @@
 ﻿Option Explicit On
 Imports System.Reflection
+Imports EdiTool.ToolsModule
 
-Module Tools
+Module ToolsModule
+
+    Public ReadOnly fullToolsList = New List(Of Tool)
+
     Public Class Tool
         Public Property Id As String
         Public Property Name As String
@@ -31,6 +35,8 @@ Module Tools
         Public Property Code As String
         Public Property CodeBar As String
 
+
+
         Public Sub New()
 
             If (D1 > 0) Then D2 = D1 - 0.2
@@ -50,9 +56,28 @@ Module Tools
             localTools.AddTool(Me)
             graphics.Refresh_outil(Me, Main.ToolPreview_PictureBox)
             FillDataGrid(Me, Main.NewToolDataGridView)
-            Main.fullToolsList.add(Me)
+            Main.localtools.add(Me)
 
 
+        End Sub
+
+        Public Sub SetType(toolType As String)
+            Select Case toolType
+                Case "c", "f", "hss"
+                    My.Settings.ToolType = "drill"
+                Case "endMill"
+                    My.Settings.ToolType = "endMill"
+            End Select
+            Dim localtools = New List(Of Tool)
+
+            localtools = GetAllToolsByType()
+            If localtools.Count > 0 Then
+                Main.NewToolDataGridView.DataSource = ""
+            End If
+            For Each tool As Tool In localtools
+                FillDataGrid(tool, Main.NewToolDataGridView)
+
+            Next
         End Sub
 
         Private Sub ValidateProperties()
@@ -122,25 +147,35 @@ Module Tools
         End Sub
 
 
-    End Class
 
-    Public Class ToolList
-        Public Property Name As String
-        Public Property BasicDescription As String
-        Public Property RoomDescription As String
-        Public Property ValidExists As New List(Of String)
-        Public Property Objects As New List(Of String)
-        Public Property Tool As New List(Of Tool)
+        Public Shared Function GetAllToolsByType()
+            Dim fullToolsList As New List(Of Tool)
 
+            Dim toolType As String = If(My.Settings.ToolType = "", "endMill", My.Settings.ToolType)
+            Dim db As New SQLiteToolDatabase(toolType)
 
-        Public Shared Function GetToolsTypes(tools As ToolList) As List(Of String)
+            Dim localtools As List(Of Tool) = db.GetAllTools()
+
+            If localtools IsNot Nothing Or localtools.Count > 0 Then
+                For Each tool As Tool In localtools
+                    fullToolsList.Add(tool)
+                    FillDataGrid(tool, Main.NewToolDataGridView)
+                Next
+            End If
+            Tool.GetToolsTypes(fullToolsList)
+
+            Return localtools
+
+        End Function
+
+        Public Shared Function GetToolsTypes(tools As List(Of Tool)) As List(Of String)
             Dim toolTypes As New List(Of String)
             Dim Filter As String = "FR2T"
 
 
             'For Each tool As NewTool In tools.Tool.Where(Function(t) t.Type.Contains(Filter))
 
-            For Each tool As Tool In tools.Tool
+            For Each tool As Tool In tools
                 If Not toolTypes.Contains(tool.Type) Then
                     toolTypes.Add(tool.Type)
                     Dim btn As New ToolStripButton With {

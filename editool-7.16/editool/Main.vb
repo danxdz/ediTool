@@ -10,7 +10,7 @@ Public Class Main
 
     Public ReadOnly debugMode As Boolean = False 'True
 
-    Public ReadOnly fullToolsList = New List(Of Tool)
+    Public localtools = New List(Of Tool)
 
     Public filteredTools = New List(Of Tool)
 
@@ -38,19 +38,7 @@ Public Class Main
 
         End If
 
-
-
-        Dim toolType As String = If(My.Settings.ToolType = "", "endMill", My.Settings.ToolType)
-        Dim db As New SQLiteToolDatabase(toolType)
-
-        Dim localtools As List(Of Tool) = db.GetAllTools()
-
-        If localtools IsNot Nothing Or localtools.Count > 0 Then
-            For Each tool As Tool In localtools
-                fullToolsList.add(tool)
-                FillDataGrid(tool, NewToolDataGridView)
-            Next
-        End If
+        localtools = Tool.GetAllToolsByType()
 
         Preload.Preload(localtools.Count)
 
@@ -140,7 +128,7 @@ Public Class Main
                 If filteredTools.count > 0 Then
                     newTool = filteredTools(i)
                 Else
-                    newTool = fullToolsList(i)
+                    newTool = localtools(i)
                 End If
 
                 Create_outil(newTool)
@@ -195,7 +183,7 @@ Public Class Main
         ToolName_config.Namemask_textbox.Text = toolName
 
         ' Update the tool list based on the selected tool type
-        Dim filteredTools As List(Of Tool) = fullToolsList.Tools.Where(Function(x) x.Type = toolType).ToList()
+        Dim filteredTools As List(Of Tool) = localtools.Where(Function(x) x.Type = toolType).ToList()
         If filteredTools.Count > 0 Then
             Refresh_outil(filteredTools(0), ToolPreview_PictureBox)
         End If
@@ -246,14 +234,14 @@ Public Class Main
 
         Dim i As Integer = NewToolDataGridView.CurrentRow().Index + 1
 
-        D1textBox.Text = fullToolsList(i).D1
-        L1textBox.Text = fullToolsList(i).L1
+        D1textBox.Text = localtools(i).D1
+        L1textBox.Text = localtools(i).L1
 
-        D2textBox.Text = fullToolsList(i).D2
-        L2textBox.Text = fullToolsList(i).L2
+        D2textBox.Text = localtools(i).D2
+        L2textBox.Text = localtools(i).L2
 
-        D3textBox.Text = fullToolsList(i).D3
-        L3textBox.Text = fullToolsList(i).L3
+        D3textBox.Text = localtools(i).D3
+        L3textBox.Text = localtools(i).L3
 
     End Sub
 
@@ -275,15 +263,15 @@ Public Class Main
             started = True
             Dim num As Integer = NewToolDataGridView.SelectedRows().Count
             Dim i As Integer = NewToolDataGridView.CurrentRow().Index '+ 1
-            Dim tmp = fullToolsList.Count
+            Dim tmp = localtools.Count
 
             If num = 1 Then
                 Try
 
-                    Dim filePath As String = "tools/" + fullToolsList(i).ManufRef + ".json"
+                    Dim filePath As String = "tools/" + localtools(i).ManufRef + ".json"
                     Dim json As String = File.ReadAllText(filePath)
                     Dim tool As Tool = JsonConvert.DeserializeObject(Of Tool)(json)
-                    fullToolsList(i) = tool
+                    localtools(i) = tool
                     D1textBox.Text = tool.D1
                     L1textBox.Text = tool.L1
 
@@ -379,7 +367,7 @@ Public Class Main
 
             ' Clear the filtered tools list and reset it to the original list
             filteredTools.Clear()
-            filteredTools = fullToolsList.Tool
+            filteredTools = localtools
 
             ' Apply the filters and update the DataGridView
             filteredTools = SetFilters(sender)
@@ -392,7 +380,7 @@ Public Class Main
             ' If the sender was the material ComboBox
             If sender.name = "filterMat_ComboBox" Then
                 ' Reset the filtered tools list and apply the filters
-                filteredTools = fullToolsList.Tool
+                filteredTools = localtools
                 filteredTools = SetFilters(sender)
 
                 ' Update the DataGridView
@@ -403,7 +391,7 @@ Public Class Main
             ' If the sender was the D1 ComboBox
             If sender.name = "filterD1_Combobox" Then
                 ' Reset the filtered tools list and apply the filters
-                filteredTools = fullToolsList.Tool
+                filteredTools = localtools
                 filteredTools = SetFilters(sender)
 
                 ' Update the DataGridView
@@ -412,7 +400,7 @@ Public Class Main
             End If
             If sender.name = "filterL1_ComboBox" Then
                 ' Reset the filtered tools list and apply the filters
-                filteredTools = fullToolsList.Tool
+                filteredTools = localtools
                 filteredTools = SetFilters(sender)
 
                 ' Update the DataGridView

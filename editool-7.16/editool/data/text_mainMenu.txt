@@ -26,6 +26,7 @@
 33;ORDERTOOLS;31;OrderTools;OrderTools;OrderTools@
 34;text;31;From table;Coler tableau;Colar tabela@
 35;string;31;From string;Coler texte;Colar texto@
+36;stringList;31;From lines;Coler lignes;Colar linhas@
 23;setup;23;Setup;Configuration;Configuração
 24;sourceLibrary;23;Library source;Source de bibliothèque;Fonte da biblioteca
 25;default;24;Default;Défaut;Predefinido#
