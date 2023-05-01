@@ -432,15 +432,21 @@ Module Init
 
 
     Private Sub PasteString()
-        Dim input As String = InputBox("Line input", "tab", "Micro-drill	Solid carbide	Without	Without	0.16	FOC501	FOC501-000.160	VHM MICRO-DRILL DIN1899A Ø0.16 Z2 L30x1 D1 	 23.43 € 	0.0020	82075050	14	FALCON TOOLS
-").Replace("& vbCrLf", "").Replace("  ", "").Replace(" & vbCrLf", "").Replace(vbCrLf, "")
+        Dim input As String =
+            InputBox("Line input", "tab", "Micro-drill	Solid carbide	Without	Without	0.16	
+            FOC501	FOC501-000.160	VHM MICRO-DRILL DIN1899A Ø0.16 Z2 L30x1 D1 	 23.43 € 	0.0020	82075050	14	FALCON TOOLS
+            ")
 
         GetDataFromStringLine(input)
     End Sub
     Private Function GetDataFromStringLine(input As String)
+
+        input = input.Replace("& vbCrLf", "").Replace("  ", "").Replace(" & vbCrLf", "").Replace(vbCrLf, "").Replace(vbLf, "")
+
         Dim toolFields As List(Of String) = input.Split(vbTab).ToList()
 
-        If toolFields.Count <= 1 Then
+        If toolFields.Count <= 1 And toolFields(0) <> "" Then
+
             Dim filter As String = InputBox("Nao foi possivel dividir a string, pls enter the caracter do divide", "ex: ;", ":")
             toolFields = input.Split(filter).ToList()
         End If
