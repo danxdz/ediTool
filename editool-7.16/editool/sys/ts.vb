@@ -64,7 +64,12 @@ Module ts
                 Try
                     'Check if custom tool lib exists, or create it
                     Dim customToolsProjectName = My.Settings.destinationLibrary
-                    Dim outputProject = If(TopSolidExt.Pdm.SearchProjectByName(customToolsProjectName), TopSolidExt.Pdm.CreateProject(customToolsProjectName))
+
+                    Dim outputProject = TopSolidExt.Pdm.SearchProjectByName(customToolsProjectName)
+
+                    If (outputProject.Count = 0) Then
+                        outputProject = TopSolidExt.Pdm.CreateProject(customToolsProjectName)
+                    End If
 
                     ' Open the first object in the list
                     'TopSolidExt.Pdm.OpenProject(lib_models(0))
@@ -72,7 +77,7 @@ Module ts
                     model_fr_id.RemoveRange(1, model_fr_id.Count - 1)
                     'Call CopySeveral so we can copy read only files
 
-                    temp_model = TopSolidExt.Pdm.CopySeveral(model_fr_id, outputProject(0))
+                    temp_model = TopSolidExt.Pdm.CopySeveral(model_fr_id, outputProject(0)) 'outputProject(0))
                     ' Return the temporary model document ID
                     Return temp_model
 

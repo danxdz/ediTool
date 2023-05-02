@@ -584,7 +584,7 @@ Module Init
     End Function
 
     Private Sub ImportOrderTools()
-        Throw New NotImplementedException()
+        'Throw New NotImplementedException()
     End Sub
 
     Private Sub ChangeLanguage(toString As String)

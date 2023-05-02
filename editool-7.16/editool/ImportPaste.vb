@@ -65,6 +65,7 @@ Public Class ImportPaste
     End Sub
 
     Private Sub CreateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CreateToolStripMenuItem.Click
+        tool.Type = "endMill"
         tool.AddTool()
     End Sub
 
