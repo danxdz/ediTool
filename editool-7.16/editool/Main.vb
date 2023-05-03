@@ -211,7 +211,7 @@ Public Class Main
     End Sub
 
     Private Sub ORDERTOOLS_ToolStripButton_Click(sender As Object, e As EventArgs) Handles OrderTools_ToolStripButton.Click
-        GetOrderTools()
+        ClearFilters()
     End Sub
 
     Private Sub NewToolDataGridView_MouseDown(sender As Object, e As MouseEventArgs) Handles NewToolDataGridView.MouseDown

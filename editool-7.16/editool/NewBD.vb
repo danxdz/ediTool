@@ -80,7 +80,8 @@ Public Class NewBD
 
             .NoTT = DataGridView1.Rows(index).Cells(8).Value
 
-            .CorRadius = DataGridView1.Rows(index).Cells(9).Value
+            .CorRadius = If(DataGridView1.Rows(index).Cells(9).Value <> "", DataGridView1.Rows(index).Cells(9).Value, 0)
+
             .CorChamfer = DataGridView1.Rows(index).Cells(10).Value
 
             .Manuf = DataGridView1.Rows(index).Cells(15).Value
@@ -111,13 +112,13 @@ Public Class NewBD
             If Char.IsDigit(c) OrElse c = "."c Then
                 currentNumber &= c
             ElseIf currentNumber.Length > 0 Then
-                numbers.Add(Double.Parse(currentNumber))
-                currentNumber = ""
+                If currentNumber <> "." Then
+                    numbers.Add(Double.Parse(currentNumber))
+                    currentNumber = ""
+
+                End If
             End If
         Next
-        If currentNumber.Length > 0 Then
-            numbers.Add(Double.Parse(currentNumber))
-        End If
         Return numbers
     End Function
 

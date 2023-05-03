@@ -258,7 +258,7 @@ Module FileImports
             xlWorkBook = xlApp.Workbooks.Open(fpath)
 
             ' Selecionar a planilha desejada
-            xlWorkSheet = CType(xlWorkBook.Sheets(NewBD.Row_NumericUpDown.Value), Excel.Worksheet)
+            xlWorkSheet = CType(xlWorkBook.Sheets(1), Excel.Worksheet)
 
             ' Ler os cabeçalhos
             Dim headers As New List(Of String)()
@@ -284,7 +284,7 @@ Module FileImports
             ' Ler os dados
             Dim data As New List(Of List(Of String))()
             Dim rowCount As Integer = xlWorkSheet.UsedRange.Rows.Count
-            For i As Integer = 1 To 10 'rowCount
+            For i As Integer = 2 To 10 'rowCount
                 Dim rowData As New List(Of String)()
 
                 For j As Integer = 1 To colCount
@@ -602,7 +602,7 @@ Module FileImports
         End With
     End Sub
 
-    Public Sub GetOrderTools()
+    Public Sub ClearFilters()
 
         With Main
             .filterD1_Combobox.DataSource = Nothing
