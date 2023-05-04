@@ -441,8 +441,11 @@ Module Init
     End Sub
     Private Function GetDataFromStringLine(input As String)
 
-        input = input.Replace("& vbCrLf", "").Replace("  ", "").Replace(" & vbCrLf", "").Replace(vbCrLf, "").Replace(vbLf, "")
+        'input = input.Replace("& vbCrLf", "").Replace("  ", "").Replace(" & vbCrLf", "").Replace(vbCrLf, "").Replace(vbLf, "")
 
+        Dim output As String = Regex.Replace(input, "[^a-zA-Z0-9\t]+", "")
+        Console.WriteLine(output)
+        input = output
         Dim toolFields As List(Of String) = input.Split(vbTab).ToList()
 
         If toolFields.Count <= 1 And toolFields(0) <> "" Then
