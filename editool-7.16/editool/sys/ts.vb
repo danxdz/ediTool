@@ -7,6 +7,7 @@ Imports Microsoft.Win32
 Module ts
     Public ReadOnly api As New TopSolidAPI()
 
+    ReadOnly keyPath As String = "SOFTWARE\TOPSOLID\TopSolid'Cam"
 
     Public Class TopSolidAPI
 
@@ -71,13 +72,11 @@ Module ts
                         outputProject = TopSolidExt.Pdm.CreateProject(customToolsProjectName)
                     End If
 
-                    ' Open the first object in the list
-                    'TopSolidExt.Pdm.OpenProject(lib_models(0))
                     model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models, model)
-                    model_fr_id.RemoveRange(1, model_fr_id.Count - 1)
+                    model_fr_id.RemoveRange(1, model_fr_id.Count - 1
+                                            )
                     'Call CopySeveral so we can copy read only files
-
-                    temp_model = TopSolidExt.Pdm.CopySeveral(model_fr_id, outputProject(0)) 'outputProject(0))
+                    temp_model = TopSolidExt.Pdm.CopySeveral(model_fr_id, outputProject(0))
                     ' Return the temporary model document ID
                     Return temp_model
 
@@ -85,19 +84,6 @@ Module ts
                     ' If the model was not found, display an error message
                     MsgBox(ex.ToString)
                 End Try
-
-                '  TopSolidExt.Pdm.OpenProject(lib_models)
-
-
-                ' Search for the specified model in all the models
-                'For i As Integer = 0 To (lib_models.Count - 1)
-                'model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models(i), model)
-                'Next
-                ' If the model was found, open it and save it as a temporary file
-
-                'model_fr = TopSolidExt.Documents.GetDocument(model_fr_id(0))
-                'model_fr = TopSolidExt.Pdm.GetCurrentProject() 'TopSolidExt.Pdm.GetDocument(model_fr_id(0))
-
 
 
             Else
@@ -107,23 +93,7 @@ Module ts
             Return "error:  cant copy tool"
         End Function
 
-        Private Function GetSelectedMenuItem() As ToolStripMenuItem
-            For Each mainMenuItem As ToolStripMenuItem In Main.MenuStrip1.Items
-                For Each subMenuItem As ToolStripMenuItem In mainMenuItem.DropDownItems
-                    If subMenuItem.Checked Then
-                        Return subMenuItem
-                    End If
 
-                    For Each subSubMenuItem As ToolStripMenuItem In subMenuItem.DropDownItems
-                        If subSubMenuItem.Checked Then
-                            Return subSubMenuItem
-                        End If
-                    Next
-                Next
-            Next
-
-            Return Nothing
-        End Function
         Private Function StartModifTopSolid()
 
             'Dim conn = GetTsPdmObjectId()
@@ -161,36 +131,10 @@ Module ts
             Dim topSolidKernel As Assembly = Assembly.LoadFrom(topSolidKernelPath)
             Return topSolidKernel
         End Function
-        Private Function GetTsPdmObjectId()
-            Try
-                TopSolidPath = GetTopSolidPath()
-
-                Dim topSolidKernel As Assembly = GetTsDLL()
-
-                Dim type As Type = topSolidKernel.GetType("TopSolid.Kernel.Automating.TopSolidHostInstance")
-                TopSolidExt = Activator.CreateInstance(type)
-                Dim pdmObjectIdType = topSolidKernel.GetType("TopSolid.Kernel.Automating.PdmObjectId")
-                Dim DocumentIdType = topSolidKernel.GetType("TopSolid.Kernel.Automating.DocumentId")
-                Dim listType = GetType(List(Of )).MakeGenericType(pdmObjectIdType)
-
-                'TopSolidExt.Connect()
-                'TopSolidExt.Pdm.OpenProject("Editool")
-                'listType = TopSolidExt.Pdm.SearchProjectByName("EdiTool")
-
-
-                Return listType
-
-
-            Catch ex As Exception
-                Console.WriteLine($"Failed to load dll: {ex.Message}")
-            End Try
-
-        End Function
 
 
     End Class
 
-    ReadOnly keyPath As String = "SOFTWARE\TOPSOLID\TopSolid'Cam"
 
     'Function to get the last subkey of a given key from registry
     Public Function GetVersion()
@@ -255,18 +199,8 @@ Module ts
 
 
 
-
-        ''Dim asss As List(Of PdmObjectId) = TopSolidHost.Pdm.SearchProjectByName("EdiTool")
-        ''TopSolidHost.Pdm.OpenProject(asss(0))
-        'InitializeApi()
-
-        ' api.TopSolidExt.Connect()
-
         Dim model_fr = api.CopyModelFile(model_name, modelLib(0))
-        'Open_file(model_id, api.TopSolidExt.Pdm.SearchProjectByName("EdiTool"))
 
-        '********
-        '********
         '********
         '********
         '********
