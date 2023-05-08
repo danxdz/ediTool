@@ -8,7 +8,7 @@ Imports Newtonsoft.Json
 
 Public Class Main
 
-    Public ReadOnly debugMode As Boolean = False 'True
+    Public ReadOnly debugMode As Boolean = True 'True to pick local files
 
     Public localtools = New List(Of Tool)
 

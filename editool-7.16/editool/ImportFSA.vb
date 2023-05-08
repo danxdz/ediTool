@@ -72,6 +72,18 @@ Public Class ImportFSA
 
     Private Sub AddFraisaTool()
 
+        Dim xmlFile As String
+
+        If Main.debugMode = True Then
+            xmlFile = Me.RefTextBox.Text + ".xml" '  "15520501.xml" '"15520260.xml"
+        Else
+            xmlFile = GetFile()
+        End If
+        ExtractXMLData(xmlFile)
+    End Sub
+
+    Public Sub ExtractXMLData(xmlfile As String)
+
         Dim splitLine() As String = My.Resources.DIN400_tool_params.Split(New String() {Environment.NewLine}, StringSplitOptions.None).ToArray
 
         Dim paramToPropDict As New Dictionary(Of String, String)
@@ -82,17 +94,10 @@ Public Class ImportFSA
             End If
         Next
 
-        Dim xmlFile As String
-
-        If Main.debugMode = True Then
-            xmlFile = Me.RefTextBox.Text + ".xml" '  "15520501.xml" '"15520260.xml"
-        Else
-            xmlFile = GetFile()
-        End If
-
         Dim documentoXml As New XmlDocument()
-        If xmlFile <> "" Then
-            documentoXml.Load(xmlFile)
+
+        If xmlfile <> "" Then
+            documentoXml.Load(xmlfile)
 
             Dim xmlDoc As XmlElement = documentoXml.DocumentElement
 
@@ -139,6 +144,7 @@ Public Class ImportFSA
             newTool.Name = Main.Name_textbox.Text
             'newTool.Type = CheckFraisaTypes(Me.RefTextBox.Text)
             FillDataGrid(newTool, DataGridView1)
+            Me.Show()
             Refresh_outil(newTool, ToolPreview_PictureBox)
             Debug.WriteLine(newTool)
         Else
@@ -146,7 +152,6 @@ Public Class ImportFSA
         End If
 
     End Sub
-
     Private Sub find_Bt_Click(sender As Object, e As EventArgs) Handles findBt.Click
 
         AddFraisaTool()

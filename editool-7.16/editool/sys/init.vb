@@ -443,7 +443,7 @@ Module Init
 
         'input = input.Replace("& vbCrLf", "").Replace("  ", "").Replace(" & vbCrLf", "").Replace(vbCrLf, "").Replace(vbLf, "")
 
-        Dim output As String = Regex.Replace(input, "[^a-zA-Z0-9\t\D\d]+", "")
+        Dim output As String = Regex.Replace(input, "[^a-zA-Z0-9\t\D\ ]+", "")
         Console.WriteLine(output)
         input = output
         Dim toolFields As List(Of String) = input.Split(vbTab).ToList()

@@ -93,74 +93,79 @@ Module FileImports
 
         Dim reader As New XmlTextReader(path)
         FindTool(reader)
-
         While reader.Read()
-            If reader.Name = "param" Then
-                Dim val1 = reader.Value
-                Dim type As String = reader.GetAttribute("type")
-                Dim name As String = reader.GetAttribute("name")
-                Dim val As String = reader.GetAttribute("value")
+                If reader.Name = "param" Then
+                    Dim val1 = reader.Value
+                    Dim type As String = reader.GetAttribute("type")
+                    Dim name As String = reader.GetAttribute("name")
+                    Dim val As String = reader.GetAttribute("value")
 
-                Select Case name
-                    Case "orderingCode"
-                        Main.manref_TextBox.Text = val
-                        newTool.ManufRef = val
-                    Case "manufacturer"
-                        Main.manuf_comboBox.Text = val
-                        newTool.Manuf = val
-                    Case "toolTotalLength"
-                        Main.L3textBox.Text = val
-                        newTool.L3 = val
-                    Case "cuttingEdges"
-                        Main.NoTT.Text = val
-                        newTool.NoTT = val
-                    Case "cuttingLength"
-                        Main.L1textBox.Text = val
-                        newTool.L1 = val
+                    Select Case name
+                        Case "orderingCode"
+                            Main.manref_TextBox.Text = val
+                            newTool.ManufRef = val
+                        Case "manufacturer"
+                            Main.manuf_comboBox.Text = val
+                            newTool.Manuf = val
+                        Case "toolTotalLength"
+                            Main.L3textBox.Text = val
+                            newTool.L3 = val
+                        Case "cuttingEdges"
+                            Main.NoTT.Text = val
+                            newTool.NoTT = val
+                        Case "cuttingLength"
+                            Main.L1textBox.Text = val
+                            newTool.L1 = val
 
-                    Case "toolShaftDiameter"
-                        Main.D3textBox.Text = val
-                        newTool.D3 = val
-                    Case "toolDiameter"
-                        Main.D1textBox.Text = val
-                        Main.D2textBox.Text = val - 0.2
+                        Case "toolShaftDiameter"
+                            Main.D3textBox.Text = val
+                            newTool.D3 = val
+                        Case "toolDiameter"
+                            Main.D1textBox.Text = val
+                            Main.D2textBox.Text = val - 0.2
 
-                        newTool.D1 = val
-                        newTool.D2 = val - 0.2
+                            newTool.D1 = val
+                            newTool.D2 = val - 0.2
 
-                    Case "taperHeight"
-                        Main.L2textBox.Text = val
-                        If val <> 0 Then
-                            newTool.L2 = val '???? not sure
-                        Else
-                            newTool.L2 = newTool.L2
-                        End If
+                        Case "taperHeight"
+                            Main.L2textBox.Text = val
+                            If val <> 0 Then
+                                newTool.L2 = val '???? not sure
+                            Else
+                                newTool.L2 = newTool.L2
+                            End If
 
-                    Case "tipDiameter"
+                        Case "tipDiameter"
                         'Main.CTS_AD_textbox.Text = val
 
                         'plungeAngle
-                    Case "cornerRadius"
-                        Main.Chf_textbox.Text = val
+                        Case "cornerRadius"
+                            Main.Chf_textbox.Text = val
 
-                    Case "cuttingMaterial"
-                        newTool.Type = val
+                        Case "cuttingMaterial"
+                            newTool.Type = val
 
-                End Select
-            ElseIf (reader.Name = "tecsets") Then
-                reader.Close()
-                Main.TabControl1.TabIndex = 3
-                FillDataGrid(newTool, Main.DataGridView1)
-                'Main.fullToolsList.Clear()
-                'Main.filteredTools.Clear()
+                    End Select
+                ElseIf (reader.Name = "tecsets") Then
+                    reader.Close()
+                    Main.TabControl1.TabIndex = 3
+                    FillDataGrid(newTool, Main.DataGridView1)
+                    'Main.fullToolsList.Clear()
+                    'Main.filteredTools.Clear()
 
-                'Dim sas As List(Of NewTool) = Main.toolsList.Tool
+                    'Dim sas As List(Of NewTool) = Main.toolsList.Tool
 
-                Main.localtools.Add(newTool) ', Main.NewToolDataGridView)
+                    Main.localtools.Add(newTool) ', Main.NewToolDataGridView)
 
-            End If
+                End If
         End While
-        Main.TabControl1.Show()
+        If newTool.D1 = 0 Then
+            ImportFSA.ExtractXMLData(path)
+
+        End If
+
+        Main.ImportTabPage.Show()
+
         Refresh_outil(newTool, Main.ToolPreview_PictureBox)
 
     End Sub
