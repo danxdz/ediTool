@@ -11,7 +11,7 @@ Public Class NewBD
     End Sub
 
     Private Sub Open_file_bt_Click(sender As Object, e As EventArgs) Handles open_file_bt.Click
-        OpenXmlFile()
+        'OpenXmlFile()
     End Sub
 
     Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs) Handles Row_NumericUpDown.ValueChanged
@@ -228,7 +228,7 @@ Public Class NewBD
 
     Private Sub Headers_CheckedChanged(sender As Object, e As EventArgs) Handles headers.CheckedChanged
         ' headers.Checked = False
-        ReadExcel(My.Settings.lastPath)
+        ' ReadExcel(My.Settings.lastPath)
     End Sub
 
     Private Sub Headers_Click(sender As Object, e As EventArgs) Handles headers.Click

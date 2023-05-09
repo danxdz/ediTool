@@ -74,10 +74,10 @@ Partial Class NewBD
         Me.Row_NumericUpDown = New System.Windows.Forms.NumericUpDown()
         Me.path_TextBox = New System.Windows.Forms.TextBox()
         Me.RC_Menu_NewDB = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.SplitColumnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.new_tool = New System.Windows.Forms.ToolStripMenuItem()
         Me.copy_tool = New System.Windows.Forms.ToolStripMenuItem()
         Me.del_tool = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SplitColumnToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.split_cell = New System.Windows.Forms.ToolStripMenuItem()
         Me.TypeFilterComboBox = New System.Windows.Forms.ComboBox()
         Me.headers = New System.Windows.Forms.RadioButton()
@@ -556,6 +556,11 @@ Partial Class NewBD
         Me.del_tool.Size = New System.Drawing.Size(106, 22)
         Me.del_tool.Text = "delete"
         '
+        'SplitColumnToolStripMenuItem
+        '
+        Me.SplitColumnToolStripMenuItem.Name = "SplitColumnToolStripMenuItem"
+        Me.SplitColumnToolStripMenuItem.Size = New System.Drawing.Size(32, 19)
+        '
         'split_cell
         '
         Me.split_cell.Name = "split_cell"
@@ -575,6 +580,7 @@ Partial Class NewBD
         '
         Me.headers.AutoCheck = False
         Me.headers.AutoSize = True
+        Me.headers.Checked = True
         Me.headers.Location = New System.Drawing.Point(508, 27)
         Me.headers.Name = "headers"
         Me.headers.Size = New System.Drawing.Size(63, 17)

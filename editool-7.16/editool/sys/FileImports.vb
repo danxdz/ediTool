@@ -1,7 +1,9 @@
 ﻿Option Explicit On
 
+Imports System.Data.OleDb
 Imports System.IO
 Imports System.Net
+Imports System.Runtime.InteropServices.ComTypes
 Imports System.Text.RegularExpressions
 Imports System.Xml
 Imports Microsoft.Office.Interop
@@ -94,86 +96,79 @@ Module FileImports
         Dim reader As New XmlTextReader(path)
         FindTool(reader)
         While reader.Read()
-                If reader.Name = "param" Then
-                    Dim val1 = reader.Value
-                    Dim type As String = reader.GetAttribute("type")
-                    Dim name As String = reader.GetAttribute("name")
-                    Dim val As String = reader.GetAttribute("value")
+            If reader.Name = "param" Then
+                Dim val1 = reader.Value
+                Dim type As String = reader.GetAttribute("type")
+                Dim name As String = reader.GetAttribute("name")
+                Dim val As String = reader.GetAttribute("value")
 
-                    Select Case name
-                        Case "orderingCode"
-                            Main.manref_TextBox.Text = val
-                            newTool.ManufRef = val
-                        Case "manufacturer"
-                            Main.manuf_comboBox.Text = val
-                            newTool.Manuf = val
-                        Case "toolTotalLength"
-                            Main.L3textBox.Text = val
-                            newTool.L3 = val
-                        Case "cuttingEdges"
-                            Main.NoTT.Text = val
-                            newTool.NoTT = val
-                        Case "cuttingLength"
-                            Main.L1textBox.Text = val
-                            newTool.L1 = val
+                Select Case name
+                    Case "orderingCode"
+                        Main.manref_TextBox.Text = val
+                        newTool.ManufRef = val
+                    Case "manufacturer"
+                        Main.manuf_comboBox.Text = val
+                        newTool.Manuf = val
+                    Case "toolTotalLength"
+                        Main.L3textBox.Text = val
+                        newTool.L3 = val
+                    Case "cuttingEdges"
+                        Main.NoTT.Text = val
+                        newTool.NoTT = val
+                    Case "cuttingLength"
+                        Main.L1textBox.Text = val
+                        newTool.L1 = val
 
-                        Case "toolShaftDiameter"
-                            Main.D3textBox.Text = val
-                            newTool.D3 = val
-                        Case "toolDiameter"
-                            Main.D1textBox.Text = val
-                            Main.D2textBox.Text = val - 0.2
+                    Case "toolShaftDiameter"
+                        Main.D3textBox.Text = val
+                        newTool.D3 = val
+                    Case "toolDiameter"
+                        Main.D1textBox.Text = val
+                        Main.D2textBox.Text = val - 0.2
 
-                            newTool.D1 = val
-                            newTool.D2 = val - 0.2
+                        newTool.D1 = val
+                        newTool.D2 = val - 0.2
+                    Case "taperHeight"
+                        Main.L2textBox.Text = val
+                        If val <> 0 Then
+                            newTool.L2 = val '???? not sure
+                        Else
+                            newTool.L2 = newTool.L2
+                        End If
 
-                        Case "taperHeight"
-                            Main.L2textBox.Text = val
-                            If val <> 0 Then
-                                newTool.L2 = val '???? not sure
-                            Else
-                                newTool.L2 = newTool.L2
-                            End If
-
-                        Case "tipDiameter"
+                    Case "tipDiameter"
                         'Main.CTS_AD_textbox.Text = val
 
                         'plungeAngle
-                        Case "cornerRadius"
-                            Main.Chf_textbox.Text = val
+                    Case "cornerRadius"
+                        Main.Chf_textbox.Text = val
+                    Case "cuttingMaterial"
+                        newTool.Type = val
+                End Select
+            ElseIf (reader.Name = "tecsets") Then
+                reader.Close()
+                Main.TabControl1.TabIndex = 3
+                FillDataGrid(newTool, Main.DataGridView1)
+                'Main.fullToolsList.Clear()
+                'Main.filteredTools.Clear()
 
-                        Case "cuttingMaterial"
-                            newTool.Type = val
+                'Dim sas As List(Of NewTool) = Main.toolsList.Tool
 
-                    End Select
-                ElseIf (reader.Name = "tecsets") Then
-                    reader.Close()
-                    Main.TabControl1.TabIndex = 3
-                    FillDataGrid(newTool, Main.DataGridView1)
-                    'Main.fullToolsList.Clear()
-                    'Main.filteredTools.Clear()
+                Main.localtools.Add(newTool) ', Main.NewToolDataGridView)
 
-                    'Dim sas As List(Of NewTool) = Main.toolsList.Tool
-
-                    Main.localtools.Add(newTool) ', Main.NewToolDataGridView)
-
-                End If
+            End If
         End While
         If newTool.D1 = 0 Then
             ImportFSA.ExtractXMLData(path)
-
         End If
-
         Main.ImportTabPage.Show()
 
         Refresh_outil(newTool, Main.ToolPreview_PictureBox)
-
     End Sub
 
     Public Sub FillDataGrid(NewTool As Tool, DGV As DataGridView)
         Dim objProperties() As String = {"GroupeMat", "ManufRef", "D1", "L1", "NoTT"}
         Dim tmpData As Data.DataTable
-
         If DGV.Columns.Count <> 0 Then
             tmpData = DGV.DataSource
         Else
@@ -201,38 +196,36 @@ Module FileImports
         Refresh_outil(NewTool, Main.ToolPreview_PictureBox)
     End Sub
 
+    Public Function OpenFilesByType() As String
+        'filters to Open files by types
+        Dim filter As String = "All files (*.*)|*.*|XML files (*.xml)|*.xml;*.XML|TXT files (*.txt)|*.txt|CSV files (*.csv)|*.csv|Excel Files|*.xls;*.xlsx"
 
-
-    Public Sub OpenXmlFile()
-        Dim startPath As String = ""
         Dim myStream As Stream
+        Dim startPath As String = ""
 
-        ' If My.Settings.lastPath <> "" Then
-        'startPath = My.Settings.lastPath
-        'My.Settings.Save()
-        'End If
 
-        Dim openFileDialog1 As New OpenFileDialog With {
+        Dim openFileDialog As New OpenFileDialog With {
             .InitialDirectory = startPath,
-            .Filter = "All files (*.*)|*.*|XML files (*.xml)|*.xml;*.XML|TXT files (*.txt)|*.txt|CSV files (*.csv)|*.csv|Excel Files|*.xls;*.xlsx",
+            .Filter = filter,
             .FilterIndex = 1,
             .RestoreDirectory = True
         }
-
-        If openFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If openFileDialog.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             Try
-                myStream = openFileDialog1.OpenFile()
-                Dim fpath As String = openFileDialog1.FileName
+                myStream = openFileDialog.OpenFile()
+                Dim fpath As String = openFileDialog.FileName
 
                 NewBD.path_TextBox.Text = fpath
                 My.Settings.lastPath = fpath
                 My.Settings.Save()
 
-                If openFileDialog1.FileName.Substring(openFileDialog1.FileName.Length - 3) = "xml" Then
+                Dim fExtension As String = openFileDialog.FileName.Substring(openFileDialog.FileName.Length - 3)
+                Dim Fsdf As String = openFileDialog.DefaultExt
+
+                If fExtension = "xml" Then
                     LoadXML(fpath)
-                Else
-                    ReadExcel(fpath)
-                    NewBD.Show()
+                ElseIf fExtension = "lsx" Then
+                    LoadExcel(fpath)
 
                 End If
 
@@ -240,32 +233,119 @@ Module FileImports
                 MessageBox.Show("error: " & Ex.Message)
             End Try
         End If
-    End Sub
+    End Function
 
+    Private Sub LoadExcel(fpath)
 
-
-    Public Sub ReadExcel(fpath As String)
-
-        NewBD.DataGridView1.Columns.Clear()
-        NewBD.DataGridView1.Rows.Clear()
+        NewBD.Show()
 
         Dim xlApp As Excel.Application = Nothing
         Dim xlWorkBook As Excel.Workbook = Nothing
         Dim xlWorkSheet As Excel.Worksheet = Nothing
 
         Try
-            ' Configurar aplicativo Excel
+            'Excel setup
             xlApp = New Excel.Application
             xlApp.ScreenUpdating = False
             xlApp.DisplayAlerts = False
 
-            ' Abrir o arquivo
+            'Open file
             xlWorkBook = xlApp.Workbooks.Open(fpath)
 
-            ' Selecionar a planilha desejada
+            'Select worksheet
             xlWorkSheet = CType(xlWorkBook.Sheets(1), Excel.Worksheet)
 
-            ' Ler os cabeçalhos
+            'Read headers
+            Dim headers As New List(Of String)()
+            Dim colCount As Integer = xlWorkSheet.UsedRange.Columns.Count
+            If NewBD.headers.Checked = True Then
+                For i As Integer = 1 To colCount
+                    Dim header As String = Trim(xlWorkSheet.Range(xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, i), xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, i)).Value)
+                    If String.IsNullOrEmpty(header) Then
+                        Exit For
+                    End If
+
+                    headers.Add(header)
+
+                    ' Adicionar nova coluna ao DataGridView
+                    Dim column As New DataGridViewTextBoxColumn With {
+                .HeaderText = header,
+                .SortMode = DataGridViewColumnSortMode.NotSortable
+            }
+
+                    NewBD.DataGridView1.Columns.Add(column)
+                    NewBD.ToolNameCb.Items.Add(header)
+                Next
+
+            End If
+
+
+            ' Ler os dados
+            Dim data As New List(Of List(Of String))()
+            Dim rowCount As Integer = xlWorkSheet.UsedRange.Rows.Count
+            For i As Integer = NewBD.Row_NumericUpDown.Value + 1 To 10 'rowCount
+                Dim rowData As New List(Of String)()
+
+                For j As Integer = 1 To colCount
+                    Dim cellValue As Object = xlWorkSheet.Range(xlWorkSheet.Cells(i, j), xlWorkSheet.Cells(i, j)).Value
+
+                    Dim cellStringValue As String = ""
+                    If cellValue IsNot Nothing Then
+                        cellStringValue = cellValue.ToString()
+                    End If
+
+                    rowData.Add(cellStringValue)
+                Next
+
+                ' Adicionar a linha ao DataGridView
+
+                NewBD.DataGridView1.Rows.Add(rowData.ToArray())
+
+            Next
+
+            NewBD.FillComboBoxes()
+
+        Finally
+            ' Limpar recursos do Excel
+            If xlWorkSheet IsNot Nothing Then
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkSheet)
+            End If
+
+            If xlWorkBook IsNot Nothing Then
+                xlWorkBook.Close(SaveChanges:=False)
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlWorkBook)
+            End If
+
+            If xlApp IsNot Nothing Then
+                xlApp.Quit()
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(xlApp)
+            End If
+        End Try
+    End Sub
+
+
+
+    Public Sub ReadExcel(fpath As String)
+
+
+
+        Dim xlApp As Excel.Application = Nothing
+        Dim xlWorkBook As Excel.Workbook = Nothing
+        Dim xlWorkSheet As Excel.Worksheet = Nothing
+
+        Try
+            'Excel setup
+            xlApp = New Excel.Application
+            xlApp.ScreenUpdating = False
+            xlApp.DisplayAlerts = False
+
+            'Open file
+            xlWorkBook = xlApp.Workbooks.Open(fpath)
+
+            'Select worksheet
+            xlWorkSheet = CType(xlWorkBook.Sheets(1), Excel.Worksheet)
+
+            'Read headers
             Dim headers As New List(Of String)()
             Dim colCount As Integer = xlWorkSheet.UsedRange.Columns.Count
             For i As Integer = 1 To colCount
@@ -278,18 +358,19 @@ Module FileImports
 
                 ' Adicionar nova coluna ao DataGridView
                 Dim column As New DataGridViewTextBoxColumn With {
-                .HeaderText = header,
-                .SortMode = DataGridViewColumnSortMode.NotSortable
-            }
+            .HeaderText = header,
+            .SortMode = DataGridViewColumnSortMode.NotSortable
+        }
 
                 NewBD.DataGridView1.Columns.Add(column)
                 NewBD.ToolNameCb.Items.Add(header)
             Next
 
+
             ' Ler os dados
             Dim data As New List(Of List(Of String))()
             Dim rowCount As Integer = xlWorkSheet.UsedRange.Rows.Count
-            For i As Integer = 2 To 10 'rowCount
+            For i As Integer = NewBD.Row_NumericUpDown.Value + 1 To 10 'rowCount
                 Dim rowData As New List(Of String)()
 
                 For j As Integer = 1 To colCount
@@ -460,155 +541,9 @@ Module FileImports
 
     End Sub
 
-    Private Sub Webtocsv(ByVal sender As Object, ByVal e As WebBrowserDocumentCompletedEventArgs)
 
-        Dim DataTableOrderTools As New Data.DataTable
-
-        Dim toolTypeFilter As String = My.Settings.ToolType
-
-        Dim webcsv As WebBrowser = CType(sender, WebBrowser)
-
-        Dim tblrows As HtmlElementCollection
-        Dim tblcols As HtmlElementCollection
-        Dim column As String
-
-        Dim filterD1 As New List(Of Decimal)
-        Dim filterL1 As New List(Of Decimal)
-        Dim filterMat As New List(Of String)
-
-        Dim row As New List(Of String)()
-        With Main
-
-            tblrows = webcsv.Document.GetElementById("tableTool").GetElementsByTagName("tr")
-            .NewToolDataGridView.DataSource = Nothing
-            'NewToolDataGridView.Columns.Clear()
-            'NewToolDataGridView.Rows.Clear()
-            Preload.toolCountLabel.Text = 0
-            Dim objList As New List(Of String)
-            tblcols = tblrows.Item(0).GetElementsByTagName("th")
-
-            If tblcols.Count > 0 Then
-                For x As Integer = 0 To tblcols.Count - 1
-                    column = tblcols.Item(x).InnerHtml
-                    column = Replace(column, "<br>", " ")
-
-                    objList.Add(column)
-                Next
-            End If
-
-            DataTableOrderTools = SetDataGridColumnsTitle(objList.ToArray, DataTableOrderTools)
-
-            For r As Integer = 0 To tblrows.Count - 2
-                tblcols = tblrows.Item(r).GetElementsByTagName("td")
-
-                Dim stock As HtmlElementCollection
-
-                Dim newTool = New Tool
-                Try
-                    stock = tblcols.Item(0).GetElementsByTagName("strong")
-                    Dim stockVal As Integer
-                    If stock.Count > 0 Then
-                        stockVal = stock(0).InnerHtml
-                    Else
-                        stockVal = 0
-                    End If
-
-                    'Get all tools
-                    'If tblcols.Item(1).InnerHtml = toolTypeFilter Then   ' Or 1 = 1 Then
-                    'ListBox1.Items.Add(tblcols.Item(2).InnerHtml & " - " & tblcols.Item(3).InnerHtml & " - " & tblcols.Item(4).InnerHtml & " - " & tblcols.Item(8).InnerHtml)
-
-                    With newTool
-                        .Type = tblcols.Item(1).InnerHtml
-                        .GroupeMat = tblcols.Item(2).InnerHtml
-                        .d1 = tblcols.Item(3).InnerHtml
-                        .d2 = tblcols.Item(3).InnerHtml - 0.2
-                        .l1 = tblcols.Item(4).InnerHtml
-                        If tblcols.Item(5).InnerHtml > 0 Then
-                            .L2 = tblcols.Item(5).InnerHtml
-                        Else
-                            .L2 = newTool.L1
-                        End If
-                        .l3 = tblcols.Item(6).InnerHtml
-                        .d3 = tblcols.Item(7).InnerHtml
-                        .nott = tblcols.Item(8).InnerHtml
-                        .RayonBout = tblcols.Item(9).InnerHtml
-                        .Chanfrein = tblcols.Item(10).InnerHtml
-                        .CoupeCentre = tblcols.Item(11).InnerHtml
-                        .ArrCentre = tblcols.Item(12).InnerHtml
-                        .TypeTar = tblcols.Item(13).InnerHtml
-                        .PasTar = tblcols.Item(14).InnerHtml
-                        .Manuf = tblcols.Item(15).InnerHtml
-                        .ManufRef = tblcols.Item(16).InnerHtml
-                        .ManufRefSec = Replace(tblcols.Item(17).InnerHtml, "    ", "")
-                        '.Link = tblcols.Item(18).InnerHtml
-                        .Code = tblcols.Item(21).InnerHtml
-                        .CodeBar = tblcols.Item(22).InnerHtml
-
-                        Dim rowTmp() As String = {
-                                stockVal,
-                                .Type,
-                                .GroupeMat,
-                                .D1,
-                                .L1,
-                                .L2,
-                                .L3,
-                                .D3,
-                                .NoTT,
-                                .RayonBout,
-                                .Chanfrein,
-                                .CoupeCentre,
-                                .ArrCentre,
-                                .TypeTar,
-                                .PasTar,
-                                .Manuf,
-                                .ManufRef,
-                                .ManufRefSec,
-                                .Code,
-                                .CodeBar
-                                }
-                        DataTableOrderTools.Rows.Add(rowTmp)
-                    End With
-                    filterD1 = AddFiltersCombobox(newTool.d1, filterD1)
-                    filterL1 = AddFiltersCombobox(newTool.l1, filterL1)
-                    filterMat = AddFiltersStringCombobox(newTool.GroupeMat, filterMat)
-                    .localtools.Tool.Add(newTool)
-                    'FileImports.FillDataGrid(newTool, NewToolDataGridView)
-                    ' End If
-
-                Catch ex As Exception
-                    'MsgBox("cant read tool")
-                End Try
-            Next
-
-            '    Dim toolTypes As List(Of String) = ToolList.GetToolsTypes(.toolsList)
-            '    .NewToolDataGridView.DataSource = DataTableOrderTools
-
-            '    filterD1 = filterD1.OrderBy(Function(x) x).ToList()
-            '    With .filterD1_Combobox
-            '        .DataSource = filterD1
-            '    End With
-            '    filterL1 = filterL1.OrderBy(Function(x) x).ToList()
-            '    With .filterL1_ComboBox
-            '        .DataSource = filterL1
-            '    End With
-            '    filterMat = filterMat.OrderBy(Function(x) x).ToList()
-            '    With .filterMat_ComboBox
-            '        .DataSource = filterMat
-            '    End With
-            '    EndLoadTimer = Now().ToUniversalTime
-            '    .timer_label.Text = DateDiff(DateInterval.Second, StartLoadTimer, EndLoadTimer)
-        End With
-    End Sub
-
-    Private Sub OrderAndSetComboBoxDataSource(list As List(Of String), combobox As ComboBox)
-        list = list.OrderBy(Function(x) x).ToList()
-        With combobox
-            .DataSource = list
-        End With
-    End Sub
 
     Public Sub ClearFilters()
-
         With Main
             .filterD1_Combobox.DataSource = Nothing
             .filterD1_Combobox.Items.Clear()
@@ -616,9 +551,6 @@ Module FileImports
             .filterL1_ComboBox.Items.Clear()
             .filterMat_ComboBox.DataSource = Nothing
             .filterMat_ComboBox.Items.Clear()
-
         End With
-
     End Sub
-
 End Module

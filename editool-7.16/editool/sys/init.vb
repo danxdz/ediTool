@@ -344,7 +344,9 @@ Module Init
             Case "exit"
                 Main.Close()
             Case "xml"
-                OpenXmlFile()
+                OpenFilesByType()
+            Case "excel"
+                OpenFilesByType()
             Case "FRAISA"
                 ImportFraisa()
             Case "ORDERTOOLS"
