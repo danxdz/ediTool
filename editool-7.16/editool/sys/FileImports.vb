@@ -220,7 +220,6 @@ Module FileImports
                 My.Settings.Save()
 
                 Dim fExtension As String = openFileDialog.FileName.Substring(openFileDialog.FileName.Length - 3)
-                Dim Fsdf As String = openFileDialog.DefaultExt
 
                 If fExtension = "xml" Then
                     LoadXML(fpath)
@@ -235,8 +234,10 @@ Module FileImports
         End If
     End Function
 
-    Private Sub LoadExcel(fpath)
-
+    Public Sub LoadExcel(fpath)
+        NewBD.DataGridView1.DataSource = Nothing
+        NewBD.DataGridView1.Columns.Clear()
+        NewBD.DataGridView1.Rows.Clear()
         NewBD.Show()
 
         Dim xlApp As Excel.Application = Nothing
@@ -245,9 +246,10 @@ Module FileImports
 
         Try
             'Excel setup
-            xlApp = New Excel.Application
-            xlApp.ScreenUpdating = False
-            xlApp.DisplayAlerts = False
+            xlApp = New Excel.Application With {
+                .ScreenUpdating = False,
+                .DisplayAlerts = False
+            }
 
             'Open file
             xlWorkBook = xlApp.Workbooks.Open(fpath)
@@ -283,7 +285,7 @@ Module FileImports
             ' Ler os dados
             Dim data As New List(Of List(Of String))()
             Dim rowCount As Integer = xlWorkSheet.UsedRange.Rows.Count
-            For i As Integer = NewBD.Row_NumericUpDown.Value + 1 To 10 'rowCount
+            For i As Integer = NewBD.Row_NumericUpDown.Value + 1 To 100 'rowCount
                 Dim rowData As New List(Of String)()
 
                 For j As Integer = 1 To colCount
