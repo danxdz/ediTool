@@ -75,14 +75,21 @@ Public Class NewBD
             .D3 = DataGridView1.Rows(index).Cells(7).Value
 
             .L1 = DataGridView1.Rows(index).Cells(4).Value
-            .L2 = DataGridView1.Rows(index).Cells(5).Value
+
+            If DataGridView1.Rows(index).Cells(5) IsNot Nothing Then
+                If DataGridView1.Rows(index).Cells(5).Value <> "" Then
+                    .L2 = DataGridView1.Rows(index).Cells(5).Value
+                Else
+                    .L2 = .L1 - 0.2
+                End If
+            End If
             .L3 = DataGridView1.Rows(index).Cells(6).Value
 
             .NoTT = DataGridView1.Rows(index).Cells(8).Value
 
             .CorRadius = If(DataGridView1.Rows(index).Cells(9).Value <> "", DataGridView1.Rows(index).Cells(9).Value, 0)
 
-            .CorChamfer = DataGridView1.Rows(index).Cells(10).Value
+            .CorChamfer = If(DataGridView1.Rows(index).Cells(10).Value <> "", DataGridView1.Rows(index).Cells(10).Value, 0)
 
             .Manuf = DataGridView1.Rows(index).Cells(15).Value
             .ManufRef = DataGridView1.Rows(index).Cells(16).Value

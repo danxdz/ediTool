@@ -1,5 +1,6 @@
 ﻿Option Explicit On
 
+Imports System.Data.Common
 Imports System.Data.OleDb
 Imports System.IO
 Imports System.Net
@@ -240,6 +241,30 @@ Module FileImports
         NewBD.DataGridView1.Rows.Clear()
         NewBD.Show()
 
+
+
+        Dim MyConnection As System.Data.OleDb.OleDbConnection
+        Dim ExcelDataSet As System.Data.DataSet
+        Dim ExcelAdapter As System.Data.OleDb.OleDbDataAdapter
+
+        MyConnection = New System.Data.OleDb.OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + fpath + ";Extended Properties=Excel 12.0;")
+        Try
+            ExcelAdapter = New System.Data.OleDb.OleDbDataAdapter("select * from [Sheet1$]", MyConnection)
+            ExcelAdapter.TableMappings.Add("Table", "Excel Data")
+            ExcelDataSet = New System.Data.DataSet
+            ExcelAdapter.Fill(ExcelDataSet)
+            NewBD.DataGridView1.DataSource = ExcelDataSet.Tables(0)
+            MyConnection.Close()
+        Catch ex As Exception
+            MessageBox.Show("Error: " + ex.ToString, "Importing Excel", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+
+
+    End Sub
+
+    Public Sub LoadExcel_old(fpath)
+
         Dim xlApp As Excel.Application = Nothing
         Dim xlWorkBook As Excel.Workbook = Nothing
         Dim xlWorkSheet As Excel.Worksheet = Nothing
@@ -285,12 +310,11 @@ Module FileImports
             ' Ler os dados
             Dim data As New List(Of List(Of String))()
             Dim rowCount As Integer = xlWorkSheet.UsedRange.Rows.Count
-            For i As Integer = NewBD.Row_NumericUpDown.Value + 1 To 100 'rowCount
+            For i As Integer = NewBD.Row_NumericUpDown.Value + 1 To NewBD.Row_NumericUpDown.Value + 10 'rowCount
                 Dim rowData As New List(Of String)()
 
                 For j As Integer = 1 To colCount
                     Dim cellValue As Object = xlWorkSheet.Range(xlWorkSheet.Cells(i, j), xlWorkSheet.Cells(i, j)).Value
-
                     Dim cellStringValue As String = ""
                     If cellValue IsNot Nothing Then
                         cellStringValue = cellValue.ToString()
@@ -422,15 +446,15 @@ Module FileImports
 
         For iCol = 1 To xlWorkSheet.Columns.Count
             Try
-                If Trim(xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, iCol).value) = "" Then
+                If Trim(xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, iCol).Value) = "" Then
                     Exit For        ' BAIL OUT IF REACHED THE LAST COL.
                 Else
                     Dim col = New DataGridViewTextBoxColumn With {
-                        .HeaderText = xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, iCol).value,
+                        .HeaderText = xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, iCol).Value,
                         .SortMode = DataGridViewColumnSortMode.NotSortable
-                    }
+}
                     Dim colIndex As Integer = NewBD.DataGridView1.Columns.Add(col)        ' ADD A NEW COLUMN.
-                    NewBD.ToolNameCb.Items.Add(xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, iCol).value)
+                    NewBD.ToolNameCb.Items.Add(xlWorkSheet.Cells(NewBD.Row_NumericUpDown.Value, iCol).Value)
 
                     iColCount += 1
 
@@ -445,15 +469,15 @@ Module FileImports
         ' ADD ROWS TO THE GRID.
         Dim iRow As Integer
         For iRow = 1 To 10 ' xlWorkSheet.Rows.Count
-            If Trim(xlWorkSheet.Cells(iRow, 1).value) = "" And Trim(xlWorkSheet.Cells(iRow, 2).value) = "" Then
+            If Trim(xlWorkSheet.Cells(iRow, 1).Value) = "" And Trim(xlWorkSheet.Cells(iRow, 2).Value) = "" Then
                 Exit For        ' BAIL OUT IF REACHED THE LAST ROW.
             Else
                 NewBD.DataGridView1.Rows.Add()
                 Preload.toolCountLabel.Text += 1
                 ' CREATE A STRING ARRAY USING THE VALUES IN EACH ROW OF THE SHEET.
                 For i As Integer = 1 To iColCount
-                    If (xlWorkSheet.Cells(iRow, i).value IsNot Nothing) Then
-                        Dim tmp_string As String = Replace(xlWorkSheet.Cells(iRow, i).value, ".", ",")
+                    If (xlWorkSheet.Cells(iRow, i).Value IsNot Nothing) Then
+                        Dim tmp_string As String = Replace(xlWorkSheet.Cells(iRow, i).Value, ".", ",")
                         NewBD.DataGridView1.Rows(iRow - 1).Cells(i - 1).Value = tmp_string
                     End If
                     'End If
