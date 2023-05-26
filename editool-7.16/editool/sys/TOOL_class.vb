@@ -35,17 +35,11 @@ Module ToolsModule
         Public Property Code As String
         Public Property CodeBar As String
 
-
-
         Public Sub New()
-
             If (D1 > 0) Then D2 = D1 - 0.2
             If (L1 > 0) Then L2 = L1
-
             If Me.Type = "drill" Then AnglePoint = 140
-            ValidateProperties()
         End Sub
-
 
         Public Sub AddTool()
 
@@ -57,7 +51,6 @@ Module ToolsModule
             graphics.Refresh_outil(Me, Main.ToolPreview_PictureBox)
             FillDataGrid(Me, Main.NewToolDataGridView)
             Main.localtools.add(Me)
-
 
         End Sub
 
@@ -80,19 +73,7 @@ Module ToolsModule
             Next
         End Sub
 
-        Private Sub ValidateProperties()
-            If Type = "drill" AndAlso AnglePoint <> 140 Then
-                Throw New InvalidOperationException("Invalid AnglePoint value for drill type.")
-            End If
 
-            If D2 > D1 Then
-                Throw New InvalidOperationException("Invalid D2 value. D2 should be less than D1.")
-            End If
-
-            If L2 > L1 Then
-                Throw New InvalidOperationException("Invalid L2 value. L2 should be less than or equal to L1.")
-            End If
-        End Sub
         Public Sub PublishParameters(DocId)
 
             Dim topSolidKernel As Assembly = api.GetTsAssembly()
@@ -120,7 +101,6 @@ Module ToolsModule
             smartTextInstance = smartTextConstructor.Invoke({elementId})
             api.TopSolidExt.Parameters.PublishText(DocId, "id", smartTextInstance)
 
-
             api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.ManufacturerPartNumber"), ManufRef)
             api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Manufacturer"), Manuf)
             api.TopSolidExt.Parameters.SetTextValue(api.TopSolidExt.Elements.SearchByName(DocId, "$TopSolid.Kernel.TX.Properties.Code"), CodeBar)
@@ -146,8 +126,6 @@ Module ToolsModule
             '***************
         End Sub
 
-
-
         Public Shared Function GetAllToolsByType()
             Dim fullToolsList As New List(Of Tool)
 
@@ -172,7 +150,6 @@ Module ToolsModule
             Dim toolTypes As New List(Of String)
             Dim Filter As String = "FR2T"
 
-
             'For Each tool As NewTool In tools.Tool.Where(Function(t) t.Type.Contains(Filter))
 
             For Each tool As Tool In tools
@@ -193,6 +170,4 @@ Module ToolsModule
         End Function
 
     End Class
-
-
 End Module

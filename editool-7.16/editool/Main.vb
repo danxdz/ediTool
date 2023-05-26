@@ -8,7 +8,7 @@ Imports Newtonsoft.Json
 
 Public Class Main
 
-    Public ReadOnly debugMode As Boolean = True 'True to pick local files
+    Public ReadOnly debugMode As Boolean = False 'True to pick local files
 
     Public localtools = New List(Of Tool)
 
@@ -41,8 +41,6 @@ Public Class Main
         localtools = Tool.GetAllToolsByType()
 
         Preload.Preload(localtools.Count)
-
-
 
         'First time load - check tool lib to save new tools
         Dim customToolLib As String = My.Settings.destinationLibrary
@@ -187,10 +185,6 @@ Public Class Main
         If filteredTools.Count > 0 Then
             Refresh_outil(filteredTools(0), ToolPreview_PictureBox)
         End If
-    End Sub
-
-    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles XML_ToolStripButton.Click
-        'OpenXmlFile()
     End Sub
 
     Private Sub V6import_bt_Click(sender As Object, e As EventArgs)
@@ -485,8 +479,6 @@ Public Class Main
         End With
     End Sub
 
-
-
     Private Sub FilterMat_ComboBox_MouseHover(sender As Object, e As EventArgs) Handles filterMat_ComboBox.MouseHover
         ToolTip1.Show("groupe matiere", filterMat_ComboBox)
     End Sub
@@ -505,12 +497,9 @@ Public Class Main
         Console.Write(sender)
     End Sub
 
-
     Private Sub ToolStripButton1_Click_1(sender As Object, e As EventArgs)
         My.Settings.ToolType = sender.ToString
         My.Settings.Save()
-
     End Sub
-
 
 End Class

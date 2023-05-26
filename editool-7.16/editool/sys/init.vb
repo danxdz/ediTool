@@ -4,6 +4,11 @@ Imports System.Text.RegularExpressions
 Imports System.Windows.Media.TextFormatting
 
 Module Init
+
+    Dim DataTable_buffer As DataTable
+
+
+
     ' Returns the index of the specified language
     Private Function GetLanguageIndex(language As String, file As String) As Integer
         ' Read the first line of the CSV file to get the list of available languages
@@ -126,7 +131,7 @@ Module Init
         Next
     End Sub
 
-    Dim DataTable_buffer As DataTable
+
     Public Sub Set_filter()
         'Dim dv As New DataView(DataTable_buffer)
         'Dim str_tmp As String
@@ -154,7 +159,7 @@ Module Init
             Return value
         End If
     End Function
-    Function Pick_param_old(param As String) ' TODO
+    Function Pick_param_ifCustom(param As String) ' TODO
         Select Case param
             Case "D" : Return Main.D1textBox.Text
             Case "L" : Return Main.L1textBox.Text

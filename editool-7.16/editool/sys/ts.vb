@@ -93,10 +93,7 @@ Module ts
             Return "error:  cant copy tool"
         End Function
 
-
         Private Function StartModifTopSolid()
-
-            'Dim conn = GetTsPdmObjectId()
 
             Dim topSolidKernel As Assembly = GetTsDLL()
             Dim type As Type = topSolidKernel.GetType("TopSolid.Kernel.Automating.TopSolidHostInstance")
@@ -116,8 +113,8 @@ Module ts
             End If
 
             Return PdmObjectIdType
-
         End Function
+
         Private Function GetTsDLL() As Assembly
             TopSolidPath = GetTopSolidPath()
 
@@ -131,10 +128,7 @@ Module ts
             Dim topSolidKernel As Assembly = Assembly.LoadFrom(topSolidKernelPath)
             Return topSolidKernel
         End Function
-
-
     End Class
-
 
     'Function to get the last subkey of a given key from registry
     Public Function GetVersion()
@@ -166,7 +160,6 @@ Module ts
 
     End Function
 
-
     Public Sub Create_outil(newTool As Tool)
         Dim modelLib = api.StartModif()
 
@@ -181,9 +174,9 @@ Module ts
         End If
 
         Select Case toolType
-            Case ""
-                model_name = "Side Mill D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
-            Case "endMill"
+            Case "endMill", ""
+                'model_name = "Ball Nose Mill D8 L30 SD8" '"Fraise hémisphérique D8 L30 SD8"
+
                 model_name = "Side Mill D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
             Case "FRTO"
                 model_name = "Radiused Mill D16 L40 r3 SD16"'"Fraise torique D16 L40 r3 SD16"
@@ -196,8 +189,6 @@ Module ts
             Case "ALFI", "reamer"
                 model_name = "Constant Reamer D10 L20 SD9"
         End Select
-
-
 
         Dim model_fr = api.CopyModelFile(model_name, modelLib(0))
 
@@ -218,7 +209,6 @@ Module ts
             If Not api.TopSolidExt.Application.StartModification("model_fr", True) Then
                 MsgBox("StartModification failure")
                 api.TopSolidExt.Application.EndModification(True, False)
-
                 Exit Sub
             End If
 
@@ -226,7 +216,6 @@ Module ts
 
             api.TopSolidExt.Documents.EnsureIsDirty(tmp)
             Set_parametre_outil(tmp, newTool)
-
 
             api.TopSolidExt.Application.EndModification(True, False)
 
@@ -238,8 +227,6 @@ Module ts
 
             api.TopSolidExt.Documents.Save(tmp)
 
-
-
             If Main.autoCheckIn.Checked = True Then
                 Dim customToolProject = My.Settings.destinationLibrary
                 api.TopSolidExt.Pdm.CheckIn(api.TopSolidExt.Pdm.SearchDocumentByName(
@@ -247,16 +234,12 @@ Module ts
                     api.TopSolidExt.Documents.GetName(tmp))(0), True)
             End If
 
-
-
             'MsgBox("Outil " + Main.Name_textbox.Text + " crée")
         Catch ex As Exception
-
             MsgBox("Failed to edit copied ( new ) tool")
         Finally
             Try
                 api.TopSolidExt.Application.EndModification(False, False)
-
             Catch ex As Exception
                 Console.Write("app closed -> modification end")
             End Try
@@ -274,13 +257,10 @@ Module ts
     ' This subroutine sets the value of a Real parameter in a TopSolid document
     'Private Sub SetReal(TopDoc As DocumentId, paramName As String, paramValue As Decimal)
     Private Sub SetReal(TopDoc, paramName, paramValue)
-
         ' Find the ElementId of the Real parameter using its name
         Dim paramElementId = api.TopSolidExt.Elements.SearchByName(TopDoc, paramName)
-
         ' Set the value of the Real parameter using its ElementId and the desired value
         api.TopSolidExt.Parameters.SetRealValue(paramElementId, paramValue)
-
     End Sub
 
 
@@ -295,8 +275,6 @@ Module ts
         Dim constructor = elementIdType.GetConstructor({GetType(String)})
 
         Dim sys_pard = api.TopSolidExt.Elements.GetElements(newTool_docId)
-
-
 
         '***************
         'Debug -> get elements param list
@@ -330,10 +308,8 @@ Module ts
         SetReal(newTool_docId, "OL", L3)
         SetReal(newTool_docId, "L", L1)
 
-
         'TopSolidHost.Parameters.SetIntegerValue()
         api.TopSolidExt.Parameters.SetIntegerValue(api.TopSolidExt.Elements.SearchByName(newTool_docId, "NoTT"), newTool.NoTT)
-
 
         If ToolType = "FOC9" Or ToolType = "drill" Then
             'Dim tmpAngleRad = Main.A_TextBox.Text * Math.PI / 180
@@ -343,13 +319,11 @@ Module ts
 
             Select Case ToolType
                 Case "FOC9"
-
                     'api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOP9)
                     newTool.Name = My.Settings.MaskTT_FOP9
                 Case "FOCA", "drill"
                     'api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FOCA)
                     newTool.Name = My.Settings.MaskTT_FOCA
-
             End Select
 
         ElseIf ToolType = "ALFI" Or ToolType = "reamer" Then
@@ -357,7 +331,6 @@ Module ts
             newTool.Name = My.Settings.MaskTT_ALFI
             SetReal(newTool_docId, "L", L2)
         Else
-
             SetReal(newTool_docId, "CTS_AD", D2)
             SetReal(newTool_docId, "CTS_AL", L2)
             SetReal(newTool_docId, "CTS_ED", D2)
@@ -386,17 +359,13 @@ Module ts
                 SetReal(newTool_docId, "r", r) 'TODO
                 'api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FT)
                 newTool.Name = My.Settings.MaskTT_FT
-
             ElseIf ToolType = "FRHE" Then
                 'api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FB)
                 newTool.Name = My.Settings.MaskTT_FB
-
             Else
                 'api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FR)
                 newTool.Name = My.Settings.MaskTT_FR
-
             End If
-
         End If
 
 
@@ -409,12 +378,5 @@ Module ts
         Catch ex As Exception
         End Try
 
-
     End Sub
-
-
-
-
-
-
 End Module
