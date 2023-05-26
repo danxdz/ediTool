@@ -16,7 +16,7 @@ Public Class NewBD
 
     Private Sub NumericUpDown1_ValueChanged(sender As Object, e As EventArgs) Handles Row_NumericUpDown.ValueChanged
         If path_TextBox.Text <> "" Then
-            FileImports.LoadExcel(path_TextBox.Text)
+            FileImports.LoadExcel_old(path_TextBox.Text)
         End If
 
     End Sub

@@ -6,6 +6,7 @@ Imports System.IO
 Imports System.Net
 Imports System.Runtime.InteropServices.ComTypes
 Imports System.Text.RegularExpressions
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports System.Xml
 Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Excel
@@ -225,7 +226,7 @@ Module FileImports
                 If fExtension = "xml" Then
                     LoadXML(fpath)
                 ElseIf fExtension = "lsx" Then
-                    LoadExcel(fpath)
+                    LoadExcel_old(fpath)
 
                 End If
 
@@ -241,23 +242,63 @@ Module FileImports
         NewBD.DataGridView1.Rows.Clear()
         NewBD.Show()
 
+        Dim xlApp As New Excel.Application
 
-
-        Dim MyConnection As System.Data.OleDb.OleDbConnection
-        Dim ExcelDataSet As System.Data.DataSet
-        Dim ExcelAdapter As System.Data.OleDb.OleDbDataAdapter
-
-        MyConnection = New System.Data.OleDb.OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0; Data Source=" + fpath + ";Extended Properties=Excel 12.0;")
         Try
-            ExcelAdapter = New System.Data.OleDb.OleDbDataAdapter("select * from [Sheet1$]", MyConnection)
-            ExcelAdapter.TableMappings.Add("Table", "Excel Data")
-            ExcelDataSet = New System.Data.DataSet
-            ExcelAdapter.Fill(ExcelDataSet)
-            NewBD.DataGridView1.DataSource = ExcelDataSet.Tables(0)
-            MyConnection.Close()
+
+            xlApp.ScreenUpdating = False
+            xlApp.DisplayAlerts = False
+            xlWorkBook = xlApp.Workbooks.Open(fpath)
+
+            xlApp.ScreenUpdating = True
+            xlApp.DisplayAlerts = True
+            xlWorkBook.Close()
+            xlApp.Quit()
         Catch ex As Exception
             MessageBox.Show("Error: " + ex.ToString, "Importing Excel", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
+
+
+        Try
+            xlApp.ScreenUpdating = False
+            xlApp.DisplayAlerts = False
+            xlWorkBook = xlApp.Workbooks.Open(fpath)
+            xlWorkSheet = CType(xlWorkBook.Worksheets(1), Excel.Worksheet)
+            NewBD.DataGridView1.Columns.Clear()
+            Dim Range = xlWorkSheet.UsedRange
+            With NewBD.DataGridView1
+                .ColumnCount = 6
+                .Columns(0).Name = CStr(xlWorkSheet.Range("A1").Value)
+                .Columns(1).Name = CStr(xlWorkSheet.Range("B1").Value)
+                .Columns(2).Name = CStr(xlWorkSheet.Range("C1").Value)
+                .Columns(3).Name = CStr(xlWorkSheet.Range("D1").Value)
+                .Columns(4).Name = CStr(xlWorkSheet.Range("E1").Value)
+                .Columns(5).Name = CStr(xlWorkSheet.Range("F1").Value)
+            End With
+            Dim rCnt As Integer
+            Dim cCnt As Integer
+            Dim obj
+            For rCnt = 2 To Range.Rows.Count
+                Dim rowArray(Range.Columns.Count) As String
+                For cCnt = 1 To Range.Columns.Count
+                    Dim colArray(Range.Rows.Count) As String
+                    Obj = CType(Range.Cells(rCnt, cCnt), Excel.Range)
+                    Dim celltext As String
+                    celltext = Obj.value
+                    rowArray((cCnt - 1)) = celltext
+                    colArray((rCnt - 1)) = celltext
+
+                Next
+                NewBD.DataGridView1.Rows.Add(rowArray)
+            Next
+
+
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+
 
 
 
@@ -330,7 +371,7 @@ Module FileImports
             Next
 
             NewBD.FillComboBoxes()
-
+            NewBD.Show()
         Finally
             ' Limpar recursos do Excel
             If xlWorkSheet IsNot Nothing Then
