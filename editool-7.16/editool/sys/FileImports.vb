@@ -351,7 +351,7 @@ Module FileImports
             ' Ler os dados
             Dim data As New List(Of List(Of String))()
             Dim rowCount As Integer = xlWorkSheet.UsedRange.Rows.Count
-            For i As Integer = NewBD.Row_NumericUpDown.Value + 1 To NewBD.Row_NumericUpDown.Value + 10 'rowCount
+            For i As Integer = 1 To rowCount ' (NewBD.Row_NumericUpDown.Value * 10) - 9 To NewBD.Row_NumericUpDown.Value * 10 'rowCount
                 Dim rowData As New List(Of String)()
 
                 For j As Integer = 1 To colCount
