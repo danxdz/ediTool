@@ -73,8 +73,11 @@ Module ts
                     End If
 
                     model_fr_id = TopSolidExt.Pdm.SearchDocumentByName(lib_models, model)
-                    model_fr_id.RemoveRange(1, model_fr_id.Count - 1
-                                            )
+                    model_fr_id.RemoveRange(1, model_fr_id.Count - 1)
+
+                    Dim qsd = model_fr_id.GetType()
+
+
                     'Call CopySeveral so we can copy read only files
                     temp_model = TopSolidExt.Pdm.CopySeveral(model_fr_id, outputProject(0))
                     ' Return the temporary model document ID
@@ -175,8 +178,6 @@ Module ts
 
         Select Case toolType
             Case "endMill", ""
-                'model_name = "Ball Nose Mill D8 L30 SD8" '"Fraise hémisphérique D8 L30 SD8"
-
                 model_name = "Side Mill D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
             Case "FRTO"
                 model_name = "Radiused Mill D16 L40 r3 SD16"'"Fraise torique D16 L40 r3 SD16"
@@ -188,6 +189,8 @@ Module ts
                 model_name = "Twisted Drill D10 L35 SD10"
             Case "ALFI", "reamer"
                 model_name = "Constant Reamer D10 L20 SD9"
+            Case Else
+                model_name = "Side Mill D20 L35 SD20"
         End Select
 
         Dim model_fr = api.CopyModelFile(model_name, modelLib(0))
@@ -198,14 +201,15 @@ Module ts
         'uncomment to unblock TS
         'api.TopSolidExt.Application.EndModification(True, False)
 
-        If model_fr(0).isEmpty Then
-            MsgBox("Can't find file ( " + model_name + " )")
-            api.TopSolidExt.Application.EndModification(True, False)
 
-            Exit Sub
-        End If
 
         Try
+            If model_fr(0).isEmpty Then
+                MsgBox("Can't find file ( " + model_name + " )")
+                api.TopSolidExt.Application.EndModification(True, False)
+
+                Exit Sub
+            End If
             If Not api.TopSolidExt.Application.StartModification("model_fr", True) Then
                 MsgBox("StartModification failure")
                 api.TopSolidExt.Application.EndModification(True, False)
@@ -374,7 +378,7 @@ Module ts
         newTool.PublishParameters(newTool_docId)
 
         Try
-            'TopSolidHost.Parameters.SetBooleanValue(TopSolidHost.Elements.SearchByName(newTool_docId, "$TopSolid.Cam.NC.Tool.TX.MachiningComponents.NotAllowedForMachining"), True)
+            api.TopSolidExt.Parameters.SetBooleanValue(api.TopSolidExt.Elements.SearchByName(newTool_docId, "$TopSolid.Cam.NC.Tool.TX.MachiningComponents.NotAllowedForMachining"), True)
         Catch ex As Exception
         End Try
 

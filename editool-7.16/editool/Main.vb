@@ -214,7 +214,7 @@ Public Class Main
                 '  DataGridView1.CurrentCell = DataGridView1(e.ColumnIndex, e.RowIndex)
 
             Catch ex As Exception
-                ' MsgBox("invalid cell")
+                MsgBox("invalid cell")
             End Try
             newToolMenu.Show(Cursor.Position)
         End If
