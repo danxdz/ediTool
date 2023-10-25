@@ -108,7 +108,7 @@ Module ts
             ' OpenProject
             If Main.MenuStrip1.Items.Count > 0 Then
                 Dim toolLib = My.Settings.sourceLibrary
-                If toolLib = "default" Then
+                If toolLib = "Default" Then
                     PdmObjectIdType = TopSolidExt.Pdm.SearchProjectByName("TopSolid Machining User Tools")
                 Else
                     PdmObjectIdType = TopSolidExt.Pdm.SearchProjectByName(toolLib)
@@ -175,6 +175,9 @@ Module ts
             My.Settings.Save()
             newTool.Type = "endMill"
         End If
+
+        'Force tooltype
+        'toolType = "FRTO"
 
         Select Case toolType
             Case "endMill", ""
