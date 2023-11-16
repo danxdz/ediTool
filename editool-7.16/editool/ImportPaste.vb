@@ -58,6 +58,9 @@ Public Class ImportPaste
         Next
         Debug.WriteLine(tool)
 
+        If tool.CorRadius > 0 And tool.Type = "endMill" Then
+            tool.Type = "radiusMill"
+        End If
 
         DataGridView1.Rows.Add("Name", Set_Name_auto(tool))
 

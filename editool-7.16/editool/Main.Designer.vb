@@ -46,7 +46,7 @@ Partial Class Main
         Me.createBt = New System.Windows.Forms.Button()
         Me.autoOpen = New System.Windows.Forms.CheckBox()
         Me.FR2T = New System.Windows.Forms.ToolStripButton()
-        Me.FRTO = New System.Windows.Forms.ToolStripButton()
+        Me.radiusMill = New System.Windows.Forms.ToolStripButton()
         Me.FRBO = New System.Windows.Forms.ToolStripButton()
         Me.FAP = New System.Windows.Forms.ToolStripButton()
         Me.FO = New System.Windows.Forms.ToolStripButton()
@@ -341,14 +341,14 @@ Partial Class Main
         '
         'FRTO
         '
-        Me.FRTO.AutoSize = False
-        Me.FRTO.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.FRTO.Image = CType(resources.GetObject("FRTO.Image"), System.Drawing.Image)
-        Me.FRTO.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.FRTO.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.FRTO.Name = "FRTO"
-        Me.FRTO.Size = New System.Drawing.Size(40, 60)
-        Me.FRTO.Text = "FRTO"
+        Me.radiusMill.AutoSize = False
+        Me.radiusMill.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.radiusMill.Image = CType(resources.GetObject("FRTO.Image"), System.Drawing.Image)
+        Me.radiusMill.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.radiusMill.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.radiusMill.Name = "FRTO"
+        Me.radiusMill.Size = New System.Drawing.Size(40, 60)
+        Me.radiusMill.Text = "FRTO"
         '
         'FRBO
         '
@@ -773,7 +773,7 @@ Partial Class Main
     Friend WithEvents createBt As Button
     Friend WithEvents autoOpen As CheckBox
     Friend WithEvents FR2T As ToolStripButton
-    Friend WithEvents FRTO As ToolStripButton
+    Friend WithEvents radiusMill As ToolStripButton
     Friend WithEvents FRBO As ToolStripButton
     Friend WithEvents FAP As ToolStripButton
     Friend WithEvents FO As ToolStripButton

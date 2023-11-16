@@ -483,7 +483,7 @@ Public Class Main
         ToolTip1.Show("groupe matiere", filterMat_ComboBox)
     End Sub
 
-    Private Sub ToolType_Click(sender As Object, e As EventArgs) Handles FR2T.Click, FRTO.Click, FRBO.Click
+    Private Sub ToolType_Click(sender As Object, e As EventArgs) Handles FR2T.Click, radiusMill.Click, FRBO.Click
         ToolTypeButton_Click(sender, e)
         Console.Write(e.ToString)
     End Sub

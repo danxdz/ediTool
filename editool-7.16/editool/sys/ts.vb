@@ -182,7 +182,7 @@ Module ts
         Select Case toolType
             Case "endMill", ""
                 model_name = "Side Mill D20 L35 SD20"'"Fraise 2 tailles D20 L35 SD20"
-            Case "FRTO"
+            Case "radiusMill"
                 model_name = "Radiused Mill D16 L40 r3 SD16"'"Fraise torique D16 L40 r3 SD16"
             Case "FRHE"
                 model_name = "Ball Nose Mill D8 L30 SD8"'"Fraise hémisphérique D8 L30 SD8"
@@ -360,9 +360,9 @@ Module ts
                 SetReal(newTool_docId, "CTS_EL", CTS_EL) 'TODO
             End If
 
-            If ToolType = "FRTO" Then
+            If ToolType = "radiusMill" Then
                 'Dim r As Double = Strip_doubles(Main.Chf_textbox.Text)
-                Dim r As Double = newTool.RayonBout / 1000
+                Dim r As Double = newTool.CorRadius / 1000
                 SetReal(newTool_docId, "r", r) 'TODO
                 'api.TopSolidExt.Parameters.SetTextParameterizedValue(Name, My.Settings.MaskTT_FT)
                 newTool.Name = My.Settings.MaskTT_FT

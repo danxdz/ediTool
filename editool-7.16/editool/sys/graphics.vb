@@ -91,7 +91,7 @@ Module graphics
                 toolPic.FillEllipse(Brushes.Orange, 1, D_tmp + 1, ((StartY - D_tmp) * 2), (StartY - D_tmp) * 2)
                 toolPic.FillRectangle(Brushes.Orange, (StartY - D_tmp), D_tmp, L_tmp - (StartY - D_tmp), StartY - D_tmp)
                 toolPic.DrawLine(myPen, (StartY - D_tmp), D_tmp, L_tmp, D_tmp)
-            ElseIf newTool.Type = "FRTO" Then
+            ElseIf newTool.Type = "radiusMill" Then
                 'FR Torique ***********************
                 toolPic.FillEllipse(Brushes.Black, 0, D_tmp, (StartY - R_tmp) * 2, (StartY - R_tmp) * 2)
                 toolPic.FillEllipse(Brushes.Orange, 1, D_tmp + 1, ((StartY - R_tmp) * 2), (StartY - R_tmp) * 2)
