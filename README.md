@@ -4,7 +4,8 @@ Tool editor for TopSolid 7 CAM
 https://forum.topsolid.fr/viewtopic.php?f=18&t=10103
 
 
-
+python side os TS
+https://github.com/danxdz/editool_python
 
 
 UPDATE: 
