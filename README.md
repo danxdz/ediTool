@@ -1,11 +1,16 @@
+NEW VERSION :: python
+
+https://github.com/danxdz/editool_python
+
+
+
+
 # ediTool
 Tool editor for TopSolid 7 CAM
 
 https://forum.topsolid.fr/viewtopic.php?f=18&t=10103
 
 
-use python to call TS API
-https://github.com/danxdz/editool_python
 
 
 UPDATE: 
